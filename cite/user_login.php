@@ -23,13 +23,13 @@
 	<div class="hero-section">
 		<div class="login-container">
 			<div class="header-container">
-				<img src="php/assets/logo.png" style="height: 70px; width: 70px">
+				<img src="assets/logo.png" style="height: 70px; width: 70px">
 				<span>UCU Cite Admin</span>
 			</div>
 			<div class="login-form">
 				<form action="#" method="POST">
 					<div class="form-control">
-					<label>Username</label>
+					<label>ID Number</label>
 						<input type="text" name="username" id="username">
 						<small>Error Message</small>
 					</div>
