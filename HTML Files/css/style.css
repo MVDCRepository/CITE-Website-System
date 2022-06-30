@@ -1467,4 +1467,102 @@ button.main_bt {
 	float: left;
 	width: 97%;
 	border-radius: 25px;
+	overflow-x: auto;
+}
+
+.availability {
+	float: right;
+}
+
+.availability p {
+	margin-top: -10px;
+}
+
+
+/************ Footer Area ********************/
+
+.footer {
+	width: 100%;
+	background-color: #222222;
+	height: auto;
+}
+
+.footer ul,
+.footer ol,
+.footer li {
+	list-style: none;
+	width: 90%;
+}
+
+.footer {
+	width: 100%;
+	float: left;
+}
+
+.footer_container {
+	width: 100%;
+	margin: 20px;
+	display: block;
+	color: white;
+}
+
+.map_icon {
+	width: 100%;
+	float: right;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.map_icon img {
+	width: 60px;
+	margin-right: 10px;
+	border-radius: 15px;
+}
+
+.map_icon i {
+	width: 20px;
+	color: white;
+	padding-right: 20px;
+}
+
+.map_icon p {
+	margin: auto;
+	margin-top: 20px;
+	color: white;
+}
+
+.map_icon h2 {
+	border-bottom: 1px solid #8c8c8c;
+	margin-bottom: 15px;
+}
+
+.map_icon h4 {
+	margin-top: 25px;
+	color: white;
+}
+
+.map_icon h5 {
+	font-size: 12px;
+	color: white;
+}
+
+.map_icon li a {
+	color: white;
+}
+
+.copyright {
+	width: 100%;
+	float: left;
+	background-color: black;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.copyright_text {
+	width: 100%;
+	color: #fbfdfd;
+	text-align: center;
+	font-size: 14px;
+	margin: 0px;
 }

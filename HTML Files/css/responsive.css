@@ -131,6 +131,7 @@
     .item_container { margin-top: 20; margin-left: 10px; margin-right: 10px; margin-bottom: 20px; }
     .item_container p, .item_container h1 { text-align: center; }
     .item_container p { max-height: 100%; text-align: left; }
+    .availability { margin-top: -60px;}
 }
 @media (max-width:575px) {
     .navbar-expand-lg .navbar-nav .nav-link { padding-left: 0; }
@@ -193,6 +194,9 @@
     .profile_left_section {float: none;}
     .profile_right_section {float: none;}
     .profile_title {margin: 0; width: 85%;}
+    .blocking_finalization .row {flex-direction: column-reverse;}
+    .availability {float: none; display: flex;}
+    .availability p{margin-top: -2px;}
 }
 
 /*******SLIDER EVENTS*********/
