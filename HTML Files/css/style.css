@@ -604,57 +604,6 @@ ul .nav-item .nav-link,
 	letter-spacing: 1px;
 }
 
-.contact_main {
-	width: 100%;
-	background-color: #222222;
-}
-
-.contact_main ul,
-.contact_main ol,
-.contact_main li {
-	list-style: none;
-	width: 90%;
-}
-
-.contact_section_2 {
-	width: 100%;
-	margin: 20px;
-	display: block;
-	color: white;
-}
-
-.map_icon {
-	width: 100%;
-	float: right;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	text-align: left;
-}
-
-.map_icon img {
-	width: 50px;
-}
-
-.map_icon i {
-	width: 20px;
-}
-
-.copyright {
-	width: 100%;
-	float: left;
-	background-color: black;
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-
-.copyright_text {
-	width: 100%;
-	color: #fbfdfd;
-	text-align: center;
-	font-size: 14px;
-	margin: 0px;
-}
-
 .email-text {
 	width: 100%;
 	float: left;
@@ -726,12 +675,6 @@ button.main_bt {
 	float: left;
 	padding-top: 30px;
 	padding-bottom: 30px;
-}
-
-.contact_main {
-	width: 100%;
-	float: left;
-	padding-top: 30px;
 }
 
 .-_main {

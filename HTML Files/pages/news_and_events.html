@@ -295,18 +295,18 @@
                     </div>
                     <!--End Content Section ------------------------------->
                     <!--Start Footer Section ------------------------------->
-                    <div class="contact_main">
-                        <div class="contact_section_2">
+                    <div class="footer">
+                        <div class="footer_container">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="map_icon">
-                                            <img src="../images/ucu_logo.png">
-                                            <img src="../images/cite_logo.png">
-                                            <ul style="margin-top: 20px;">
-                                                <li><a href="#">College of Information and Technology Education</a></li>
-                                                <li><a href="#">Urdaneta City University</a></li>
-                                            </ul>
+                                            <a href="../index.html"><img src="../images/cite_logo.png"></a>
+                                            <a href="https://ucu.edu.ph" target="_blank"><img src="../images/ucu_mis_logo.png"></a>
+                                            <h4>Contact Us:</h4>
+                                            <h5><i class="bi bi-geo-alt"></i>1 San Vicente West Urdaneta City Pangasinan 2428</h5>
+                                            <h5><i class="bi bi-telephone"></i>(075) 204-9020</h5>
+                                            <h5><i class="bi bi-envelope"></i>univpresidentofficial@gmail.com</h5>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -314,98 +314,99 @@
                                             <h2>Quick Links</h2>
                                             <ul>
                                                 <li><a href="#">Announcements</a></li>
-                                                <li><a href="#">News and Events</a></li>
-                                                <li><a href="#">About</a></li>
-                                                <li><a href="#">Faculty</a></li>
+                                                <li><a href="news_and_events.html">News and Events</a></li>
+                                                <li><a href="about.html">About</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="map_icon">
-                                            <h2>Follow us:</h2>
-                                            <a href="#"><i class="fab fa-facebook-f"> </i></a>
-                                            <a href="#"><i class="fab fa-twitter"> </i></a>
-                                            <a href="#"><i class="fab fa-instagram"> </i></a>
+                                            <h2>Follow UCU</h2>
+                                            <a href="https://www.facebook.com/UCUOfficial" target="_blank"><i class="fab fa-facebook-f"> </i></a>
+                                            <a href="https://www.youtube.com/c/UcuEduPhOfficial" target="_blank"><i style="padding-right: 25px;" class="fab fa-youtube"> </i></a>
+                                            <a href="https://www.instagram.com/ucuofficial/" target="_blank"><i class="fab fa-instagram"> </i></a>
+                                            <a href="https://mis.ucu.edu.ph" target="_blank"><p>UCU-MIS+ 2022</p></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--End Footer Section --------------------------------->
-                        <!--Start Copyright Section ---------------------------->
-                        <div class="copyright">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <p class="copyright_text">© 2022 All Rights Reserved. College of Information and Technology Education</p>
-                                    </div>
+                    </div>
+                    <!--End Footer Section --------------------------------->
+                    <!--Start Copyright Section ---------------------------->
+                    <div class="copyright">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <p class="copyright_text">© 2022 All Rights Reserved. College of Information and Technology Education</p>
                                 </div>
                             </div>
                         </div>
-                        <!--End Copyright Section ------------------------------>
-                        <!-- Javascript files----------------------------------->
-                        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.2.2/swiper-bundle.min.js"></script>
-                        <script type="text/javascript" src="js/card-slider.js"></script>
-                        <script src="../js/jquery.min.js"></script>
-                        <script src="../js/popper.min.js"></script>
-                        <script src="../js/bootstrap.bundle.min.js"></script>
-                        <script src="../js/card-slider-pages.js" crossorigin="anonymous"></script>
-                        <script type="text/javascript" src="../js/swiper.js"></script>
-                        <script type="text/javascript">
-                        function getPageList(totalPages, page, maxLength) {
-                        function range(start, end) {
-                        return Array.from(Array(end - start + 1), (_, i) => i + start);
+                    </div>
+                    <!--End Copyright Section ------------------------------>
+                    <!-- Javascript files----------------------------------->
+                    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.2.2/swiper-bundle.min.js"></script>
+                    <script type="text/javascript" src="js/card-slider.js"></script>
+                    <script src="../js/jquery.min.js"></script>
+                    <script src="../js/popper.min.js"></script>
+                    <script src="../js/bootstrap.bundle.min.js"></script>
+                    <script src="../js/card-slider-pages.js" crossorigin="anonymous"></script>
+                    <script type="text/javascript" src="../js/swiper.js"></script>
+                    <script type="text/javascript">
+                    function getPageList(totalPages, page, maxLength) {
+                    function range(start, end) {
+                    return Array.from(Array(end - start + 1), (_, i) => i + start);
+                    }
+                    var sideWidth = maxLength < 6 ? 1 : 2;
+                    var leftWidth = (maxLength - sideWidth * 2 - 3) >> 1;
+                    var rightWidth = (maxLength - sideWidth * 2 - 3) >> 1;
+                    
+                    if (totalPages <= maxLength) {
+                    return range(1, totalPages);
+                    }
+                    if (page <= maxLength - sideWidth - 1 - rightWidth) {
+                    return range(1, maxLength - sideWidth - 1).concat(0, range(totalPages - sideWidth + 1, totalPages));
+                    }
+                    if (page >= totalPages - sideWidth - 1 - rightWidth) {
+                    return range(1, sideWidth).concat(0, range(totalPages - sideWidth - 1 - rightWidth - leftWidth, totalPages));
+                    }
+                    return range(1, sideWidth).concat(0, range(page - leftWidth, page + rightWidth), 0, range(totalPages - sideWidth + 1, totalPages));
+                    }
+                    $(function(){
+                    var numberOfItems = $(".card-content .card").length;
+                    var limitPerPage = 6; //How many card visible in one page?
+                    var totalPages = Math.ceil(numberOfItems / limitPerPage);
+                    var paginationSize = 7; //How many page elements visible in the pagination?
+                    var currentPage;
+                    function showPage(whichPage) {
+                    if(whichPage < 1 || whichPage > totalPages) return false;
+                    currentPage = whichPage;
+                    $(".card-content .card").hide().slice((currentPage - 1) * limitPerPage, currentPage * limitPerPage).show();
+                    $(".pagination li").slice(1, -1).remove();
+                    getPageList(totalPages, currentPage, paginationSize).forEach(item => {
+                    $("<li>").addClass("page-item").addClass(item ? "current-page" : "dots").toggleClass("active", item == currentPage).append($("<a>").addClass("page-link")
+                        .attr({href: "javascript:void(0)"}).text(item || "...")).insertBefore(".next-page");
+                        });
+                        $(".previous-page").toggleClass("disable", currentPage === 1);
+                        $(".next-page").toggleClass("disable", currentPage === totalPages);
+                        return true;
                         }
-                        var sideWidth = maxLength < 6 ? 1 : 2;
-                        var leftWidth = (maxLength - sideWidth * 2 - 3) >> 1;
-                        var rightWidth = (maxLength - sideWidth * 2 - 3) >> 1;
-                        
-                        if (totalPages <= maxLength) {
-                        return range(1, totalPages);
-                        }
-                        if (page <= maxLength - sideWidth - 1 - rightWidth) {
-                        return range(1, maxLength - sideWidth - 1).concat(0, range(totalPages - sideWidth + 1, totalPages));
-                        }
-                        if (page >= totalPages - sideWidth - 1 - rightWidth) {
-                        return range(1, sideWidth).concat(0, range(totalPages - sideWidth - 1 - rightWidth - leftWidth, totalPages));
-                        }
-                        return range(1, sideWidth).concat(0, range(page - leftWidth, page + rightWidth), 0, range(totalPages - sideWidth + 1, totalPages));
-                        }
-                        $(function(){
-                        var numberOfItems = $(".card-content .card").length;
-                        var limitPerPage = 6; //How many card visible in one page?
-                        var totalPages = Math.ceil(numberOfItems / limitPerPage);
-                        var paginationSize = 7; //How many page elements visible in the pagination?
-                        var currentPage;
-                        function showPage(whichPage) {
-                        if(whichPage < 1 || whichPage > totalPages) return false;
-                        currentPage = whichPage;
-                        $(".card-content .card").hide().slice((currentPage - 1) * limitPerPage, currentPage * limitPerPage).show();
-                        $(".pagination li").slice(1, -1).remove();
-                        getPageList(totalPages, currentPage, paginationSize).forEach(item => {
-                        $("<li>").addClass("page-item").addClass(item ? "current-page" : "dots").toggleClass("active", item == currentPage).append($("<a>").addClass("page-link")
-                            .attr({href: "javascript:void(0)"}).text(item || "...")).insertBefore(".next-page");
-                            });
-                            $(".previous-page").toggleClass("disable", currentPage === 1);
-                            $(".next-page").toggleClass("disable", currentPage === totalPages);
-                            return true;
-                            }
-                            $(".pagination").append(
-                            $("<li>").addClass("page-item").addClass("previous-page").append($("<a>").addClass("page-link").attr({href: "javascript:void(0)"}).text("Prev")),
-                                $("<li>").addClass("page-item").addClass("next-page").append($("<a>").addClass("page-link").attr({href: "javascript:void(0)"}).text("Next"))
-                                    );
-                                    $(".card-content").show();
-                                    showPage(1);
-                                    $(document).on("click", ".pagination li.current-page:not(.active)", function(){
-                                    return showPage(+$(this).text());
-                                    });
-                                    $(".next-page").on("click", function(){
-                                    return showPage(currentPage + 1);
-                                    });
-                                    $(".previous-page").on("click", function(){
-                                    return showPage(currentPage - 1);
-                                    })
-                                    });
-                                    </script>
-                                </body>
-                            </html>
+                        $(".pagination").append(
+                        $("<li>").addClass("page-item").addClass("previous-page").append($("<a>").addClass("page-link").attr({href: "javascript:void(0)"}).text("Prev")),
+                            $("<li>").addClass("page-item").addClass("next-page").append($("<a>").addClass("page-link").attr({href: "javascript:void(0)"}).text("Next"))
+                                );
+                                $(".card-content").show();
+                                showPage(1);
+                                $(document).on("click", ".pagination li.current-page:not(.active)", function(){
+                                return showPage(+$(this).text());
+                                });
+                                $(".next-page").on("click", function(){
+                                return showPage(currentPage + 1);
+                                });
+                                $(".previous-page").on("click", function(){
+                                return showPage(currentPage - 1);
+                                })
+                                });
+                                </script>
+                            </body>
+                        </html>
