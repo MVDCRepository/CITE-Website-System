@@ -83,105 +83,108 @@
                                                         <a class="dropdown-item" href="#">BLIS</a>
                                                     </div>
                                                 </li>
-                                                <li id="nav-last" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Raen Jercee</a>
-                                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
-                                                    <a class="dropdown-item" href="profile.html"><img src="../images/xiao.png">Profile Settings</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="grades.html">Grades</a>
-                                                    <a style="font-weight: 600;" class="dropdown-item" href="#">Blocking</a>
-                                                    <a style="color: red !important;" class="dropdown-item" href="#"><i class="bi bi-box-arrow-left"></i>&nbsp;Logout</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end header end -->
-                <!--Start Content Section ----------------------------->
-                <div class="blocking_content">
-                    <form>
-                        <div class="choose_block">
-                            <div class="container">
-                                <div class="form-row">
-                                    <div class="form-group col-md-3">
-                                        <label for="inputYear">A.Y.</label>
-                                        <h3>2022-2023</h3>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="inputYear">Year</label>
-                                        <h3>4th</h3>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="inputSem">Semester</label>
-                                        <h3>2nd</h3>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="inputBlock">Block</label>
-                                        <select id="inputBlock" class="form-control">
-                                            <option selected disabled>Choose...</option>
-                                            <option>Block 1</option>
-                                            <option>Block 2</option>
-                                            <option>Block 3</option>
-                                            <option>Block 4</option>
-                                            <option>Block 5</option>
-                                            <option>Block 6</option>
-                                            <option>Block 7</option>
-                                            <option>Block 8</option>
-                                            <option>Block 9</option>
-                                            <option>Block 10</option>
-                                        </select>
-                                    </div>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="admission.html">ADMISSION</a></li>
+                                                    <li id="nav-last" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Raen Jercee</a>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
+                                                        <a class="dropdown-item" href="profile.html"><img src="../images/xiao.png">Profile Settings</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="grades.html">Grades</a>
+                                                        <a style="font-weight: 600;" class="dropdown-item" href="#">Blocking</a>
+                                                        <a style="color: red !important;" class="dropdown-item" href="#"><i class="bi bi-box-arrow-left"></i>&nbsp;Logout</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </nav>
                                 </div>
                             </div>
                         </div>
-                        <div class="block_result_content">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="block_result">
-                                            <table class="table table-bordered table-striped table-hover table-sm">
-                                                <thead>
-                                                    <th>Course Code</th>
-                                                    <th>Course Description</th>
-                                                    <th>Days / Hours</th>
-                                                </thead>
-                                                <tr>
-                                                    <td>C100</td>
-                                                    <td>Web Development (Lec)</td>
-                                                    <td>Monday 09:00am - 11:00am <br> Thursday 09:00am - 11:00am</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>C101</td>
-                                                    <td>Web Development (Lab)</td>
-                                                    <td>Tuesday 08:00am - 11:00am</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>C102</td>
-                                                    <td>Literature</td>
-                                                    <td>Wednesday 01:00pm - 03:00pm</td>
-                                                </tr>
-                                            </table>
-                                            <br>
-                                            <div class="blocking_finalization">
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-check">
-                                                                <input
-                                                                oninvalid="this.setCustomValidity('Please check the box to confirm your selected Block')"
-                                                                oninput="this.setCustomValidity('')"
-                                                                type="checkbox" class="form-check-input" id="confirm" required>
-                                                                <label class="form-check-label" for="confirm">Check the box for the confirmation</label>
+                    </div>
+                    <!-- end header end -->
+                    <!--Start Content Section ----------------------------->
+                    <div class="blocking_content">
+                        <form>
+                            <div class="choose_block">
+                                <div class="container">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label for="inputYear">A.Y.</label>
+                                            <h3>2022-2023</h3>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="inputYear">Year</label>
+                                            <h3>4th</h3>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="inputSem">Semester</label>
+                                            <h3>2nd</h3>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="inputBlock">Block</label>
+                                            <select id="inputBlock" class="form-control">
+                                                <option selected disabled>Choose...</option>
+                                                <option>Block 1</option>
+                                                <option>Block 2</option>
+                                                <option>Block 3</option>
+                                                <option>Block 4</option>
+                                                <option>Block 5</option>
+                                                <option>Block 6</option>
+                                                <option>Block 7</option>
+                                                <option>Block 8</option>
+                                                <option>Block 9</option>
+                                                <option>Block 10</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block_result_content">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="block_result">
+                                                <table class="table table-bordered table-striped table-hover table-sm">
+                                                    <thead>
+                                                        <th>Course Code</th>
+                                                        <th>Course Description</th>
+                                                        <th>Days / Hours</th>
+                                                    </thead>
+                                                    <tr>
+                                                        <td>C100</td>
+                                                        <td>Web Development (Lec)</td>
+                                                        <td>Monday 09:00am - 11:00am <br> Thursday 09:00am - 11:00am</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>C101</td>
+                                                        <td>Web Development (Lab)</td>
+                                                        <td>Tuesday 08:00am - 11:00am</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>C102</td>
+                                                        <td>Literature</td>
+                                                        <td>Wednesday 01:00pm - 03:00pm</td>
+                                                    </tr>
+                                                </table>
+                                                <br>
+                                                <div class="blocking_finalization">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-check">
+                                                                    <input
+                                                                    oninvalid="this.setCustomValidity('Please check the box to confirm your selected Block')"
+                                                                    oninput="this.setCustomValidity('')"
+                                                                    type="checkbox" class="form-check-input" id="confirm" required>
+                                                                    <label class="form-check-label" for="confirm">Check the box for the confirmation</label>
+                                                                </div>
+                                                                <input type="submit" name="sub" value="Reserve Block" class="btn btn-success">
                                                             </div>
-                                                            <input type="submit" name="sub" value="Reserve Block" class="btn btn-success">
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="availability">
-                                                                <h3>Availability:</h3>
-                                                                <p>17 / 40</p>
+                                                            <div class="col-md-6">
+                                                                <div class="availability">
+                                                                    <h3>Availability:</h3>
+                                                                    <p>17 / 40</p>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -191,65 +194,64 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
+                    </div>
+                    <!--End Content Section -------------------------------->
+                    <!--Start Footer Section ------------------------------->
+                    <div class="footer">
+                        <div class="footer_container">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="map_icon">
+                                            <a href="../index.html"><img src="../images/cite_logo.png"></a>
+                                            <a href="https://ucu.edu.ph" target="_blank"><img src="../images/ucu_mis_logo.png"></a>
+                                            <h4>Contact Us:</h4>
+                                            <h5><i class="bi bi-geo-alt"></i>1 San Vicente West Urdaneta City Pangasinan 2428</h5>
+                                            <h5><i class="bi bi-telephone"></i>(075) 204-9020</h5>
+                                            <h5><i class="bi bi-envelope"></i>univpresidentofficial@gmail.com</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="map_icon">
+                                            <h2>Quick Links</h2>
+                                            <ul>
+                                                <li><a href="#">Announcements</a></li>
+                                                <li><a href="news_and_events.html">News and Events</a></li>
+                                                <li><a href="about.html">About</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="map_icon">
+                                            <h2>Follow UCU</h2>
+                                            <a href="https://www.facebook.com/UCUOfficial" target="_blank"><i class="fab fa-facebook-f"> </i></a>
+                                            <a href="https://www.youtube.com/c/UcuEduPhOfficial" target="_blank"><i style="padding-right: 25px;" class="fab fa-youtube"> </i></a>
+                                            <a href="https://www.instagram.com/ucuofficial/" target="_blank"><i class="fab fa-instagram"> </i></a>
+                                            <a href="https://mis.ucu.edu.ph" target="_blank"><p>UCU-MIS+ 2022</p></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </form>
-                </div>
-                <!--End Content Section -------------------------------->
-                <!--Start Footer Section ------------------------------->
-                <div class="footer">
-                    <div class="footer_container">
+                    </div>
+                    <!--End Footer Section --------------------------------->
+                    <!--Start Copyright Section ---------------------------->
+                    <div class="copyright">
                         <div class="container">
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="map_icon">
-                                        <a href="../index.html"><img src="../images/cite_logo.png"></a>
-                                        <a href="https://ucu.edu.ph" target="_blank"><img src="../images/ucu_mis_logo.png"></a>
-                                        <h4>Contact Us:</h4>
-                                        <h5><i class="bi bi-geo-alt"></i>1 San Vicente West Urdaneta City Pangasinan 2428</h5>
-                                        <h5><i class="bi bi-telephone"></i>(075) 204-9020</h5>
-                                        <h5><i class="bi bi-envelope"></i>univpresidentofficial@gmail.com</h5>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="map_icon">
-                                        <h2>Quick Links</h2>
-                                        <ul>
-                                            <li><a href="#">Announcements</a></li>
-                                            <li><a href="news_and_events.html">News and Events</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="map_icon">
-                                        <h2>Follow UCU</h2>
-                                        <a href="https://www.facebook.com/UCUOfficial" target="_blank"><i class="fab fa-facebook-f"> </i></a>
-                                        <a href="https://www.youtube.com/c/UcuEduPhOfficial" target="_blank"><i style="padding-right: 25px;" class="fab fa-youtube"> </i></a>
-                                        <a href="https://www.instagram.com/ucuofficial/" target="_blank"><i class="fab fa-instagram"> </i></a>
-                                        <a href="https://mis.ucu.edu.ph" target="_blank"><p>UCU-MIS+ 2022</p></a>
-                                    </div>
+                                <div class="col-sm-12">
+                                    <p class="copyright_text">© 2022 All Rights Reserved. College of Information and Technology Education</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--End Footer Section --------------------------------->
-                <!--Start Copyright Section ---------------------------->
-                <div class="copyright">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <p class="copyright_text">© 2022 All Rights Reserved. College of Information and Technology Education</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--End Copyright Section ------------------------------>
-                <!-- Javascript files----------------------------------->
-                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.2.2/swiper-bundle.min.js"></script>
-                <script type="text/javascript" src="js/card-slider.js"></script>
-                <script src="../js/jquery.min.js"></script>
-                <script src="../js/popper.min.js"></script>
-                <script src="../js/bootstrap.bundle.min.js"></script>
-            </body>
-        </html>
+                    <!--End Copyright Section ------------------------------>
+                    <!-- Javascript files----------------------------------->
+                    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.2.2/swiper-bundle.min.js"></script>
+                    <script type="text/javascript" src="js/card-slider.js"></script>
+                    <script src="../js/jquery.min.js"></script>
+                    <script src="../js/popper.min.js"></script>
+                    <script src="../js/bootstrap.bundle.min.js"></script>
+                </body>
+            </html>

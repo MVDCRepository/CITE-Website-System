@@ -169,7 +169,7 @@ ul .nav-item .nav-link,
 
 #nav-last {
 	margin-top: -6px; 
-	margin-left: 60px;
+	margin-left: -65px;
 }
 
 .dropdown-item img {
@@ -1685,6 +1685,26 @@ button.main_bt {
 	margin: 20px;
 	padding: 20px;
 	border-radius: 25px;
+	height: 370px;
+}
+
+.admission_conts button {
+	width: 120px;
+	height: 30px;
+	background: #46c263;
+	border: none;
+	border-radius: 5px;
+	margin-top: 45px;
+	cursor: pointer;
+	float: left;
+}
+
+.admission_conts button:hover {
+	background: #39db5f;
+}
+
+.admission_conts button a {
+	color: white;
 }
 
 .admission_conts h2 {
@@ -1695,8 +1715,4 @@ button.main_bt {
 .admission_conts ul, .admission_conts li {
 	list-style: none;
 	text-align: left;
-}
-
-.admission_conts button {
-	float: left;
 }
