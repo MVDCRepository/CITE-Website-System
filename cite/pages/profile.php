@@ -245,18 +245,17 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                           if($result->num_rows > 0) {
                                             while ($row=$result->fetch_assoc()) {
                                     ?>
-                                        
+                                        <input type="hidden" name="student_id" value="<?php echo $_SESSION['student_id'];?>">
                                         <table class="table table-striped table-responsive-md">
                                             <thead>
                                                 <th colspan="3">
                                                     Student's Account Information
                                                     <center>
-                                                        <?php if (isset($_GET['error_credential'])) { ?>
-                                                          <p class="error_msg my-0"><?php echo $_GET['error_credential']; ?></p>
+                                                        <?php if (isset($_GET['error_msg'])) { ?>
+                                                          <p class="error_msg mt-3 mb-2"><?php echo $_GET['error_msg'];?></p>
                                                         <?php } ?>
                                                         <?php if (isset($_GET['success_upd_cred'])) { ?>
-                                                          <p class="success_msg my-0"><?php echo $_GET['success_upd_cred']; ?></p>
-                                                          <p class="success_msg my-0"><?php echo $_GET['success_upd_cred']; ?></p>
+                                                          <p class="success_msg mt-3 mb-2"><?php echo $_GET['success_upd_cred']; ?></p>
                                                         <?php } ?>
                                                     </center>
                                                 </th>
@@ -273,7 +272,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                     <td>Change Password:</td>
                                                     <td colspan="2">
                                                         <div class="control-form">
-                                                            <input type="password" class="form-control" placeholder="Enter Password" name="password" id="password">
+                                                            <input type="password" class="form-control" placeholder="Enter Password" name="password" id="password" required>
                                                             <small>error</small>
                                                         </div>
                                                     </td>
@@ -282,7 +281,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                     <td>Confirm New Password:</td>
                                                     <td colspan="2">
                                                         <div class="control-form">
-                                                            <input type="password" class="form-control" placeholder="Confirm New Password" name="confirmPass" id="confirmPass">
+                                                            <input type="password" class="form-control" placeholder="Confirm New Password" name="confirmPass" id="confirmPass" required>
                                                             <small>error</small>
                                                         </div>
                                                     </td>
@@ -360,7 +359,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                 <script src="../js/popper.min.js"></script>
                 <script src="../js/bootstrap.bundle.min.js"></script>
                 <!-- cite js -->
-                <!-- <script type="text/javascript" src="../js/profile.js"></script> -->
+                <script type="text/javascript" src="../js/profile.js"></script>
             </body>
         </html>
 <?php
