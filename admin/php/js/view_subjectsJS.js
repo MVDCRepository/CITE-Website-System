@@ -114,53 +114,28 @@ window.addEventListener('click', function(i) {
 });
 
 
-// tbl_1styr();
+const add_sub_form = document.getElementById('add_sub_form');
+const sem = document.getElementById('sem');
+const yr_lvl = document.getElementById('yr_lvl');
 
-// function tbl_1styr() {
-// 	units_1styr_1stsem();
-// 	units_1styr_2ndsem();
+add_sub_form.addEventListener('submit', (e) => {
+	const semValue = sem.value;
+	const yr_lvlValue = yr_lvl.value;
 
-// 	function units_1styr_1stsem () {
-// 		var tbl_1styr_1stsem = document.getElementById("tbl_1styr_1stsem");
-// 		var total_units = 0;
-// 		var total_lec = 0;
-// 		var total_lab = 0;
-	            
-// 		for(var i = 1; i < tbl_1styr_1stsem.rows.length; i++) {
-// 		    total_units = total_units + parseInt(tbl_1styr_1stsem.rows[i].cells[3].innerHTML);
-// 		}
-// 		for(var i = 1; i < tbl_1styr_1stsem.rows.length; i++) {
-// 		    total_lec = total_lec + parseInt(tbl_1styr_1stsem.rows[i].cells[4].innerHTML);
-// 		}
-// 		for(var i = 1; i < tbl_1styr_1stsem.rows.length; i++) {
-// 		    total_lab = total_lab + parseInt(tbl_1styr_1stsem.rows[i].cells[5].innerHTML);
-// 		}
+	if (semValue === 'Middle Term' && yr_lvlValue != '3rd') {
+		setErrorFor(yr_lvl, 'Only third year have Middle Term for semester');
+		e.preventDefault();
+	}
+});
 
-// 		document.getElementById("total_units").innerHTML = "Total Units : " + total_units;
-// 		document.getElementById("total_lec_msg").innerHTML = "Total Lec : " + total_lec;
-// 		document.getElementById("total_lab_msg").innerHTML = "Total Lab : " + total_lab;
-// 		console.log(total_units);
-// 	}
+function setErrorFor(input, message) {
+	const formControl = input.parentElement;
+	const small = formControl.querySelector('small');
+	formControl.className = 'control-form error';
+	small.innerText = message;
+}
 
-// 	function units_1styr_2ndsem () {
-// 		var tbl_1styr_2ndsem = document.getElementById("tbl_1styr_2ndsem");
-// 		var total_units = 0;
-// 		var total_lec = 0;
-// 		var total_lab = 0;
-	            
-// 		for(var i = 1; i < tbl_1styr_2ndsem.rows.length; i++) {
-// 		    total_units = total_units + parseInt(tbl_1styr_2ndsem.rows[i].cells[3].innerHTML);
-// 		}
-// 		for(var i = 1; i < tbl_1styr_2ndsem.rows.length; i++) {
-// 		    total_lec = total_lec + parseInt(tbl_1styr_2ndsem.rows[i].cells[4].innerHTML);
-// 		}
-// 		for(var i = 1; i < tbl_1styr_2ndsem.rows.length; i++) {
-// 		    total_lab = total_lab + parseInt(tbl_1styr_2ndsem.rows[i].cells[5].innerHTML);
-// 		}
-
-// 		document.getElementById("total_units").innerHTML = "Total Units : " + total_units;
-// 		document.getElementById("total_lec_msg").innerHTML = "Total Lec : " + total_lec;
-// 		document.getElementById("total_lab_msg").innerHTML = "Total Lab : " + total_lab;
-// 		console.log(total_units);
-// 	}
-// }
+function setValidInputFor(input) {
+	const formControl = input.parentElement;
+	formControl.className = 'control-form success';
+}

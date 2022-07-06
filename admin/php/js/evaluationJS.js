@@ -26,6 +26,35 @@ close_modaldelete_BTN.forEach(function(btn) {
 	}
 });
 
+
+//delete modal academic year table
+var del_acadYr = document.querySelectorAll('#del_acadYr');
+	
+del_acadYr.forEach( function(btn) {
+	btn.onclick = function() {
+		var modal = btn.getAttribute("data-modal");
+
+		document.getElementById(modal).style.display = "block";
+
+		var ay_table = document.getElementById('ay_table');
+		for (var i = 1; i < ay_table.rows.length; i++) {
+			ay_table.rows[i].onclick = function() {
+				document.getElementById('del_acad_id').value = this.cells[0].innerHTML;
+				document.getElementById('del_acadyr').innerHTML = this.cells[1].innerHTML;
+				document.getElementById('del_status').innerHTML = this.cells[2].innerHTML;
+			};
+		}
+	};
+});
+	
+var close_modaldelete_BTN_ay = document.querySelectorAll("#close_modaldelete_ay");
+
+close_modaldelete_BTN_ay.forEach(function(btn) {
+	btn.onclick = function() {
+		var modal = (btn.closest(".delete-modal").style.display = "none");
+	}
+});
+
 window.addEventListener('click', function(i) {
 	if(i.target.className === "delete-modal") {
 		i.target.style.display = "none";

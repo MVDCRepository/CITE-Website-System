@@ -333,6 +333,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                         <option value=""></option>
                         <option value="College Dean">College Dean</option>
                         <option value="Cite Instructor">Cite Instructor</option>
+                        <option value="Program Head">Program Head</option>
+                        <option value="Secretary">Secretary</option>
                         <option value="Faculty">Faculty</option>
                         <option value="other">other</option>
                       </select>

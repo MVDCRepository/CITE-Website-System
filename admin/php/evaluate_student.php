@@ -333,7 +333,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                           <td><?php echo $row_subjects['lab'];?></td>
                           <td><?php echo $row_subjects['courseCode'];?></td>
                           <td><?php echo $row_subjects['courseDesc'];?></td>
-                          <td><input type="number" class="grade_input" name="grade[]"></td>
+                          <td><input type="number" class="grade_input" name="grade[]" max="99" maxlength="2"></td>
                         </tr>
                         <?php
                             }
@@ -375,7 +375,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                           <td><?php echo $row_subjects['lab'];?></td>
                           <td><?php echo $row_subjects['courseCode'];?></td>
                           <td><?php echo $row_subjects['courseDesc'];?></td>
-                          <td><input type="number" class="grade_input" name="grade[]"></td>
+                          <td><input type="number" class="grade_input" name="grade[]" max="99" maxlength="2"></td>
                         </tr>
                         <?php
                             }
@@ -419,7 +419,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                           <td><?php echo $row_subjects['lab'];?></td>
                           <td><?php echo $row_subjects['courseCode'];?></td>
                           <td><?php echo $row_subjects['courseDesc'];?></td>
-                          <td><input type="number" class="grade_input" name="grade[]"></td>
+                          <td><input type="number" class="grade_input" name="grade[]" max="99" maxlength="2"></td>
                         </tr>
                         <?php
                             }
@@ -461,7 +461,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                           <td><?php echo $row_subjects['lab'];?></td>
                           <td><?php echo $row_subjects['courseCode'];?></td>
                           <td><?php echo $row_subjects['courseDesc'];?></td>
-                          <td><input type="number" class="grade_input" name="grade[]"></td>
+                          <td><input type="number" class="grade_input" name="grade[]" max="99" maxlength="2"></td>
                         </tr>
                         <?php
                             }
@@ -505,7 +505,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                           <td><?php echo $row_subjects['lab'];?></td>
                           <td><?php echo $row_subjects['courseCode'];?></td>
                           <td><?php echo $row_subjects['courseDesc'];?></td>
-                          <td><input type="number" class="grade_input" name="grade[]"></td>
+                          <td><input type="number" class="grade_input" name="grade[]" max="99" maxlength="2"></td>
                         </tr>
                         <?php
                             }
@@ -547,7 +547,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                           <td><?php echo $row_subjects['lab'];?></td>
                           <td><?php echo $row_subjects['courseCode'];?></td>
                           <td><?php echo $row_subjects['courseDesc'];?></td>
-                          <td><input type="number" class="grade_input" name="grade[]"></td>
+                          <td><input type="number" class="grade_input" name="grade[]" max="99" maxlength="2"></td>
                         </tr>
                         <?php
                             }
@@ -560,7 +560,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                     </div>
                   </div>
 
-                  <div class="col-md mb-5">
+                  <div class="col-md mb-5" id="3rd_yr_middle_termTbl">
                     <table class="table-cite">
                       <tr>
                         <th colspan="6" class="text-center">Third Year Middle Term</th>
@@ -590,13 +590,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                         <td><?php echo $row_subjects['lab'];?></td>
                         <td><?php echo $row_subjects['courseCode'];?></td>
                         <td><?php echo $row_subjects['courseDesc'];?></td>
-                        <td><input type="number" class="grade_input" name="grade[]"></td>
+                        <td><input type="number" class="grade_input" name="grade[]" max="99" maxlength="2"></td>
                       </tr>
                       <?php
                           }
                         }
                         else {
-                          echo "<tr><td colspan='6' class='text-center' style='color: #A94442'>No subjects available</td></tr>";
+                          echo "<tr><td colspan='6' class='text-center' style='color: #A94442'>No subjects available</td></tr>
+                          <script>document.getElementById('3rd_yr_middle_termTbl').style.display = 'none';</script>";
                         }
                       ?>
                     </table>
@@ -633,7 +634,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                           <td><?php echo $row_subjects['lab'];?></td>
                           <td><?php echo $row_subjects['courseCode'];?></td>
                           <td><?php echo $row_subjects['courseDesc'];?></td>
-                          <td><input type="number" class="grade_input" name="grade[]"></td>
+                          <td><input type="number" class="grade_input" name="grade[]" max="99" maxlength="2"></td>
                         </tr>
                         <?php
                             }
@@ -675,7 +676,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                           <td><?php echo $row_subjects['lab'];?></td>
                           <td><?php echo $row_subjects['courseCode'];?></td>
                           <td><?php echo $row_subjects['courseDesc'];?></td>
-                          <td><input type="number" class="grade_input" name="grade[]"></td>
+                          <td><input type="number" class="grade_input" name="grade[]" max="99" maxlength="2"></td>
                         </tr>
                         <?php
                             }

@@ -321,6 +321,27 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       <input type="text" class="form-control" name="lname" value="<?php echo $row['lname'];?>" required>
                     </div>
                     <div class="col-md-6 mb-3">
+                      <label class="form-label">Gender</label><br>
+                      <input type="radio" class="form-check-input" name="gender" value="Male" <?php if($row['gender']=="Male") {echo "checked";}?> required> Male
+                      <input type="radio" class="form-check-input" name="gender" value="Female" <?php if($row['gender']=="Female") {echo "checked";}?> required> Female
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Birthdate</label>
+                      <input type="date" class="form-control" name="b_date" value="<?php echo $row['b_date'];?>" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Address</label>
+                      <input type="text" class="form-control" name="address" value="<?php echo $row['address'];?>" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Email</label>
+                      <input type="email" class="form-control" name="email" value="<?php echo $row['email'];?>" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Phone</label>
+                      <input type="number" maxlength="11" class="form-control" name="phoneNum" value="<?php echo $row['phoneNum'];?>" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
                       <label class="form-label">Year Level</label>
                       <select class="form-select" name="yr_lvl" required>
                         <option value="<?php echo $row['yr_lvl'];?>"><?php echo $row['yr_lvl']." Year";?></option>
@@ -338,6 +359,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       <label class="form-label">Series</label>
                       <input type="text" class="form-control" name="series" value="<?php echo $row['series'];?>" required>
                     </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Student Status</label>
+                      <select class="form-select" name="status" required>
+                        <option value="<?php echo $row['status'];?>"><?php echo $row['status'];?></option>
+                        <option value="Transferee">Transferee</option>
+                        <option value="Freshmen">Freshmen</option>
+                        <option value="Regular">Regular</option>
+                        <option value="Regular Graduating">Regular Graduating</option>
+                        <option value="Transferee Graduating">Transferee Graduating</option>
+                      </select>
+                    </div>
                   </div>
                   <div class="d-grid gap-2 d-md-block mt-4">
                     <button class="main-button" type="submit" name="upd_studentBtn">Save Changes</button>
@@ -352,6 +384,51 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                 ?>
               </div>
               <!-- / section container -->
+
+              <!-- section container guardian information -->
+              <center>
+                <?php if (isset($_GET['success_upd_guardian'])) { ?>
+                  <p class="success_msg mb-3"><?php echo $_GET['success_upd_guardian'];?></p>
+                <?php } ?>
+                <?php if (isset($_GET['error_upd_guardian'])) { ?>
+                  <p class="error_msg mb-3"><?php echo $_GET['error_upd_guardian'];?></p>
+                <?php } ?>
+              </center>
+
+              <div class="section-container mb-4 card">
+                <h5 class="mb-4">Student Guardian</h5>
+                <?php
+                  include "db_conn.php";
+                  $sql = "SELECT * FROM student_tbl WHERE student_id = '$student_id'";
+                  $result = $conn->query($sql);
+                    if($result->num_rows > 0) {
+                      while ($row=$result->fetch_assoc()) {
+                ?>
+                <form action="php/studentPHP.php?student_id=<?=$student_id?>" method="POST">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <input type="hidden" name="student_id" id="student_id" value="<?php echo $row['student_id'];?>">
+                      <label class="form-label">Guardian Name</label>
+                      <input type="text" class="form-control" name="guardian_name" value="<?php echo $row['guardian_name'];?>" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Contact No.</label>
+                      <input type="text" class="form-control" name="guardian_contact" id="guardian_contact" value="<?php echo $row['guardian_contact'];?>" required>
+                    </div>
+                  </div>
+                  <div class="d-grid gap-2 d-md-block mt-4">
+                    <button class="main-button" type="submit" name="upd_studentGuardianBtn">Save Changes</button>
+                  </div>
+                </form>
+                <?php
+                    }
+                  }
+                  else {
+                    echo "<center><p style='color: #ff0000'>Student credentials unavailable</p></center>";
+                  }
+                ?>
+              </div>
+              <!-- / section container guardian information -->
 
               <!-- section container credential -->
               <center>
@@ -377,11 +454,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                     <div class="col-md-6 mb-3">
                       <input type="hidden" name="student_id" id="student_id" value="<?php echo $row['student_id'];?>">
                       <label class="form-label">Identification Card Number</label>
-                      <input type="text" class="form-control" name="id_number" value="<?php echo $row['id_number'];?>" readonly>
+                      <input type="text" class="form-control" name="id_number" value="<?php echo $row['id_number'];?>">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Password</label>
-                      <input type="text" class="form-control" name="password" id="password" value="" readonly>
+                      <input type="text" class="form-control" name="password" id="password" value="<?php echo $row['password'];?>" readonly>
                     </div>
                   </div>
                   <input type="checkbox" class="form-check-input" name="generate_pass" id="generate_pass" onclick="generate_cred()">

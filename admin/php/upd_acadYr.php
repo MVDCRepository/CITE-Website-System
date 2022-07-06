@@ -3,6 +3,7 @@ session_start();
 
 if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['fname'])) {
   include 'db_conn.php';
+  $acad_id = $_GET['acad_id'];
 ?>
 <!DOCTYPE html>
 
@@ -22,7 +23,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Students</title>
+    <title>Add Evaluation CMO Series</title>
 
     <meta name="description" content="" />
 
@@ -137,7 +138,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="upd_announcements.php" class="menu-link">
+                  <a href="add_announcements.php" class="menu-link">
                     <div>Add</div>
                   </a>
                 </li>
@@ -151,7 +152,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
             </li>
 
             <!-- Evaluation -->
-            <li class="menu-item">
+            <li class="menu-item active open">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <div data-i18n="Layouts">Evaluation</div>
               </a>
@@ -171,13 +172,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
             </li>
 
             <!-- Students -->
-            <li class="menu-item active open">
+            <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <div data-i18n="Layouts">Students</div>
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="students.php" class="menu-link">
                     <div>Manage</div>
                   </a>
@@ -283,107 +284,62 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-              <!-- page header and search -->
-              <div class="d-flex flex-wrap">
-                <div class="p-2 flex-fill">
-                  <!-- page title -->
-                  <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> List of Students</h4>
+              <!-- page title -->
+              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Evaluation /</span> Update Academic Year</h4>
+              <!-- form -->
+              <form action="php/evaluationPHP.php?acad_id=<?=$acad_id?>" method="POST" id="upd_acadyr_form">
+                <?php
+                  include "db_conn.php";
+                  $sql = "SELECT * FROM acad_yr_tbl WHERE acad_id = $acad_id";
+                  $result = $conn->query($sql);
+                    if($result->num_rows > 0) {
+                      while ($row=$result->fetch_assoc()) {
+                ?>
+                <div class="p-4 card mb-4">
+                  <h5 class="mb-4">Update Academic Year</h5>
+                  <center>
+                    <?php if (isset($_GET['acad_error'])) { ?>
+                      <p class="error_msg mt-3 mb-3" style="margin: 0px 0px 10px 0px"><?php echo $_GET['acad_error']; ?></p>
+                    <?php } ?>
+                    <?php if (isset($_GET['acad_success_msg'])) { ?>
+                      <p class="success_msg mb-3" style="margin: 0px 0px 10px 0px"><?php echo $_GET['acad_success_msg']; ?></p>
+                    <?php } ?>
+                  </center>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Academic Year</label>
+                      <input type="hidden" class="form-control" name="upd_acad_id" value="<?php echo $row['acad_id'];?>">
+                      <input type="text" class="form-control" name="upd_acad_yr" value="<?php echo $row['acad_yr'];?>" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Status</label><br>
+                      <label class="form-check-label" for="drop_student"></label>
+                      <input type="radio" class="form-check-input" <?php if ($row['status'] == 'Active') {echo "checked";}?> name="upd_status" value="Active" required> Active
+                      <input type="radio" class="form-check-input ms-2" <?php if ($row['status'] == 'Inactive') {echo "checked";}?> name="upd_status" value="Inactive" required> Inactive
+                    </div>
+                    <div class="d-grid gap-2 d-md-block mt-3">
+                      <button class="main-button" type="submit" name="upd_acadBtn">Update Academic Year</button>
+                    </div>
+                  </div>
                 </div>
-                <div class="p-2 flex-fill">
-                  <!-- search -->
-                  <?php 
-                    include "db_conn.php";
-                      $sql = "SELECT * FROM student_tbl WHERE eval_status = 'Evaluate' OR eval_status = 'Evaluated' ORDER BY student_id ASC";
-
-                    if (isset($_POST['search'])) {
-                      $search = $_POST['search'];
-                      $sql = "SELECT * FROM student_tbl WHERE CONCAT(fname, ' ', lname) LIKE '%$search%' OR CONCAT(lname, ' ', fname) LIKE '%$search%' OR id_number = '$search'";
+                <?php
                     }
-                    else {
-                      $search = "";
-                      $sql = "SELECT * FROM student_tbl WHERE eval_status = 'Evaluate' OR eval_status = 'Evaluated' ORDER BY student_id ASC";
-                    }
-
-                    $result = $conn->query($sql);
-                  ?>
-                  <form method="POST">
-                    <label>Search</label><input type="text" class="search" placeholder="Search..." name="search" value="<?php echo $search;?>">
-                  </form>
-                </div>
-              </div>
-              
-              <!-- section container -->
-              <center>
-                <?php if (isset($_GET['success_msg'])) { ?>
-                  <p class="success_msg mb-3"><?php echo $_GET['success_msg']; ?></p>
-                <?php } ?>
-              </center>
-              <div class="section-container card">
-                
-                <!-- table wrapper -->
-                <div class="table-wrapper">
-                  <table class="table-cite" id="evaluation_table">
-                    <thead>
-                      <tr>
-                        <th scope="col" style="display: none">ID</th>
-                        <th scope="col">ID Number</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">CMO No.</th>
-                        <th scope="col">Series</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                      if($result->num_rows > 0) {
-                        while ($row=$result->fetch_assoc()) {
-                    ?>
-                    <tr>
-                      <td style="display: none"><?php echo $row['student_id'];?></td>
-                      <td><?php echo $row['id_number'];?></td>
-                      <td><?php echo $row['lname'].", ".$row['fname']." ".$row['mname'];?></td>
-                      <td><?php echo $row['cmoNo'];?></td>
-                      <td><?php echo $row['series'];?></td>
-                      <td>
-                        <div class="d-grid gap-2 d-md-block">
-                          <?php 
-                            if ($row['eval_status'] == "Evaluate") {
-                              echo "<a href='evaluate_student.php?student_id={$row['student_id']}'><button class='editbtn' style='background-color: #ff0000'>Evaluate</button></a>";
-                            }
-                            else {
-                              echo "<a href='upd_eval_student.php?student_id={$row['student_id']}'><button class='editbtn'>Evaluate</button></a>";
-                            }
-                          ?>
-                          <a href="view_student_grade.php?student_id=<?=$row['student_id'];?>"><button class="viewbtn">View Grades</button></a>
-                          <a href="upd_student.php?student_id=<?=$row['student_id'];?>"><button class="editbtn">Edit</button></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <?php
-                        }
-                      }
-                      else if($result->num_rows == 0 && $search != "") {
-                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>Student not found</center></td></tr>";
-                      }
-                      else {
-                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>No students available</center></td></tr>";
-                      }
-                    ?>
-                    </tbody>
-                  </table>
-                </div>
-                <!-- / table wrapper -->
-              </div>
-              <!-- / section container -->
-              <!-- / Content -->
-
-              <div class="content-backdrop fade"></div>
+                  }
+                  else {
+                    echo "<center><p style='color: #ff0000'>Evaluation unavailable</p></center>";
+                  }
+                ?>
+              </form>
+              <!-- / form -->
             </div>
             <!-- / Content -->
-          <!-- / Content wrapper -->
+
+            <div class="content-backdrop fade"></div>
           </div>
-        <!-- / Layout container -->
+          <!-- Content wrapper -->
         </div>
+        <!-- / Layout container -->
+      </div>
 
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
@@ -412,9 +368,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
     <!-- Place this tag in your head or just before your close body tag. -->
     <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
 
-    <!-- my js -->
-    <script type="text/javascript" src="js/evaluationJS.js"></script>
-
+    <!-- cite js -->
   </body>
 </html>
 <?php

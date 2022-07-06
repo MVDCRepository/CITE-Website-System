@@ -307,7 +307,36 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       <input type="text" class="form-control" name="series" required>
                     </div>
                     <div class="d-grid gap-2 d-md-block mt-3">
-                      <button class="main-button" type="submit" name="save_evalBtn">Save</button>
+                      <button class="main-button" type="submit" name="save_evalBtn">Add CMO No. & Series</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+              <form action="php/evaluationPHP.php" method="POST" id="add_acadYr_form">
+                <div class="p-4 card mb-4">
+                  <h5 class="mb-4">Add Academic Year</h5>
+                  <center>
+                    <?php if (isset($_GET['acad_error'])) { ?>
+                      <p class="error_msg mt-3 mb-3" style="margin: 0px 0px 10px 0px"><?php echo $_GET['acad_error']; ?></p>
+                    <?php } ?>
+                    <?php if (isset($_GET['acad_success_msg'])) { ?>
+                      <p class="success_msg mb-3" style="margin: 0px 0px 10px 0px"><?php echo $_GET['acad_success_msg']; ?></p>
+                    <?php } ?>
+                  </center>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Academic Year</label>
+                      <input type="text" class="form-control" name="acad_yr" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Status</label><br>
+                      <label class="form-check-label" for="drop_student"></label>
+                      <input type="radio" class="form-check-input" name="status" value="Active" required> Active
+                      <input type="radio" class="form-check-input ms-2" name="status" value="Inactive" required> Inactive
+                    </div>
+                    <div class="d-grid gap-2 d-md-block mt-3">
+                      <button class="main-button" type="submit" name="save_acadBtn">Add Academic Year</button>
                     </div>
                   </div>
                 </div>
@@ -351,7 +380,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
     <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
 
     <!-- cite js -->
-    <script type="text/javascript" src="js/add_facultyJS.js"></script>
   </body>
 </html>
 <?php

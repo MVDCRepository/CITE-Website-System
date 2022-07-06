@@ -1,9 +1,3 @@
-<?php
-session_start();
-
-if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status'])) {
-  include '../db_conn.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,25 +8,25 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <!-- site metas -->
-        <title>News & Events | CITE</title>
+        <title>Faculty | CITE</title>
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
         <!-- bootstrap css -->
-        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <!-- style css -->
-        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <!-- Responsive-->
-        <link rel="stylesheet" href="../css/responsive.css">
+        <link rel="stylesheet" href="css/responsive.css">
         <!-- Scrollbar Custom CSS -->
-        <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
         <!-- Tweaks for older IEs-->
         <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
         <!-- owl stylesheets -->
-        <link rel="stylesheet" href="../css/owl.carousel.min.css">
-        <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/owl.theme.default.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
         <!-- Font Awesome -->
@@ -41,23 +35,26 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.2.2/swiper-bundle.css" integrity="sha512-VbPb+KrNIjcE5nM/Y+ZBvKvQF7+B/alQCQLPdIUAP3KsmDWkv0EdiyX4gfTwtJ3Sfais/nGJ0whTxjSwhQ1C8g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Jquery -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <!-- body -->
-        <body>
-            <div class="header_pages">
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    </head>
+    <!-- body -->
+    <body>
+        <div class="header_pages">
+            <div class="container">
                 <div class="container">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="logo1"><a href="index.php"><img src="../images/cite_logo_title.png"></a></div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="logo2"><a href="https://ucu.edu.ph" target="_blank"><img src="../images/ucu_logo.png"></a></div>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="logo1"><a href="index.html"><img src="images/cite_logo_title.png"></a></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="logo2"><a href="https://ucu.edu.ph" target="_blank"><img src="images/ucu_logo.png"></a></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="header">
+        </div>
+    </div>
+    <div class="header">
             <div class="container">
                 <!--  header inner -->
                 <div class="col-sm-12">
@@ -75,7 +72,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                             <li class="nav-item">
                                                 <a class="nav-link" href="about.html">ABOUT</a></li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" href="faculty.php">FACULTY</a></li>
+                                                    <a style="font-weight: 600;" class="nav-link" href="#">FACULTY</a></li>
                                                     <li class="nav-item">
                                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">ACADEMICS</a>
                                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
@@ -86,13 +83,9 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                     </li>
                                                     <li class="nav-item">
                                                     <a class="nav-link" href="admission.php">ADMISSION</a></li>
-                                                    <li id="nav" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['fname'];?></a>
+                                                <li id="nav-last" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Log In</a>
                                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
-                                                        <a class="dropdown-item" href="profile.php"><!-- <img src="images/xiao.png"> -->Profile Settings</a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="grades.php">Grades</a>
-                                                        <a class="dropdown-item" href="blocking.php">Blocking</a>
-                                                        <a style="color: red !important;" class="dropdown-item" href="../php/logout.php"><i class="bi bi-box-arrow-left"></i>&nbsp;Logout</a>
+                                                        <a class="dropdown-item" href="user_login.php">Go To Log In</a>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -102,90 +95,70 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                             </div>
                         </div>
                     </div>
-                            <!-- end header end -->
-                            <!--Start Banner Section ------------------------------>
-                            <!--End Banner Section -------------------------------->
-                            <!--Start Content Section ----------------------------->
-                            <?php
-                                $bulletin_id = $_GET['bulletin_id'];
-
-                                include "../db_conn.php";
-                                $sql = "SELECT * FROM news_events_tbl WHERE bulletin_id = $bulletin_id";
-                                $result = $conn->query($sql);
-                                  if($result->num_rows > 0) {
-                                    while ($row=$result->fetch_assoc()) {
-                            ?>
-                            <div class="item_container">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="item_img">
-                                            <img class="img-fluid" src="../../admin/php/images/<?php echo $row['photo'];?>">
-                                            <p><?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h1><?php echo $row['title'];?></h1>
-                                        <p>
-                                            <?php echo $row['content'];?>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                                    }
-                                }
-
-                                else {
-                                    echo "<center><h1 class='error_msg'>No News & Events available</h1></center>";
-                                }
-                            ?>
-
-                            <div class="more-news-container">
-                                <h3>More news</h3>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="more-news-slider">
+                    <!-- end header end -->
+                    <!--Start Banner Section ------------------------------>
+                    <div class="banner_news_events">
+                        <div class="titlepage-h1-news_events">
+                            <h1 class="bnner_title_news_events">Faculty</h1>
+                        </div>
+                    </div>
+                    <!--End Banner Section -------------------------------->
+                    <!--Start Content Section ----------------------------->
+                    <div class="service_main">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="container_faculty">
+                                        <div class="timeline">
+                                            <ul>
                                                 <?php
-                                                    $bulletin_id = $_GET['bulletin_id'];
-
-                                                    include "../db_conn.php";
-                                                    $sql = "SELECT * FROM news_events_tbl";
+                                                    include "db_conn.php";
+                                                    $sql = "SELECT * FROM faculty_tbl";
                                                     $result = $conn->query($sql);
                                                       if($result->num_rows > 0) {
                                                         while ($row=$result->fetch_assoc()) {
                                                 ?>
-                                                <li class="item-a">
-                                                    <a href="news_and_events_details.php?bulletin_id=<?=$row['bulletin_id'];?>">
-                                                        <div class="more-news-box">
-                                                            <img class="img-fluid" src="../../admin/php/images/<?php echo $row['photo'];?>">
-                                                            <h1 class="more-news-title"><?php echo $row['content'];?></h1>
-                                                            <p class="more-news-date"><?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></p>
-                                                        </div>
-                                                    </a>
+                                                <li>
+                                                    <div class="timeline-content">
+                                                        <h3 class="date"><?php echo $row['position'];?></h3>
+                                                        <h1 data-aos="fade-right" data-aos-duration="2000"><?php echo $row['fname'].' '.$row['lname'];?></h1>
+                                                        <img data-aos="fade-left" data-aos-duration="1000" src="../admin/php/faculties/<?php echo $row['profile_pic'];?>">
+                                                        <p><?php echo $row['subjects'];?></p>
+                                                    </div>
                                                 </li>
                                                 <?php
                                                         }
                                                     }
+
                                                     else {
-                                                        echo "<center><h1 class='error_msg'>No News & Events available</h1></center>";
+                                                        echo "<center><h1 class='error_msg'>No faculty member found</h1></center>";
                                                     }
                                                 ?>
-                                            </div>
+                                                <!-- <li>
+                                                    <div class="timeline-content">
+                                                        <h3 class="date">Internship/Practicum Coordinator</h3>
+                                                        <h1 data-aos="fade-right" data-aos-duration="2000" >Dionnel M. Caguin</h1>
+                                                        <img data-aos="fade-left" data-aos-duration="1000" data-aos="fade-up" src="images/faculty_members/sir_dionnel.png">
+                                                        <p>Subjects:</p>
+                                                    </div>
+                                                </li> -->
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!--End Content Section ------------------------------->
-                            <!--Start Footer Section ------------------------------->
+                        </div>
+                    </div>
+                    <!--End Content Section -------------------------------->
+                    <!--Start Footer Section ------------------------------->
                 <div class="footer">
                     <div class="footer_container">
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="map_icon">
-                                        <a href="index.php"><img src="../images/cite_logo.png"></a>
-                                        <a href="https://ucu.edu.ph" target="_blank"><img src="../images/ucu_mis_logo.png"></a>
+                                        <a href="index.php"><img src="images/cite_logo.png"></a>
+                                        <a href="https://ucu.edu.ph" target="_blank"><img src="images/ucu_mis_logo.png"></a>
                                         <h4>Contact Us:</h4>
                                         <h5><i class="bi bi-geo-alt"></i>1 San Vicente West Urdaneta City Pangasinan 2428</h5>
                                         <h5><i class="bi bi-telephone"></i>(075) 204-9020</h5>
@@ -216,30 +189,26 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                     </div>
                 </div>
                 <!--End Footer Section --------------------------------->
-                                <!--Start Copyright Section ---------------------------->
-                                <div class="copyright">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <p class="copyright_text">© 2022 All Rights Reserved. College of Information and Technology Education</p>
-                                            </div>
-                                        </div>
+                        <!--Start Copyright Section ---------------------------->
+                        <div class="copyright">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p class="copyright_text">© 2022 All Rights Reserved. College of Information and Technology Education</p>
                                     </div>
                                 </div>
-                                <!--End Copyright Section ------------------------------>
-                                <!-- Javascript files----------------------------------->
-                                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.2.2/swiper-bundle.min.js"></script>
-                                <script type="text/javascript" src="js/card-slider.js"></script>
-                                <script src="../js/jquery.min.js"></script>
-                                <script src="../js/popper.min.js"></script>
-                                <script src="../js/bootstrap.bundle.min.js"></script>
-        </body>
-    </html>
-<?php
-} 
-else {
-  header("Location: ../user_login.php");
-  exit();
-}
-
-?>
+                            </div>
+                        </div>
+                        <!--End Copyright Section ------------------------------>
+                        <!-- Javascript files----------------------------------->
+                        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.2.2/swiper-bundle.min.js"></script>
+                        <script type="text/javascript" src="js/card-slider.js"></script>
+                        <script src="js/jquery.min.js"></script>
+                        <script src="js/popper.min.js"></script>
+                        <script src="js/bootstrap.bundle.min.js"></script>
+                        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+                        <script>
+                        AOS.init();
+                        </script>
+                    </body>
+                </html>

@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status'])) {
+  include '../db_conn.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -42,7 +48,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="logo1"><a href="../index.php"><img src="../images/cite_logo_title.png"></a></div>
+                                <div class="logo1"><a href="index.php"><img src="../images/cite_logo_title.png"></a></div>
                             </div>
                             <div class="col-md-6">
                                 <div class="logo2"><a href="https://ucu.edu.ph" target="_blank"><img src="../images/ucu_logo.png"></a></div>
@@ -52,47 +58,50 @@
                 </div>
             </div>
             <div class="header">
-                <div class="container">
-                    <div class="col-sm-12">
-                        <div class="menu-area">
-                            <nav class="navbar navbar-expand-lg">
-                                <button style="background: #8c8c8c;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="caret" style="color: white;">☰</span>
-                                </button>
-                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                    <ul class="navbar-nav md-auto">
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="../index.php">HOME<span class="sr-only">(current)</span></a> </li>
+            <div class="container">
+                <!--  header inner -->
+                <div class="col-sm-12">
+                    <div class="menu-area">
+                        <nav class="navbar navbar-expand-lg">
+                            <button style="background: #8c8c8c;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="caret" style="color: white;">☰</span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav md-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="index.php">HOME<span class="sr-only">(current)</span></a> </li>
                                         <li class="nav-item">
-                                        <a class="nav-link" href="news_and_events.php">NEWS & EVENTS</a></li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="about.php">ABOUT</a></li>
+                                            <a class="nav-link" href="news_and_events.php">NEWS & EVENTS</a></li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="faculty.php">FACULTY</a></li>
-                                        <li class="nav-item">
-                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">ACADEMICS</a>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
-                                                <a class="dropdown-item" href="#">BSIT</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">BLIS</a>
-                                            </div>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">SERVICES</a>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
-                                                <a class="dropdown-item" href="#">Grades</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Blocking</a>
-                                            </div>
-                                        </li>
-                                        <li class="last"><a href="#">LOGIN</a></li>
-                                    </ul>
+                                                <a class="nav-link" href="about.html">ABOUT</a></li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="faculty.php">FACULTY</a></li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">ACADEMICS</a>
+                                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
+                                                            <a class="dropdown-item" href="#">BSIT</a>
+                                                            <div class="dropdown-divider"></div>
+                                                            <a class="dropdown-item" href="#">BLIS</a>
+                                                        </div>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                    <a class="nav-link" href="admission.php">ADMISSION</a></li>
+                                                    <li id="nav" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['fname'];?></a>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
+                                                        <a class="dropdown-item" href="profile.php"><!-- <img src="images/xiao.png"> -->Profile Settings</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="grades.php">Grades</a>
+                                                        <a class="dropdown-item" href="blocking.php">Blocking</a>
+                                                        <a style="color: red !important;" class="dropdown-item" href="../php/logout.php"><i class="bi bi-box-arrow-left"></i>&nbsp;Logout</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </nav>
                                 </div>
-                            </nav>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
                             <!-- end header end -->
                             <!--Start Banner Section ------------------------------>
                             <!--End Banner Section -------------------------------->
@@ -169,44 +178,44 @@
                             </div>
                             <!--End Content Section ------------------------------->
                             <!--Start Footer Section ------------------------------->
-                            <div class="contact_main">
-                                <div class="contact_section_2">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="map_icon">
-                                                    <img src="../images/ucu_logo.png">
-                                                    <img src="../images/cite_logo.png">
-                                                    <ul style="margin-top: 20px;">
-                                                        <li><a href="#">College of Information and Technology Education</a></li>
-                                                        <li><a href="#">Urdaneta City University</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="map_icon">
-                                                    <h2>Quick Links</h2>
-                                                    <ul>
-                                                        <li><a href="#">Announcements</a></li>
-                                                        <li><a href="#">News and Events</a></li>
-                                                        <li><a href="#">About</a></li>
-                                                        <li><a href="#">Faculty</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="map_icon">
-                                                    <h2>Follow us:</h2>
-                                                    <a href="#"><i class="fab fa-facebook-f"> </i></a>
-                                                    <a href="#"><i class="fab fa-twitter"> </i></a>
-                                                    <a href="#"><i class="fab fa-instagram"> </i></a>
-                                                </div>
-                                            </div>
-                                        </div>
+                <div class="footer">
+                    <div class="footer_container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="map_icon">
+                                        <a href="index.php"><img src="../images/cite_logo.png"></a>
+                                        <a href="https://ucu.edu.ph" target="_blank"><img src="../images/ucu_mis_logo.png"></a>
+                                        <h4>Contact Us:</h4>
+                                        <h5><i class="bi bi-geo-alt"></i>1 San Vicente West Urdaneta City Pangasinan 2428</h5>
+                                        <h5><i class="bi bi-telephone"></i>(075) 204-9020</h5>
+                                        <h5><i class="bi bi-envelope"></i>univpresidentofficial@gmail.com</h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="map_icon">
+                                        <h2>Quick Links</h2>
+                                        <ul>
+                                            <li><a href="#">Announcements</a></li>
+                                            <li><a href="news_and_events.php">News and Events</a></li>
+                                            <li><a href="about.php">About</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="map_icon">
+                                        <h2>Follow UCU</h2>
+                                        <a href="https://www.facebook.com/UCUOfficial" target="_blank"><i class="fab fa-facebook-f"> </i></a>
+                                        <a href="https://www.youtube.com/c/UcuEduPhOfficial" target="_blank"><i style="padding-right: 25px;" class="fab fa-youtube"> </i></a>
+                                        <a href="https://www.instagram.com/ucuofficial/" target="_blank"><i class="fab fa-instagram"> </i></a>
+                                        <a href="https://mis.ucu.edu.ph" target="_blank"><p>UCU-MIS+ 2022</p></a>
                                     </div>
                                 </div>
                             </div>
-                                <!--End Footer Section --------------------------------->
+                        </div>
+                    </div>
+                </div>
+                <!--End Footer Section --------------------------------->
                                 <!--Start Copyright Section ---------------------------->
                                 <div class="copyright">
                                     <div class="container">
@@ -226,3 +235,11 @@
                                 <script src="../js/bootstrap.bundle.min.js"></script>
         </body>
     </html>
+<?php
+} 
+else {
+  header("Location: ../user_login.php");
+  exit();
+}
+
+?>

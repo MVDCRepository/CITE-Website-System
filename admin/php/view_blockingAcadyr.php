@@ -3,6 +3,7 @@ session_start();
 
 if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['fname'])) {
   include 'db_conn.php';
+  $acad_id = $_GET['acad_id'];
 ?>
 <!DOCTYPE html>
 
@@ -22,7 +23,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Students</title>
+    <title>Blocking</title>
 
     <meta name="description" content="" />
 
@@ -137,7 +138,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="upd_announcements.php" class="menu-link">
+                  <a href="add_announcements.php" class="menu-link">
                     <div>Add</div>
                   </a>
                 </li>
@@ -151,7 +152,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
             </li>
 
             <!-- Evaluation -->
-            <li class="menu-item">
+            <li class="menu-item ">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <div data-i18n="Layouts">Evaluation</div>
               </a>
@@ -171,13 +172,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
             </li>
 
             <!-- Students -->
-            <li class="menu-item active open">
+            <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <div data-i18n="Layouts">Students</div>
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="students.php" class="menu-link">
                     <div>Manage</div>
                   </a>
@@ -191,24 +192,26 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
             </li>
 
             <!-- Blocking -->
-            <li class="menu-item">
+            <li class="menu-item active open">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <div data-i18n="Layouts">Blocking</div>
               </a>
 
-              <ul class="menu-sub">
+              <ul class="menu-sub ">
                 <li class="menu-item">
                   <a href="blocking.php" class="menu-link">
                     <div>Manage</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="add_schedule.php" class="menu-link" >
+                  <a href="add_schedule.php" class="menu-link">
                     <div>Add</div>
                   </a>
                 </li>
+                
               </ul>
             </li>
+
           </ul>
         </aside>
         <!-- / Menu -->
@@ -279,111 +282,80 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
 
           <!-- / Navbar -->
 
-          <!-- Content wrapper -->
+           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
               <!-- page header and search -->
-              <div class="d-flex flex-wrap">
-                <div class="p-2 flex-fill">
-                  <!-- page title -->
-                  <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> List of Students</h4>
-                </div>
-                <div class="p-2 flex-fill">
-                  <!-- search -->
-                  <?php 
-                    include "db_conn.php";
-                      $sql = "SELECT * FROM student_tbl WHERE eval_status = 'Evaluate' OR eval_status = 'Evaluated' ORDER BY student_id ASC";
-
-                    if (isset($_POST['search'])) {
-                      $search = $_POST['search'];
-                      $sql = "SELECT * FROM student_tbl WHERE CONCAT(fname, ' ', lname) LIKE '%$search%' OR CONCAT(lname, ' ', fname) LIKE '%$search%' OR id_number = '$search'";
-                    }
-                    else {
-                      $search = "";
-                      $sql = "SELECT * FROM student_tbl WHERE eval_status = 'Evaluate' OR eval_status = 'Evaluated' ORDER BY student_id ASC";
-                    }
-
-                    $result = $conn->query($sql);
-                  ?>
-                  <form method="POST">
-                    <label>Search</label><input type="text" class="search" placeholder="Search..." name="search" value="<?php echo $search;?>">
-                  </form>
-                </div>
-              </div>
-              
+              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Blocking /</span> Year Levels</h4>
               <!-- section container -->
-              <center>
-                <?php if (isset($_GET['success_msg'])) { ?>
-                  <p class="success_msg mb-3"><?php echo $_GET['success_msg']; ?></p>
-                <?php } ?>
-              </center>
-              <div class="section-container card">
-                
                 <!-- table wrapper -->
-                <div class="table-wrapper">
-                  <table class="table-cite" id="evaluation_table">
-                    <thead>
+                <div class="section-container card">
+                  <div class="table-wrapper">
+                    <table class="table-cite" id="">
+                      <thead>
+                        <tr>
+                          <th scope="col">Year Level</th>
+                          <th scope="col">Total Blocks</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <?php
+                        include "db_conn.php";
+                        $sql = "SELECT DISTINCT yr_lvl FROM blocking_tbl WHERE acad_id = '$acad_id'";
+
+                        $result = $conn->query($sql);
+                          if($result->num_rows > 0) {
+                            while ($row=$result->fetch_assoc()) {
+                      ?>
                       <tr>
-                        <th scope="col" style="display: none">ID</th>
-                        <th scope="col">ID Number</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">CMO No.</th>
-                        <th scope="col">Series</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                      if($result->num_rows > 0) {
-                        while ($row=$result->fetch_assoc()) {
-                    ?>
-                    <tr>
-                      <td style="display: none"><?php echo $row['student_id'];?></td>
-                      <td><?php echo $row['id_number'];?></td>
-                      <td><?php echo $row['lname'].", ".$row['fname']." ".$row['mname'];?></td>
-                      <td><?php echo $row['cmoNo'];?></td>
-                      <td><?php echo $row['series'];?></td>
-                      <td>
-                        <div class="d-grid gap-2 d-md-block">
-                          <?php 
-                            if ($row['eval_status'] == "Evaluate") {
-                              echo "<a href='evaluate_student.php?student_id={$row['student_id']}'><button class='editbtn' style='background-color: #ff0000'>Evaluate</button></a>";
-                            }
-                            else {
-                              echo "<a href='upd_eval_student.php?student_id={$row['student_id']}'><button class='editbtn'>Evaluate</button></a>";
+                        <td><?php echo $row['yr_lvl']." Year";?></td>
+                        <td>
+                          <?php
+                            $yr_lvl = $row['yr_lvl'];
+                            $sql = "SELECT COUNT(block_no) as total_block FROM blocking_tbl WHERE yr_lvl = '$yr_lvl' AND acad_id = '$acad_id'";
+                            $sql_result = mysqli_query($conn, $sql);
+
+                            if ($sql_result->num_rows > 0) {
+                              while($total_count = $sql_result->fetch_assoc()) {
+                                if ($total_count['total_block'] > 1) {
+                                  echo $total_count['total_block']." Blocks";
+                                }
+                                else if ($total_count['total_block'] <= 1) {
+                                  echo $total_count['total_block']." Block";
+                                }
+                              }
                             }
                           ?>
-                          <a href="view_student_grade.php?student_id=<?=$row['student_id'];?>"><button class="viewbtn">View Grades</button></a>
-                          <a href="upd_student.php?student_id=<?=$row['student_id'];?>"><button class="editbtn">Edit</button></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <?php
+                        </td>
+                        <td>
+                          <a href="all_block.php?yr_lvl=<?=$row['yr_lvl'];?>&acad_id=<?=$acad_id;?>"><button class="viewbtn">View Blockings</button></a>
+                        </td>
+                      </tr>
+                      <?php
+                          }
                         }
-                      }
-                      else if($result->num_rows == 0 && $search != "") {
-                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>Student not found</center></td></tr>";
-                      }
-                      else {
-                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>No students available</center></td></tr>";
-                      }
-                    ?>
-                    </tbody>
-                  </table>
+                        else {
+                          echo "<tr><td colspan='6' style='color: #ff0000;'><center>No blocking available</center></td></tr>";
+                        }
+                      ?>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
                 <!-- / table wrapper -->
-              </div>
               <!-- / section container -->
               <!-- / Content -->
 
               <div class="content-backdrop fade"></div>
             </div>
+          </div>
             <!-- / Content -->
           <!-- / Content wrapper -->
-          </div>
-        <!-- / Layout container -->
         </div>
+        <!-- / Layout container -->
+      </div>
 
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
@@ -412,9 +384,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
     <!-- Place this tag in your head or just before your close body tag. -->
     <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
 
-    <!-- my js -->
-    <script type="text/javascript" src="js/evaluationJS.js"></script>
-
+    <!-- cite js -->
+    <!-- <script type="text/javascript" src="js/add_facultyJS.js"></script> -->
   </body>
 </html>
 <?php

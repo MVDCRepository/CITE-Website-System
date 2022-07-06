@@ -222,4 +222,78 @@
 			echo "Error delete subject";
 		}
 	}
+
+	// Academic year
+	if (isset($_POST['save_acadBtn'])) {
+		include "../db_conn.php";
+
+		$acad_yr = $_POST['acad_yr'];
+		$status = $_POST['status'];
+
+		if (empty($acad_yr) || empty($status)) {
+			header("Location: ../add_evaluation.php?acad_error=Fill all inputs");
+		}
+		else {
+			$sql = "INSERT INTO acad_yr_tbl (acad_yr, status) VALUES ('$acad_yr', '$status')";
+			$sql_result = mysqli_query($conn, $sql);
+
+			if ($sql_result) {
+				header("Location: ../add_evaluation.php?acad_success_msg=Added new academic year");
+				exit();
+			}
+			else {
+				echo "Error adding academic year";
+			}
+		}
+	}
+
+	if (isset($_POST['upd_acadBtn'])) {
+		include "../db_conn.php";
+
+		$upd_acad_id = $_POST['upd_acad_id'];
+
+		$upd_acad_yr = $_POST['upd_acad_yr'];
+		$upd_status = $_POST['upd_status'];
+
+		if (empty($upd_acad_yr) || empty($upd_status)) {
+			header('Location: ../upd_acadYr.php?' . http_build_query(array(
+			    'acad_id' => $_GET['acad_id'],
+			    'acad_error' => "Fill all inputs"
+			)));
+			exit();
+		}
+		else {
+			$sql = "UPDATE acad_yr_tbl SET acad_yr = '$upd_acad_yr', status = '$upd_status' WHERE acad_id = '$upd_acad_id'";
+			$sql_result = mysqli_query($conn, $sql);
+
+			if ($sql_result) {
+				header('Location: ../upd_acadYr.php?' . http_build_query(array(
+				    'acad_id' => $_GET['acad_id'],
+				    'acad_success_msg' => "Updated academic year"
+				)));
+				exit();
+			}
+			else {
+				echo "Error update academic year";
+			}
+		}
+	}
+
+	if (isset($_POST['del_ayBtn'])) {
+		include "../db_conn.php";
+
+		$del_acad_id = $_POST['del_acad_id'];
+
+		$sql = "DELETE FROM acad_yr_tbl WHERE acad_id = '$del_acad_id'";
+		$sql_result = mysqli_query($conn, $sql);
+
+		if ($sql_result) {
+			header("Location: ../evaluation.php?acad_error=Deleted academic year");
+			exit();
+		}
+		else {
+			header("Location: ../evaluation.php?error_msg=Subjects under this CMO No. and series is being used.<script src='js/evaluationJS.js' onLoad='show_delete_notif();'></script>");
+			exit();
+		}
+	}
 ?>

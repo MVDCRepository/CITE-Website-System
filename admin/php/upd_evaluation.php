@@ -285,7 +285,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
               <!-- page title -->
-              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Evaluation /</span> Update</h4>
+              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Evaluation /</span> Update CMO No. & Series</h4>
               <!-- form -->
               <form action="php/evaluationPHP.php?eval_id=<?=$eval_id?>" method="POST" id="upd_evaluation_form">
                 <?php

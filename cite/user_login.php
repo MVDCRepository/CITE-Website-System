@@ -3,7 +3,7 @@
 <head>
 	<title>Log In</title>
 	<link rel="stylesheet" type="text/css" href="css/user_login.css">
-	<link rel="icon" href="assets/logo.png">
+	<link rel="icon" href="images/cite_logo.png">
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <style>
         a{
@@ -23,19 +23,24 @@
 	<div class="hero-section">
 		<div class="login-container">
 			<div class="header-container">
-				<img src="assets/logo.png" style="height: 70px; width: 70px">
+				<img src="images/cite_logo.png" style="height: 70px; width: 70px">
 				<span>UCU Cite Admin</span>
 			</div>
 			<div class="login-form">
-				<form action="#" method="POST">
+				<form action="php/login.php" method="POST">
+
+					<?php if (isset($_GET['error'])) { ?>
+    					<p class="error" style="margin: 0px 0px 10px 0px"><?php echo $_GET['error']; ?></p>
+    				<?php } ?>
+
 					<div class="form-control">
-					<label>ID Number</label>
-						<input type="text" name="username" id="username">
+						<label>ID Number</label>
+						<input type="text" name="id_number" id="id_number">
 						<small>Error Message</small>
 					</div>
 
 					<div class="form-control">
-					<label>Password</label>
+						<label>Password</label>
 						<input type="Password" name="password" id="password">
 						<small>Error Message</small>
 					</div>

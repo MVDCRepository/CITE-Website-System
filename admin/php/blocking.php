@@ -294,32 +294,22 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                     <table class="table-cite" id="">
                       <thead>
                         <tr>
-                          <th scope="col">Block</th>
-                          <th scope="col">Year level</th>
-                          <th scope="col">Semester</th>
                           <th scope="col">Academic Year</th>
-                          <th scope="col">Availability</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody>
                       <?php
                         include "db_conn.php";
-                        $sql = "SELECT DISTINCT block_id, block_no, yr_lvl, sem, acad_yr, total_student FROM blocking_tbl ORDER BY yr_lvl";
+                        $sql = "SELECT * FROM acad_yr_tbl";
                         $result = $conn->query($sql);
                           if($result->num_rows > 0) {
                             while ($row=$result->fetch_assoc()) {
                       ?>
                       <tr>
-                        <td><?php echo "Block ".$row['block_no'];?></td>
-                        <td><?php echo $row['yr_lvl']." Year";?></td>
-                        <td><?php echo $row['sem']." Sem";?></td>
                         <td><?php echo $row['acad_yr'];?></td>
-                        <td><?php echo $row['total_student'];?></td>
                         <td>
-                          <a href=""><button class="editbtn">Edit</button></a>
-                          <a href="view_blockingDetails.php?block_id=<?=$row['block_id'];?>"><button class="viewbtn">View</button></a>
-                          <button class="delbtn" name="" id="" data-modal="">Del</button>
+                          <a href="view_blockingAcadyr.php?acad_id=<?=$row['acad_id'];?>"><button class="viewbtn">Year Levels</button></a>
                         </td>
                       </tr>
                       <?php
@@ -374,7 +364,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
     <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
 
     <!-- cite js -->
-    <script type="text/javascript" src="js/add_facultyJS.js"></script>
+    <!-- <script type="text/javascript" src="js/add_facultyJS.js"></script> -->
   </body>
 </html>
 <?php

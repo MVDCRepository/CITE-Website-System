@@ -1,9 +1,3 @@
-<?php
-session_start();
-
-if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status'])) {
-  include '../db_conn.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,25 +8,25 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <!-- site metas -->
-        <title>News & Events | CITE</title>
+        <title>Announcement | CITE</title>
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
         <!-- bootstrap css -->
-        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <!-- style css -->
-        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <!-- Responsive-->
-        <link rel="stylesheet" href="../css/responsive.css">
+        <link rel="stylesheet" href="css/responsive.css">
         <!-- Scrollbar Custom CSS -->
-        <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
         <!-- Tweaks for older IEs-->
         <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
         <!-- owl stylesheets -->
-        <link rel="stylesheet" href="../css/owl.carousel.min.css">
-        <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/owl.theme.default.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
         <!-- Font Awesome -->
@@ -48,10 +42,10 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="logo1"><a href="index.php"><img src="../images/cite_logo_title.png"></a></div>
+                                <div class="logo1"><a href="index.php"><img src="images/cite_logo_title.png"></a></div>
                             </div>
                             <div class="col-md-6">
-                                <div class="logo2"><a href="https://ucu.edu.ph" target="_blank"><img src="../images/ucu_logo.png"></a></div>
+                                <div class="logo2"><a href="https://ucu.edu.ph" target="_blank"><img src="images/ucu_logo.png"></a></div>
                             </div>
                         </div>
                     </div>
@@ -86,13 +80,9 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                     </li>
                                                     <li class="nav-item">
                                                     <a class="nav-link" href="admission.php">ADMISSION</a></li>
-                                                    <li id="nav" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['fname'];?></a>
+                                                <li id="nav-last" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Log In</a>
                                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
-                                                        <a class="dropdown-item" href="profile.php"><!-- <img src="images/xiao.png"> -->Profile Settings</a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="grades.php">Grades</a>
-                                                        <a class="dropdown-item" href="blocking.php">Blocking</a>
-                                                        <a style="color: red !important;" class="dropdown-item" href="../php/logout.php"><i class="bi bi-box-arrow-left"></i>&nbsp;Logout</a>
+                                                        <a class="dropdown-item" href="user_login.php">Go To Log In</a>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -109,8 +99,8 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                             <?php
                                 $bulletin_id = $_GET['bulletin_id'];
 
-                                include "../db_conn.php";
-                                $sql = "SELECT * FROM news_events_tbl WHERE bulletin_id = $bulletin_id";
+                                include "db_conn.php";
+                                $sql = "SELECT * FROM announcement_tbl WHERE bulletin_id = $bulletin_id";
                                 $result = $conn->query($sql);
                                   if($result->num_rows > 0) {
                                     while ($row=$result->fetch_assoc()) {
@@ -119,7 +109,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="item_img">
-                                            <img class="img-fluid" src="../../admin/php/images/<?php echo $row['photo'];?>">
+                                            <img class="img-fluid" src="../admin/php/images/<?php echo $row['photo'];?>">
                                             <p><?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></p>
                                         </div>
                                     </div>
@@ -149,16 +139,16 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                 <?php
                                                     $bulletin_id = $_GET['bulletin_id'];
 
-                                                    include "../db_conn.php";
-                                                    $sql = "SELECT * FROM news_events_tbl";
+                                                    include "db_conn.php";
+                                                    $sql = "SELECT * FROM announcement_tbl";
                                                     $result = $conn->query($sql);
                                                       if($result->num_rows > 0) {
                                                         while ($row=$result->fetch_assoc()) {
                                                 ?>
                                                 <li class="item-a">
-                                                    <a href="news_and_events_details.php?bulletin_id=<?=$row['bulletin_id'];?>">
+                                                    <a href="announcement_details.php?bulletin_id=<?=$row['bulletin_id'];?>">
                                                         <div class="more-news-box">
-                                                            <img class="img-fluid" src="../../admin/php/images/<?php echo $row['photo'];?>">
+                                                            <img class="img-fluid" src="../admin/php/images/<?php echo $row['photo'];?>">
                                                             <h1 class="more-news-title"><?php echo $row['content'];?></h1>
                                                             <p class="more-news-date"><?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></p>
                                                         </div>
@@ -178,44 +168,44 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                             </div>
                             <!--End Content Section ------------------------------->
                             <!--Start Footer Section ------------------------------->
-                <div class="footer">
-                    <div class="footer_container">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="map_icon">
-                                        <a href="index.php"><img src="../images/cite_logo.png"></a>
-                                        <a href="https://ucu.edu.ph" target="_blank"><img src="../images/ucu_mis_logo.png"></a>
-                                        <h4>Contact Us:</h4>
-                                        <h5><i class="bi bi-geo-alt"></i>1 San Vicente West Urdaneta City Pangasinan 2428</h5>
-                                        <h5><i class="bi bi-telephone"></i>(075) 204-9020</h5>
-                                        <h5><i class="bi bi-envelope"></i>univpresidentofficial@gmail.com</h5>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="map_icon">
-                                        <h2>Quick Links</h2>
-                                        <ul>
-                                            <li><a href="#">Announcements</a></li>
-                                            <li><a href="news_and_events.php">News and Events</a></li>
-                                            <li><a href="about.php">About</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="map_icon">
-                                        <h2>Follow UCU</h2>
-                                        <a href="https://www.facebook.com/UCUOfficial" target="_blank"><i class="fab fa-facebook-f"> </i></a>
-                                        <a href="https://www.youtube.com/c/UcuEduPhOfficial" target="_blank"><i style="padding-right: 25px;" class="fab fa-youtube"> </i></a>
-                                        <a href="https://www.instagram.com/ucuofficial/" target="_blank"><i class="fab fa-instagram"> </i></a>
-                                        <a href="https://mis.ucu.edu.ph" target="_blank"><p>UCU-MIS+ 2022</p></a>
+                            <div class="footer">
+                                <div class="footer_container">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="map_icon">
+                                                    <a href="index.php"><img src="images/cite_logo.png"></a>
+                                                    <a href="https://ucu.edu.ph" target="_blank"><img src="images/ucu_mis_logo.png"></a>
+                                                    <h4>Contact Us:</h4>
+                                                    <h5><i class="bi bi-geo-alt"></i>1 San Vicente West Urdaneta City Pangasinan 2428</h5>
+                                                    <h5><i class="bi bi-telephone"></i>(075) 204-9020</h5>
+                                                    <h5><i class="bi bi-envelope"></i>univpresidentofficial@gmail.com</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="map_icon">
+                                                    <h2>Quick Links</h2>
+                                                        <ul>
+                                                            <li><a href="#">Announcements</a></li>
+                                                            <li><a href="news_and_events.php">News and Events</a></li>
+                                                            <li><a href="about.php">About</a></li>
+                                                        </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="map_icon">
+                                                    <h2>Follow UCU</h2>
+                                                    <a href="https://www.facebook.com/UCUOfficial" target="_blank"><i class="fab fa-facebook-f"> </i></a>
+                                                    <a href="https://www.youtube.com/c/UcuEduPhOfficial" target="_blank"><i style="padding-right: 25px;" class="fab fa-youtube"> </i></a>
+                                                    <a href="https://www.instagram.com/ucuofficial/" target="_blank"><i class="fab fa-instagram"> </i></a>
+                                                    <a href="https://mis.ucu.edu.ph" target="_blank"><p>UCU-MIS+ 2022</p></a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <!--End Footer Section --------------------------------->
+                            <!--End Footer Section --------------------------------->
                                 <!--Start Copyright Section ---------------------------->
                                 <div class="copyright">
                                     <div class="container">
@@ -230,16 +220,8 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                 <!-- Javascript files----------------------------------->
                                 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.2.2/swiper-bundle.min.js"></script>
                                 <script type="text/javascript" src="js/card-slider.js"></script>
-                                <script src="../js/jquery.min.js"></script>
-                                <script src="../js/popper.min.js"></script>
-                                <script src="../js/bootstrap.bundle.min.js"></script>
+                                <script src="js/jquery.min.js"></script>
+                                <script src="js/popper.min.js"></script>
+                                <script src="js/bootstrap.bundle.min.js"></script>
         </body>
     </html>
-<?php
-} 
-else {
-  header("Location: ../user_login.php");
-  exit();
-}
-
-?>

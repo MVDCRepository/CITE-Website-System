@@ -295,18 +295,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   <p class="success_msg mb-3"><?php echo $_GET['success_msg'];?></p>
                 <?php } ?>
               </center>
-              <div class="section-container card">
-                <h5 class="mb-4">Student Information</h5>
-                <form action="php/studentPHP.php" method="POST">
+
+              <form action="php/studentPHP.php" method="POST">
+                <!-- student information -->
+                <div class="section-container card">
+                  <h5 class="mb-4">Student Information</h5>
                   <div class="row">
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Identification Card Number</label>
-                      <input type="text" class="form-control" name="id_number" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Credentials</label>
-                      <input type="text" class="form-control" name="password" id="password" readonly="readonly">
-                    </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">First Name</label>
                       <input type="text" class="form-control" name="fname" required>
@@ -320,9 +314,30 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       <input type="text" class="form-control" name="lname" required>
                     </div>
                     <div class="col-md-6 mb-3">
+                      <label class="form-label">Gender</label><br>
+                      <input type="radio" class="form-check-input" name="gender" value="Male" required> Male
+                      <input type="radio" class="form-check-input" name="gender" value="Female" required> Female
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Birthdate</label>
+                      <input type="date" class="form-control" name="b_date" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Address</label>
+                      <input type="text" class="form-control" name="address" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Email</label>
+                      <input type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Phone</label>
+                      <input type="number" maxlength="11" class="form-control" name="phoneNum" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
                       <label class="form-label">Year Level</label>
                       <select class="form-select" name="yr_lvl" required>
-                        <option value=""></option>
+                        <option value="" selected disabled>Choose...</option>
                         <option value="1st">1st Year</option>
                         <option value="2nd">2nd Year</option>
                         <option value="3rd">3rd Year</option>
@@ -337,12 +352,58 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       <label class="form-label">Series</label>
                       <input type="text" class="form-control" name="series" required>
                     </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Student Status</label>
+                      <select class="form-select" name="status" required>
+                        <option value="" selected disabled>Choose...</option>
+                        <option value="Transferee">Transferee</option>
+                        <option value="Freshmen">Freshmen</option>
+                        <option value="Regular">Regular</option>
+                        <option value="Regular Graduating">Regular Graduating</option>
+                        <option value="Transferee Graduating">Transferee Graduating</option>
+                      </select>
+                    </div>
                   </div>
+                </div>
+                <!-- guardian information -->
+                <div class="section-container card mt-4">
+                  <h5 class="mb-4">Guardian Information</h5>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Guardian Name</label>
+                      <input type="text" class="form-control" name="guardian_name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Guardian Phone No.</label>
+                      <input type="text" class="form-control" name="guardian_contact" required>
+                    </div>
+                  </div>
+                </div>
+                <!-- student credentials -->
+                <div class="section-container card mt-4">
+                  <h5 class="mb-4">Student Credentials</h5>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Identification Card Number</label>
+                      <input type="text" class="form-control" name="id_number" id="id_number" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Credentials</label>
+                      <input type="text" class="form-control" name="password" id="password" readonly="readonly">
+                    </div>
+                  </div>
+
+
+                  <div class="d-flex">
+                    <input type="checkbox" class="form-check-input me-2" name="generate_idnumber" id="generate_idnumber" onclick="generate_idNumber()">
+                    <label class="form-check-label" for="generate_idnumber">Generate Temporary ID Number</label>
+                  </div>
+
                   <div class="d-grid gap-2 d-md-block mt-4">
                     <button class="main-button" type="submit" name="add_studentBtn">Add Student</button>
                   </div>
-                </form>
-              </div>
+                </div>
+              </form>
               <!-- / section container -->
               <!-- / Content -->
 
@@ -397,6 +458,26 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
           return result;
         }
         document.getElementById("password").value = (makeid(10));
+      }
+      // generates student's ID number
+      function generate_idNumber() {
+        var generate_idnumber = document.getElementById("generate_idnumber");
+        if (generate_idnumber.checked == true) {
+          function create_idNumber(length) {
+            var result           = '';
+            var characters       = '0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+              result += characters.charAt(Math.floor(Math.random() * 
+              charactersLength));
+            }
+            return result;
+          }
+          document.getElementById("id_number").value = (create_idNumber(8));
+        }
+        else {
+          document.getElementById("id_number").value = "";
+        }
       }
     </script>
 

@@ -165,6 +165,25 @@ a {
 ul .nav-item .nav-link,
 .header a {
 	color: #222222 !important;
+	margin-left: -12px;
+}
+
+#nav-last {
+	margin-top: -6px;
+}
+
+.dropdown-item img {
+	max-width: 30px;
+	max-height: 30px;
+	height: 30px;
+	width: 30px;
+	margin-right: 8px;
+	margin-bottom: 5px;
+	object-position: center center;
+	object-fit: cover;
+	border-radius: 50%;
+	padding: 3px;
+	box-shadow: 1px 1px 5px rgba(34, 35, 58, 0.3);
 }
 
 .header_main .logo1 img {
@@ -630,56 +649,6 @@ ul .nav-item .nav-link,
 
 .evaluation_btn button {
 	font-size: 14px;
-}
-
-.contact_main {
-	width: 100%;
-	background-color: #222222;
-}
-
-.contact_main ul,
-.contact_main ol,
-.contact_main li {
-	list-style: none;
-}
-
-.contact_section_2 {
-	width: 50%;
-	margin: 0 auto;
-	display: block;
-	color: white;
-}
-
-.map_icon {
-	width: 100%;
-	float: right;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	text-align: left;
-}
-
-.map_icon img {
-	width: 50px;
-}
-
-.map_icon i {
-	width: 20px;
-}
-
-.copyright {
-	width: 100%;
-	float: left;
-	background-color: black;
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-
-.copyright_text {
-	width: 100%;
-	color: #fbfdfd;
-	text-align: center;
-	font-size: 14px;
-	margin: 0px;
 }
 
 .email-text {
@@ -1255,9 +1224,178 @@ button.main_bt {
 }
 
 /************ Grades Area ********************/
+.grades-section .container {
+	overflow-x: auto;
+}
+
 .grades-section table {
 	margin-top: 15px;
 	text-align: center;
+	width: 100%;
+}
+
+.grades-section th, .grades-section td{
+  border: 1px solid black;
+  font-size: 6px;
+  color: black;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.grades-section th {
+	font-family: Montserrat;
+	font-weight: bolder;
+}
+
+.grades-section td {
+	font-family: Calibri;
+}
+
+.grades-section-below h2 {
+	margin-top: 20px;
+	font-size: 7px;
+	font-weight: bolder;
+	font-family: Montserrat;
+}
+
+.grades-section-below ul, .grades-section-below li {
+	list-style: none;
+	font-size: 7px;
+	margin-left: 35px;
+	font-family: Montserrat;
+}
+
+.grades-section-below ul {
+	margin-top: -6px;
+}
+
+.grades-section-below table {
+	margin-left: 70px;
+	margin-top: -5px;
+}
+
+.grades-section-below table, .grades-section-below td, .grades-section-below tr {
+	text-align: left;
+	border: 0;
+}
+
+.grades-section-below td {
+	width: 800px !important;
+}
+
+.course_des {
+	text-align: left;
+}
+
+.grades-content button {
+	margin: 15px;
+	float: right;
+}
+
+.pdf_title {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.pdf_title h2 {
+	font-size: 10px;
+	font-weight: bolder;
+	font-family: Montserrat;
+	margin-bottom: -7px;
+}
+
+.pdf_title p {
+	font-weight: bolder;
+	font-family: Calibri;
+	font-size: 10px;
+	margin-top: -15px;
+	margin-bottom: -5px;
+}
+
+.pdf_title h3 {
+	font-weight: 500;
+	font-size: 18px;
+}
+
+.year_title {
+	text-transform: uppercase;
+	font-family: sans-serif;
+	font-weight: bolder;
+	font-size: 6px;
+	margin-bottom: -20px;
+	margin-top: 20px;
+	text-align: center;
+	font-family: Montserrat;
+}
+
+.bocc {
+	display: flex;
+	align-items: center;
+	align-content: center;
+	margin-top: -10px;
+}
+
+.bocc h4 {
+	margin-top: 10px;
+	margin-left: 10px;
+	font-size: 7px;
+	font-weight: bolder;
+	font-family: Montserrat;
+}
+
+.bocc_color {
+	width: 45px;
+	height: 13px;
+	background-color: gray;
+}
+
+.lack {
+	display: flex;
+	align-items: center;
+	align-content: center;
+	margin-top: -40px;
+}
+
+.lack h4 {
+	margin-top: 10px;
+	margin-left: 10px;
+	font-size: 7px;
+	font-weight: bolder;
+	font-family: Montserrat;
+}
+
+.lack_color {
+	width: 45px;
+	height: 13px;
+	background-color: red;
+}
+
+.signatures_item {
+	display: flex;
+}
+
+.signatures_item h2 {
+	text-align: right;
+	width: 60px;
+}
+
+.signatures_item_contents {
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+.signatures_item_contents h3 {
+	font-size: 10px;
+	font-weight: bolder;
+	font-family: serif;
+}
+
+.signatures_item_contents h1 {
+	font-size: 10px;
+	font-weight: 500;
+	font-family: serif;
+	font-style: italic;
+	margin-top: -10px;
 }
 
 /********** View Item Area ******************/
@@ -1379,7 +1517,15 @@ button.main_bt {
 	font-size: 18px;
 	padding: 10px 12px;
 	text-align: center;
-	margin: 20px;
+}
+
+.success_msg {
+	background-color: #71c174;
+	color: #006600;
+	border-radius: 5px;
+	font-size: 18px;
+	padding: 10px 12px;
+	text-align: center;
 }
 /************ Faculty Area ********************/
 
@@ -1442,4 +1588,281 @@ button.main_bt {
 .timeline-content img{
 	width: 100%;
 	margin-top: -70px;
+}
+
+/************ Blocking Area ********************/
+
+.blocking_content {
+	box-shadow: 1px 0px 10px rgba(34, 35, 58, 0.2);
+	margin: 70px 20px 40px 20px;
+	padding: 20px;
+	float: left;
+	width: 97%;
+	border-radius: 5px;
+	overflow-x: auto;
+}
+
+.availability {
+	float: right;
+}
+
+.availability p {
+	margin-top: -10px;
+}
+
+
+/************ Footer Area ********************/
+
+.footer {
+	width: 100%;
+	background-color: #222222;
+	height: auto;
+}
+
+.footer ul,
+.footer ol,
+.footer li {
+	list-style: none;
+	width: 90%;
+}
+
+.footer {
+	width: 100%;
+	float: left;
+}
+
+.footer_container {
+	width: 100%;
+	margin: 20px;
+	display: block;
+	color: white;
+}
+
+.map_icon {
+	width: 100%;
+	float: right;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.map_icon img {
+	width: 60px;
+	margin-right: 10px;
+	border-radius: 15px;
+}
+
+.map_icon i {
+	width: 20px;
+	color: white;
+	padding-right: 20px;
+}
+
+.map_icon p {
+	margin: auto;
+	margin-top: 20px;
+	color: white;
+}
+
+.map_icon h2 {
+	border-bottom: 1px solid #8c8c8c;
+	margin-bottom: 15px;
+}
+
+.map_icon h4 {
+	margin-top: 25px;
+	color: white;
+}
+
+.map_icon h5 {
+	font-size: 12px;
+	color: white;
+}
+
+.map_icon li a {
+	color: white;
+}
+
+.copyright {
+	width: 100%;
+	float: left;
+	background-color: black;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.copyright_text {
+	width: 100%;
+	color: #fbfdfd;
+	text-align: center;
+	font-size: 14px;
+	margin: 0px;
+}
+
+/************ Profile Area ********************/
+.profile_title_container {
+	width: 100%;
+	float: left;
+	margin: 30px;
+}
+
+.profile_title {
+	color: #222222;
+	letter-spacing: 1px;
+	font-size: 22pt;
+	text-align: center;
+	border-bottom: 1px solid #000;
+	width: 22%;
+	margin: 0 auto;	
+	font-weight: bold;
+}
+
+.profile_left_section{
+	box-shadow: 1px 0px 10px rgba(34, 35, 58, 0.2);
+	margin: auto;
+	float: right;
+	text-align: center;
+	margin: 20px;
+	padding: 20px;
+	border-radius: 25px;
+	width: 500px;
+}
+
+.profile_left_section img {
+	max-width: 150px;
+	max-height: 150px;
+	height: 150px;
+	width: 150px;
+	margin: 20px;
+	border-radius: 50%;
+	object-position: center;
+	object-fit: cover;
+	box-shadow: 5px 7px 15px rgba(34, 35, 58, 0.3);
+}
+
+.profile_left_section td {
+	font-size: 12px;
+}
+
+.custom_upload {
+	font-size: 10px;
+	background: white;
+	border-radius: 5px;
+	width: 200px;
+	box-shadow: 1px 2px 5px rgba(34, 35, 58, 0.2);
+	outline: none;
+	margin-bottom: 15px;
+}
+
+::-webkit-file-upload-button {
+	color: white;
+	background: #8c8c8c;
+	padding: 5px;
+	border: none;
+	border-radius: 5px;
+	outline: none;
+	cursor: pointer;
+	transition: all ease-out 200ms;
+}
+
+::-webkit-file-upload-button:hover {
+	background: #222222;
+}
+
+.upload_status {
+	color: red; 
+	margin-left: 100px;
+	float: right;
+}
+
+.profile_right_section{
+	margin-bottom: 20px;
+	float: left;
+	text-align: center;
+	padding: 20px;
+	text-align: left;
+}
+
+.profile_right_section::-webkit-scrollbar {
+	height: auto;
+  	width: 8px;
+  	border: 1px solid #8c8c8c;
+  	border-radius: 10px;
+}
+
+.profile_right_section::-webkit-scrollbar-thumb:vertical{
+    background: #222222;
+    border-radius: 10px;
+}
+
+.profile_right_section span {
+	font-weight: bold;
+}
+
+
+/********* Admission Area **************/
+.admission_conts {
+	box-shadow: 1px 0px 10px rgba(34, 35, 58, 0.2);
+	margin: auto;
+	text-align: center;
+	margin: 20px;
+	padding: 20px;
+	border-radius: 25px;
+	height: 370px;
+}
+
+.admission_conts button {
+	width: 120px;
+	height: 30px;
+	background: #46c263;
+	border: none;
+	border-radius: 5px;
+	margin-top: 45px;
+	cursor: pointer;
+	float: left;
+}
+
+.admission_conts button:hover {
+	background: #39db5f;
+}
+
+.admission_conts button a {
+	color: white;
+}
+
+.admission_conts h2 {
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.admission_conts ul, .admission_conts li {
+	list-style: none;
+	text-align: left;
+}
+
+/*form error*/
+form .error input {
+	border: 3px solid #e74c3c;
+}
+
+form .success input {
+	border-color: #2ecc71;
+}
+
+form .error textarea {
+	border: 3px solid #e74c3c;
+}
+
+form .success textarea {
+	border-color: #2ecc71;
+}
+
+form small {
+	color: #e74c3c;
+	display: block;
+	display: none;
+}
+
+form .error small {
+	display: block;
 }

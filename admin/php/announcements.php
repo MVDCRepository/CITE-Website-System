@@ -376,12 +376,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                           <div class="description-container mb-3">
                             <?php echo $row['content'];?>
                           </div>
-                          <span><?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></span>
+                          <span><?php $date = $row['time_date']; echo date("M d,Y h:i a", strtotime($date));?></span>
                         </td>
                         <td>
                           <div class="d-flex p-2 gap-2 bd-highlight">
                             <a href="upd_announcements.php?bulletin_id=<?=$row['bulletin_id'];?>"><button class="editbtn">Edit</button></a>
-                            <a target="_blank" href="../../cite/pages/announcement_details.php?bulletin_id=<?=$row['bulletin_id'];?>"><button class="viewbtn">View</button></a>
+                            <a target="_blank" href="../../cite/announcement_details.php?bulletin_id=<?=$row['bulletin_id'];?>"><button class="viewbtn">View</button></a>
                             <button class="delbtn" name="del_newsEvent_btn" id="del_newsEvent_btn" data-modal="modal_delete">Del</button>
                           </div>
                         </td>

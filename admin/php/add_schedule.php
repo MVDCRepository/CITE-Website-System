@@ -349,7 +349,24 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
 
                     <div class="col-md-4 mb-3">
                       <label class="form-label">Academic Year</label>
-                      <input type="text" class="form-control" id="acad_yr" name="acad_yr" required>
+                      <select class="form-control" id="acad_id" name="acad_id" required>
+                        <option value=""></option>
+                        <?php
+                          include "db_conn.php";
+                          $sql = "SELECT * FROM acad_yr_tbl WHERE status = 'Active'";
+                          $result = $conn->query($sql);
+                            if($result->num_rows > 0) {
+                              while ($row_acadyr=$result->fetch_assoc()) {
+                        ?>
+                        <option value="<?php echo $row_acadyr['acad_id'];?>"><?php echo $row_acadyr['acad_yr']." - ".$row_acadyr['status'];?></option>
+                        <?php
+                            }
+                          }
+                          else {
+                            echo "<option value=''>No academic year available</option>";
+                          }
+                        ?>
+                      </select>
                     </div>
                     
                     <div class="col-md-4 mb-3">

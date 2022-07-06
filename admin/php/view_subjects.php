@@ -339,7 +339,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Semester</label>
-                      <select class="select2 form-select" name="sem" required>
+                      <select class="select2 form-select" name="sem" id="sem" required>
                         <option value=""></option>
                         <option value="1st">1st Semester</option>
                         <option value="2nd">2nd Semester</option>
@@ -379,14 +379,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       </select>
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label class="form-label">Year Level</label>
-                      <select class="select2 form-select" name="yr_lvl" required>
-                        <option value=""></option>
-                        <option value="1st">1st Year</option>
-                        <option value="2nd">2nd Year</option>
-                        <option value="3rd">3rd Year</option>
-                        <option value="4th">4th Year</option>
-                      </select>
+                      <div class="control-form">
+                        <label class="form-label">Year Level</label>
+                        <select class="select2 form-select" name="yr_lvl" id="yr_lvl" required>
+                          <option value=""></option>
+                          <option value="1st">1st Year</option>
+                          <option value="2nd">2nd Year</option>
+                          <option value="3rd">3rd Year</option>
+                          <option value="4th">4th Year</option>
+                        </select>
+                        <small>error</small>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Pre-requisites</label>
@@ -828,7 +831,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       }
                     }
                     else {
-                      echo "<tr><td colspan='7' style='color: #ff0000;'><center>No subjects available</center></td></tr>";
+                      echo "<tr><td colspan='7' style='color: #ff0000;'>
+                      <center>No subjects available</center>
+                      </td></tr>";
                     }
                   ?>
                   </tbody>

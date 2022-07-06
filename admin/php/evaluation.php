@@ -390,6 +390,79 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                 </div>
                 <!-- / table wrapper -->
               </div>
+
+              <div class="section-container card mt-4">
+                <center>
+                  <?php if (isset($_GET['acad_error'])) { ?>
+                    <p class="error_msg mt-3 mb-3" style="margin: 0px 0px 10px 0px"><?php echo $_GET['acad_error']; ?></p>
+                  <?php } ?>
+                  <?php if (isset($_GET['acad_success_msg'])) { ?>
+                    <p class="success_msg mb-3" style="margin: 0px 0px 10px 0px"><?php echo $_GET['acad_success_msg']; ?></p>
+                  <?php } ?>
+                </center>
+                <h5 class="mb-4">Academic Year</h5>
+                <!-- table wrapper -->
+                <div class="table-wrapper">
+                  <table class="table-cite" id="ay_table">
+                    <thead>
+                      <tr>
+                        <th scope="col" style="display: none">ID</th>
+                        <th scope="col">Academic Year</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                      $sql_acadYr = "SELECT * FROM acad_yr_tbl";
+                      $result_acadYr = mysqli_query($conn, $sql_acadYr);
+                      if($result_acadYr->num_rows > 0) {
+                        while ($row_acadYr=$result_acadYr->fetch_assoc()) {
+                    ?>
+
+                    <!-- delete modal-->
+                    <div class="delete-modal" id="modal_del_ay">
+                      <div class="modalBox row">
+                        <div class="modal_header">
+                          <span class="close" id="close_modaldelete_ay">&times;</span>
+                          <h4>Delete Academic Year</h4>
+                        </div>
+                        <div class="modal_body">
+                          <form action="php/evaluationPHP.php" method="POST">
+                            <input type="hidden" name="del_acad_id" id="del_acad_id">
+                            <p><b>Academic Year:</b><br> <span id="del_acadyr"></span></p>
+                            <p><b>Status:</b><br> <span id="del_status"></span></p>
+                            <br>
+                            <button class="main-button" type="submit" name="del_ayBtn">Delete</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- / delete modal -->
+
+                    <tr>
+                      <td style="display: none"><?php echo $row_acadYr['acad_id'];?></td>
+                      <td><?php echo $row_acadYr['acad_yr'];?></td>
+                      <td><?php echo $row_acadYr['status'];?></td>
+                      <td>
+                        <a href="upd_acadYr.php?acad_id=<?=$row_acadYr['acad_id'];?>"><button class="editbtn">Edit</button></a>
+                        <button class="delbtn" name="del_acadYr" id="del_acadYr" data-modal="modal_del_ay">Del</button></td>
+                    </tr>
+                    <?php
+                        }
+                      }
+                      else if($result->num_rows == 0 && $search != "") {
+                        echo "<tr><td colspan='4' style='color: #ff0000;'><center>A.Y. not found</center></td></tr>";
+                      }
+                      else {
+                        echo "<tr><td colspan='4' style='color: #ff0000;'><center>No Academic Year Available</center></td></tr>";
+                      }
+                    ?>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- / table wrapper -->
+              </div>
               <!-- / section container -->
               <!-- / Content -->
 

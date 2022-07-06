@@ -7,19 +7,19 @@
 		$block_no = $_POST['block_no'];
 		$yr_lvl = $_POST['yr_lvl'];
 		$sem = $_POST['sem'];
-		$acad_yr = $_POST['acad_yr'];
+		$acad_id = $_POST['acad_id'];
 		$total_student = $_POST['total_student'];
 		$eval_id = $_POST['eval_id'];
 
 		$checked_array = $_POST['sched_id'];
 
-		if (empty($block_no) || empty($yr_lvl) || empty($sem) || empty($acad_yr) || empty($total_student) || empty($eval_id)) {
+		if (empty($block_no) || empty($yr_lvl) || empty($sem) || empty($acad_id) || empty($total_student) || empty($eval_id)) {
 			header("Location: ../add_schedule.php?error_msg=Fill all inputs");
 			exit();
 		}
 		else {
 
-			$sql_add_block = "INSERT INTO blocking_tbl (block_no, yr_lvl, sem, acad_yr, total_student, eval_id) VALUES ('$block_no', '$yr_lvl', '$sem', '$acad_yr', '$total_student', '$eval_id')";
+			$sql_add_block = "INSERT INTO blocking_tbl (block_no, yr_lvl, sem, acad_id, total_student, eval_id) VALUES ('$block_no', '$yr_lvl', '$sem', '$acad_id', '$total_student', '$eval_id')";
 			$sql_result_addBlock = mysqli_query($conn, $sql_add_block);
 
 			$block_id = mysqli_insert_id($conn);
