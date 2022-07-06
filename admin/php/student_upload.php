@@ -1,36 +1,19 @@
 <?php
-session_start();
+  session_start();
 
-if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['fname'])) {
-  include 'db_conn.php';
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "test";
-  $conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
-  if (mysqli_connect_errno()) {
-      printf("Connect failed: %s\n", mysqli_connect_error());
-      exit();
-  }
-  if(!empty($_GET['import_status'])) {
-      switch($_GET['import_status']) {
-          case 'success':
-              $message_stauts_class = 'alert-success';
-              $import_status_message = 'Employee data inserted successfully.';
-              break;
-          case 'error':
-              $message_stauts_class = 'alert-danger';
-              $import_status_message = 'Error: Please try again.';
-              break;
-          case 'invalid_file':
-              $message_stauts_class = 'alert-danger';
-              $import_status_message = 'Error: Please upload a valid CSV file.';
-              break;
-          default:
-              $message_stauts_class = '';
-              $import_status_message = '';
-      }
-  }
+  if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['fname'])) {
+    include 'db_conn.php';
+
+    /* Database connection start */
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "test";
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 
@@ -87,17 +70,47 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
 
     <!-- cite theme css -->
     <link rel="stylesheet" href="css/cite_theme.css" />
-    <!-- upload csv -->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- import csv -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="script/validation.min.js"></script>
-    <script type="text/javascript" src="script/login.js"></script>
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="screen">
   </head>
-
+<?php
+    if(isset($_POST['import_data'])){    
+        // validate to check uploaded file is a valid csv file
+        $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
+        if(!empty($_FILES['file']['name']) &&
+        in_array($_FILES['file']['type'],$file_mimes)){
+            if(is_uploaded_file($_FILES['file']['tmp_name'])){   
+                $csv_file = fopen($_FILES['file']['tmp_name'], 'r');           
+                //fgetcsv($csv_file);            
+                // get data records from csv file
+                while(($emp_record = fgetcsv($csv_file)) !== FALSE){
+                    // Check if employee already exists with same id_number
+                    $sql_query = "SELECT  fname, lname, mname, gender, b_date, address, email, phoneNum, guardian_name, guardian_contact, cmoNo, series, yr_lvl, eval_status status, password FROM student_table WHERE id_number = '".$emp_record[1]."'";
+                    $resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
+                    // if employee already exist then update details otherwise insert new record
+                    if(mysqli_num_rows($resultset)) {                     
+                        $sql_update = "UPDATE student_table set fname='".$emp_record[2]."',  lname='".$emp_record[3]."',  mname='".$emp_record[4]."',  gender='".$emp_record[5]."',  b_date='".$emp_record[6]."',  address='".$emp_record[7]."',  email='".$emp_record[8]."',  phoneNum='".$emp_record[9]."',  guardian_name='".$emp_record[10]."',  guardian_contact='".$emp_record[11]."',  cmoNo='".$emp_record[12]."',  series='".$emp_record[13]."',  yr_lvl='".$emp_record[14]."',  eval_status='".$emp_record[15]."',  status='".$emp_record[16]."',  password='".$emp_record[17]."' WHERE id_number ='".$emp_record[1]."'";
+                        mysqli_query($conn, $sql_update) or die("database error:". mysqli_error($conn));
+                    } else{
+                        $mysql_insert = "INSERT INTO student_table (id_number, fname, lname, mname, gender, b_date, address, email, phoneNum, guardian_name, guardian_contact, cmoNo, series, yr_lvl, eval_status, status, password )VALUES('".$emp_record[1]."', '".$emp_record[2]."', '".$emp_record[3]."', '".$emp_record[4]."', '".$emp_record[5]."', '".$emp_record[6]."', '".$emp_record[7]."', '".$emp_record[8]."', '".$emp_record[9]."', '".$emp_record[10]."', '".$emp_record[11]."', '".$emp_record[12]."', '".$emp_record[13]."', '".$emp_record[14]."', '".$emp_record[15]."', '".$emp_record[16]."', '".$emp_record[17]."')";
+                        mysqli_query($conn, $mysql_insert) or die("database error:". mysqli_error($conn));
+                    }
+                }            
+                fclose($csv_file);
+                $import_status = '?import_status=success';
+            } else {
+                $import_status = '?import_status=error';
+            }
+        } else {
+            $import_status = '?import_status=invalid_file';
+        }
+    }
+    // header("Location: index.php".$import_status);
+?>
   <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -174,7 +187,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="upd_announcements.php" class="menu-link">
+                  <a href="add_announcements.php" class="menu-link">
                     <div>Add</div>
                   </a>
                 </li>
@@ -214,7 +227,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="students.php" class="menu-link">
                     <div>Manage</div>
                   </a>
@@ -320,91 +333,103 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-              <!-- page header and search -->
-              <div class="d-flex flex-wrap">
-                <div class="p-2 flex-fill">
-                  <!-- page title -->
-                  <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> Upluad CSV</h4>
-                </div>
-              </div>
+              <!-- page header title -->
+              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> Add Student</h4>
               
               <!-- section container -->
-              
+              <center>
+                <?php if (isset($_GET['error_msg'])) { ?>
+                  <p class="error_msg mb-3"><?php echo $_GET['error_msg'];?></p>
+                <?php } ?>
+                <?php if (isset($_GET['success_msg'])) { ?>
+                  <p class="success_msg mb-3"><?php echo $_GET['success_msg'];?></p>
+                <?php } ?>
+              </center>
               <div class="section-container card">
-                
-                  <!-- table wrapper -->
-                  <div class="container">
-                    <?php if(!empty($import_status_message)){
-                        echo '<div class="alert '.$message_stauts_class.'">'.$import_status_message.'</div>';
-                    } ?>
-                  <!-- <div class="panel panel-default">         -->
-                    <div class="panel-body">
-                        <br>
-                         <div class="row"  style="border: 1px; color:red;">
-                            <form  method="post" enctype="multipart/form-data" id="import_form" >				
-                                    <div class="col-md-3">
-                                    <input type="file" name="file" />
-                                    </div>
-                                    <div class="col-md-5">
-                                    <input type="submit" class="btn btn-primary" name="import_data" value="IMPORT">
-                                    </div>			
-                            </form>
-                         </div>
-                          <br>
-                         <div class="row">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>id_number</th>
-                                        <th>fname</th>
-                                        <th>lname</th>
-                                        <th>mname</th> 
-                                        <th>cmoNo</th>
-                                        <th>series</th>
-                                        <th>yr_lvl</th>
-                                        <th>status</th>
-                                        <th>password</th>                      
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                      $sql = "SELECT student_id, id_number, fname, lname, mname, cmoNo, series, yr_lvl, status, password FROM student_table ORDER BY student_id ASC LIMIT 10";
-                                      $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
-                                      if(mysqli_num_rows($resultset)) { 
-                                      while( $rows = mysqli_fetch_assoc($resultset) ) { 
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $rows['id_number']; ?></td>
-                                        <td><?php echo $rows['fname']; ?></td>
-                                        <td><?php echo $rows['lname']; ?></td>
-                                        <td><?php echo $rows['mname']; ?></td>
-                                        <td><?php echo $rows['cmoNo']; ?></td>  
-                                        <td><?php echo $rows['series']; ?></td>   
-                                        <td><?php echo $rows['yr_lvl']; ?></td> 
-                                        <td><?php echo $rows['status']; ?></td>  
-                                        <td><?php echo $rows['password']; ?></td>    
-                                    </tr>
-                                    <?php } } else { ?>  
-                                    <tr><td colspan="5">No records to display.....</td></tr>
-                                    <?php } ?>					
-                                </tbody>
-                             </table>
-                        </div>	
-                      <!-- </div>
-                  </div> -->
-              </div>
-                <!-- / table wrapper -->
+                <h5 class="mb-4">Student Information</h5>
+                <form action="php/studentPHP.php" method="POST">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Identification Card Number</label>
+                      <input type="text" class="form-control" name="id_number" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Credentials</label>
+                      <input type="text" class="form-control" name="password" id="password" readonly="readonly">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">First Name</label>
+                      <input type="text" class="form-control" name="fname" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Middle Name</label>
+                      <input type="text" class="form-control" name="mname" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Last Name</label>
+                      <input type="text" class="form-control" name="lname" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Year Level</label>
+                      <select class="form-select" name="yr_lvl" required>
+                        <option value=""></option>
+                        <option value="1st">1st Year</option>
+                        <option value="2nd">2nd Year</option>
+                        <option value="3rd">3rd Year</option>
+                        <option value="4th">4th Year</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">CHED Memorandum Order No.</label>
+                      <input type="text" class="form-control" name="cmoNo" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Series</label>
+                      <input type="text" class="form-control" name="series" required>
+                    </div>
+                  </div>
+                  <div class="d-grid gap-2 d-md-block mt-4">
+                    <button class="main-button" type="submit" name="add_studentBtn">Add Student</button>
+                  </div>
+                </form>
               </div>
               <!-- / section container -->
               <!-- / Content -->
 
               <div class="content-backdrop fade"></div>
             </div>
+
+            <!-- 2nd Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
+
+              <!-- page title -->
+              <h4 class="fw-bold py-3"><span class="text-muted fw-light">Students /</span> Upload CSV</h4>
+              <div class="section-container card">
+                <!-- form -->
+                <form action="student_upload.php" method="post" enctype="multipart/form-data" id="import_form">
+                  <?php if (isset($_GET['error'])) { ?>
+                      <p class="error_msg" style="margin: 0px 0px 10px 0px"><?php echo $_GET['error']; ?></p>
+                  <?php } ?>
+
+                  <div class="control-form">
+                    <label>Upload CSV</label>
+                    <input type="file" class="ip-file" name="file" required/>
+                    <small>error message</small>
+                  </div>
+                  <br>
+                  <input type="submit" class="main-button" name="import_data" value="Import CSV">
+                </form>
+                <!-- /form -->
+              </div>
+            </div>
             <!-- / Content -->
-          <!-- / Content wrapper -->
+
+            <div class="content-backdrop fade"></div>
           </div>
-        <!-- / Layout container -->
+          <!-- Content wrapper -->
         </div>
+        <!-- / Layout container -->
+      </div>
 
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
@@ -434,8 +459,23 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
     <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
 
     <!-- my js -->
-    <script type="text/javascript" src="js/evaluationJS.js"></script>
-
+    <script type="text/javascript">
+      // generates student's credential
+      generate_cred();
+      function generate_cred() {
+        function makeid(length) {
+          var result           = '';
+          var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+          var charactersLength = characters.length;
+          for ( var i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() * 
+            charactersLength));
+          }
+          return result;
+        }
+        document.getElementById("password").value = (makeid(10));
+      }
+    </script>
   </body>
 </html>
 <?php
@@ -445,35 +485,3 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
 }
 
 ?>
- <?php
-    if(isset($_POST['import_data'])){    
-        // validate to check uploaded file is a valid csv file
-        $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
-        if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'],$file_mimes)){
-            if(is_uploaded_file($_FILES['file']['tmp_name'])){   
-                $csv_file = fopen($_FILES['file']['tmp_name'], 'r');           
-                //fgetcsv($csv_file);            
-                // get data records from csv file
-                while(($emp_record = fgetcsv($csv_file)) !== FALSE){
-                    // Check if employee already exists with same email
-                    $sql_query = "SELECT student_id, fname, lname, mname, cmoNo, series, yr_lvl, status, password FROM student_table WHERE id_number = '".$emp_record[1]."'";
-                    $resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
-                    // if employee already exist then update details otherwise insert new record
-                    if(mysqli_num_rows($resultset)) {                     
-                        $sql_update = "UPDATE student_table set fname='".$emp_record[2]."', lname='".$emp_record[3]."', mname='".$emp_record[4]."', cmoNo='".$emp_record[5]."', series='".$emp_record[6]."', yr_lvl='".$emp_record[7]."', status='".$emp_record[8]."', password='".$emp_record[9]."' WHERE id_number = '".$emp_record[1]."'";
-                        mysqli_query($conn, $sql_update) or die("database error:". mysqli_error($conn));
-                    } else{
-                        $mysql_insert = "INSERT INTO student_table (id_number, fname, lname, mname, cmoNo, series, yr_lvl, status, password )VALUES('".$emp_record[1]."', '".$emp_record[2]."', '".$emp_record[3]."', '".$emp_record[4]."', '".$emp_record[5]."', '".$emp_record[6]."', '".$emp_record[7]."', '".$emp_record[8]."', '".$emp_record[9]."')";
-                        mysqli_query($conn, $mysql_insert) or die("database error:". mysqli_error($conn));
-                    }
-                }            
-                fclose($csv_file);
-                $import_status = '?import_status=success';
-            } else {
-                $import_status = '?import_status=error';
-            }
-        } else {
-            $import_status = '?import_status=invalid_file';
-        }
-    }
-    ?>
