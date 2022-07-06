@@ -3,6 +3,7 @@
 /*--------------------------------------------------------------------- import Fonts ---------------------------------------------------------------------*/
 @import url('https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=latin-ext');
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 /*****---------------------------------------- 1) font-family: 'Rajdhani', sans-serif;
  2) font-family: 'Poppins', sans-serif;
@@ -1121,6 +1122,60 @@ button.main_bt {
 .grades-section table {
 	margin-top: 15px;
 	text-align: center;
+	width: 100%;
+}
+
+.grades-section th, .grades-section td{
+  border: 1px solid black;
+  font-size: 6px;
+  color: black;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.grades-section th {
+	font-family: Montserrat;
+	font-weight: bolder;
+}
+
+.grades-section td {
+	font-family: Calibri;
+}
+
+.grades-section-below h2 {
+	margin-top: 20px;
+	font-size: 7px;
+	font-weight: bolder;
+	font-family: Montserrat;
+}
+
+.grades-section-below ul, .grades-section-below li {
+	list-style: none;
+	font-size: 7px;
+	margin-left: 35px;
+	font-family: Montserrat;
+}
+
+.grades-section-below ul {
+	margin-top: -6px;
+}
+
+.grades-section-below table {
+	margin-left: 70px;
+	margin-top: -5px;
+}
+
+.grades-section-below table, .grades-section-below td, .grades-section-below tr {
+	text-align: left;
+	border: 0;
+}
+
+.grades-section-below td {
+	width: 800px !important;
+}
+
+.course_des {
+	text-align: left;
 }
 
 .grades-content button {
@@ -1130,18 +1185,22 @@ button.main_bt {
 
 .pdf_title {
 	text-align: center;
-	font-family: sans-serif;
+	margin-top: 20px;
 }
 
 .pdf_title h2 {
-	margin-bottom: -20px;
-	margin-top: 20px;
-	font-size: 18px;
-	font-weight: bold;
+	font-size: 10px;
+	font-weight: bolder;
+	font-family: Montserrat;
+	margin-bottom: -7px;
 }
 
 .pdf_title p {
-	font-weight: 500;
+	font-weight: bolder;
+	font-family: Calibri;
+	font-size: 10px;
+	margin-top: -15px;
+	margin-bottom: -5px;
 }
 
 .pdf_title h3 {
@@ -1152,12 +1211,84 @@ button.main_bt {
 .year_title {
 	text-transform: uppercase;
 	font-family: sans-serif;
-	font-weight: 600;
-	font-size: 15px;
+	font-weight: bolder;
+	font-size: 6px;
 	margin-bottom: -20px;
 	margin-top: 20px;
 	text-align: center;
+	font-family: Montserrat;
 }
+
+.bocc {
+	display: flex;
+	align-items: center;
+	align-content: center;
+	margin-top: -10px;
+}
+
+.bocc h4 {
+	margin-top: 10px;
+	margin-left: 10px;
+	font-size: 7px;
+	font-weight: bolder;
+	font-family: Montserrat;
+}
+
+.bocc_color {
+	width: 45px;
+	height: 13px;
+	background-color: gray;
+}
+
+.lack {
+	display: flex;
+	align-items: center;
+	align-content: center;
+	margin-top: -40px;
+}
+
+.lack h4 {
+	margin-top: 10px;
+	margin-left: 10px;
+	font-size: 7px;
+	font-weight: bolder;
+	font-family: Montserrat;
+}
+
+.lack_color {
+	width: 45px;
+	height: 13px;
+	background-color: red;
+}
+
+.signatures_item {
+	display: flex;
+}
+
+.signatures_item h2 {
+	text-align: right;
+	width: 60px;
+}
+
+.signatures_item_contents {
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+.signatures_item_contents h3 {
+	font-size: 10px;
+	font-weight: bolder;
+	font-family: serif;
+}
+
+.signatures_item_contents h1 {
+	font-size: 10px;
+	font-weight: 500;
+	font-family: serif;
+	font-style: italic;
+	margin-top: -10px;
+}
+
 
 /********** View Item Area ******************/
 
@@ -1361,6 +1492,7 @@ button.main_bt {
 	margin: 20px;
 	padding: 20px;
 	border-radius: 25px;
+	width: 500px;
 }
 
 .profile_left_section img {
@@ -1375,14 +1507,47 @@ button.main_bt {
 	box-shadow: 5px 7px 15px rgba(34, 35, 58, 0.3);
 }
 
+.profile_left_section td {
+	font-size: 12px;
+}
+
+.custom_upload {
+	font-size: 10px;
+	background: white;
+	border-radius: 5px;
+	width: 200px;
+	box-shadow: 1px 2px 5px rgba(34, 35, 58, 0.2);
+	outline: none;
+	margin-bottom: 15px;
+}
+
+::-webkit-file-upload-button {
+	color: white;
+	background: #8c8c8c;
+	padding: 5px;
+	border: none;
+	border-radius: 5px;
+	outline: none;
+	cursor: pointer;
+	transition: all ease-out 200ms;
+}
+
+::-webkit-file-upload-button:hover {
+	background: #222222;
+}
+
+.upload_status {
+	color: red; 
+	margin-left: 100px;
+	float: right;
+}
+
 .profile_right_section{
 	margin-bottom: 20px;
 	float: left;
 	text-align: center;
 	padding: 20px;
 	text-align: left;
-	max-height: 500px;
-	overflow-x: auto;
 }
 
 .profile_right_section::-webkit-scrollbar {
@@ -1508,4 +1673,30 @@ button.main_bt {
 	text-align: center;
 	font-size: 14px;
 	margin: 0px;
+}
+
+
+
+/********* Admission Area **************/
+.admission_conts {
+	box-shadow: 1px 0px 10px rgba(34, 35, 58, 0.2);
+	margin: auto;
+	text-align: center;
+	margin: 20px;
+	padding: 20px;
+	border-radius: 25px;
+}
+
+.admission_conts h2 {
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.admission_conts ul, .admission_conts li {
+	list-style: none;
+	text-align: left;
+}
+
+.admission_conts button {
+	float: left;
 }

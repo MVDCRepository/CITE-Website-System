@@ -191,8 +191,9 @@
     .container_faculty {margin-top: -18px;}
     .timeline-content h1 {margin-top: -40px;}
     .timeline-content img {margin-top: -30px;}
-    .profile_left_section {float: none;}
+    .profile_left_section {float: none; width: auto;}
     .profile_right_section {float: none;}
+    .upload_status {margin: 0;}
     .profile_title {margin: 0; width: 85%;}
     .blocking_finalization .row {flex-direction: column-reverse;}
     .availability {float: none; display: flex;}
