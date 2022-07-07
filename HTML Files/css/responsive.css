@@ -3,6 +3,7 @@
 /*------------------------------------------------------------------- 991px x 768px ---------------------------------------------------------------------*/
 @media only screen and (min-width:768px) and (max-width:991px) {
     .header-search { padding: 15px 0px; }
+    #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 1500px;}
 }
 
 /*------------------------------------------------------------------- 767px x 599px ---------------------------------------------------------------------*/
@@ -88,12 +89,11 @@
     .service_text { width: 32%; }
     .touch_text { width: 40%; }
     .bnner_title { font-size: 34pt; }
-
+    #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 1000px;}
 }
 
 @media (min-width:576px) and (max-width:767px) {
     .navbar-expand-lg .navbar-nav .nav-link { padding-left: 0; }
-    .last { display: none; }
     .banner-main .carousel-caption { top: 0%; }
     .titlepage h2 { font-size: 42px; display: block; }
     .logo1 { float: inherit; text-align: center; }
@@ -132,7 +132,9 @@
     .item_container p, .item_container h1 { text-align: center; }
     .item_container p { max-height: 100%; text-align: left; }
     .availability { margin-top: -60px;}
+    #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 1000px;}
 }
+
 @media (max-width:575px) {
     .navbar-expand-lg .navbar-nav .nav-link { padding-left: 0; }
     .carousel-caption { display: none; }
@@ -198,6 +200,10 @@
     .blocking_finalization .row {flex-direction: column-reverse;}
     .availability {float: none; display: flex;}
     .availability p{margin-top: -2px;}
+    .admission_conts button {margin-top: 55px;}
+    .admission_conts {height: 430px;}
+    #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 525px;}
+    .reg_content img {display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;}
 }
 
 /*******SLIDER EVENTS*********/
