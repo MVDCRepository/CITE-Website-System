@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Log In</title>
+	<title>Request Password</title>
 	<link rel="stylesheet" type="text/css" href="css/user_login.css">
 	<link rel="icon" href="images/cite_logo.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,14 +11,20 @@
 		<div class="login-container">
 			<div class="header-container">
 				<img src="images/cite_logo.png" style="height: 70px; width: 70px">
-				<span>UCU Student Login</span>
+				<span>UCU Request Password</span>
 			</div>
 			<div class="login-form">
-				<form action="php/login.php" method="POST">
+				<form action="php/request_password.php" method="POST">
 
 					<?php if (isset($_GET['error'])) { ?>
     					<p class="error" style="margin: 0px 0px 10px 0px"><?php echo $_GET['error']; ?></p>
     				<?php } ?>
+
+					<div class="form-control">
+						<label>Email</label>
+						<input type="text" name="email" id="email">
+						<small>Error Message</small>
+					</div>
 
 					<div class="form-control">
 						<label>ID Number</label>
@@ -31,9 +37,9 @@
 						<input type="Password" name="password" id="password">
 						<small>Error Message</small>
 					</div>
-					<button class="login-btn" name="btn_login">LOG IN</button>
-                    <p><a href="request_password.php" class="request_password" name="request_password">REQUEST PASSWORD</a></p>
-                        
+                    
+					<button class="login-btn" name="Request_Password">SUBMIT</button>
+                    <p><a href="user_login.php" class="request_password" name="request_password">LOGIN</a></p>
 				</form>
 			</div>
 			<div class="header-footer">
