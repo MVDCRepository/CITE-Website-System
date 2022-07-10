@@ -67,8 +67,9 @@
 		$yr_lvl = $_POST['yr_lvl'];
 		$cmoNo = $_POST['cmoNo'];
 		$series = $_POST['series'];
+		$status = $_POST['status'];
 
-		if (empty($fname) || empty($mname) || empty($gender) || empty($b_date) || empty($address) || empty($email) || empty($phoneNum) || empty($lname) || empty($yr_lvl) || empty($cmoNo) || empty($series)) {
+		if (empty($fname) || empty($mname) || empty($gender) || empty($b_date) || empty($address) || empty($email) || empty($phoneNum) || empty($lname) || empty($yr_lvl) || empty($cmoNo) || empty($series) || empty($status)) {
 			header('Location: ../upd_student.php?' . http_build_query(array(
 				    'student_id' => $_GET['student_id'],
 				    'error_msg' => "Fill all inputs"
@@ -76,7 +77,7 @@
 			exit();
 		}
 		else {
-			$sql = "UPDATE student_tbl SET fname = '$fname', mname = '$mname', lname = '$lname', yr_lvl = '$yr_lvl', cmoNo = '$cmoNo', series = '$series', gender = '$gender', b_date = '$b_date', address = '$address', email = '$email', phoneNum = '$phoneNum' WHERE student_id = '$student_id'";
+			$sql = "UPDATE student_tbl SET fname = '$fname', mname = '$mname', lname = '$lname', yr_lvl = '$yr_lvl', cmoNo = '$cmoNo', series = '$series', gender = '$gender', b_date = '$b_date', address = '$address', email = '$email', phoneNum = '$phoneNum', status = '$status' WHERE student_id = '$student_id'";
 
 			$sql_result = mysqli_query($conn, $sql);
 

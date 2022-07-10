@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2022 at 08:53 PM
+-- Generation Time: Jul 10, 2022 at 11:47 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -96,7 +96,7 @@ INSERT INTO `announcement_tbl` (`bulletin_id`, `photo`, `title`, `content`, `tim
 
 CREATE TABLE `blocking_subj_tbl` (
   `sched_id` int(11) NOT NULL,
-  `block_id` varchar(10) NOT NULL,
+  `block_id` int(11) NOT NULL,
   `subj_id` int(11) NOT NULL,
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
@@ -108,13 +108,13 @@ CREATE TABLE `blocking_subj_tbl` (
 --
 
 INSERT INTO `blocking_subj_tbl` (`sched_id`, `block_id`, `subj_id`, `start_time`, `end_time`, `days`) VALUES
-(32, '18', 112, '14:38:00', '14:38:00', 'M-T-W-TH-F'),
-(33, '18', 113, '14:38:00', '14:38:00', 'M'),
-(34, '18', 114, '14:38:00', '14:38:00', 'M-W-F'),
-(35, '18', 115, '14:38:00', '14:38:00', 'M-W-F'),
-(36, '19', 114, '16:10:00', '16:10:00', 'M-T-W-TH-F'),
-(37, '19', 115, '16:10:00', '16:10:00', 'M-W-F'),
-(38, '20', 116, '16:10:00', '16:10:00', 'M-T-W-TH-F');
+(32, 18, 112, '14:38:00', '14:38:00', 'M-T-W-TH-F'),
+(33, 18, 113, '14:38:00', '14:38:00', 'M'),
+(34, 18, 114, '14:38:00', '14:38:00', 'M-W-F'),
+(35, 18, 115, '14:38:00', '14:38:00', 'M-W-F'),
+(36, 19, 114, '16:10:00', '16:10:00', 'M-T-W-TH-F'),
+(37, 19, 115, '16:10:00', '16:10:00', 'M-W-F'),
+(38, 20, 130, '16:10:00', '16:10:00', 'M-T-W-TH-F');
 
 -- --------------------------------------------------------
 
@@ -230,7 +230,8 @@ CREATE TABLE `reserve_block_tbl` (
 --
 
 INSERT INTO `reserve_block_tbl` (`id`, `block_id`, `student_id`, `status`) VALUES
-(6, 18, 1, 'Pending');
+(7, 18, 2, 'Pending'),
+(8, 18, 1, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -286,7 +287,7 @@ INSERT INTO `student_grade_tbl` (`id`, `student_id`, `subj_id`, `grade`) VALUES
 (599, 1, 94, ''),
 (600, 1, 95, ''),
 (601, 1, 96, ''),
-(602, 1, 97, '89'),
+(602, 1, 97, '80'),
 (603, 1, 98, ''),
 (604, 1, 99, ''),
 (605, 1, 100, ''),
@@ -305,7 +306,22 @@ INSERT INTO `student_grade_tbl` (`id`, `student_id`, `subj_id`, `grade`) VALUES
 (618, 1, 113, ''),
 (619, 1, 114, ''),
 (620, 1, 115, '80'),
-(621, 1, 116, '90');
+(621, 1, 130, '95');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_requirement_tbl`
+--
+
+CREATE TABLE `student_requirement_tbl` (
+  `req_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `requirement` varchar(100) NOT NULL,
+  `file_name` varchar(100) NOT NULL,
+  `date_time` datetime NOT NULL,
+  `status` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -326,8 +342,8 @@ CREATE TABLE `student_tbl` (
   `phoneNum` varchar(12) NOT NULL,
   `guardian_name` varchar(100) NOT NULL,
   `guardian_contact` varchar(12) NOT NULL,
-  `cmoNo` varchar(10) NOT NULL,
-  `series` varchar(10) NOT NULL,
+  `cmoNo` varchar(10) DEFAULT NULL,
+  `series` varchar(10) DEFAULT NULL,
   `yr_lvl` varchar(10) NOT NULL,
   `eval_status` varchar(10) NOT NULL,
   `status` varchar(100) NOT NULL,
@@ -339,7 +355,7 @@ CREATE TABLE `student_tbl` (
 --
 
 INSERT INTO `student_tbl` (`student_id`, `id_number`, `fname`, `lname`, `mname`, `gender`, `b_date`, `address`, `email`, `phoneNum`, `guardian_name`, `guardian_contact`, `cmoNo`, `series`, `yr_lvl`, `eval_status`, `status`, `password`) VALUES
-(1, '20181636', 'Russel Jeanne', 'Pinlac', 'Vinoya', 'Male', '2000-03-26', 'Bantog, Asingan, Pangasinan', 'russeljeannepinlac@gmail.com', '09705778540', 'Milagros M. Vinoya', 'xxxxxxxxxxx', '25', '2015', '4th', 'Evaluated', '', '032600'),
+(1, '20181636', 'Russel Jeanne', 'Pinlac', 'Vinoya', 'Male', '2000-03-26', 'Bantog, Asingan, Pangasinan', 'russeljeannepinlac@gmail.com', '09705778540', 'Milagros M. Vinoya', 'xxxxxxxxxxx', '25', '2015', '4th', 'Evaluated', 'Regular Graduating', '032600'),
 (2, '20184039', 'Raen Jercee', 'Serrano', '', '', '0000-00-00', '', '', '', '', '', '53', '2013', '4th', 'Evaluate', '', 'test'),
 (3, '20183845', 'Michael Vincent', 'Carpo', 'Dumo', '', '0000-00-00', '', '', '', '', '', '25', '2015', '4th', 'Evaluate', '', 'test');
 
@@ -422,10 +438,10 @@ INSERT INTO `subject_tbl` (`subj_id`, `eval_id`, `courseCode`, `courseDesc`, `un
 (113, 1, 'IT27', 'Capstone Project 2', '3', 3, 0, 'IT25', '4th', '1st'),
 (114, 1, 'IT ELEC04', 'Elective 4 (Special Topic in IT)', '3', 2, 3, 'None', '4th', '1st'),
 (115, 1, 'ORATA 4', 'Sharing the Nobility ', '1', 1, 0, 'None', '4th', '1st'),
-(116, 1, 'IT28', 'Practicum (486 Hours)', '9', 9, 0, 'IT27', '4th', '2nd'),
 (120, 2, 'Eng 101', 'Study Thinking Skills', '3', 3, 0, 'None', '1st', '1st'),
 (121, 2, 'IT 101', 'Intro to Information Technology', '3', 3, 0, 'None', '1st', '1st'),
-(122, 2, 'IT 102', 'Computer Programming I', '3', 2, 1, 'None', '1st', '1st');
+(122, 2, 'IT 102', 'Computer Programming I', '3', 2, 1, 'None', '1st', '1st'),
+(130, 1, 'IT28', 'Practicum (486 Hours)', '9', 9, 0, 'IT27', '4th', '2nd');
 
 --
 -- Indexes for dumped tables
@@ -453,13 +469,17 @@ ALTER TABLE `announcement_tbl`
 -- Indexes for table `blocking_subj_tbl`
 --
 ALTER TABLE `blocking_subj_tbl`
-  ADD PRIMARY KEY (`sched_id`);
+  ADD PRIMARY KEY (`sched_id`),
+  ADD KEY `block_id` (`block_id`),
+  ADD KEY `subj_id` (`subj_id`);
 
 --
 -- Indexes for table `blocking_tbl`
 --
 ALTER TABLE `blocking_tbl`
-  ADD PRIMARY KEY (`block_id`);
+  ADD PRIMARY KEY (`block_id`),
+  ADD KEY `acad_id` (`acad_id`),
+  ADD KEY `eval_id` (`eval_id`);
 
 --
 -- Indexes for table `eval_cmo_series_tbl`
@@ -491,7 +511,15 @@ ALTER TABLE `reserve_block_tbl`
 -- Indexes for table `student_grade_tbl`
 --
 ALTER TABLE `student_grade_tbl`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`),
+  ADD KEY `subj_id` (`subj_id`);
+
+--
+-- Indexes for table `student_requirement_tbl`
+--
+ALTER TABLE `student_requirement_tbl`
+  ADD PRIMARY KEY (`req_id`);
 
 --
 -- Indexes for table `student_tbl`
@@ -562,7 +590,7 @@ ALTER TABLE `news_events_tbl`
 -- AUTO_INCREMENT for table `reserve_block_tbl`
 --
 ALTER TABLE `reserve_block_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `student_grade_tbl`
@@ -571,20 +599,40 @@ ALTER TABLE `student_grade_tbl`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=622;
 
 --
+-- AUTO_INCREMENT for table `student_requirement_tbl`
+--
+ALTER TABLE `student_requirement_tbl`
+  MODIFY `req_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+
+--
 -- AUTO_INCREMENT for table `student_tbl`
 --
 ALTER TABLE `student_tbl`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `subject_tbl`
 --
 ALTER TABLE `subject_tbl`
-  MODIFY `subj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `subj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `blocking_subj_tbl`
+--
+ALTER TABLE `blocking_subj_tbl`
+  ADD CONSTRAINT `blocking_subj_tbl_ibfk_1` FOREIGN KEY (`block_id`) REFERENCES `blocking_tbl` (`block_id`),
+  ADD CONSTRAINT `blocking_subj_tbl_ibfk_2` FOREIGN KEY (`subj_id`) REFERENCES `subject_tbl` (`subj_id`);
+
+--
+-- Constraints for table `blocking_tbl`
+--
+ALTER TABLE `blocking_tbl`
+  ADD CONSTRAINT `blocking_tbl_ibfk_1` FOREIGN KEY (`acad_id`) REFERENCES `acad_yr_tbl` (`acad_id`),
+  ADD CONSTRAINT `blocking_tbl_ibfk_2` FOREIGN KEY (`eval_id`) REFERENCES `eval_cmo_series_tbl` (`eval_id`);
 
 --
 -- Constraints for table `reserve_block_tbl`
@@ -592,6 +640,13 @@ ALTER TABLE `subject_tbl`
 ALTER TABLE `reserve_block_tbl`
   ADD CONSTRAINT `reserve_block_tbl_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student_tbl` (`student_id`),
   ADD CONSTRAINT `reserve_block_tbl_ibfk_2` FOREIGN KEY (`block_id`) REFERENCES `blocking_tbl` (`block_id`);
+
+--
+-- Constraints for table `student_grade_tbl`
+--
+ALTER TABLE `student_grade_tbl`
+  ADD CONSTRAINT `student_grade_tbl_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student_tbl` (`student_id`),
+  ADD CONSTRAINT `student_grade_tbl_ibfk_2` FOREIGN KEY (`subj_id`) REFERENCES `subject_tbl` (`subj_id`);
 
 --
 -- Constraints for table `subject_tbl`

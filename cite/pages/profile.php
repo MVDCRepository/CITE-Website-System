@@ -98,7 +98,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item" href="grades.php">Grades</a>
                                                     <a class="dropdown-item" href="blocking.php">Blocking</a>
-                                                    <a style="color: red !important;" class="dropdown-item" href="#"><i class="bi bi-box-arrow-left"></i>&nbsp;Logout</a>
+                                                    <a style="color: red !important;" class="dropdown-item" href="../php/logout.php"><i class="bi bi-box-arrow-left"></i>&nbsp;Logout</a>
                                                 </div>
                                             </li>
                                         </ul>
@@ -118,68 +118,84 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_left_section">
-                                    <img src="../images/xiao.png">
+                                    <!-- <img src="../images/xiao.png"> -->
                                     <h2><?php echo $_SESSION['lname']." ,".$_SESSION['fname'];?></h2>
                                     <p>Bachelor of Science in Information Technology <br> <?php echo $_SESSION['yr_lvl']." Year";?></p>
                                 </div>
-                                <form>
-                                        <div class="profile_left_section">
-                                            <h2>Requirements</h2>
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <form>
-                                                            <table>
-                                                                <!----- FORM 137 ------->
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="form-check float-left">
-                                                                            <input class="form-check-input" type="checkbox" value="FORM 137" id="form_137">
-                                                                            <label class="form-check-label" for="form_137">
-                                                                                FORM 137
-                                                                            </label>
-                                                                        </div>
-                                                                        <br>
-                                                                        <input class="custom_upload" type="file" name="form_137_upload" id="form_137_upload">
-                                                                    </td>
-                                                                    <td class="upload_status">Missing</td>
-                                                                </tr>
-                                                                <!----- FORM 138 ------->
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="form-check float-left">
-                                                                            <input class="form-check-input" type="checkbox" value="FORM 138" id="form_138">
-                                                                            <label class="form-check-label" for="form_138">
-                                                                                FORM 138
-                                                                            </label>
-                                                                        </div>
-                                                                        <br>
-                                                                        <input class="custom_upload" type="file" name="form_138_upload" id="form_138_upload">
-                                                                    </td>
-                                                                    <td class="upload_status">Missing</td>
-                                                                </tr>
-                                                                <!----- Good Moral ------->
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="form-check float-left">
-                                                                            <input class="form-check-input" type="checkbox" value="Good Moral Certification" id="good_moral">
-                                                                            <label class="form-check-label" for="good_moral">
-                                                                                Good Moral Certification
-                                                                            </label>
-                                                                        </div>
-                                                                        <br>
-                                                                        <input class="custom_upload" type="file" name="good_moral_upload" id="good_moral_upload">
-                                                                    </td>
-                                                                    <td class="upload_status">Missing</td>
-                                                                </tr>
-                                                            </table>
-                                                            <input type="submit" name="sub" value="Submit" class="btn btn-success float-left">
-                                                        </form>
-                                                    </div>
+                                <div class="profile_left_section">
+                                    <h2>Requirements</h2>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <center>
+                                                    <?php if (isset($_GET['submit_error'])) { ?>
+                                                      <p class="error_msg"><?php echo $_GET['submit_error'];?></p>
+                                                    <?php } ?>
+                                                    <?php if (isset($_GET['submit_success'])) { ?>
+                                                      <p class="success_msg"><?php echo $_GET['submit_success']; ?></p>
+                                                    <?php } ?>
+                                                </center>
+                                                <div class="alert alert-warning">
+                                                    <h5 class="alert-heading">Note!</h5>
+                                                    Rename your files according what you checked.
                                                 </div>
+                                                <form action="../php/submit_requirementsPHP.php" method="POST" enctype="multipart/form-data">
+                                                    <table>
+                                                        <!----- FORM 137 ------->
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check float-left">
+                                                                    <input class="form-check-input" type="checkbox" value="FORM 137" id="form_137" name="req_id[]">
+                                                                    <input type="hidden" name="student_id[]" value="<?php echo $_SESSION['student_id'];?>">
+                                                                    <input type="hidden" name="requirement[]" value="FORM 137">
+                                                                    <label class="form-check-label" for="form_137">
+                                                                            FORM 137
+                                                                    </label>
+                                                                </div>
+                                                                <br>
+                                                                <input class="custom_upload" type="file" name="file_name[]">
+                                                            </td>
+                                                        <!-- <td class="upload_status">Missing</td> -->
+                                                        </tr>
+                                                        <!----- FORM 138 ------->
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check float-left">
+                                                                    <input class="form-check-input" type="checkbox" value="FORM 138" id="form_138" name="req_id[]">
+                                                                    <input type="hidden" name="student_id[]" value="<?php echo $_SESSION['student_id'];?>">
+                                                                    <input type="hidden" name="requirement[]" value="FORM 138">
+                                                                    <label class="form-check-label" for="form_138">
+                                                                        FORM 138
+                                                                    </label>
+                                                                </div>
+                                                                <br>
+                                                                <input class="custom_upload" type="file" name="file_name[]">
+                                                            </td>
+                                                        <!-- <td class="upload_status">Missing</td> -->
+                                                        </tr>
+                                                        <!----- Good Moral ------->
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-check float-left">
+                                                                    <input class="form-check-input" type="checkbox" value="Good Moral Certification" id="good_moral" name="req_id[]">
+                                                                    <input type="hidden" name="student_id[]" value="<?php echo $_SESSION['student_id'];?>">
+                                                                    <input type="hidden" name="requirement[]" value="Good Moral Certification">
+                                                                    <label class="form-check-label" for="good_moral">
+                                                                        Good Moral Certification
+                                                                    </label>
+                                                                </div>
+                                                                <br>
+                                                                <input class="custom_upload" type="file" name="file_name[]">
+                                                            </td>
+                                                           <!-- <td class="upload_status">Missing</td> -->
+                                                        </tr>
+                                                    </table>
+                                                    <input type="submit" name="submit_btn" value="Submit" class="btn btn-success float-left">
+                                                </form>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="profile_right_section">
