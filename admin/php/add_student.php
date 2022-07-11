@@ -346,11 +346,45 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">CHED Memorandum Order No.</label>
-                      <input type="text" class="form-control" name="cmoNo" required>
+                      <!-- <input type="text" class="form-control" name="cmoNo" required> -->
+                      <select class="form-select" name="cmoNo" required>
+                        <option value="">Select CMO No.</option>
+                        <?php
+                          $sql_cmo = "SELECT * FROM eval_cmo_series_tbl";
+                          $cmo_result = $conn->query($sql_cmo);
+                            if($cmo_result->num_rows > 0) {
+                              while ($row_cmo_series=$cmo_result->fetch_assoc()) {
+                        ?>
+                        <option value="<?php echo $row_cmo_series['cmoNo'];?>"><?php echo $row_cmo_series['cmoNo'];?></option>
+                        <?php
+                            }
+                          }
+                          else {
+                            echo "<option value=''>No CMO No. & Series available</option>";
+                          }
+                        ?>
+                      </select>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Series</label>
-                      <input type="text" class="form-control" name="series" required>
+                      <!-- <input type="text" class="form-control" name="series" required> -->
+                      <select class="form-select" name="series" required>
+                        <option value="">Select Series</option>
+                        <?php
+                          $sql_cmo = "SELECT * FROM eval_cmo_series_tbl";
+                          $cmo_result = $conn->query($sql_cmo);
+                            if($cmo_result->num_rows > 0) {
+                              while ($row_cmo_series=$cmo_result->fetch_assoc()) {
+                        ?>
+                        <option value="<?php echo $row_cmo_series['series'];?>"><?php echo $row_cmo_series['series'];?></option>
+                        <?php
+                            }
+                          }
+                          else {
+                            echo "<option value=''>No CMO No. & Series available</option>";
+                          }
+                        ?>
+                      </select>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Student Status</label>

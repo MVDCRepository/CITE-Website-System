@@ -363,9 +363,60 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   </table>
                 </div>
 
+                <!-- accept student modal-->
+                <div class="modal" id="accept_modal">
+                  <div class="modalBox row">
+                    <div class="modal_header">
+                      <span class="close" id="close_modalaccept">&times;</span>
+                      <h4>Accept Student</h4>
+                    </div>
+                    <div class="modal_body">
+                      <form action="php/view_blockSchedPHP.php?block_id=<?=$block_id?>&&block_no=<?=$block_no?>&&yr_lvl=<?=$yr_lvl?>&&sem=<?=$sem?>&&acad_id=<?=$acad_id?>" method="POST">
+                        <input type="hidden" name="accept_student_id" id="accept_student_id">
+                          <h6 class="alert-heading fw-bold mb-1">Are you sure you want to accept this student from list?</h6>
+                          <p>Once you accept this student <span class="text-dark fw-bold" id="accept_student_name"></span> it cannot be undone. Student ID Number <span class="text-dark fw-bold" id="accept_student_id_number"></span></p>
+                        <button class="editbtn" name="accept_studentBtn" type="submit">Accept Student</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!-- / accept student modal -->
+
+                <!-- unload student modal-->
+                <div class="delete-modal" id="unload_modal">
+                  <div class="modalBox row">
+                    <div class="modal_header">
+                      <span class="close" id="close_modalunload">&times;</span>
+                      <h4>Unload Student</h4>
+                    </div>
+                    <div class="modal_body">
+                      <form action="php/view_blockSchedPHP.php?block_id=<?=$block_id?>&&block_no=<?=$block_no?>&&yr_lvl=<?=$yr_lvl?>&&sem=<?=$sem?>&&acad_id=<?=$acad_id?>" method="POST">
+                        <input type="hidden" name="student_id" id="student_id">
+                        <div class="alert alert-warning">
+                          <h6 class="alert-heading fw-bold mb-1">Are you sure you want to remove this student from list?</h6>
+                          <p class="my-0">Once you remove this student <span class="text-dark fw-bold" id="student_name"></span> it cannot be undone. Student ID Number <span class="text-dark fw-bold" id="student_id_number"></span></p>
+                        </div>
+                        <button class="delbtn" name="unload_studentBtn" type="submit">Yes, Unload Student</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!-- / unload student modal -->
+
+                <!-- notif message -->
+                <center>
+                  <?php if (isset($_GET['success_msg'])) { ?>
+                    <p class="success_msg mt-4"><?php echo $_GET['success_msg']; ?></p>
+                  <?php } ?>
+                  <?php if (isset($_GET['error_msg'])) { ?>
+                    <p class="error_msg mt-4"><?php echo $_GET['error_msg']; ?></p>
+                  <?php } ?>
+                </center>
+                <!-- / notif message -->
+
                 <div class="section-container card mt-4">
                   <h5 class="mt-2 mb-4">List of Students</h5>
-                  <table class="table-cite">
+                  <table class="table-cite" id="student_tbl">
                     <thead>
                       <tr>
                         <th scope="col" colspan="5"><p class="my-0 text-center">Students</p></th>
@@ -373,14 +424,18 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                     </thead>
                     <tbody>
                       <tr>
+                        <td scope="col" style="display: none;"><span class="fw-bold">ID</span></td>
+                        <td scope="col"><span class="fw-bold">ID Number</span></td>
                         <td scope="col"><span class="fw-bold">Name</span></td>
                         <td scope="col"><span class="fw-bold">Year Level</span></td>
+                        <td scope="col"><span class="fw-bold">Status</span></td>
                         <td scope="col"><span class="fw-bold">Action</span></td>
                       </tr>
                       <?php
                       include "db_conn.php";
                       $sql = "SELECT
                               student_tbl.student_id,
+                              student_tbl.id_number,
                               student_tbl.fname,
                               student_tbl.mname,
                               student_tbl.lname,
@@ -398,19 +453,22 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                               FROM student_tbl
                               INNER JOIN reserve_block_tbl ON reserve_block_tbl.student_id = student_tbl.student_id
                               INNER JOIN blocking_tbl ON blocking_tbl.block_id = reserve_block_tbl.block_id
-                              WHERE blocking_tbl.block_id = '$block_id'";
+                              WHERE blocking_tbl.block_id = '$block_id' AND reserve_block_tbl.status = 'Pending'";
 
                         $result = $conn->query($sql);
                           if($result->num_rows > 0) {
                             while ($student_list=$result->fetch_assoc()) {
                       ?>
                       <tr>
+                        <td style="display: none"><?php echo $student_list['student_id'];?></td>
+                        <td><?php echo $student_list['id_number'];?></td>
                         <td><?php echo $student_list['lname']." ,".$student_list['fname']." ".$student_list['mname'];?></td>
                         <td><?php echo $student_list['yr_lvl'];?></td>
+                        <td><?php echo $student_list['status'];?></td>
                         <td>
                           <div class="d-grid gap-2 d-md-block">
-                            <button class="editbtn">Accept</button>
-                            <button class="delbtn">Unload</button>
+                            <button class="editbtn" id="accept_btn" data-modal="accept_modal">Accept</button>
+                            <button class="delbtn" id="unload_btn" data-modal="unload_modal">Unload</button>
                           </div>
                         </td>
                       </tr>
@@ -465,7 +523,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
     <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
 
     <!-- cite js -->
-    <script type="text/javascript" src="js/add_facultyJS.js"></script>
+    <script type="text/javascript" src="js/view_blockSchedJS.js"></script>
   </body>
 </html>
 <?php

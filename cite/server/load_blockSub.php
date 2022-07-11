@@ -105,7 +105,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                             echo "<p class='text-danger'>You already reserved a block.</p>";
                         }
                         else {
-                            $sql = "SELECT COUNT(id) as total_reservation FROM reserve_block_tbl WHERE block_id = '$block_id'";
+                            $sql = "SELECT COUNT(id) as total_reservation FROM reserve_block_tbl WHERE block_id = '$block_id' AND status = 'Pending'";
                             $sql_result = mysqli_query($conn, $sql);
 
                                 if ($sql_result->num_rows > 0) {

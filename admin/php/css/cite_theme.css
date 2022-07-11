@@ -241,7 +241,7 @@ form .error small {
 }
 .modalBox {
 	position: relative;
-	border-radius: 10px;
+	border-radius: 5px;
 	overflow: hidden;
 	margin: auto;
 	background-color: #ffffff;

@@ -97,7 +97,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                             <div class="dropdown-divider"></div>
                                                             <a class="dropdown-item" href="grades.php">Grades</a>
                                                             <a class="dropdown-item" href="blocking.php">Blocking</a>
-                                                            <a style="color: red !important;" class="dropdown-item" href="#"><i class="bi bi-box-arrow-left"></i>&nbsp;Logout</a>
+                                                            <a style="color: red !important;" class="dropdown-item" href="../php/logout.php"><i class="bi bi-box-arrow-left"></i>&nbsp;Logout</a>
                                                         </div>
                                                     </li>
                                                 </ul>
