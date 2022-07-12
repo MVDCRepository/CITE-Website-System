@@ -1114,7 +1114,42 @@ button.main_bt {
 	list-style-type: upper-roman;
 }
 
+/************ Grades View Area ********************/
+.year_title_view {
+	font-size: 18px;
+	text-align: center;
+	margin: 15px;
+	font-weight: 700;
+}
+
+.grades-content-view {
+	width: 100%;
+	float: left;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	overflow-x: auto;
+}
+
+.grades-content-view th{
+	text-align: center;
+	font-size: 12px;
+}
+
+.grades-content-view td {
+	font-size: 12px;
+}
+
+.grades-content-view button {
+	margin: 15px;
+	float: right;
+}
+
+
 /************ Grades Area ********************/
+.grades-section {
+	display: none;
+}
+
 .grades-section .container {
 	overflow-x: auto;
 }
