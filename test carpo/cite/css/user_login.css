@@ -20,10 +20,9 @@ body {
 }
 
 .login-container {
-	width: 23%;
-	border-radius: 5px;
-	overflow: hidden;
-	box-shadow: 5px 5px 10px #000;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 5px 5px 10px #000;
 }
 
 .header-container {
@@ -45,7 +44,7 @@ body {
 }
 
 .header-footer {
-	padding: 20px;
+	/* padding: 20px; */
 	background-color: #f2f2f2;
 	position: relative;
 	align-items: center;
@@ -116,22 +115,4 @@ body {
 	font-size: 18px;
 	padding: 10px;
 	text-align: center;
-}
-
-@media only screen and (max-width: 1400px) {
-	.login-container {
-		width: 50%;
-	}
-}
-
-@media only screen and (max-width: 1000px) {
-	.login-container {
-		width: 50%;
-	}
-}
-
-@media only screen and (max-device-width: 700px) {
-	.login-container {
-		width: 60%;
-	}
 }
