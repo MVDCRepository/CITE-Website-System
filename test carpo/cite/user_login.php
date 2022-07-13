@@ -3,6 +3,7 @@
 <head>
 	<title>Log In</title>
 	<link rel="stylesheet" type="text/css" href="css/user_login.css">
+	<link rel="stylesheet" type="text/css" href="css/form-responsive.css">
 	<link rel="icon" href="images/cite_logo.png">
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <style>
