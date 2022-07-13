@@ -90,6 +90,7 @@
     .touch_text { width: 40%; }
     .bnner_title { font-size: 34pt; }
     #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 1000px;}
+    .mission_vision_cont {padding: 0; margin-left: -2px; padding: 15px; height: 320px;}
 }
 
 @media (min-width:576px) and (max-width:767px) {
@@ -181,8 +182,11 @@
     .map_icon { width: 100%; }
     .bnner_title { font-size: 26pt; padding-top: 0px; margin-top: 0px; }
     .long_text { font-size: 10pt; }
-    .navbar-nav.mr-auto li { float: left; width: 100%; }
-    .obj_section .row { flex-direction: column-reverse; }
+    .navbar-nav.mr-auto li { float: left; width: 100%;}
+    .mission_vision_cont {padding: 0; margin-left: -2px; padding: 5px; height: auto;}
+    .goals_obj_cont {float: none; margin-left: -2px; padding: 5px; text-align: left;}
+    .history_content {float: none; margin-left: -1px; padding: 5px;}
+    .obj_section .row { flex-direction: column-reverse;}
     .obj_section ol, .obj_section ul, .obj_section li { list-style: none; text-align: center; }
     .goals_obj_cont_title { text-align: center; margin: auto; font-size: 20px; }
     .banner_news_events { height: 100px; }
@@ -204,6 +208,7 @@
     .admission_conts {height: 430px;}
     #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 525px;}
     .reg_content img {display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;}
+    .reg_content {width: 100%; margin: 0; border-radius: 0;}
 }
 
 /*******SLIDER EVENTS*********/
