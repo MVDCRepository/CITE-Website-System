@@ -86,7 +86,7 @@
                                                     <li class="nav-item">
                                                     <a class="nav-link" href="admission.php">ADMISSION</a></li>
                                                 <li id="nav-last" class="nav-item last">
-                                                        <a class="dropdown-item" href="user_login.php">Log In</a>
+                                                        <a class="dropdown-item" href="login.php">Log In</a>
                                                 </li>
                                             </ul>
                                         </div>

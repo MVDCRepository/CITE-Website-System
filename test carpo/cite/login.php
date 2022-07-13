@@ -13,6 +13,7 @@
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
+  <link rel="stylesheet" href="login/css/custom.css">
   <link rel="stylesheet" href="login/css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="login/images/favicon.ico" />
@@ -31,24 +32,28 @@
               <div class="brand-logo text-center m-1">
                 <h3><b>CITE Portal</b></h3>
               </div>
-			          <h6 class=" text-center mb-0">ADMIN LOGIN</h6>
+			          <h6 class=" text-center mb-0">STUDENT LOGIN</h6>
 									
-              <form class="pt-3" action="php/php/login.php" method="POST">
+              <form class="pt-3" action="php/login.php" method="POST">
 
               <?php if (isset($_GET['error'])) { ?>
-    					    <p class="error" style="margin: 0px 0px 10px 0px"><?php echo $_GET['error']; ?></p>
+    					    <p class="error" style="margin: 0px 0px 10px 0px "><?php echo $_GET['error']; ?></p>
     				  <?php } ?>
 
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="username" placeholder="Username" name="username" autocomplete="off" required >
+                  <input type="text" class="form-control form-control-lg" id="id_number" placeholder="ID Number" name="id_number" autocomplete="off" required >
                 </div>
                 <div class="form-group mb-1">
                   <input type="password" class="form-control form-control-lg" id="password" placeholder="Password" name="password" required >
                 </div>
-                <div class="mt-1 text-center">
+                <div class="mt-1 mb-3 text-center">
 				        <div style="text-align: center;"><div class="h-captcha" data-sitekey=""  style="display: inline-block;"></div></div>
                  <button type="submit" class="btn btn-gradient-primary btn-lg font-weight-medium auth-form-btn " name="btn_login">LOG IN</button>
                 </div>
+                <div class="link">
+                  <p><a href="request.php">REQUEST PASSWORD</a></p>
+                </div>
+                
                 <div class="my-2 d-flex justify-content-between align-items-center">
                
                 </div>
@@ -73,8 +78,8 @@
   <script src="login/vendors/js/vendor.bundle.addons.js"></script>
   <!-- endinject -->
   <!-- inject:js -->
-  <script src="js/off-canvas.js"></script>
-  <script src="js/misc.js"></script>
+  <script src="login/js/off-canvas.js"></script>
+  <script src="login/js/misc.js"></script>
   <!-- endinject -->
 </body>
 

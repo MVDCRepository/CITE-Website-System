@@ -1,0 +1,12 @@
+  .link a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+  }
+  .link a:hover{
+      color: rgb(129, 129, 129);
+      text-decoration: none;
+  }
+  .link p{
+      text-align: center;
+      margin-top: 15px;
+  }
