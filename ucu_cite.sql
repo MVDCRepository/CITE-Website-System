@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2022 at 11:47 PM
+-- Generation Time: Jul 15, 2022 at 07:20 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -38,7 +38,8 @@ CREATE TABLE `acad_yr_tbl` (
 --
 
 INSERT INTO `acad_yr_tbl` (`acad_id`, `acad_yr`, `status`) VALUES
-(2, '2022-2023', 'Active');
+(2, '2022-2023', 'Active'),
+(37, '2024-2025', 'Inactive');
 
 -- --------------------------------------------------------
 
@@ -225,13 +226,116 @@ CREATE TABLE `reserve_block_tbl` (
   `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `reserve_block_tbl`
+-- Table structure for table `student_acad_info_tbl`
 --
 
-INSERT INTO `reserve_block_tbl` (`id`, `block_id`, `student_id`, `status`) VALUES
-(7, 18, 2, 'Pending'),
-(8, 18, 1, 'Pending');
+CREATE TABLE `student_acad_info_tbl` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `course` varchar(100) NOT NULL,
+  `strand` varchar(100) NOT NULL,
+  `second_course` varchar(100) NOT NULL,
+  `graduated_shs` varchar(100) NOT NULL,
+  `learners_ref_num` varchar(100) NOT NULL,
+  `graduated_es` varchar(100) NOT NULL,
+  `form_138` varchar(100) NOT NULL,
+  `graduated_year_es` varchar(100) NOT NULL,
+  `eval_id` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_acad_info_tbl`
+--
+
+INSERT INTO `student_acad_info_tbl` (`id`, `student_id`, `course`, `strand`, `second_course`, `graduated_shs`, `learners_ref_num`, `graduated_es`, `form_138`, `graduated_year_es`, `eval_id`) VALUES
+(4, 18, 'Bachelor of Science in Information Technology', 'ICT', 'Bachelor in Library & Information Science', 'Luciano Millan National High School', 'N/A', 'Narciso R. Ramos Elementary School', 'N/A', '2012', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_acad_info_transferee_tbl`
+--
+
+CREATE TABLE `student_acad_info_transferee_tbl` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `present_course` varchar(100) NOT NULL,
+  `transfered_from` varchar(100) NOT NULL,
+  `second_course` varchar(100) NOT NULL,
+  `graduated_es` varchar(100) NOT NULL,
+  `graduated_year_es` varchar(100) NOT NULL,
+  `eval_id` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_acad_info_transferee_tbl`
+--
+
+INSERT INTO `student_acad_info_transferee_tbl` (`id`, `student_id`, `present_course`, `transfered_from`, `second_course`, `graduated_es`, `graduated_year_es`, `eval_id`) VALUES
+(3, 19, 'Bachelor in Library & Information Science', 'PSU Asingan', 'Bachelor of Science in Information Technology', 'Narciso R. Ramos Elementary School', '2012', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_basic_info_tbl`
+--
+
+CREATE TABLE `student_basic_info_tbl` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `bdate` date NOT NULL,
+  `nationality` varchar(255) NOT NULL,
+  `birth_province` varchar(255) NOT NULL,
+  `birth_city` varchar(255) NOT NULL,
+  `birth_barangay` varchar(255) NOT NULL,
+  `birth_house_num` varchar(255) NOT NULL,
+  `birth_zip_code` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `contact_num` varchar(255) NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `religion` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_basic_info_tbl`
+--
+
+INSERT INTO `student_basic_info_tbl` (`id`, `student_id`, `bdate`, `nationality`, `birth_province`, `birth_city`, `birth_barangay`, `birth_house_num`, `birth_zip_code`, `email`, `contact_num`, `gender`, `religion`) VALUES
+(5, 18, '2000-03-26', 'Filipino', 'Pangasinan', 'Urdaneta City', 'N/A', 'N/A', '2428', 'russeljeannepinlac@gmail.com', '09705778540', 'Male', 'IGLESIA NI CRISTO'),
+(6, 19, '2002-10-31', 'Filipino', 'Pangasinan', 'Urdaneta City', 'N/A', 'N/A', '2428', 'lhoressel@gmail.com', 'N/A', 'Female', 'ROMAN CATHOLIC');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_fam_info_tbl`
+--
+
+CREATE TABLE `student_fam_info_tbl` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `father_fname` varchar(100) NOT NULL,
+  `father_mname` varchar(100) NOT NULL,
+  `father_lname` varchar(100) NOT NULL,
+  `father_sname` varchar(100) NOT NULL,
+  `father_contact` varchar(100) NOT NULL,
+  `father_occupation` varchar(100) NOT NULL,
+  `mother_fname` varchar(100) NOT NULL,
+  `mother_mname` varchar(100) NOT NULL,
+  `mother_lname` varchar(100) NOT NULL,
+  `mother_contact` varchar(100) NOT NULL,
+  `mother_occupation` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_fam_info_tbl`
+--
+
+INSERT INTO `student_fam_info_tbl` (`id`, `student_id`, `father_fname`, `father_mname`, `father_lname`, `father_sname`, `father_contact`, `father_occupation`, `mother_fname`, `mother_mname`, `mother_lname`, `mother_contact`, `mother_occupation`) VALUES
+(6, 18, 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'Milagros', 'Marquez', 'Vinoya', 'N/A', 'Teacher'),
+(7, 19, 'Salvador', 'N/A', 'Salayog', 'N/A', 'N/A', 'Vendor', 'Lorena', 'N/A', 'Salayog', 'N/A', 'Vendor');
 
 -- --------------------------------------------------------
 
@@ -246,67 +350,69 @@ CREATE TABLE `student_grade_tbl` (
   `grade` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `student_grade_tbl`
+-- Table structure for table `student_guardian_info_tbl`
 --
 
-INSERT INTO `student_grade_tbl` (`id`, `student_id`, `subj_id`, `grade`) VALUES
-(566, 1, 61, '85'),
-(567, 1, 62, '88'),
-(568, 1, 63, ''),
-(569, 1, 64, ''),
-(570, 1, 65, ''),
-(571, 1, 66, ''),
-(572, 1, 67, ''),
-(573, 1, 68, ''),
-(574, 1, 69, ''),
-(575, 1, 70, ''),
-(576, 1, 71, ''),
-(577, 1, 72, '80'),
-(578, 1, 73, ''),
-(579, 1, 74, ''),
-(580, 1, 75, ''),
-(581, 1, 76, ''),
-(582, 1, 77, ''),
-(583, 1, 78, ''),
-(584, 1, 79, '81'),
-(585, 1, 80, ''),
-(586, 1, 81, ''),
-(587, 1, 82, ''),
-(588, 1, 83, ''),
-(589, 1, 84, ''),
-(590, 1, 85, ''),
-(591, 1, 86, ''),
-(592, 1, 87, ''),
-(593, 1, 88, ''),
-(594, 1, 89, ''),
-(595, 1, 90, '76'),
-(596, 1, 91, ''),
-(597, 1, 92, ''),
-(598, 1, 93, ''),
-(599, 1, 94, ''),
-(600, 1, 95, ''),
-(601, 1, 96, ''),
-(602, 1, 97, '80'),
-(603, 1, 98, ''),
-(604, 1, 99, ''),
-(605, 1, 100, ''),
-(606, 1, 101, ''),
-(607, 1, 102, ''),
-(608, 1, 103, ''),
-(609, 1, 104, ''),
-(610, 1, 105, '85'),
-(611, 1, 106, ''),
-(612, 1, 107, ''),
-(613, 1, 108, ''),
-(614, 1, 109, ''),
-(615, 1, 110, '90'),
-(616, 1, 111, ''),
-(617, 1, 112, ''),
-(618, 1, 113, ''),
-(619, 1, 114, ''),
-(620, 1, 115, '80'),
-(621, 1, 130, '95');
+CREATE TABLE `student_guardian_info_tbl` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `guardian_fname` varchar(100) NOT NULL,
+  `guardian_mname` varchar(100) NOT NULL,
+  `guardian_lname` varchar(100) NOT NULL,
+  `guardian_sname` varchar(100) NOT NULL,
+  `guardian_contact` varchar(100) NOT NULL,
+  `guardian_occupation` varchar(100) NOT NULL,
+  `guardian_relationship` varchar(100) NOT NULL,
+  `spouse_fname` varchar(100) NOT NULL,
+  `spouse_mname` varchar(100) NOT NULL,
+  `spouse_lname` varchar(100) NOT NULL,
+  `spouse_sname` varchar(100) NOT NULL,
+  `spouse_contact` varchar(100) NOT NULL,
+  `spouse_occupation` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_guardian_info_tbl`
+--
+
+INSERT INTO `student_guardian_info_tbl` (`id`, `student_id`, `guardian_fname`, `guardian_mname`, `guardian_lname`, `guardian_sname`, `guardian_contact`, `guardian_occupation`, `guardian_relationship`, `spouse_fname`, `spouse_mname`, `spouse_lname`, `spouse_sname`, `spouse_contact`, `spouse_occupation`) VALUES
+(6, 18, 'Milagros', 'Marquez', 'Vinoya', 'N/A', 'N/A', 'Teacher', 'Mother', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A'),
+(7, 19, 'Lorena', 'N/A', 'Salayog', 'N/A', 'N/A', 'Vendor', 'Mother', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_pri_info_tbl`
+--
+
+CREATE TABLE `student_pri_info_tbl` (
+  `student_id` int(11) NOT NULL,
+  `id_number` varchar(20) NOT NULL,
+  `yr_lvl` varchar(255) NOT NULL,
+  `fname` varchar(255) NOT NULL,
+  `mname` varchar(255) NOT NULL,
+  `lname` varchar(255) NOT NULL,
+  `sname` varchar(255) NOT NULL,
+  `province` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `barangay` varchar(255) NOT NULL,
+  `house_num` varchar(255) NOT NULL,
+  `zip_code` varchar(255) NOT NULL,
+  `eval_status` varchar(30) NOT NULL,
+  `status` varchar(30) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_pri_info_tbl`
+--
+
+INSERT INTO `student_pri_info_tbl` (`student_id`, `id_number`, `yr_lvl`, `fname`, `mname`, `lname`, `sname`, `province`, `city`, `barangay`, `house_num`, `zip_code`, `eval_status`, `status`, `password`) VALUES
+(18, '41482098', '1st', 'Russel Jeanne', 'Vinoya', 'Pinlac', 'N/A', 'Pangasinan', 'Asingan', 'Bantog', '153', '2439', 'Evaluate', 'Freshmen', '032600'),
+(19, '54495912', '1st', 'Lhoressa Mae', 'Mercado', 'Salayog', 'N/A', 'Pangasinan', 'Asingan', 'Zone 1 Macalong', 'N/A', '2439', 'Evaluate', 'Freshmen', 'lhoressel');
 
 -- --------------------------------------------------------
 
@@ -317,47 +423,10 @@ INSERT INTO `student_grade_tbl` (`id`, `student_id`, `subj_id`, `grade`) VALUES
 CREATE TABLE `student_requirement_tbl` (
   `req_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
-  `requirement` varchar(100) NOT NULL,
   `file_name` varchar(100) NOT NULL,
   `date_time` datetime NOT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `student_tbl`
---
-
-CREATE TABLE `student_tbl` (
-  `student_id` int(11) NOT NULL,
-  `id_number` varchar(20) NOT NULL,
-  `fname` varchar(30) NOT NULL,
-  `lname` varchar(30) NOT NULL,
-  `mname` varchar(30) NOT NULL,
-  `gender` varchar(10) NOT NULL,
-  `b_date` date NOT NULL,
-  `address` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phoneNum` varchar(12) NOT NULL,
-  `guardian_name` varchar(100) NOT NULL,
-  `guardian_contact` varchar(12) NOT NULL,
-  `cmoNo` varchar(10) DEFAULT NULL,
-  `series` varchar(10) DEFAULT NULL,
-  `yr_lvl` varchar(10) NOT NULL,
-  `eval_status` varchar(10) NOT NULL,
-  `status` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `student_tbl`
---
-
-INSERT INTO `student_tbl` (`student_id`, `id_number`, `fname`, `lname`, `mname`, `gender`, `b_date`, `address`, `email`, `phoneNum`, `guardian_name`, `guardian_contact`, `cmoNo`, `series`, `yr_lvl`, `eval_status`, `status`, `password`) VALUES
-(1, '20181636', 'Russel Jeanne', 'Pinlac', 'Vinoya', 'Male', '2000-03-26', 'Bantog, Asingan, Pangasinan', 'russeljeannepinlac@gmail.com', '09705778540', 'Milagros M. Vinoya', 'xxxxxxxxxxx', '25', '2015', '4th', 'Evaluated', 'Regular Graduating', '032600'),
-(2, '20184039', 'Raen Jercee', 'Serrano', '', '', '0000-00-00', '', '', '', '', '', '53', '2013', '4th', 'Evaluate', '', 'test'),
-(3, '20183845', 'Michael Vincent', 'Carpo', 'Dumo', '', '0000-00-00', '', '', '', '', '', '25', '2015', '4th', 'Evaluate', '', 'test');
 
 -- --------------------------------------------------------
 
@@ -508,6 +577,30 @@ ALTER TABLE `reserve_block_tbl`
   ADD KEY `block_id` (`block_id`);
 
 --
+-- Indexes for table `student_acad_info_tbl`
+--
+ALTER TABLE `student_acad_info_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_acad_info_transferee_tbl`
+--
+ALTER TABLE `student_acad_info_transferee_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_basic_info_tbl`
+--
+ALTER TABLE `student_basic_info_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_fam_info_tbl`
+--
+ALTER TABLE `student_fam_info_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `student_grade_tbl`
 --
 ALTER TABLE `student_grade_tbl`
@@ -516,16 +609,22 @@ ALTER TABLE `student_grade_tbl`
   ADD KEY `subj_id` (`subj_id`);
 
 --
+-- Indexes for table `student_guardian_info_tbl`
+--
+ALTER TABLE `student_guardian_info_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_pri_info_tbl`
+--
+ALTER TABLE `student_pri_info_tbl`
+  ADD PRIMARY KEY (`student_id`);
+
+--
 -- Indexes for table `student_requirement_tbl`
 --
 ALTER TABLE `student_requirement_tbl`
   ADD PRIMARY KEY (`req_id`);
-
---
--- Indexes for table `student_tbl`
---
-ALTER TABLE `student_tbl`
-  ADD PRIMARY KEY (`student_id`);
 
 --
 -- Indexes for table `subject_tbl`
@@ -542,7 +641,7 @@ ALTER TABLE `subject_tbl`
 -- AUTO_INCREMENT for table `acad_yr_tbl`
 --
 ALTER TABLE `acad_yr_tbl`
-  MODIFY `acad_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `acad_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `admin_table`
@@ -590,7 +689,31 @@ ALTER TABLE `news_events_tbl`
 -- AUTO_INCREMENT for table `reserve_block_tbl`
 --
 ALTER TABLE `reserve_block_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `student_acad_info_tbl`
+--
+ALTER TABLE `student_acad_info_tbl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `student_acad_info_transferee_tbl`
+--
+ALTER TABLE `student_acad_info_transferee_tbl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `student_basic_info_tbl`
+--
+ALTER TABLE `student_basic_info_tbl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `student_fam_info_tbl`
+--
+ALTER TABLE `student_fam_info_tbl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `student_grade_tbl`
@@ -599,16 +722,22 @@ ALTER TABLE `student_grade_tbl`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=622;
 
 --
+-- AUTO_INCREMENT for table `student_guardian_info_tbl`
+--
+ALTER TABLE `student_guardian_info_tbl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `student_pri_info_tbl`
+--
+ALTER TABLE `student_pri_info_tbl`
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
 -- AUTO_INCREMENT for table `student_requirement_tbl`
 --
 ALTER TABLE `student_requirement_tbl`
-  MODIFY `req_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
-
---
--- AUTO_INCREMENT for table `student_tbl`
---
-ALTER TABLE `student_tbl`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `req_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 
 --
 -- AUTO_INCREMENT for table `subject_tbl`
@@ -638,14 +767,14 @@ ALTER TABLE `blocking_tbl`
 -- Constraints for table `reserve_block_tbl`
 --
 ALTER TABLE `reserve_block_tbl`
-  ADD CONSTRAINT `reserve_block_tbl_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student_tbl` (`student_id`),
+  ADD CONSTRAINT `reserve_block_tbl_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student_pri_info_tbl` (`student_id`),
   ADD CONSTRAINT `reserve_block_tbl_ibfk_2` FOREIGN KEY (`block_id`) REFERENCES `blocking_tbl` (`block_id`);
 
 --
 -- Constraints for table `student_grade_tbl`
 --
 ALTER TABLE `student_grade_tbl`
-  ADD CONSTRAINT `student_grade_tbl_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student_tbl` (`student_id`),
+  ADD CONSTRAINT `student_grade_tbl_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student_pri_info_tbl` (`student_id`),
   ADD CONSTRAINT `student_grade_tbl_ibfk_2` FOREIGN KEY (`subj_id`) REFERENCES `subject_tbl` (`subj_id`);
 
 --
