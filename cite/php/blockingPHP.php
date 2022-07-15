@@ -26,7 +26,7 @@
 
 			if (mysqli_num_rows($sql_duplicate_check_result) > 0) {
 				header("Location: ../pages/blocking.php?error_msg=Unable to reserve block");
-					exit();
+				exit();
 			}
 			else {
 				$sql = "INSERT INTO reserve_block_tbl (block_id, student_id, status) VALUES ('$block_id', '$student_id', 'Pending')";
@@ -39,6 +39,26 @@
 				else {
 					echo "Error reserve block";
 				}
+			}
+		}
+	}
+
+	if (isset($_POST['cancel_reqBtn'])) {
+		include "../db_conn.php";
+
+		$reserve_id = $_POST['reserve_id'];
+
+		if (empty($reserve_id)) {
+			header("Location: ../pages/blocking.php?error_msg=Error Update Request");
+			exit();
+		}
+		else {
+			$sql = "UPDATE reserve_block_tbl SET status = 'Cancelled' WHERE id = '$reserve_id'";
+			$sql_result = mysqli_query($conn, $sql);
+
+			if ($sql_result) {
+				header("Location: ../pages/blocking.php?success_msg=Cancelled Request");
+				exit();
 			}
 		}
 	}

@@ -128,6 +128,10 @@ a {
 	outline: none !important;
 }
 
+.no-display {
+	display: none;
+}
+
 .header_main {
 	width: 100%;
 	height: auto;
@@ -1223,7 +1227,40 @@ button.main_bt {
 	letter-spacing: 2px;
 }
 
+/************ Grades View Area ********************/
+.year_title_view {
+	font-size: 18px;
+	text-align: center;
+	margin: 15px;
+	font-weight: 700;
+}
+
+.grades-content-view {
+	width: 100%;
+	float: left;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	overflow-x: auto;
+}
+
+.grades-content-view th{
+	text-align: center;
+	font-size: 12px;
+}
+
+.grades-content-view td {
+	font-size: 12px;
+}
+
+.grades-content-view button {
+	margin: 15px;
+	float: right;
+}
 /************ Grades Area ********************/
+.grades-section {
+	display: none;
+}
+
 .grades-section .container {
 	overflow-x: auto;
 }
@@ -1717,14 +1754,14 @@ button.main_bt {
 	font-weight: bold;
 }
 
-.profile_left_section{
+.profile_left_section {
 	box-shadow: 1px 0px 10px rgba(34, 35, 58, 0.2);
 	margin: auto;
 	float: right;
-	text-align: center;
+	text-align: left;
 	margin: 20px;
 	padding: 20px;
-	border-radius: 25px;
+	border-radius: 5px;
 	width: 500px;
 }
 
@@ -1748,7 +1785,7 @@ button.main_bt {
 	/*font-size: 10px;*/
 	background: white;
 	border-radius: 5px;
-	width: 200px;
+	/*width: 200px;*/
 	box-shadow: 1px 2px 5px rgba(34, 35, 58, 0.2);
 	outline: none;
 	margin-bottom: 15px;
@@ -1769,8 +1806,14 @@ button.main_bt {
 	background: #222222;
 }
 
-.upload_status {
-	color: red; 
+.upload_status_red {
+	color: red;
+	margin-left: 100px;
+	float: right;
+}
+
+.upload_status_green {
+	color: green;
 	margin-left: 100px;
 	float: right;
 }
@@ -1903,3 +1946,93 @@ form .error small {
 .reg_content h3 {
 	font-weight: 600;
 }
+
+/* modal or pop up */
+.modal, .delete-modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	padding-top: 200px;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.4);
+}
+.modalBox {
+	position: relative;
+	border-radius: 5px;
+	overflow: hidden;
+	margin: auto;
+	background-color: #ffffff;
+	width: 28%;
+	-webkit-animation-name: slideIn;
+	-webkit-animation-duration: 0.4s;
+	animation-name: slideIn;
+	animation-duration: 0.4s;
+	border: 1px solid #808080;
+}
+.modalBox p {
+	margin: 0;
+}
+.close {
+	color: #fff;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	/*background-color: #fff;*/
+	padding: 0px 10px;
+	top: 0;
+	position: absolute;
+	right: 0;
+}
+.close:hover,
+.close:focus {
+	color: #fff;
+	background-color: red;
+	text-decoration: none;
+	cursor: pointer;
+}
+.modal_header {
+	padding: 20px;
+	background-color: #333;
+	color: #fff;
+}
+
+.modal_header h4 {
+	color: #ffffff;
+	margin: 0;
+	font-size: 18px;
+}
+
+.modal_body {
+	padding: 30px;
+}
+
+/* modal animation */
+@-webkit-keyframes slideIn {
+	from {top: -300px; opacity: 0}
+	to {top: 0; opacity: 1}
+}
+@keyframes slideIn {
+	from {top: -300px; opacity: 0}
+	to {top: 0; opacity: 1}
+}
+
+/* action button theme */
+.redBtn {
+	padding: 7px 10px;
+	background-color: #ff0000;
+	color: #fff;
+	font-weight: 300;
+	border: none;
+	border-radius: 5px;
+	font-size: 15px;
+}
+
+.redBtn:hover {
+	background-color: #990000;
+}
+
+/* form order list */

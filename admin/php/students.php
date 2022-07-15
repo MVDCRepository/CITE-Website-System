@@ -293,15 +293,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   <!-- search -->
                   <?php 
                     include "db_conn.php";
-                      $sql = "SELECT * FROM student_tbl WHERE eval_status = 'Evaluate' OR eval_status = 'Evaluated' ORDER BY student_id ASC";
+                      $sql = "SELECT * FROM student_pri_info_tbl WHERE eval_status = 'Evaluate' OR eval_status = 'Evaluated' ORDER BY student_id ASC";
 
                     if (isset($_POST['search'])) {
                       $search = $_POST['search'];
-                      $sql = "SELECT * FROM student_tbl WHERE CONCAT(fname, ' ', lname) LIKE '%$search%' OR CONCAT(lname, ' ', fname) LIKE '%$search%' OR id_number = '$search'";
+                      $sql = "SELECT * FROM student_pri_info_tbl WHERE CONCAT(fname, ' ', lname) LIKE '%$search%' OR CONCAT(lname, ' ', fname) LIKE '%$search%' OR id_number = '$search'";
                     }
                     else {
                       $search = "";
-                      $sql = "SELECT * FROM student_tbl WHERE eval_status = 'Evaluate' OR eval_status = 'Evaluated' ORDER BY student_id ASC";
+                      $sql = "SELECT * FROM student_pri_info_tbl WHERE eval_status = 'Evaluate' OR eval_status = 'Evaluated' ORDER BY student_id ASC";
                     }
 
                     $result = $conn->query($sql);
@@ -342,8 +342,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       <td style="display: none"><?php echo $row['student_id'];?></td>
                       <td><?php echo $row['id_number'];?></td>
                       <td><?php echo $row['lname'].", ".$row['fname']." ".$row['mname'];?></td>
-                      <td><?php echo $row['cmoNo'];?></td>
-                      <td><?php echo $row['series'];?></td>
+                      <td><?php echo $row['yr_lvl'];?></td>
+                      <td><?php echo $row['status'];?></td>
                       <td>
                         <div class="d-grid gap-2 d-md-block">
                           <?php 

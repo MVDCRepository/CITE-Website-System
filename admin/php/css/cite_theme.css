@@ -280,6 +280,7 @@ form .error small {
 	color: #ffffff;
 	margin: 0;
 	font-size: 18px;
+	width: 100%;
 }
 
 .modal_body {

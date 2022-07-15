@@ -122,7 +122,7 @@
                                                                 <li>NCAE Result (Temporary waived)</li>
                                                                 <li>Medical Certificate (Chest x-ray, Urinalysis, CBC) (Temporary waived)</li>
                                                             </ul>
-                                                            <button><a href="registration.php">Register here</a></button>
+                                                            <button><a href="registration_freshmen.php">Register here</a></button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -139,7 +139,7 @@
                                                             <li>Birth Certificate (NSO/PSA)</li>
                                                             <li>Medical Certificate (Chest x-ray, Urinalysis, CBC) (Temporary waived)</li>
                                                         </ul>
-                                                        <button><a href="registration.php">Register here</a></button>
+                                                        <button><a href="registration_transferee.php">Register here</a></button>
                                                     </div>
                                                 </div>
                                             </div>

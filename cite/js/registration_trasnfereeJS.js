@@ -15,12 +15,12 @@ function generate_id_number() {
 }
 
 // credentials form
-const registration_freshmen = document.getElementById("registration_freshmen");
+const registration_trasnferee = document.getElementById("registration_trasnferee");
 const id_number = document.getElementById("id_number");
 const password = document.getElementById("password");
 const confirmPass = document.getElementById("confirmPass");
 
-registration_freshmen.addEventListener('submit', (e) => {
+registration_trasnferee.addEventListener('submit', (e) => {
     const passwordValue = password.value;
     const confirmPassValue = confirmPass.value;
     
