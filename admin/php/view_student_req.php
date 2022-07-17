@@ -3,6 +3,7 @@ session_start();
 
 if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['fname'])) {
   include 'db_conn.php';
+  $student_id = $_GET['student_id'];
 ?>
 <!DOCTYPE html>
 
@@ -177,7 +178,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="students.php" class="menu-link">
                     <div>Manage</div>
                   </a>
@@ -287,21 +288,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
               <div class="d-flex flex-wrap">
                 <div class="p-2 flex-fill">
                   <!-- page title -->
-                  <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> List of Students</h4>
+                  <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> Requirements</h4>
                 </div>
                 <div class="p-2 flex-fill">
                   <!-- search -->
                   <?php 
                     include "db_conn.php";
-                      $sql = "SELECT * FROM student_pri_info_tbl WHERE eval_status = 'Evaluate' OR eval_status = 'Evaluated' ORDER BY student_id ASC";
+                      $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id'";
 
                     if (isset($_POST['search'])) {
                       $search = $_POST['search'];
-                      $sql = "SELECT * FROM student_pri_info_tbl WHERE CONCAT(fname, ' ', lname) LIKE '%$search%' OR CONCAT(lname, ' ', fname) LIKE '%$search%' OR id_number = '$search'";
+                      $sql = "SELECT * FROM student_requirement_tbl WHERE file_name LIKE '%$search%' AND student_id = '$student_id'";
                     }
                     else {
                       $search = "";
-                      $sql = "SELECT * FROM student_pri_info_tbl WHERE eval_status = 'Evaluate' OR eval_status = 'Evaluated' ORDER BY student_id ASC";
+                      $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id'";
                     }
 
                     $result = $conn->query($sql);
@@ -317,19 +318,68 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                 <?php if (isset($_GET['success_msg'])) { ?>
                   <p class="success_msg mb-3"><?php echo $_GET['success_msg']; ?></p>
                 <?php } ?>
+                <?php if (isset($_GET['error_msg'])) { ?>
+                  <p class="error_msg mb-3"><?php echo $_GET['error_msg']; ?></p>
+                <?php } ?>
               </center>
               <div class="section-container card">
                 
+                <!-- accept modal-->
+                <div class="modal" id="modal_accept">
+                  <div class="modalBox row">
+                    <div class="modal_header">
+                      <span class="close" id="close_modalAccept">&times;</span>
+                      <h4>Accept student requirement?</h4>
+                    </div>
+                    <div class="modal_body">
+                      <form action="php/student_requirementPHP.php?student_id=<?=$student_id?>" method="POST">
+                        <div class="alert alert-dark">
+                          <h6 class="alert-heading fw-bold mb-1">Are you sure you want to accept this requirement?</h6>
+                        </div>
+                        <input type="hidden" name="accept_req_id" id="accept_req_id">
+                        <p><b>File name:</b> <span id="accept_file_name"></span></p>
+                        <p><b>Date & Time:</b> <span id="accept_dateTime"></span></p>
+                        <br>
+                        <button class="editbtn" type="submit" name="accept_req_btn">Yes, accept requirement</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!-- / accept modal -->
+
+                <!-- decline modal-->
+                <div class="delete-modal" id="modal_decline">
+                  <div class="modalBox row">
+                    <div class="modal_header">
+                      <span class="close" id="close_modalDec">&times;</span>
+                      <h4>Decline student requirement?</h4>
+                    </div>
+                    <div class="modal_body">
+                      <form action="php/student_requirementPHP.php?student_id=<?=$student_id?>" method="POST">
+                        <div class="alert alert-danger">
+                          <h6 class="alert-heading fw-bold mb-1">Are you sure you want to decline this requirement?</h6>
+                          <p class="mb-0">Student will see the status of pending to declined requirement.</p>
+                        </div>
+                        <input type="hidden" name="dec_req_id" id="dec_req_id">
+                        <p><b>File name:</b> <span id="dec_file_name"></span></p>
+                        <p><b>Date & Time:</b> <span id="dec_dateTime"></span></p>
+                        <br>
+                        <button class="delbtn" type="submit" name="dec_req_btn">Yes, decline requirement</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!-- / decline modal -->
+
                 <!-- table wrapper -->
                 <div class="table-wrapper">
-                  <table class="table-cite" id="evaluation_table">
+                  <table class="table-cite" id="requirement_tbl">
                     <thead>
                       <tr>
-                        <th scope="col" style="display: none">ID</th>
-                        <th scope="col">ID Number</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Year Level</th>
-                        <th scope="col">Requirements</th>
+                        <th scope="col" class="d-none">ID</th>
+                        <th scope="col">File Name</th>
+                        <th scope="col">Date & Time</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -339,30 +389,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                         while ($row=$result->fetch_assoc()) {
                     ?>
                     <tr>
-                      <td style="display: none"><?php echo $row['student_id'];?></td>
-                      <td><?php echo $row['id_number'];?></td>
-                      <td><?php echo $row['lname'].", ".$row['fname']." ".$row['mname'];?></td>
-                      <td><?php echo $row['yr_lvl']." Year";?></td>
-                      <td><a href="view_student_req.php?student_id=<?=$row['student_id'];?>">View Requirements</a></td>
+                      <td class="d-none"><?php echo $row['req_id'];?></td>
+                      <td>
+                        <a href="../../cite/student_requirements/<?php echo $row['file_name'];?>" target="_blank"><?php echo $row['file_name'];?>
+                        </a>
+                      </td>
+                      <td><?php $date = $row['date_time']; echo date("M d,Y - h:i a", strtotime($date));?></td>
+                      <td><?php echo $row['status'];?></td>
                       <td>
                         <div class="d-grid gap-2 d-md-block">
-                          <?php 
-                            if ($row['eval_status'] == "Evaluate") {
-                              echo "<a href='evaluate_student.php?student_id={$row['student_id']}&status={$row['status']}'><button class='editbtn' style='background-color: #ff0000'>Evaluate</button></a>";
-                            }
-                            else {
-                              echo "<a href='upd_eval_student.php?student_id={$row['student_id']}&status={$row['status']}'><button class='viewbtn'>Evaluate</button></a>";
-                            }
-                          ?>
-                          <!-- <a href="view_student_grade.php?student_id=<?=$row['student_id'];?>"><button class="viewbtn">View Grades</button></a> -->
-                          <?php 
-                            if ($row['status'] == "Freshmen" || $row['status'] == "Regular" || $row['status'] == "Regular Graduating") {
-                              echo "<a href='upd_student.php?student_id={$row['student_id']}'><button class='editbtn'>Edit</button></a>";
-                            }
-                            if ($row['status'] == "Transferee" || $row['status'] == "Graduating Transferee") {
-                              echo "<a href='upd_student_transferee.php?student_id={$row['student_id']}'><button class='editbtn'>Edit</button></a>";
-                            }
-                          ?>
+                          <button class="editbtn" id="accept_student_req" data-modal="modal_accept">Accept</button>
+                          <button class="delbtn" id="dec_student_req" data-modal="modal_decline">Decline</button>
                         </div>
                       </td>
                     </tr>
@@ -370,10 +407,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                         }
                       }
                       else if($result->num_rows == 0 && $search != "") {
-                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>Student not found</center></td></tr>";
+                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>Requirement not found</center></td></tr>";
                       }
                       else {
-                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>No students available</center></td></tr>";
+                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>No requirements available</center></td></tr>";
                       }
                     ?>
                     </tbody>
@@ -420,7 +457,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
     <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
 
     <!-- my js -->
-    <script type="text/javascript" src="js/evaluationJS.js"></script>
+    <script type="text/javascript" src="js/view_student_reqJS.js"></script>
 
   </body>
 </html>

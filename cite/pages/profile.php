@@ -198,14 +198,14 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                             <div class="col-md-6">
                                 <div class="profile_right_section">
                                     <?php
-                                        $sql = "SELECT * FROM student_tbl WHERE student_id = '$student_id'";
+                                        $sql = "SELECT * FROM student_pri_info_tbl WHERE student_id = '$student_id'";
                                         $result = $conn->query($sql);
                                           if($result->num_rows > 0) {
                                             while ($row=$result->fetch_assoc()) {
                                     ?>
                                     <table class="table table-striped table-responsive-md">
                                         <thead>
-                                            <th colspan="3">Student Information</th>
+                                            <th colspan="3">Primary Information</th>
                                         </thead>
                                         <tr>
                                             <td>Full Name:</td>
@@ -216,32 +216,24 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                             <td colspan="2"><span><?php echo $row['id_number'];?></span></td>
                                         </tr>
                                         <tr>
-                                            <td>Gender:</td>
-                                            <td colspan="2"><span><?php echo $row['gender'];?></span></td>
+                                            <td>Province:</td>
+                                            <td colspan="2"><span><?php echo $row['province'];?></span></td>
                                         </tr>
                                         <tr>
-                                            <td>Birthdate:</td>
-                                            <td colspan="2"><span><?php echo $row['b_date'];?></td>
+                                            <td>City:</td>
+                                            <td colspan="2"><span><?php echo $row['city'];?></td>
                                         </tr>
                                         <tr>
-                                            <td>Current Address:</td>
-                                            <td colspan="2"><span><?php echo $row['address'];?></span></td>
+                                            <td>Barangay:</td>
+                                            <td colspan="2"><span><?php echo $row['barangay'];?></span></td>
                                         </tr>
                                         <tr>
-                                            <td>Email:</td>
-                                            <td colspan="2"><span><?php echo $row['email'];?></span></td>
+                                            <td>House Number:</td>
+                                            <td colspan="2"><span><?php echo $row['house_num'];?></span></td>
                                         </tr>
                                         <tr>
-                                            <td>Number:</td>
-                                            <td colspan="2"><span><?php echo $row['phoneNum'];?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Guardian's Name:</td>
-                                            <td colspan="2"><span><?php echo $row['guardian_name'];?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Guardian's Contact:</td>
-                                            <td colspan="2"><span><?php echo $row['guardian_contact'];?></span></td>
+                                            <td>Zip Code:</td>
+                                            <td colspan="2"><span><?php echo $row['zip_code'];?></span></td>
                                         </tr>
                                     </table>
                                     <?php
@@ -253,8 +245,8 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                     ?>
 
                                     <form action="../php/profilePHP.php" method="POST" id="upd_student_cred_form">
-                                        <?php
-                                        $sql = "SELECT * FROM student_tbl WHERE student_id = '$student_id'";
+                                    <?php
+                                        $sql = "SELECT * FROM student_pri_info_tbl WHERE student_id = '$student_id'";
                                         $result = $conn->query($sql);
                                           if($result->num_rows > 0) {
                                             while ($row=$result->fetch_assoc()) {
@@ -275,12 +267,8 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                 </th>
                                             </thead>
                                             <tr>
-                                                <td>Username:</td>
+                                                <td>ID Number:</td>
                                                 <td colspan="2"><span><?php echo $row['id_number'];?></span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Password:</td>
-                                                <td colspan="2"><span><?php echo $row['password'];?></span></td>
                                             </tr>
                                                 <tr>
                                                     <td>Change Password:</td>

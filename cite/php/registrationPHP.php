@@ -176,7 +176,7 @@
 		}
 		else {
 			// queries
-			$sql_primary_info = "INSERT INTO student_pri_info_tbl (id_number, yr_lvl, fname, mname, lname, sname, province, city, barangay, house_num, zip_code, eval_status, status, password) VALUES ('$id_number', '$yr_lvl', '$fname', '$mname', '$lname', '$sname', '$province', '$city', '$barangay', '$house_num', '$zip_code', 'Evaluate', 'Freshmen','$password')";
+			$sql_primary_info = "INSERT INTO student_pri_info_tbl (id_number, yr_lvl, fname, mname, lname, sname, province, city, barangay, house_num, zip_code, eval_status, status, password) VALUES ('$id_number', '$yr_lvl', '$fname', '$mname', '$lname', '$sname', '$province', '$city', '$barangay', '$house_num', '$zip_code', 'Evaluate', 'Transferee','$password')";
 			$sql_primary_info_result = mysqli_query($conn, $sql_primary_info);
 
 			$student_id = mysqli_insert_id($conn);

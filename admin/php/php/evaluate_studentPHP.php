@@ -19,7 +19,7 @@
 
 		if ($sql_result) {
 
-			$sql_update_student_status = "UPDATE student_tbl SET status = 'Evaluated' WHERE student_id = '$upd_student_id'";
+			$sql_update_student_status = "UPDATE student_pri_info_tbl SET eval_status = 'Evaluated' WHERE student_id = '$upd_student_id'";
 			$sql_update_student_status_result = mysqli_query($conn, $sql_update_student_status) or die ('Query failed: ' . mysqli_error($conn));
 
 			if ($sql_update_student_status_result) {

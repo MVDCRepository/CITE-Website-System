@@ -284,8 +284,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
               <!-- page header title -->
-              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> Add Student</h4>
-              
+              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> Add Student (freshmen or regular)</h4>
+              <ul class="nav nav-pills flex-column flex-sm-row mb-3">
+                <li class="nav-item">
+                  <a class="nav-link active" href="javascript:void(0);">Freshmen/Regular</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="add_transferee_student.php">Transferee</a>
+                </li>
+              </ul>
               <!-- section container -->
               <center>
                 <?php if (isset($_GET['error_msg'])) { ?>
@@ -299,19 +306,89 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
               <form action="php/studentPHP.php" method="POST">
                 <!-- student information -->
                 <div class="section-container card">
-                  <h5 class="mb-4">Student Information</h5>
+                  <h5 class="mb-4">Primary Information</h5>
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label class="form-label">First Name</label>
-                      <input type="text" class="form-control" name="fname" required>
+                      <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" required>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Middle Name</label>
-                      <input type="text" class="form-control" name="mname" required>
+                      <input type="text" class="form-control" id="mname" name="mname" placeholder="Middle Name" required>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Last Name</label>
-                      <input type="text" class="form-control" name="lname" required>
+                      <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Suffix Name</label>
+                      <input type="text" class="form-control" id="sname" name="sname" placeholder="Suffix Name" required>
+                    </div>
+                  </div>
+                  <h5>Permanent Address</h5>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Province</label>
+                      <input type="text" class="form-control" id="province" name="province" placeholder="Province" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">City/Municipality</label>
+                      <input type="text" class="form-control" id="city" name="city" placeholder="City/Municipality" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Barangay</label>
+                      <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Barangay" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <label class="form-label">House Number</label>
+                      <input type="text" class="form-control" id="house_num" name="house_num" placeholder="House Number" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <label class="form-label">Zip Code</label>
+                      <input type="text" class="form-control" id="zip_code" name="zip_code" placeholder="Zip Code" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="section-container card mt-4">
+                  <h5>Basic Information</h5>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Birthdate</label>
+                      <input type="date" class="form-control" id="bdate" name="bdate" placeholder="Birthdate" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Nationality</label>
+                      <input type="text" class="form-control" id="nationality" name="nationality" placeholder="Nationality" required>
+                    </div>
+                    <h5>Birth Place</h5>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Province</label>
+                      <input type="text" class="form-control" id="birth_province" name="birth_province" placeholder="Province" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">City/Municipality</label>
+                      <input type="text" class="form-control" id="birth_city" name="birth_city" placeholder="City/Municipality" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Barangay</label>
+                      <input type="text" class="form-control" id="birth_barangay" name="birth_barangay" placeholder="Barangay" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <label class="form-label">House Number</label>
+                      <input type="text" class="form-control" id="birth_house_num" name="birth_house_num" placeholder="House Number" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <label class="form-label">Zip Code</label>
+                      <input type="text" class="form-control" id="birth_zip_code" name="birth_zip_code" placeholder="Zip Code" required>
+                    </div>
+                    <h5>Contact & Other Info.</h5>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Email</label>
+                      <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Contact Number</label>
+                      <input type="text" class="form-control" id="contact_num" name="contact_num" placeholder="Contact Number" required>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Gender</label><br>
@@ -319,97 +396,254 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       <input type="radio" class="form-check-input" name="gender" value="Female" required> Female
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label class="form-label">Birthdate</label>
-                      <input type="date" class="form-control" name="b_date" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Address</label>
-                      <input type="text" class="form-control" name="address" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Email</label>
-                      <input type="email" class="form-control" name="email" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Phone</label>
-                      <input type="number" maxlength="11" class="form-control" name="phoneNum" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Year Level</label>
-                      <select class="form-select" name="yr_lvl" required>
-                        <option value="" selected disabled>Choose...</option>
-                        <option value="1st">1st Year</option>
-                        <option value="2nd">2nd Year</option>
-                        <option value="3rd">3rd Year</option>
-                        <option value="4th">4th Year</option>
-                      </select>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">CHED Memorandum Order No.</label>
-                      <!-- <input type="text" class="form-control" name="cmoNo" required> -->
-                      <select class="form-select" name="cmoNo" required>
-                        <option value="">Select CMO No.</option>
-                        <?php
-                          $sql_cmo = "SELECT * FROM eval_cmo_series_tbl";
-                          $cmo_result = $conn->query($sql_cmo);
-                            if($cmo_result->num_rows > 0) {
-                              while ($row_cmo_series=$cmo_result->fetch_assoc()) {
-                        ?>
-                        <option value="<?php echo $row_cmo_series['cmoNo'];?>"><?php echo $row_cmo_series['cmoNo'];?></option>
-                        <?php
-                            }
-                          }
-                          else {
-                            echo "<option value=''>No CMO No. & Series available</option>";
-                          }
-                        ?>
-                      </select>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Series</label>
-                      <!-- <input type="text" class="form-control" name="series" required> -->
-                      <select class="form-select" name="series" required>
-                        <option value="">Select Series</option>
-                        <?php
-                          $sql_cmo = "SELECT * FROM eval_cmo_series_tbl";
-                          $cmo_result = $conn->query($sql_cmo);
-                            if($cmo_result->num_rows > 0) {
-                              while ($row_cmo_series=$cmo_result->fetch_assoc()) {
-                        ?>
-                        <option value="<?php echo $row_cmo_series['series'];?>"><?php echo $row_cmo_series['series'];?></option>
-                        <?php
-                            }
-                          }
-                          else {
-                            echo "<option value=''>No CMO No. & Series available</option>";
-                          }
-                        ?>
-                      </select>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Student Status</label>
-                      <select class="form-select" name="status" required>
-                        <option value="" selected disabled>Choose...</option>
-                        <option value="Transferee">Transferee</option>
-                        <option value="Freshmen">Freshmen</option>
-                        <option value="Regular">Regular</option>
-                        <option value="Regular Graduating">Regular Graduating</option>
-                        <option value="Transferee Graduating">Transferee Graduating</option>
+                      <label class="form-label">Religion</label>
+                      <select class="form-control" id="religion" name="religion" required>
+                        <option selected disabled>Select Religion</option>
+                        <option value="ROMAN CATHOLIC">ROMAN CATHOLIC</option>
+                        <option value="IGLESIA NI CRISTO">IGLESIA NI CRISTO</option>
+                        <option value="JEHOVAH WITNESSES">JEHOVAH WITNESSES</option>
+                        <option value="ISLAM">ISLAM</option>
+                        <option value="EVANGELICAL">EVANGELICAL</option>
+                        <option value="BUDDHISM">BUDDHISM</option>
+                        <option value="JUDAISM">JUDAISM</option>
+                        <option value="BAHAI FAITH">BAHAI FAITH</option>
+                        <option value="PROTESTANT">PROTESTANT</option>
+                        <option value="BORN AGAIN CHRISTIAN">BORN AGAIN CHRISTIAN</option>
+                        <option value="SEVENTH DAY ADVENTIST">SEVENTH DAY ADVENTIST</option>
+                        <option value="AGLIPAYAN CHURCH">AGLIPAYAN CHURCH</option>
+                        <option value="BAPTIST">BAPTIST</option>
+                        <option value="CHRISTIAN">CHRISTIAN</option>
+                        <option value="ORTHODOX CHURCH">ORTHODOX CHURCH</option>
+                        <option value="ATHEISM">ATHEISM</option>
+                        <option value="LATTER DAY SAINTS (MORMONS)">LATTER DAY SAINTS (MORMONS)</option>
+                        <option value="JESUS IS LORD">JESUS IS LORD</option>
                       </select>
                     </div>
                   </div>
-                </div>
+                </div>    
                 <!-- guardian information -->
                 <div class="section-container card mt-4">
-                  <h5 class="mb-4">Guardian Information</h5>
+                  <h5 class="mb-4">Family Information</h5>
+                  <div class="row">
+                    <div class="col-md">
+                      <div class="row">
+                        <p>Father's Information</p>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">First Name</label>
+                          <input type="text" class="form-control" id="father_fname" name="father_fname" placeholder="First Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Middle Name</label>
+                          <input type="text" class="form-control" id="father_mname" name="father_mname" placeholder="Middle Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Last Name</label>
+                          <input type="text" class="form-control" id="father_lname" name="father_lname" placeholder="Last Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Suffix Name</label>
+                          <input type="text" class="form-control" id="father_sname" name="father_sname" placeholder="Suffix Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Contact Number</label>
+                          <input type="text" class="form-control" id="father_contact" name="father_contact" placeholder="Contact Number" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Occupation</label>
+                          <input type="text" class="form-control" id="father_occupation" name="father_occupation" placeholder="Occupation" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md">
+                      <div class="row">
+                        <p>Mother's Information</p>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">First Name</label>
+                          <input type="text" class="form-control" id="mother_fname" name="mother_fname" placeholder="First Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Middle Name</label>
+                          <input type="text" class="form-control" id="mother_mname" name="mother_mname" placeholder="Middle Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Last Name</label>
+                          <input type="text" class="form-control" id="mother_lname" name="mother_lname" placeholder="Last Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Contact Number</label>
+                          <input type="text" class="form-control" id="mother_contact" name="mother_contact" placeholder="Contact Number" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Occupation</label>
+                          <input type="text" class="form-control" id="mother_occupation" name="mother_occupation" placeholder="Occupation" required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md">
+                      <div class="row">
+                        <p>Guardian's Information</p>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">First Name</label>
+                          <input type="text" class="form-control" id="guardian_fname" name="guardian_fname" placeholder="First Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Middle Name</label>
+                          <input type="text" class="form-control" id="guardian_mname" name="guardian_mname" placeholder="Middle Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Last Name</label>
+                          <input type="text" class="form-control" id="guardian_lname" name="guardian_lname" placeholder="Last Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Suffix Name</label>
+                          <input type="text" class="form-control" id="guardian_sname" name="guardian_sname" placeholder="Suffix Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Contact Number</label>
+                          <input type="text" class="form-control" id="guardian_contact" name="guardian_contact" placeholder="Contact Number" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Occupation</label>
+                          <input type="text" class="form-control" id="guardian_occupation" name="guardian_occupation" placeholder="Occupation" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Relationship</label>
+                          <input type="text" class="form-control" id="guardian_relationship" name="guardian_relationship" placeholder="Relationship" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md">
+                      <div class="row">
+                        <p>Spouse's (if married)</p>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">First Name</label>
+                          <input type="text" class="form-control" id="spouse_fname" name="spouse_fname" placeholder="First Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Middle Name</label>
+                          <input type="text" class="form-control" id="spouse_mname" name="spouse_mname" placeholder="Middle Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Last Name</label>
+                          <input type="text" class="form-control" id="spouse_lname" name="spouse_lname" placeholder="Last Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Suffix Name</label>
+                          <input type="text" class="form-control" id="spouse_lname" name="spouse_sname" placeholder="Suffix Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Contact Number</label>
+                          <input type="text" class="form-control" id="spouse_contact" name="spouse_contact" placeholder="Contact Number" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label class="form-label">Occupation</label>
+                          <input type="text" class="form-control" id="spouse_occupation" name="spouse_occupation" placeholder="Occupation" required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- academic information -->
+                <div class="section-container card mt-4">
+                  <h5>Academic Information</h5>
                   <div class="row">
                     <div class="col-md-6 mb-3">
-                      <label class="form-label">Guardian Name</label>
-                      <input type="text" class="form-control" name="guardian_name" required>
+                      <label class="form-label">CMO No. and Series</label>
+                      <select class="form-control" id="eval_id" name="eval_id" required>
+                          <option selected disabled>Choose CMO No. and series</option>
+                          <?php
+                            include "db_conn.php";
+                            $sql = "SELECT * FROM eval_cmo_series_tbl";
+                            $result = $conn->query($sql);
+                              if($result->num_rows > 0) {
+                                while ($row=$result->fetch_assoc()) {
+                          ?>
+                          <option value="<?php echo $row['eval_id'];?>"><?php echo "CMO No. ".$row['cmoNo']." & Series of ".$row['series'];?></option>
+                          <?php
+                              }
+                            }
+                            else {
+                              echo "<option value=''>No CMO No. & Series available</option>";
+                            }
+                          ?>
+                      </select>
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label class="form-label">Guardian Phone No.</label>
-                      <input type="text" class="form-control" name="guardian_contact" required>
+                      <label class="form-label">Select Year Level</label>
+                      <select class="form-control" id="yr_lvl" name="yr_lvl" required>
+                          <option selected disabled>Select Year Level</option>
+                          <option value="1st">1st Year</option>
+                          <option value="2nd">2nd Year</option>
+                          <option value="3rd">3rd Year</option>
+                          <option value="4th">4th Year</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Select Status</label>
+                      <select class="form-control" id="status" name="status" required>
+                          <option selected disabled>Select Status</option>
+                          <option value="Freshmen">Freshmen</option>
+                          <!-- <option value="Transferee">Transferee</option> -->
+                          <option value="Regular">Regular</option>
+                          <!-- <option value="Regular Graduating">Regular Graduating</option> -->
+                          <!-- <option value="Transferee Graduating">Transferee Graduating</option> -->
+                      </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Course to be Enroll</label>
+                      <select class="form-control" id="course" name="course" required>
+                          <option selected disabled>Course to be Enroll</option>
+                          <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
+                          <option value="Bachelor in Library & Information Science">Bachelor in Library & Information Science</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Select Strand</label>
+                      <select class="form-control" id="strand" name="strand" required>
+                          <option selected disabled>Select Strand</option>
+                          <option value="STEM">STEM</option>
+                          <option value="HUMMS">HUMMS</option>
+                          <option value="ABM">ABM</option>
+                          <option value="GAS">GAS</option>
+                          <option value="ICT">ICT</option>
+                          <option value="TVL">TVL</option>
+                          <option value="HOME ECONOMICS">HOME ECONOMICS</option>
+                          <option value="AGRI-FISHERY ARTS">AGRI-FISHERY ARTS</option>
+                          <option value="INDUSTRIAL ARTS">INDUSTRIAL ARTS</option>
+                          <option value="SPORTS">SPORTS</option>
+                          <option value="ARTS AND DESIGN">ARTS AND DESIGN</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Second choice of course</label>
+                      <select class="form-control" id="second_course" name="second_course" required>
+                          <option selected disabled>Second choice of course</option>
+                          <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
+                          <option value="Bachelor in Library & Information Science">Bachelor in Library & Information Science</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Graduated Senior High School</label>
+                      <input type="text" class="form-control" id="graduated_shs" name="graduated_shs" placeholder="Graduated Senior High School" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Learners Reference Number</label>
+                      <input type="text" class="form-control" id="learners_ref_num" name="learners_ref_num" placeholder="Learners Reference Number" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Graduated Elementary School</label>
+                      <input type="text" class="form-control" id="graduated_es" name="graduated_es" placeholder="Graduated Elementary School" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Form 138 GWA</label>
+                      <input type="text" class="form-control" id="form_138" name="form_138" placeholder="Form 138 GWA" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Graduated Year from Elementary School</label>
+                      <input type="text" class="form-control" id="graduated_year_es" name="graduated_year_es" placeholder="Graduated Year from Elementary School" required>
                     </div>
                   </div>
                 </div>

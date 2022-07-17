@@ -50,10 +50,38 @@ function load_student_requirements() {
 
 	var grad_requirements = document.getElementById('grad_requirements');
 
+	if (student_status == 'Regular') {
+		// grad_requirements.style.display = "block";
+	}
+	else {
+		// grad_requirements.style.display = "none";
+	}
+
 	if (student_status == 'Regular Graduating') {
 		grad_requirements.style.display = "block";
 	}
 	else {
 		grad_requirements.style.display = "none";
+	}
+
+	if (student_status == 'Freshmen') {
+		// grad_requirements.style.display = "block";
+	}
+	else {
+		// grad_requirements.style.display = "none";
+	}
+
+	if (student_status == 'Transferee') {
+		// grad_requirements.style.display = "block";
+	}
+	else {
+		// grad_requirements.style.display = "none";
+	}
+
+	if (student_status == 'Transferee Graduating') {
+		// grad_requirements.style.display = "block";
+	}
+	else {
+		// grad_requirements.style.display = "none";
 	}
 }

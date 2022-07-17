@@ -202,17 +202,17 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                         blocking_tbl.yr_lvl,
                                                         blocking_tbl.sem,
 
-                                                        student_tbl.student_id,
-                                                        student_tbl.fname,
-                                                        student_tbl.mname,
-                                                        student_tbl.lname
+                                                        student_pri_info_tbl.student_id,
+                                                        student_pri_info_tbl.fname,
+                                                        student_pri_info_tbl.mname,
+                                                        student_pri_info_tbl.lname
 
                                                         FROM reserve_block_tbl
 
                                                         INNER JOIN blocking_tbl ON blocking_tbl.block_id = reserve_block_tbl.block_id
-                                                        INNER JOIN student_tbl ON student_tbl.student_id = reserve_block_tbl.student_id
+                                                        INNER JOIN student_pri_info_tbl ON student_pri_info_tbl.student_id = reserve_block_tbl.student_id
 
-                                                        WHERE student_tbl.student_id = '$student_id' AND reserve_block_tbl.status = 'Pending'";
+                                                        WHERE student_pri_info_tbl.student_id = '$student_id' AND reserve_block_tbl.status = 'Pending'";
                                                 $result = $conn->query($sql);
                                                   if($result->num_rows > 0) {
                                                     while ($row=$result->fetch_assoc()) {

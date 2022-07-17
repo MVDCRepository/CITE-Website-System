@@ -287,7 +287,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
               <!-- page header title -->
-              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> Update Student (freshmen or regular)</h4>
+              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> Update Student Transferee</h4>
               <!-- section container -->
               <center>
                 <?php if (isset($_GET['error_msg'])) { ?>
@@ -297,7 +297,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   <p class="success_msg mb-3"><?php echo $_GET['success_msg'];?></p>
                 <?php } ?>
               </center>
+
               <form action="php/studentPHP.php" method="POST">
+                <!-- student information -->
+                <form action="php/studentPHP.php" method="POST">
                 <!-- student information -->
                 <?php
                   $sql = "SELECT * FROM student_pri_info_tbl WHERE student_id = '$student_id'";
@@ -444,7 +447,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   else {
                     echo "<center><h5 class='error_msg mt-4'>Basic Information Unavailable</h5></center>";
                   }
-                ?>   
+                ?>    
                 <!-- guardian information -->
                 <div class="section-container card mt-4">
                   <h5 class="mb-4">Family Information</h5>
@@ -599,26 +602,23 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                 <!-- academic information -->
                 <?php
                   $sql = "SELECT
-                          student_acad_info_tbl.student_id,
-                          student_acad_info_tbl.course,
-                          student_acad_info_tbl.strand,
-                          student_acad_info_tbl.second_course,
-                          student_acad_info_tbl.graduated_shs,
-                          student_acad_info_tbl.learners_ref_num,
-                          student_acad_info_tbl.graduated_es,
-                          student_acad_info_tbl.form_138,
-                          student_acad_info_tbl.graduated_year_es,
-                          student_acad_info_tbl.eval_id,
+                          student_acad_info_transferee_tbl.student_id,
+                          student_acad_info_transferee_tbl.present_course,
+                          student_acad_info_transferee_tbl.transfered_from,
+                          student_acad_info_transferee_tbl.second_course,
+                          student_acad_info_transferee_tbl.graduated_es,
+                          student_acad_info_transferee_tbl.graduated_year_es,
+                          student_acad_info_transferee_tbl.eval_id,
 
                           eval_cmo_series_tbl.eval_id,
                           eval_cmo_series_tbl.cmoNo,
                           eval_cmo_series_tbl.series
 
-                          FROM student_acad_info_tbl
+                          FROM student_acad_info_transferee_tbl
 
-                          INNER JOIN eval_cmo_series_tbl ON student_acad_info_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                          INNER JOIN eval_cmo_series_tbl ON student_acad_info_transferee_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                  WHERE student_acad_info_tbl.student_id = '$student_id'";
+                  WHERE student_acad_info_transferee_tbl.student_id = '$student_id'";
                   $result = $conn->query($sql);
                     if($result->num_rows > 0) {
                       while ($row=$result->fetch_assoc()) {
@@ -661,36 +661,19 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       <label class="form-label">Select Status</label>
                       <select class="form-control" id="status" name="status" required>
                         <option value="<?php echo $student_status;?>"><?php echo $student_status;?></option>
-                        <option value="Freshmen">Freshmen</option>
-                        <!-- <option value="Transferee">Transferee</option> -->
-                        <option value="Regular">Regular</option>
-                        <option value="Regular Graduating">Regular Graduating</option>
-                        <!-- <option value="Transferee Graduating">Transferee Graduating</option> -->
+                        <!-- <option value="Freshmen">Freshmen</option> -->
+                        <option value="Transferee">Transferee</option>
+                        <!-- <option value="Regular">Regular</option> -->
+                        <!-- <option value="Regular Graduating">Regular Graduating</option> -->
+                        <option value="Transferee Graduating">Transferee Graduating</option>
                       </select>
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label class="form-label">Course to be Enroll</label>
-                      <select class="form-control" id="course" name="course" required>
-                          <option value="<?php echo $row['course'];?>"><?php echo $row['course'];?></option>
+                      <label class="form-label">Present Course</label>
+                      <select class="form-control" id="present_course" name="present_course" required>
+                          <option value="<?php echo $row['present_course'];?>"><?php echo $row['present_course'];?></option>
                           <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
                           <option value="Bachelor in Library & Information Science">Bachelor in Library & Information Science</option>
-                      </select>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Select Strand</label>
-                      <select class="form-control" id="strand" name="strand" required>
-                          <option value="<?php echo $row['strand'];?>"><?php echo $row['strand'];?></option>
-                          <option value="STEM">STEM</option>
-                          <option value="HUMMS">HUMMS</option>
-                          <option value="ABM">ABM</option>
-                          <option value="GAS">GAS</option>
-                          <option value="ICT">ICT</option>
-                          <option value="TVL">TVL</option>
-                          <option value="HOME ECONOMICS">HOME ECONOMICS</option>
-                          <option value="AGRI-FISHERY ARTS">AGRI-FISHERY ARTS</option>
-                          <option value="INDUSTRIAL ARTS">INDUSTRIAL ARTS</option>
-                          <option value="SPORTS">SPORTS</option>
-                          <option value="ARTS AND DESIGN">ARTS AND DESIGN</option>
                       </select>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -702,20 +685,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       </select>
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label class="form-label">Graduated Senior High School</label>
-                      <input type="text" class="form-control" id="graduated_shs" name="graduated_shs" placeholder="Graduated Senior High School" value="<?php echo $row['graduated_shs'];?>" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Learners Reference Number</label>
-                      <input type="text" class="form-control" id="learners_ref_num" name="learners_ref_num" placeholder="Learners Reference Number" value="<?php echo $row['learners_ref_num'];?>" required>
+                      <label class="form-label">Transfered From</label>
+                      <input type="text" class="form-control" id="transfered_from" name="transfered_from" placeholder="Transfered From" value="<?php echo $row['transfered_from'];?>" required>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Graduated Elementary School</label>
                       <input type="text" class="form-control" id="graduated_es" name="graduated_es" placeholder="Graduated Elementary School" value="<?php echo $row['graduated_es'];?>" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <label class="form-label">Form 138 GWA</label>
-                      <input type="text" class="form-control" id="form_138" name="form_138" placeholder="Form 138 GWA" value="<?php echo $row['form_138'];?>" required>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Graduated Year from Elementary School</label>
@@ -729,7 +704,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   else {
                     echo "<center><h5 class='error_msg mt-4'>Academic Information Unavailable</h5></center>";
                   }
-                ?> 
+                ?>
                 <!-- student credentials -->
                 <?php
                   $sql = "SELECT * FROM student_pri_info_tbl WHERE student_id = '$student_id'";
@@ -757,7 +732,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   </div>
 
                   <div class="d-grid gap-2 d-md-block mt-4">
-                    <button class="main-button" type="submit" name="upd_studentBtn">Add Student</button>
+                    <button class="main-button" type="submit" name="upd_student_transfereeBtn">Add Student</button>
                   </div>
                 </div>
                 <?php

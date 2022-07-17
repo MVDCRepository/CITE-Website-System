@@ -434,12 +434,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       <?php
                       include "db_conn.php";
                       $sql = "SELECT
-                              student_tbl.student_id,
-                              student_tbl.id_number,
-                              student_tbl.fname,
-                              student_tbl.mname,
-                              student_tbl.lname,
-                              student_tbl.yr_lvl,
+                              student_pri_info_tbl.student_id,
+                              student_pri_info_tbl.id_number,
+                              student_pri_info_tbl.fname,
+                              student_pri_info_tbl.mname,
+                              student_pri_info_tbl.lname,
+                              student_pri_info_tbl.yr_lvl,
 
                               reserve_block_tbl.id,
                               reserve_block_tbl.block_id,
@@ -450,8 +450,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                               blocking_tbl.yr_lvl,
                               blocking_tbl.sem
 
-                              FROM student_tbl
-                              INNER JOIN reserve_block_tbl ON reserve_block_tbl.student_id = student_tbl.student_id
+                              FROM student_pri_info_tbl
+                              INNER JOIN reserve_block_tbl ON reserve_block_tbl.student_id = student_pri_info_tbl.student_id
                               INNER JOIN blocking_tbl ON blocking_tbl.block_id = reserve_block_tbl.block_id
                               WHERE blocking_tbl.block_id = '$block_id' AND reserve_block_tbl.status = 'Pending'";
 

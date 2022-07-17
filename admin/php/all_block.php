@@ -342,10 +342,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                                       reserve_block_tbl.block_id,
                                       reserve_block_tbl.status,
 
-                                      student_tbl.student_id,
-                                      student_tbl.fname,
-                                      student_tbl.lname,
-                                      student_tbl.mname,
+                                      student_pri_info_tbl.student_id,
+                                      student_pri_info_tbl.fname,
+                                      student_pri_info_tbl.lname,
+                                      student_pri_info_tbl.mname,
 
                                       blocking_tbl.block_id,
                                       blocking_tbl.block_no,
@@ -354,9 +354,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                                       blocking_tbl.total_student
 
                                       FROM reserve_block_tbl
-                                      INNER JOIN student_tbl ON student_tbl.student_id = reserve_block_tbl.student_id
+                                      INNER JOIN student_pri_info_tbl ON student_pri_info_tbl.student_id = reserve_block_tbl.student_id
                                       INNER JOIN blocking_tbl ON blocking_tbl.block_id = reserve_block_tbl.block_id
-                                      WHERE student_tbl.yr_lvl = '$yr_lvl' AND reserve_block_tbl.block_id = '$block_id'";
+                                      WHERE student_pri_info_tbl.yr_lvl = '$yr_lvl' AND reserve_block_tbl.block_id = '$block_id'";
                               $sql_result = mysqli_query($conn, $sql);
 
                               if ($sql_result->num_rows > 0) {
@@ -433,10 +433,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                                       reserve_block_tbl.block_id,
                                       reserve_block_tbl.status,
 
-                                      student_tbl.student_id,
-                                      student_tbl.fname,
-                                      student_tbl.lname,
-                                      student_tbl.mname,
+                                      student_pri_info_tbl.student_id,
+                                      student_pri_info_tbl.fname,
+                                      student_pri_info_tbl.lname,
+                                      student_pri_info_tbl.mname,
 
                                       blocking_tbl.block_id,
                                       blocking_tbl.block_no,
@@ -445,9 +445,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                                       blocking_tbl.total_student
 
                                       FROM reserve_block_tbl
-                                      INNER JOIN student_tbl ON student_tbl.student_id = reserve_block_tbl.student_id
+                                      INNER JOIN student_pri_info_tbl ON student_pri_info_tbl.student_id = reserve_block_tbl.student_id
                                       INNER JOIN blocking_tbl ON blocking_tbl.block_id = reserve_block_tbl.block_id
-                                      WHERE student_tbl.yr_lvl = '$yr_lvl' AND reserve_block_tbl.block_id = '$block_id'";
+                                      WHERE student_pri_info_tbl.yr_lvl = '$yr_lvl' AND reserve_block_tbl.block_id = '$block_id'";
                               $sql_result = mysqli_query($conn, $sql);
 
                               if ($sql_result->num_rows > 0) {

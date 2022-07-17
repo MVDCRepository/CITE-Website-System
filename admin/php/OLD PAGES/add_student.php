@@ -177,12 +177,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="students.php" class="menu-link">
                     <div>Manage</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item active">
                   <a href="add_student.php" class="menu-link">
                     <div>Add</div>
                   </a>
@@ -283,104 +283,161 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-              <!-- page header and search -->
-              <div class="d-flex flex-wrap">
-                <div class="p-2 flex-fill">
-                  <!-- page title -->
-                  <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> List of Students</h4>
-                </div>
-                <div class="p-2 flex-fill">
-                  <!-- search -->
-                  <?php 
-                    include "db_conn.php";
-                      $sql = "SELECT * FROM student_pri_info_tbl WHERE eval_status = 'Evaluate' OR eval_status = 'Evaluated' ORDER BY student_id ASC";
-
-                    if (isset($_POST['search'])) {
-                      $search = $_POST['search'];
-                      $sql = "SELECT * FROM student_pri_info_tbl WHERE CONCAT(fname, ' ', lname) LIKE '%$search%' OR CONCAT(lname, ' ', fname) LIKE '%$search%' OR id_number = '$search'";
-                    }
-                    else {
-                      $search = "";
-                      $sql = "SELECT * FROM student_pri_info_tbl WHERE eval_status = 'Evaluate' OR eval_status = 'Evaluated' ORDER BY student_id ASC";
-                    }
-
-                    $result = $conn->query($sql);
-                  ?>
-                  <form method="POST">
-                    <label>Search</label><input type="text" class="search" placeholder="Search..." name="search" value="<?php echo $search;?>">
-                  </form>
-                </div>
-              </div>
+              <!-- page header title -->
+              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> Add Student</h4>
               
               <!-- section container -->
               <center>
+                <?php if (isset($_GET['error_msg'])) { ?>
+                  <p class="error_msg mb-3"><?php echo $_GET['error_msg'];?></p>
+                <?php } ?>
                 <?php if (isset($_GET['success_msg'])) { ?>
-                  <p class="success_msg mb-3"><?php echo $_GET['success_msg']; ?></p>
+                  <p class="success_msg mb-3"><?php echo $_GET['success_msg'];?></p>
                 <?php } ?>
               </center>
-              <div class="section-container card">
-                
-                <!-- table wrapper -->
-                <div class="table-wrapper">
-                  <table class="table-cite" id="evaluation_table">
-                    <thead>
-                      <tr>
-                        <th scope="col" style="display: none">ID</th>
-                        <th scope="col">ID Number</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Year Level</th>
-                        <th scope="col">Requirements</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                      if($result->num_rows > 0) {
-                        while ($row=$result->fetch_assoc()) {
-                    ?>
-                    <tr>
-                      <td style="display: none"><?php echo $row['student_id'];?></td>
-                      <td><?php echo $row['id_number'];?></td>
-                      <td><?php echo $row['lname'].", ".$row['fname']." ".$row['mname'];?></td>
-                      <td><?php echo $row['yr_lvl']." Year";?></td>
-                      <td><a href="view_student_req.php?student_id=<?=$row['student_id'];?>">View Requirements</a></td>
-                      <td>
-                        <div class="d-grid gap-2 d-md-block">
-                          <?php 
-                            if ($row['eval_status'] == "Evaluate") {
-                              echo "<a href='evaluate_student.php?student_id={$row['student_id']}&status={$row['status']}'><button class='editbtn' style='background-color: #ff0000'>Evaluate</button></a>";
+
+              <form action="php/studentPHP.php" method="POST">
+                <!-- student information -->
+                <div class="section-container card">
+                  <h5 class="mb-4">Student Information</h5>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">First Name</label>
+                      <input type="text" class="form-control" name="fname" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Middle Name</label>
+                      <input type="text" class="form-control" name="mname" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Last Name</label>
+                      <input type="text" class="form-control" name="lname" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Gender</label><br>
+                      <input type="radio" class="form-check-input" name="gender" value="Male" required> Male
+                      <input type="radio" class="form-check-input" name="gender" value="Female" required> Female
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Birthdate</label>
+                      <input type="date" class="form-control" name="b_date" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Address</label>
+                      <input type="text" class="form-control" name="address" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Email</label>
+                      <input type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Phone</label>
+                      <input type="number" maxlength="11" class="form-control" name="phoneNum" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Year Level</label>
+                      <select class="form-select" name="yr_lvl" required>
+                        <option value="" selected disabled>Choose...</option>
+                        <option value="1st">1st Year</option>
+                        <option value="2nd">2nd Year</option>
+                        <option value="3rd">3rd Year</option>
+                        <option value="4th">4th Year</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">CHED Memorandum Order No.</label>
+                      <!-- <input type="text" class="form-control" name="cmoNo" required> -->
+                      <select class="form-select" name="cmoNo" required>
+                        <option value="">Select CMO No.</option>
+                        <?php
+                          $sql_cmo = "SELECT * FROM eval_cmo_series_tbl";
+                          $cmo_result = $conn->query($sql_cmo);
+                            if($cmo_result->num_rows > 0) {
+                              while ($row_cmo_series=$cmo_result->fetch_assoc()) {
+                        ?>
+                        <option value="<?php echo $row_cmo_series['cmoNo'];?>"><?php echo $row_cmo_series['cmoNo'];?></option>
+                        <?php
                             }
-                            else {
-                              echo "<a href='upd_eval_student.php?student_id={$row['student_id']}&status={$row['status']}'><button class='viewbtn'>Evaluate</button></a>";
+                          }
+                          else {
+                            echo "<option value=''>No CMO No. & Series available</option>";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Series</label>
+                      <!-- <input type="text" class="form-control" name="series" required> -->
+                      <select class="form-select" name="series" required>
+                        <option value="">Select Series</option>
+                        <?php
+                          $sql_cmo = "SELECT * FROM eval_cmo_series_tbl";
+                          $cmo_result = $conn->query($sql_cmo);
+                            if($cmo_result->num_rows > 0) {
+                              while ($row_cmo_series=$cmo_result->fetch_assoc()) {
+                        ?>
+                        <option value="<?php echo $row_cmo_series['series'];?>"><?php echo $row_cmo_series['series'];?></option>
+                        <?php
                             }
-                          ?>
-                          <!-- <a href="view_student_grade.php?student_id=<?=$row['student_id'];?>"><button class="viewbtn">View Grades</button></a> -->
-                          <?php 
-                            if ($row['status'] == "Freshmen" || $row['status'] == "Regular" || $row['status'] == "Regular Graduating") {
-                              echo "<a href='upd_student.php?student_id={$row['student_id']}'><button class='editbtn'>Edit</button></a>";
-                            }
-                            if ($row['status'] == "Transferee" || $row['status'] == "Graduating Transferee") {
-                              echo "<a href='upd_student_transferee.php?student_id={$row['student_id']}'><button class='editbtn'>Edit</button></a>";
-                            }
-                          ?>
-                        </div>
-                      </td>
-                    </tr>
-                    <?php
-                        }
-                      }
-                      else if($result->num_rows == 0 && $search != "") {
-                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>Student not found</center></td></tr>";
-                      }
-                      else {
-                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>No students available</center></td></tr>";
-                      }
-                    ?>
-                    </tbody>
-                  </table>
+                          }
+                          else {
+                            echo "<option value=''>No CMO No. & Series available</option>";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Student Status</label>
+                      <select class="form-select" name="status" required>
+                        <option value="" selected disabled>Choose...</option>
+                        <option value="Transferee">Transferee</option>
+                        <option value="Freshmen">Freshmen</option>
+                        <option value="Regular">Regular</option>
+                        <option value="Regular Graduating">Regular Graduating</option>
+                        <option value="Transferee Graduating">Transferee Graduating</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-                <!-- / table wrapper -->
-              </div>
+                <!-- guardian information -->
+                <div class="section-container card mt-4">
+                  <h5 class="mb-4">Guardian Information</h5>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Guardian Name</label>
+                      <input type="text" class="form-control" name="guardian_name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Guardian Phone No.</label>
+                      <input type="text" class="form-control" name="guardian_contact" required>
+                    </div>
+                  </div>
+                </div>
+                <!-- student credentials -->
+                <div class="section-container card mt-4">
+                  <h5 class="mb-4">Student Credentials</h5>
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Identification Card Number</label>
+                      <input type="text" class="form-control" name="id_number" id="id_number" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label class="form-label">Credentials</label>
+                      <input type="text" class="form-control" name="password" id="password" readonly="readonly">
+                    </div>
+                  </div>
+
+
+                  <div class="d-flex">
+                    <input type="checkbox" class="form-check-input me-2" name="generate_idnumber" id="generate_idnumber" onclick="generate_idNumber()">
+                    <label class="form-check-label" for="generate_idnumber">Generate Temporary ID Number</label>
+                  </div>
+
+                  <div class="d-grid gap-2 d-md-block mt-4">
+                    <button class="main-button" type="submit" name="add_studentBtn">Add Student</button>
+                  </div>
+                </div>
+              </form>
               <!-- / section container -->
               <!-- / Content -->
 
@@ -420,7 +477,43 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
     <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
 
     <!-- my js -->
-    <script type="text/javascript" src="js/evaluationJS.js"></script>
+    <script type="text/javascript">
+      // generates student's credential
+      generate_cred();
+      function generate_cred() {
+        function makeid(length) {
+          var result           = '';
+          var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+          var charactersLength = characters.length;
+          for ( var i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() * 
+            charactersLength));
+          }
+          return result;
+        }
+        document.getElementById("password").value = (makeid(10));
+      }
+      // generates student's ID number
+      function generate_idNumber() {
+        var generate_idnumber = document.getElementById("generate_idnumber");
+        if (generate_idnumber.checked == true) {
+          function create_idNumber(length) {
+            var result           = '';
+            var characters       = '0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+              result += characters.charAt(Math.floor(Math.random() * 
+              charactersLength));
+            }
+            return result;
+          }
+          document.getElementById("id_number").value = (create_idNumber(8));
+        }
+        else {
+          document.getElementById("id_number").value = "";
+        }
+      }
+    </script>
 
   </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status'])) {
+if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status']) && isset($_SESSION['status'])) {
   include '../db_conn.php';
 
   $student_id = $_SESSION['student_id'];
@@ -120,6 +120,12 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                 <!--Start Content Section ----------------------------->
                 <div class="grades-content-view">
                     <div class="grades-section-view">
+                        <?php
+                            $sql = "SELECT * FROM student_acad_info_tbl WHERE student_id = '$student_id'";
+                            $result = $conn->query($sql);
+                              if($result->num_rows > 0) {
+                                while ($row=$result->fetch_assoc()) {
+                        ?>
                         <div class="container">
                             <!------ First Year --------------------------->
                             <h2 class="year_title_view">First Year</h2>
@@ -145,12 +151,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '1st'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '1st'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -194,12 +231,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '2nd'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '2nd'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -247,12 +315,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '1st'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '1st'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -296,12 +395,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '2nd'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '2nd'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -349,12 +479,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '1st'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '1st'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -398,12 +559,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '2nd'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '2nd'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -451,12 +643,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                  $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                                  FROM student_tbl
-                                                  INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                                  INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                                  RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                                  WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = 'Middle Term'";
+                                                  $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = 'Middle Term'";
                                                   $result_subjects = $conn->query($sql_subjects);
                                                     if($result_subjects->num_rows > 0) {
                                                       while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -505,12 +728,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '1st'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '1st'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -554,12 +808,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '2nd'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '2nd'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -584,12 +869,25 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                 </div>
                             </div>
                         </div>
+                        <?php
+                                }
+                            }
+                            else {
+                                echo "<center><h1 class='error_msg'>Information unavailable</h1></center>";
+                            }
+                        ?>
                     </div>
                     <button type="button" class="btn btn-secondary btn-lg" onclick="generatePDF()">Download PDF</button>
                 </div>
 
                 <div class="grades-content">
                     <div id="element" class="grades-section">
+                        <?php
+                            $sql = "SELECT * FROM student_acad_info_tbl WHERE student_id = '$student_id'";
+                            $result = $conn->query($sql);
+                              if($result->num_rows > 0) {
+                                while ($row=$result->fetch_assoc()) {
+                        ?>
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
@@ -626,12 +924,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '1st'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '1st'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -675,12 +1004,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '2nd'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '2nd'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -728,12 +1088,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '1st'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '1st'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -777,12 +1168,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '2nd'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '2nd'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -830,12 +1252,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '1st'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '1st'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -879,12 +1332,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '2nd'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '2nd'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -932,12 +1416,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                  $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                                  FROM student_tbl
-                                                  INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                                  INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                                  RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                                  WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = 'Middle Term'";
+                                                  $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = 'Middle Term'";
                                                   $result_subjects = $conn->query($sql_subjects);
                                                     if($result_subjects->num_rows > 0) {
                                                       while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -986,12 +1501,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '1st'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '1st'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -1035,12 +1581,43 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT student_tbl.student_id, student_tbl.id_number, student_tbl.fname, student_tbl.lname, eval_cmo_series_tbl.eval_id, eval_cmo_series_tbl.cmoNo, eval_cmo_series_tbl.series, subject_tbl.subj_id, subject_tbl.courseCode, subject_tbl.courseDesc, subject_tbl.units, subject_tbl.lec, subject_tbl.lab, subject_tbl.yr_lvl, subject_tbl.sem, student_grade_tbl.grade
-                                              FROM student_tbl
-                                              INNER JOIN eval_cmo_series_tbl ON student_tbl.cmoNo = eval_cmo_series_tbl.cmoNo AND student_tbl.series = eval_cmo_series_tbl.series
-                                              INNER JOIN subject_tbl ON eval_cmo_series_tbl.eval_id = subject_tbl.eval_id
-                                              RIGHT JOIN student_grade_tbl ON subject_tbl.subj_id = student_grade_tbl.subj_id
-                                              WHERE student_tbl.student_id = '$student_id' AND student_tbl.cmoNo = '$cmoNo' AND student_tbl.series = '$series' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '2nd'";
+                                              $sql_subjects = "SELECT
+                                              student_pri_info_tbl.student_id,
+                                              student_pri_info_tbl.id_number,
+                                              student_pri_info_tbl.fname,
+                                              student_pri_info_tbl.Mname,
+                                              student_pri_info_tbl.lname,
+
+                                              student_acad_info_tbl.eval_id,
+
+                                              eval_cmo_series_tbl.eval_id,
+                                              eval_cmo_series_tbl.cmoNo,
+                                              eval_cmo_series_tbl.series,
+
+                                              subject_tbl.subj_id,
+                                              subject_tbl.courseCode,
+                                              subject_tbl.courseDesc,
+                                              subject_tbl.units,
+                                              subject_tbl.lec,
+                                              subject_tbl.lab,
+                                              subject_tbl.yr_lvl,
+                                              subject_tbl.sem,
+
+                                              student_grade_tbl.student_id,
+                                              student_grade_tbl.subj_id,
+                                              student_grade_tbl.grade
+
+                                              FROM student_pri_info_tbl
+
+                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '2nd'";
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -1065,6 +1642,13 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                 </div>
                             </div>
                         </div>
+                        <?php
+                                }
+                            }
+                            else {
+                                echo "<center><h1 class='error_msg'>Information unavailable</h1></center>";
+                            }
+                        ?>
                         <div class="grades-section-below">
                             <div class="container">
                                 <div class="row">

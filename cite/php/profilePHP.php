@@ -16,7 +16,7 @@
 			exit();
 		}
 		else {
-			$sql = "UPDATE student_tbl SET password = '$password' WHERE student_id = '$student_id'";
+			$sql = "UPDATE student_pri_info_tbl SET password = '$password' WHERE student_id = '$student_id'";
 			$sql_result = mysqli_query($conn, $sql);
 
 			if ($sql_result) {
