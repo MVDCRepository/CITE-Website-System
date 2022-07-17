@@ -400,12 +400,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                 
                 <div class="p-4 card mb-4">
                   <h5 class="mb-4">Add Subjects</h5>
-                  <!-- <div class="col mb-3"> -->
+                  <!-- load subject container -->
                     <div class="table-wrapper">
                       <div id="load_subject_container">
                       </div>
                     </div>
-                  <!-- </div> -->
+                  <!-- / load subject container -->
                   
                   <div class="d-flex gap-2 mt-4 justify-content-end">
                     <button class="main-button" type="submit" name="add_blockBtn">Create Schedule</button>

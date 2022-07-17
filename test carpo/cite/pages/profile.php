@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status'])) {
+if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status']) && isset($_SESSION['status'])) {
     include '../db_conn.php';
     $student_id = $_SESSION['student_id'];
 ?>
@@ -117,13 +117,15 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="profile_left_section">
+                                <div class="profile_left_section text-center">
                                     <!-- <img src="../images/xiao.png"> -->
                                     <h2><?php echo $_SESSION['lname']." ,".$_SESSION['fname'];?></h2>
                                     <p>Bachelor of Science in Information Technology <br> <?php echo $_SESSION['yr_lvl']." Year";?></p>
                                 </div>
+
                                 <div class="profile_left_section">
-                                    <h2>Requirements</h2>
+                                    <h2 class="text-center">Requirements</h2>
+                                    <p hidden id="student_status"><?php echo $_SESSION['status'];?></p>
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -135,66 +137,62 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                       <p class="success_msg"><?php echo $_GET['submit_success']; ?></p>
                                                     <?php } ?>
                                                 </center>
-                                                <div class="alert alert-warning">
+                                                <div class="alert alert-warning text-center mb-3 mt-3">
                                                     <h5 class="alert-heading">Note!</h5>
-                                                    Rename your files according what you checked.
+                                                    Rename your files according to the requirements, else it will be rejected.
                                                 </div>
-                                                <form action="../php/submit_requirementsPHP.php" method="POST" enctype="multipart/form-data">
-                                                    <table>
-                                                        <!----- FORM 137 ------->
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check float-left">
-                                                                    <input class="form-check-input" type="checkbox" value="FORM 137" id="form_137" name="req_id[]">
-                                                                    <input type="hidden" name="student_id[]" value="<?php echo $_SESSION['student_id'];?>">
-                                                                    <input type="hidden" name="requirement[]" value="FORM 137">
-                                                                    <label class="form-check-label" for="form_137">
-                                                                            FORM 137
-                                                                    </label>
-                                                                </div>
-                                                                <br>
-                                                                <input class="custom_upload" type="file" name="file_name[]">
-                                                            </td>
-                                                        <!-- <td class="upload_status">Missing</td> -->
-                                                        </tr>
-                                                        <!----- FORM 138 ------->
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check float-left">
-                                                                    <input class="form-check-input" type="checkbox" value="FORM 138" id="form_138" name="req_id[]">
-                                                                    <input type="hidden" name="student_id[]" value="<?php echo $_SESSION['student_id'];?>">
-                                                                    <input type="hidden" name="requirement[]" value="FORM 138">
-                                                                    <label class="form-check-label" for="form_138">
-                                                                        FORM 138
-                                                                    </label>
-                                                                </div>
-                                                                <br>
-                                                                <input class="custom_upload" type="file" name="file_name[]">
-                                                            </td>
-                                                        <!-- <td class="upload_status">Missing</td> -->
-                                                        </tr>
-                                                        <!----- Good Moral ------->
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check float-left">
-                                                                    <input class="form-check-input" type="checkbox" value="Good Moral Certification" id="good_moral" name="req_id[]">
-                                                                    <input type="hidden" name="student_id[]" value="<?php echo $_SESSION['student_id'];?>">
-                                                                    <input type="hidden" name="requirement[]" value="Good Moral Certification">
-                                                                    <label class="form-check-label" for="good_moral">
-                                                                        Good Moral Certification
-                                                                    </label>
-                                                                </div>
-                                                                <br>
-                                                                <input class="custom_upload" type="file" name="file_name[]">
-                                                            </td>
-                                                           <!-- <td class="upload_status">Missing</td> -->
-                                                        </tr>
-                                                    </table>
-                                                    <input type="submit" name="submit_btn" value="Submit" class="btn btn-success float-left">
+
+                                                <form action="../php/profilePHP.php" method="POST" enctype="multipart/form-data" class="no-display" id="grad_requirements">
+                                                    <div>
+                                                        <p>FORM 137</p>
+                                                        <p>FORM 138</p>
+                                                        <p>Good Moral Certification</p>
+                                                        <p>Updated Evaluation form</p>
+                                                        <p>Application for Graduation</p>
+                                                        <p>2 Picture (Passport Size with Name)</p>
+                                                        <p>Barangay Clearance</p>
+                                                        <p>Birth Certificate (NSO/PSA)</p>
+                                                        <p>Capstone 1 & Capstone 2 Certificate</p>
+                                                        <p>Medical Certificate</p>
+                                                        
+                                                        <input type="hidden" name="student_id" value="<?php echo $student_id;?>">
+                                                        <input type="file" name="file[]" id="file" class="custom_upload" accept="image/png, image/gif, image/jpeg" multiple required>
+                                                    </div>
+
+                                                    <input type="submit" name="submit_reqBtn" value="Submit" class="btn btn-success float-right">
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="profile_left_section" id="requirement_container">
+                                    <h2 class="text-center">Submitted Requirements</h2>
+                                    <?php
+                                        $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id'";
+                                        $result = $conn->query($sql);
+                                          if($result->num_rows > 0) {
+                                            while ($row=$result->fetch_assoc()) {
+                                    ?>
+                                    <p><?php echo $row['file_name'];?>
+                                        <span class="upload_status">
+                                            <?php
+                                                if ($row['status'] == "Confirmed") {
+                                                    echo "<span class='upload_status_green'>".$row['status']."</span>";
+                                                }
+                                                else {
+                                                    echo "<span class='upload_status_red'>".$row['status']."</span>";
+                                                }
+                                            ?>
+                                        </span>
+                                    </p>
+                                    <?php
+                                            }
+                                        }
+                                        else {
+                                            echo "<script>document.getElementById('requirement_container').style.display = 'none';</script>";
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -381,7 +379,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
 <?php
 } 
 else {
-  header("Location: ../user_login.php");
+  header("Location: ../login.php");
   exit();
 }
 

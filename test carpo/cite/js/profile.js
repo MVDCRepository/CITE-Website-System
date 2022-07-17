@@ -42,3 +42,18 @@ function setValidInputFor(input) {
 	const formControl = input.parentElement;
 	formControl.className = 'control-form success';
 }
+
+// load student requirements depends on the student status
+load_student_requirements();
+function load_student_requirements() {
+	var student_status = document.getElementById('student_status').innerHTML;
+
+	var grad_requirements = document.getElementById('grad_requirements');
+
+	if (student_status == 'Regular Graduating') {
+		grad_requirements.style.display = "block";
+	}
+	else {
+		grad_requirements.style.display = "none";
+	}
+}

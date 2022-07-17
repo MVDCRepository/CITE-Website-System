@@ -78,7 +78,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         <li class="nav-item">
                                             <a class="nav-link" href="news_and_events.php">NEWS & EVENTS</a></li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="about.html">ABOUT</a></li>
+                                                <a class="nav-link" href="about.php">ABOUT</a></li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="faculty.php">FACULTY</a></li>
                                                     <li class="nav-item">
@@ -90,7 +90,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                         </div>
                                                     </li>
                                                     <li class="nav-item">
-                                                    <a class="nav-link" href="admission.php">ADMISSION</a></li>
+                                                        <a class="nav-link" href="admission.php">ADMISSION</a></li>
                                                     <li id="nav" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['fname'];?></a>
                                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
                                                         <a class="dropdown-item" href="profile.php"><!-- <img src="images/xiao.png"> -->Profile Settings</a>

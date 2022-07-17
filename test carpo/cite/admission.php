@@ -81,11 +81,13 @@
                                                     </li>
                                                     <li class="nav-item">
                                                         <a style="font-weight: 600;" class="nav-link" href="admission.php">ADMISSION</a></li>
-                                                        <li id="nav-last" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Log In</a>
+                                                    </li>
+                                                    <!-- <li id="nav-last" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Log In</a>
                                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
                                                             <a class="dropdown-item" href="user_login.php">Go To Log In</a>
                                                         </div>
-                                                    </li>
+                                                    </li> -->
+                                                    <li class="last"><a href="login.php"><b></b> LOGIN</a></li>
                                                 </ul>
                                             </div>
                                         </nav>
@@ -122,7 +124,7 @@
                                                                 <li>NCAE Result (Temporary waived)</li>
                                                                 <li>Medical Certificate (Chest x-ray, Urinalysis, CBC) (Temporary waived)</li>
                                                             </ul>
-                                                            <button><a href="registration.php">Register here</a></button>
+                                                            <button><a href="registration_freshmen.php">Register here</a></button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -139,7 +141,7 @@
                                                             <li>Birth Certificate (NSO/PSA)</li>
                                                             <li>Medical Certificate (Chest x-ray, Urinalysis, CBC) (Temporary waived)</li>
                                                         </ul>
-                                                        <button><a href="registration.php">Register here</a></button>
+                                                        <button><a href="registration_transferee.php">Register here</a></button>
                                                     </div>
                                                 </div>
                                             </div>

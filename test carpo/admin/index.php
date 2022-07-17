@@ -36,7 +36,7 @@
               <form class="pt-3" action="php/php/login.php" method="POST">
 
               <?php if (isset($_GET['error'])) { ?>
-    					    <p class="error" style="margin: 0px 0px 10px 0px"><?php echo $_GET['error']; ?></p>
+                <p class="error" style="margin: 0px 0px 10px 0px; color:red;"><?php echo $_GET['error']; ?></p>
     				  <?php } ?>
 
                 <div class="form-group">

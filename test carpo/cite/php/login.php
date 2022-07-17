@@ -26,7 +26,7 @@ if (isset($_POST['id_number']) && isset($_POST['password'])) {
 		exit();
 	}
 	else {
-		$sql = "SELECT * FROM student_tbl WHERE id_number='$id_number' AND password='$password'";
+		$sql = "SELECT * FROM student_pri_info_tbl WHERE id_number='$id_number' AND password='$password'";
 
 		$result = mysqli_query($conn, $sql);
 
@@ -40,10 +40,10 @@ if (isset($_POST['id_number']) && isset($_POST['password'])) {
 				$_SESSION['fname'] = $row['fname'];
 				$_SESSION['mname'] = $row['mname'];
 				$_SESSION['lname'] = $row['lname'];
-				$_SESSION['cmoNo'] = $row['cmoNo'];
-				$_SESSION['series'] = $row['series'];
+				$_SESSION['sname'] = $row['sname'];
 				$_SESSION['yr_lvl'] = $row['yr_lvl'];
 				$_SESSION['eval_status'] = $row['eval_status'];
+				$_SESSION['status'] = $row['status'];
 				header("Location: ../pages/index.php");
 				exit();
 			}

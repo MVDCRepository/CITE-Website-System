@@ -73,7 +73,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         <li class="nav-item">
                                             <a class="nav-link" href="news_and_events.php">NEWS & EVENTS</a></li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="about.html">ABOUT</a></li>
+                                                <a class="nav-link" href="about.php">ABOUT</a></li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="faculty.php">FACULTY</a></li>
                                                     <li class="nav-item">

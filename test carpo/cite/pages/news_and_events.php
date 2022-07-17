@@ -75,7 +75,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         <li class="nav-item">
                                             <a style="font-weight: 600;" class="nav-link" href="#">NEWS & EVENTS</a></li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="about.html">ABOUT</a></li>
+                                                <a class="nav-link" href="about.php">ABOUT</a></li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="faculty.php">FACULTY</a></li>
                                                     <li class="nav-item">
@@ -269,7 +269,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
 <?php
 } 
 else {
-  header("Location: ../user_login.php");
+  header("Location: ../login.php");
   exit();
 }
 

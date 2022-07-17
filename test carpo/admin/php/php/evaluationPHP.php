@@ -234,15 +234,32 @@
 			header("Location: ../add_evaluation.php?acad_error=Fill all inputs");
 		}
 		else {
-			$sql = "INSERT INTO acad_yr_tbl (acad_yr, status) VALUES ('$acad_yr', '$status')";
-			$sql_result = mysqli_query($conn, $sql);
+			$sql_duplicate_check_active = "SELECT * FROM acad_yr_tbl WHERE status = 'Active'";
+			$sql_duplicate_check_active_result = mysqli_query($conn, $sql_duplicate_check_active);
 
-			if ($sql_result) {
-				header("Location: ../add_evaluation.php?acad_success_msg=Added new academic year");
-				exit();
+			if (mysqli_num_rows($sql_duplicate_check_active_result) > 0) {
+				$sql = "INSERT INTO acad_yr_tbl (acad_yr, status) VALUES ('$acad_yr', 'Inactive')";
+				$sql_result = mysqli_query($conn, $sql);
+
+				if ($sql_result) {
+					header("Location: ../add_evaluation.php?acad_success_msg=Added new academic year");
+					exit();
+				}
+				else {
+					echo "Error adding academic year";
+				}
 			}
 			else {
-				echo "Error adding academic year";
+				$sql = "INSERT INTO acad_yr_tbl (acad_yr, status) VALUES ('$acad_yr', 'Active')";
+				$sql_result = mysqli_query($conn, $sql);
+
+				if ($sql_result) {
+					header("Location: ../add_evaluation.php?acad_success_msg=Added new academic year");
+					exit();
+				}
+				else {
+					echo "Error adding academic year";
+				}
 			}
 		}
 	}
@@ -263,18 +280,43 @@
 			exit();
 		}
 		else {
-			$sql = "UPDATE acad_yr_tbl SET acad_yr = '$upd_acad_yr', status = '$upd_status' WHERE acad_id = '$upd_acad_id'";
-			$sql_result = mysqli_query($conn, $sql);
+			$sql_duplicate_check = "SELECT * FROM acad_yr_tbl WHERE status = 'Active' AND acad_id != '$upd_acad_id'";
+			$sql_duplicate_check_result = mysqli_query($conn, $sql_duplicate_check);
 
-			if ($sql_result) {
+			if (mysqli_num_rows($sql_duplicate_check_result) > 0) {
+				// $sql = "UPDATE acad_yr_tbl SET acad_yr = '$upd_acad_yr', status = '$status' WHERE acad_id = '$upd_acad_id'";
+				// $sql_result = mysqli_query($conn, $sql);
+
+				// if ($sql_result) {
+				// 	header('Location: ../upd_acadYr.php?' . http_build_query(array(
+				// 	    'acad_id' => $_GET['acad_id'],
+				// 	    'acad_success_msg' => "Updated academic year"
+				// 	)));
+				// 	exit();
+				// }
+				// else {
+				// 	echo "Error update academic year";
+				// }
 				header('Location: ../upd_acadYr.php?' . http_build_query(array(
-				    'acad_id' => $_GET['acad_id'],
-				    'acad_success_msg' => "Updated academic year"
+					    'acad_id' => $_GET['acad_id'],
+					    'acad_error' => "Only one academic year can be active"
 				)));
 				exit();
 			}
 			else {
-				echo "Error update academic year";
+				$sql = "UPDATE acad_yr_tbl SET acad_yr = '$upd_acad_yr', status = '$upd_status' WHERE acad_id = '$upd_acad_id'";
+				$sql_result = mysqli_query($conn, $sql);
+
+				if ($sql_result) {
+					header('Location: ../upd_acadYr.php?' . http_build_query(array(
+					    'acad_id' => $_GET['acad_id'],
+					    'acad_success_msg' => "Updated academic year"
+					)));
+					exit();
+				}
+				else {
+					echo "Error update academic year";
+				}
 			}
 		}
 	}
@@ -292,7 +334,7 @@
 			exit();
 		}
 		else {
-			header("Location: ../evaluation.php?error_msg=Subjects under this CMO No. and series is being used.<script src='js/evaluationJS.js' onLoad='show_delete_notif();'></script>");
+			header("Location: ../evaluation.php?error_msg=Subjects under this academic year is being used.<script src='js/evaluationJS.js' onLoad='show_delete_notif();'></script>");
 			exit();
 		}
 	}

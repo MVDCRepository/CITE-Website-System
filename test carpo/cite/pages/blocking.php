@@ -119,22 +119,21 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                     <div class="form-group col-md-3">
                                         <label for="acad_yr">Academic Year</label>
                                         <!-- value must academic year where status is active -->
-                                        <select id="acad_yr" class="form-control" name="acad_yr" onkeyup="search_subject()" onfocus="search_subject()" onchange="search_subject()" style="width: 200px;">
-                                            <?php
-                                                $sql = "SELECT * FROM acad_yr_tbl WHERE status = 'Active'";
-                                                $result = $conn->query($sql);
-                                                if($result->num_rows > 0) {
-                                                    while ($row=$result->fetch_assoc()) {
-                                            ?>
-                                            <option value="<?php echo $row['acad_yr'];?>"><?php echo $row['acad_yr'];?></option>
-                                            <?php
-                                                    }
+                                        <?php
+                                            $sql = "SELECT * FROM acad_yr_tbl WHERE status = 'Active'";
+                                            $result = $conn->query($sql);
+                                            if($result->num_rows > 0) {
+                                                while ($row=$result->fetch_assoc()) {
+                                        ?>
+                                        <input type="hidden" name="acad_yr" id="acad_yr" onkeyup="search_subject()" onfocus="search_subject()" onchange="search_subject()" value="<?php echo $row['acad_yr'];?>">
+                                        <h3><?php echo $row['acad_yr'];?></h3>
+                                        <?php
                                                 }
-                                                else {
-                                                    echo "<option value=''>Academic Year not set</option>";
-                                                }
-                                            ?>
-                                        </select>
+                                            }
+                                            else {
+                                                echo "<option value=''>Academic Year not set</option>";
+                                            }
+                                        ?>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="inputYear">Year Level</label>
@@ -175,67 +174,98 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                         </div>
                     </form>
 
-                    <form action="../php/blockingPHP.php" method="POST">
-                        <div class="block_result_content">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="block_result">
+                    <div class="block_result_content">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md">
+                                    <center>
+                                        <?php if (isset($_GET['error_msg'])) { ?>
+                                            <p class="error_msg mt-5 mb-5" style="width: 40%"><?php echo $_GET['error_msg']; ?></p>
+                                        <?php } ?>
+                                        <?php if (isset($_GET['success_msg'])) { ?>
+                                            <p class="success_msg mt-5 mb-5" style="width: 40%"><?php echo $_GET['success_msg']; ?></p>
+                                        <?php } ?>
+                                    </center>
+
+                                    <div class="d-flex justify-content-center">
+                                        <div class="p-3 border rounded mt-3 mb-5" id="reserve_info">
+                                            <h5 class="success_msg">Block Information. Wait for the update of your request</span></h5>
+                                            <?php
+                                                $sql = "SELECT
+                                                        reserve_block_tbl.id,
+                                                        reserve_block_tbl.block_id,
+                                                        reserve_block_tbl.student_id,
+                                                        reserve_block_tbl.status,
+
+                                                        blocking_tbl.block_id,
+                                                        blocking_tbl.block_no,
+                                                        blocking_tbl.yr_lvl,
+                                                        blocking_tbl.sem,
+
+                                                        student_tbl.student_id,
+                                                        student_tbl.fname,
+                                                        student_tbl.mname,
+                                                        student_tbl.lname
+
+                                                        FROM reserve_block_tbl
+
+                                                        INNER JOIN blocking_tbl ON blocking_tbl.block_id = reserve_block_tbl.block_id
+                                                        INNER JOIN student_tbl ON student_tbl.student_id = reserve_block_tbl.student_id
+
+                                                        WHERE student_tbl.student_id = '$student_id' AND reserve_block_tbl.status = 'Pending'";
+                                                $result = $conn->query($sql);
+                                                  if($result->num_rows > 0) {
+                                                    while ($row=$result->fetch_assoc()) {
+                                                    $block_status = $row['status'];
+                                                    $id = $row['id'];
+                                            ?>
+
+                                            <!-- cancel reservation modal-->
+                                            <div class="delete-modal" id="modal">
+                                                <div class="modalBox">
+                                                    <div class="modal_header">
+                                                        <span class="close" id="close_modal">&times;</span>
+                                                        <h4>Confirm Cancellation</h4>
+                                                    </div>
+                                                    <div class="modal_body">
+                                                        <form action="../php/blockingPHP.php" method="POST">
+                                                            <input type="hidden" name="reserve_id" id="reserve_id" value="<?php echo $row['id'];?>">
+                                                            <h5 class="h5">Are you sure you want to cancel your request?</h5>
+                                                            <p>Once you cancell this it cannot be undone.</p>
+                                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                                                <button class="redBtn" name="cancel_reqBtn" type="submit">Yes, Cancel Reservation</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- / cancel reservation modal -->
+
+                                            <p>Year Level: <span class="font-weight-bold mr-3"><?php echo $row['yr_lvl']." Year";?></span> Block: <span class="font-weight-bold mr-3"><?php echo $row['block_no'];?></span> Semester: <span class="font-weight-bold mr-3"><?php echo $row['sem']." Sem";?></span> Status: <span class="font-weight-bold mr-3"><?php echo $row['status'];?></span></p>
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                                <button class="redBtn" name="cancel_btn" id="cancel_btn" type="submit">Cancel  Request</button>
+                                            </div>
+                                            <?php
+                                                    }
+                                                }
+                                                else {
+                                                    echo "<script>document.getElementById('reserve_info').style.display = 'none';</script>";
+                                                }
+                                            ?>
+                                            <input type="hidden" id="block_status" value="<?php echo $block_status;?>">
+                                        </div>
+                                    </div>
+
+                                    <form action="../php/blockingPHP.php" method="POST">
+                                        <div class="block_result" id="block_form">
                                             <!-- load subjects container -->
-                                            <center>
-                                                <?php if (isset($_GET['error_msg'])) { ?><p class="error_msg mb-5 mt-5" style="width: 40%"><?php echo $_GET['error_msg']; ?></p>
-                                                <?php } ?>
-                                                <?php if (isset($_GET['success_msg'])) { ?><p class="success_msg mb-5 mt-5" style="width: 40%"><?php echo $_GET['success_msg']; ?></p>
-                                                <?php } ?>
-                                            </center>
                                             <div id="loadBlock_sub">
                                             </div>
                                             <br>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-
-                    <div class="d-flex justify-content-center mt-5 mb-5">
-                        <div class="p-3 col-md-5 border rounded" id="reserve_info">
-                        <h5 class="success_msg" style="width: 100%">Block Information. Wait for the update of your request</span></h5>
-                            <?php
-                                $sql = "SELECT
-                                        reserve_block_tbl.id,
-                                        reserve_block_tbl.block_id,
-                                        reserve_block_tbl.student_id,
-                                        reserve_block_tbl.status,
-
-                                        blocking_tbl.block_id,
-                                        blocking_tbl.block_no,
-                                        blocking_tbl.yr_lvl,
-                                        blocking_tbl.sem,
-
-                                        student_tbl.student_id,
-                                        student_tbl.fname,
-                                        student_tbl.mname,
-                                        student_tbl.lname
-
-                                        FROM reserve_block_tbl
-
-                                        INNER JOIN blocking_tbl ON blocking_tbl.block_id = reserve_block_tbl.block_id
-                                        INNER JOIN student_tbl ON student_tbl.student_id = reserve_block_tbl.student_id
-
-                                        WHERE student_tbl.student_id = '$student_id' AND reserve_block_tbl.status = 'Pending'";
-                                $result = $conn->query($sql);
-                                  if($result->num_rows > 0) {
-                                    while ($row=$result->fetch_assoc()) {
-                            ?>
-                            <p>Year Level: <span class="font-weight-bold mr-3"><?php echo $row['yr_lvl']." Year";?></span> Block: <span class="font-weight-bold mr-3"><?php echo $row['block_no'];?></span> Semester: <span class="font-weight-bold mr-3"><?php echo $row['sem']." Sem";?></span> Status: <span class="font-weight-bold mr-3"><?php echo $row['status'];?></span></p>
-                            <?php
-                                    }
-                                }
-                                else {
-                                    echo "<script>document.getElementById('reserve_info').style.display = 'none';</script>";
-                                }
-                            ?>
                         </div>
                     </div>
                 </div>
@@ -297,28 +327,13 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                 <script src="../js/popper.min.js"></script>
                 <script src="../js/bootstrap.bundle.min.js"></script>
                 <!-- cite js -->
-                <script>
-                    function search_subject() {
-                        var yr_lvl = document.getElementById("yr_lvl").value;
-                        var sem = document.getElementById("sem").value;
-                        var block_no = document.getElementById("block_no").value;
-                        var acad_yr = document.getElementById("acad_yr").value;
-
-                        xmlhttp = new XMLHttpRequest();
-                        xmlhttp.open("GET", "../server/load_blockSub.php?yr_lvl="+yr_lvl+"&sem="+sem+"&block_no="+block_no+"&acad_yr="+acad_yr,false);
-                        xmlhttp.send(null);
-
-                        document.getElementById('loadBlock_sub').innerHTML=xmlhttp.responseText;
-                    }
-
-                    window.onload = search_subject;
-                </script>
+                <script type="text/javascript" src="../js/blockingJS.js"></script>
             </body>
         </html>
 <?php
 } 
 else {
-  header("Location: ../user_login.php");
+  header("Location: ../login.php");
   exit();
 }
 
