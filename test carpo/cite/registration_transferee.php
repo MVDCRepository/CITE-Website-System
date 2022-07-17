@@ -12,6 +12,7 @@
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
+        <link rel="icon" href="images/cite_logo.png">
         <!-- bootstrap css -->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
