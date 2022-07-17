@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Login | CITEPortal</title>
+  <title>Request | CITEPortal</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="login/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="login/vendors/css/vendor.bundle.base.css">
@@ -32,9 +32,9 @@
               <div class="brand-logo text-center m-1">
                 <h3><b>CITE Portal</b></h3>
               </div>
-			          <h6 class=" text-center mb-0">STUDENT LOGIN</h6>
+			          <h6 class=" text-center mb-0">REQUEST</h6>
 									
-              <form class="pt-3" action="php/login.php" method="POST">
+              <form class="pt-3" action="#" method="POST">
 
               <?php if (isset($_GET['error'])) { ?>
     					    <p class="error" style="margin: 0px 0px 10px 0px "><?php echo $_GET['error']; ?></p>
@@ -43,15 +43,18 @@
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" id="id_number" placeholder="ID Number" name="id_number" autocomplete="off" required >
                 </div>
+                <div class="form-group mt-1">
+                  <input type="text" class="form-control form-control-lg" id="email" placeholder="Email" name="email" required >
+                </div>
                 <div class="form-group mb-1">
-                  <input type="password" class="form-control form-control-lg" id="password" placeholder="Password" name="password" required >
+                   <textarea class="form-control form-control-lg" id="description" placeholder="Description" name="description" required></textarea>
                 </div>
                 <div class="mt-1 mb-3 text-center">
-				        <div style="text-align: center;"><div class="h-captcha" data-sitekey=""  style="display: inline-block;"></div></div>
-                 <button type="submit" class="btn btn-gradient-primary btn-lg font-weight-medium auth-form-btn " name="btn_login">LOG IN</button>
+				<div style="text-align: center;"><div class="h-captcha" data-sitekey=""  style="display: inline-block;"></div></div>
+                 <button type="submit" class="btn btn-gradient-primary btn-lg font-weight-medium auth-form-btn " name="btn_login">REQUEST PASSWORD</button>
                 </div>
                 <div class="link">
-                  <p><a href="password_request.php">REQUEST PASSWORD</a></p>
+                  <p><a href="login.php">LOG IN</a></p>
                 </div>
                 
                 <div class="my-2 d-flex justify-content-between align-items-center">
