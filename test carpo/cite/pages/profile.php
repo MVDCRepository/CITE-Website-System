@@ -1,10 +1,10 @@
-<?php
+<!-- <?php
 session_start();
 
-if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status']) && isset($_SESSION['status'])) {
+if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status'])) {
     include '../db_conn.php';
     $student_id = $_SESSION['student_id'];
-?>
+?> -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -45,6 +45,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
         <!--- PDF Generator --->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js"></script>
         <script type="text/javascript" src="../js/generate-pdf.js"></script>
+        <link href="custom.css" rel="stylesheet" />
     </head>
     <!-- body -->
     <body>
@@ -109,6 +110,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                     </div>
                 </div>
                 <!-- end header end -->
+
                 <!--Start Content Section ----------------------------->
                 <div class="profile_content">
                     <div class="profile_title_container">
@@ -116,200 +118,258 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                     </div>
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="profile_left_section text-center">
-                                    <!-- <img src="../images/xiao.png"> -->
-                                    <h2><?php echo $_SESSION['lname']." ,".$_SESSION['fname'];?></h2>
-                                    <p>Bachelor of Science in Information Technology <br> <?php echo $_SESSION['yr_lvl']." Year";?></p>
-                                </div>
-
-                                <div class="profile_left_section">
-                                    <h2 class="text-center">Requirements</h2>
-                                    <p hidden id="student_status"><?php echo $_SESSION['status'];?></p>
+                            <div class="col-md-12">
+                                <form>
+                                    <div class="reg_content">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <table class="table table-condensed table-bordered  table-hover">
+                                                    <tbody>
+                                                        <tr class="table-dark">
+                                                            <th>TYPE</th>
+                                                            <th>STORED</th>
+                                                        </tr>
+                                                        <tr class="table-active">
+                                                            <th colspan="2">PRIMARY INFORMATION :</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Fulll Name</th>
+                                                            <td>MICHAEL VINCENT D. CARPO</td>
+                                                        </tr>
+                                                        <tr class="table-active">
+                                                            <th colspan="2">PERMANENT ADDRESS :</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Province</th>
+                                                            <td>test address</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>City/Municipality</th>
+                                                            <td>test address</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Barangay</th>
+                                                            <td>test address</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>House Number</th>
+                                                            <td>test address</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Zip Code</th>
+                                                            <td>test address</td>
+                                                        </tr>
+                                                        <tr class="table-active">
+                                                            <th colspan="2">BASIC INFORMATION :</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Birthdate</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Nationality</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr class="table-active">
+                                                            <th colspan="2">BIRTH PLACE :</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Province</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>City/Municipality</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Barangay</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>House Number</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Zip Code</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr class="table-active">
+                                                            <th colspan="2">CONTACT & OTHER INFO :</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Email Address</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Contact Number</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Sex</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Religion</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr class="table-active">
+                                                            <th colspan="2">FATHER'S INFORMATION :</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Father's Name</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Contact Number</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Occupation</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr class="table-active">
+                                                            <th colspan="2">MOTHER'S INFORMATION :</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Mother's Name</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Contact Number</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Occupation</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr class="table-active">
+                                                            <th colspan="2">GUARDIAN'S INFORMATION :</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Contact Number</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Occupation</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr class="table-active">
+                                                            <th colspan="2">ACADEMIC INFORMATION :</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Course Enrolled</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Second Choice of Course</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Graduated Senior High School</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Year Graduated Senior High School</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Graduated Elementary School</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Year Graduated Elementary School</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Strand</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Learners Reference Number</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                            <th>Form 138 GWA</th>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr class="table-active">
+                                                            <th>Temporary Password</th>
+                                                            <th>Temporary Username</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> <input type="text" class="form-control" id="" disabled></td>
+                                                            <td> <input type="text" class="form-control" id="" disabled></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="reg_content">
+                                    <h2>Requirements</h2>
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <center>
-                                                    <?php if (isset($_GET['submit_error'])) { ?>
-                                                      <p class="error_msg"><?php echo $_GET['submit_error'];?></p>
-                                                    <?php } ?>
-                                                    <?php if (isset($_GET['submit_success'])) { ?>
-                                                      <p class="success_msg"><?php echo $_GET['submit_success']; ?></p>
-                                                    <?php } ?>
-                                                </center>
-                                                <div class="alert alert-warning text-center mb-3 mt-3">
-                                                    <h5 class="alert-heading">Note!</h5>
-                                                    Rename your files according to the requirements, else it will be rejected.
-                                                </div>
-
-                                                <form action="../php/profilePHP.php" method="POST" enctype="multipart/form-data" class="no-display" id="grad_requirements">
-                                                    <div>
-                                                        <p>FORM 137</p>
-                                                        <p>FORM 138</p>
-                                                        <p>Good Moral Certification</p>
-                                                        <p>Updated Evaluation form</p>
-                                                        <p>Application for Graduation</p>
-                                                        <p>2 Picture (Passport Size with Name)</p>
-                                                        <p>Barangay Clearance</p>
-                                                        <p>Birth Certificate (NSO/PSA)</p>
-                                                        <p>Capstone 1 & Capstone 2 Certificate</p>
-                                                        <p>Medical Certificate</p>
-                                                        
-                                                        <input type="hidden" name="student_id" value="<?php echo $student_id;?>">
-                                                        <input type="file" name="file[]" id="file" class="custom_upload" accept="image/png, image/gif, image/jpeg" multiple required>
-                                                    </div>
-
-                                                    <input type="submit" name="submit_reqBtn" value="Submit" class="btn btn-success float-right">
+                                                <form action="" method="POST" enctype="multipart/form-data">
+                                                    <table class="table table-sm table-hover">
+                                                        <tr>
+                                                            <th class="col">FORM 137</th>
+                                                            <td class="col"><input type="submit" name="" value="Upload" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="col">FORM 138</th>
+                                                            <td class="col"><input type="submit" name="" value="Upload" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="col">Good Moral Certification</th>
+                                                            <td class="col"><input type="submit" name="" value="Upload" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="col">Updated Evaluation form</th>
+                                                            <td class="col"><input type="submit" name="" value="Upload" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="col">Application for Graduation</th>
+                                                            <td class="col"><input type="submit" name="" value="Upload" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="col">2 Picture (Passport Size with Name)</th>
+                                                            <td class="col"><input type="submit" name="" value="Upload" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="col">Barangay Clearance</th>
+                                                            <td class="col"><input type="submit" name="" value="Upload" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="col">Birth Certificate (NSO/PSA)</th>
+                                                            <td class="col"><input type="submit" name="" value="Upload" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="col">Capstone 1 & Capstone 2 Certificate</th>
+                                                            <td class="col"><input type="submit" name="" value="Upload" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="col">Medical Certificate</th>
+                                                            <td class="col"><input type="submit" name="" value="Upload" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                    </table>
+                                                    
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="profile_left_section" id="requirement_container">
-                                    <h2 class="text-center">Submitted Requirements</h2>
-                                    <?php
-                                        $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id'";
-                                        $result = $conn->query($sql);
-                                          if($result->num_rows > 0) {
-                                            while ($row=$result->fetch_assoc()) {
-                                    ?>
-                                    <p><?php echo $row['file_name'];?>
-                                        <span class="upload_status">
-                                            <?php
-                                                if ($row['status'] == "Confirmed") {
-                                                    echo "<span class='upload_status_green'>".$row['status']."</span>";
-                                                }
-                                                else {
-                                                    echo "<span class='upload_status_red'>".$row['status']."</span>";
-                                                }
-                                            ?>
-                                        </span>
-                                    </p>
-                                    <?php
-                                            }
-                                        }
-                                        else {
-                                            echo "<script>document.getElementById('requirement_container').style.display = 'none';</script>";
-                                        }
-                                    ?>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="profile_right_section">
-                                    <?php
-                                        $sql = "SELECT * FROM student_tbl WHERE student_id = '$student_id'";
-                                        $result = $conn->query($sql);
-                                          if($result->num_rows > 0) {
-                                            while ($row=$result->fetch_assoc()) {
-                                    ?>
-                                    <table class="table table-striped table-responsive-md">
-                                        <thead>
-                                            <th colspan="3">Student Information</th>
-                                        </thead>
-                                        <tr>
-                                            <td>Full Name:</td>
-                                            <td colspan="2"><span><?php echo $row['lname']." ,".$row['fname']." ".$row['mname'];?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>ID Number:</td>
-                                            <td colspan="2"><span><?php echo $row['id_number'];?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Gender:</td>
-                                            <td colspan="2"><span><?php echo $row['gender'];?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Birthdate:</td>
-                                            <td colspan="2"><span><?php echo $row['b_date'];?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Current Address:</td>
-                                            <td colspan="2"><span><?php echo $row['address'];?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Email:</td>
-                                            <td colspan="2"><span><?php echo $row['email'];?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Number:</td>
-                                            <td colspan="2"><span><?php echo $row['phoneNum'];?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Guardian's Name:</td>
-                                            <td colspan="2"><span><?php echo $row['guardian_name'];?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Guardian's Contact:</td>
-                                            <td colspan="2"><span><?php echo $row['guardian_contact'];?></span></td>
-                                        </tr>
-                                    </table>
-                                    <?php
-                                            }
-                                        }
-                                        else {
-                                            echo "<center><h1 class='error_msg'>Information unavailable</h1></center>";
-                                        }
-                                    ?>
-
-                                    <form action="../php/profilePHP.php" method="POST" id="upd_student_cred_form">
-                                        <?php
-                                        $sql = "SELECT * FROM student_tbl WHERE student_id = '$student_id'";
-                                        $result = $conn->query($sql);
-                                          if($result->num_rows > 0) {
-                                            while ($row=$result->fetch_assoc()) {
-                                    ?>
-                                        <input type="hidden" name="student_id" value="<?php echo $_SESSION['student_id'];?>">
-                                        <table class="table table-striped table-responsive-md">
-                                            <thead>
-                                                <th colspan="3">
-                                                    Student's Account Information
-                                                    <center>
-                                                        <?php if (isset($_GET['error_msg'])) { ?>
-                                                          <p class="error_msg mt-3 mb-2"><?php echo $_GET['error_msg'];?></p>
-                                                        <?php } ?>
-                                                        <?php if (isset($_GET['success_upd_cred'])) { ?>
-                                                          <p class="success_msg mt-3 mb-2"><?php echo $_GET['success_upd_cred']; ?></p>
-                                                        <?php } ?>
-                                                    </center>
-                                                </th>
-                                            </thead>
-                                            <tr>
-                                                <td>Username:</td>
-                                                <td colspan="2"><span><?php echo $row['id_number'];?></span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Password:</td>
-                                                <td colspan="2"><span><?php echo $row['password'];?></span></td>
-                                            </tr>
-                                                <tr>
-                                                    <td>Change Password:</td>
-                                                    <td colspan="2">
-                                                        <div class="control-form">
-                                                            <input type="password" class="form-control" placeholder="Enter Password" name="password" id="password" required>
-                                                            <small>error</small>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Confirm New Password:</td>
-                                                    <td colspan="2">
-                                                        <div class="control-form">
-                                                            <input type="password" class="form-control" placeholder="Confirm New Password" name="confirmPass" id="confirmPass" required>
-                                                            <small>error</small>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                        </table>
-                                        <?php
-                                                }
-                                            }
-                                            else {
-                                                echo "<center><h1 class='error_msg'>Credential unavailable</h1></center>";
-                                            }
-                                        ?>
-                                        <input type="submit" name="change_passBtn" value="Confirm Changes" class="btn btn-success">
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -347,7 +407,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         <a href="https://www.facebook.com/UCUOfficial" target="_blank"><i class="fab fa-facebook-f"> </i></a>
                                         <a href="https://www.youtube.com/c/UcuEduPhOfficial" target="_blank"><i style="padding-right: 25px;" class="fab fa-youtube"> </i></a>
                                         <a href="https://www.instagram.com/ucuofficial/" target="_blank"><i class="fab fa-instagram"> </i></a>
-                                        <a href="https://mis.ucu.edu.ph" target="_blank"><p>UCU-MIS+ 2022</p></a>
+                                        <!-- <a href="https://mis.ucu.edu.ph" target="_blank"><p>UCU-MIS+ 2022</p></a> -->
                                     </div>
                                 </div>
                             </div>
@@ -379,7 +439,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
 <?php
 } 
 else {
-  header("Location: ../login.php");
+  header("Location: ../user_login.php");
   exit();
 }
 
