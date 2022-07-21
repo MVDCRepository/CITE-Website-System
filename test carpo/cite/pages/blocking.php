@@ -20,6 +20,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
+        <link rel="icon" href="../images/cite_logo.png">
         <!-- bootstrap css -->
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -202,17 +203,17 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                         blocking_tbl.yr_lvl,
                                                         blocking_tbl.sem,
 
-                                                        student_tbl.student_id,
-                                                        student_tbl.fname,
-                                                        student_tbl.mname,
-                                                        student_tbl.lname
+                                                        student_pri_info_tbl.student_id,
+                                                        student_pri_info_tbl.fname,
+                                                        student_pri_info_tbl.mname,
+                                                        student_pri_info_tbl.lname
 
                                                         FROM reserve_block_tbl
 
                                                         INNER JOIN blocking_tbl ON blocking_tbl.block_id = reserve_block_tbl.block_id
-                                                        INNER JOIN student_tbl ON student_tbl.student_id = reserve_block_tbl.student_id
+                                                        INNER JOIN student_pri_info_tbl ON student_pri_info_tbl.student_id = reserve_block_tbl.student_id
 
-                                                        WHERE student_tbl.student_id = '$student_id' AND reserve_block_tbl.status = 'Pending'";
+                                                        WHERE student_pri_info_tbl.student_id = '$student_id' AND reserve_block_tbl.status = 'Pending'";
                                                 $result = $conn->query($sql);
                                                   if($result->num_rows > 0) {
                                                     while ($row=$result->fetch_assoc()) {
@@ -271,43 +272,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                 </div>
                 <!--End Content Section -------------------------------->
                 <!--Start Footer Section ------------------------------->
-                <div class="footer mt-5">
-                    <div class="footer_container">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="map_icon">
-                                        <a href="index.php"><img src="../images/cite_logo.png"></a>
-                                        <a href="https://ucu.edu.ph" target="_blank"><img src="../images/ucu_mis_logo.png"></a>
-                                        <h4>Contact Us:</h4>
-                                        <h5><i class="bi bi-geo-alt"></i>1 San Vicente West Urdaneta City Pangasinan 2428</h5>
-                                        <h5><i class="bi bi-telephone"></i>(075) 204-9020</h5>
-                                        <h5><i class="bi bi-envelope"></i>univpresidentofficial@gmail.com</h5>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="map_icon">
-                                        <h2>Quick Links</h2>
-                                        <ul>
-                                            <li><a href="#">Announcements</a></li>
-                                            <li><a href="news_and_events.php">News and Events</a></li>
-                                            <li><a href="about.php">About</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="map_icon">
-                                        <h2>Follow UCU</h2>
-                                        <a href="https://www.facebook.com/UCUOfficial" target="_blank"><i class="fab fa-facebook-f"> </i></a>
-                                        <a href="https://www.youtube.com/c/UcuEduPhOfficial" target="_blank"><i style="padding-right: 25px;" class="fab fa-youtube"> </i></a>
-                                        <a href="https://www.instagram.com/ucuofficial/" target="_blank"><i class="fab fa-instagram"> </i></a>
-                                        <a href="https://mis.ucu.edu.ph" target="_blank"><p>UCU-MIS+ 2022</p></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php include 'footer.php';?>
                 <!--End Footer Section --------------------------------->
                 <!--Start Copyright Section ---------------------------->
                 <div class="copyright">
