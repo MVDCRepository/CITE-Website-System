@@ -32,6 +32,30 @@
     .profile_left_section {float: none;}
     .profile_right_section {float: none;}
     .profile_title {margin: 0; width: 50%;}
+    .health_df_cont {width: 100%; margin: 15px 0;}
+    .health_df_header {padding: 15px 0;}
+    .health_df_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .health_df_header h1 {font-size: 12px;}
+    .health_df_header h2 {font-size: 10px;}
+    .health_df_header h3 {font-size: 10px;}    
+    .temp_cont h1 {margin-top: 25px;}
+    .illness_section { overflow-x: auto; width: 100%;}
+    .illness_section table tr td {font-size: 8px;}
+    .illness_section table tr td p {font-size: 8px; width: 100px;}
+    .com_undertake_cont {width: 100%; margin: 15px 0;}
+    .com_undertake_header {padding: 15px 0;}
+    .com_undertake_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .com_undertake_header h1 {font-size: 12px;}
+    .com_undertake_header h2 {font-size: 10px;}
+    .com_undertake_header h3 {font-size: 10px;}
+    .com_undertake_confirmation {float: none;}
+    .cert_consent_cont {width: 100%; margin: 15px 0;}
+    .cert_consent_header {padding: 15px 0;}
+    .cert_consent_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .cert_consent_header h1 {font-size: 12px;}
+    .cert_consent_header h2 {font-size: 10px;}
+    .cert_consent_header h3 {font-size: 10px;}
+    .com_undertake_confirmation {float: none;} 
 }
 
 /*------------------------------------------------------------------- 599px x 280px ---------------------------------------------------------------------*/
@@ -91,6 +115,18 @@
     .bnner_title { font-size: 34pt; }
     #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 1000px;}
     .mission_vision_cont {padding: 0; margin-left: -2px; padding: 15px; height: 320px;}
+    .health_df_cont {width: 100%; margin: 15px 0;}
+    .health_df_header {padding: 15px 0;}
+    .health_df_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .health_df_header h1 {font-size: 12px;}
+    .health_df_header h2 {font-size: 10px;}
+    .health_df_header h3 {font-size: 10px;}    
+    .temp_cont h1 {margin-top: 25px;}
+    .illness_section { overflow-x: auto; width: 100%;}
+    .illness_section table{ width: 100%;}
+    .illness_section table tr td {font-size: 8px;}
+    .illness_section table tr td p {font-size: 8px; width: 100px;}
+    
 }
 
 @media (min-width:576px) and (max-width:767px) {
@@ -134,6 +170,31 @@
     .item_container p { max-height: 100%; text-align: left; }
     .availability { margin-top: -60px;}
     #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 1000px;}
+    .health_df_cont {width: 100%; margin: 15px 0;}
+    .health_df_header {padding: 15px 0;}
+    .health_df_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .health_df_header h1 {font-size: 12px;}
+    .health_df_header h2 {font-size: 10px;}
+    .health_df_header h3 {font-size: 10px;}    
+    .temp_cont h1 {margin-top: 25px;}
+    .illness_section { overflow-x: auto; width: 100%;}
+    .illness_section table{ width: 100%;}
+    .illness_section table tr td {font-size: 8px;}
+    .illness_section table tr td p {font-size: 8px; width: 100px;}
+    .com_undertake_cont {width: 100%; margin: 15px 0;}
+    .com_undertake_header {padding: 15px 0;}
+    .com_undertake_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .com_undertake_header h1 {font-size: 12px;}
+    .com_undertake_header h2 {font-size: 10px;}
+    .com_undertake_header h3 {font-size: 10px;}
+    .com_undertake_confirmation {float: none;}
+    .cert_consent_cont {width: 100%; margin: 15px 0;}
+    .cert_consent_header {padding: 15px 0;}
+    .cert_consent_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .cert_consent_header h1 {font-size: 12px;}
+    .cert_consent_header h2 {font-size: 10px;}
+    .cert_consent_header h3 {font-size: 10px;}
+    .com_undertake_confirmation {float: none;} 
 }
 
 @media (max-width:575px) {
@@ -148,7 +209,7 @@
     .card-list { padding: 0; margin-top: 25px; }
     .card-list .row .col-md-6 { width: 50%; }
     .card-list img { width: 45px; }
-    .card-list .btn_main { float: !important }
+    .card-list .btn_main { float: none !important }
     .btn-primary { max-width: 126px; margin-right: 2px; font-size: 14px; }
     .banner-main .carousel-caption h1 { font-size: 30px; line-height: 38px; }
     .titlepage h2 { font-size: 27px; }
@@ -219,8 +280,23 @@
     .health_df_header h3 {font-size: 10px;}    
     .temp_cont h1 {margin-top: 25px;}
     .illness_section { overflow-x: auto; width: 100%;}
+    .illness_section table{ width: 100%;}
     .illness_section table tr td {font-size: 8px;}
     .illness_section table tr td p {font-size: 8px; width: 100px;}
+    .com_undertake_cont {width: 100%; margin: 15px 0;}
+    .com_undertake_header {padding: 15px 0;}
+    .com_undertake_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .com_undertake_header h1 {font-size: 12px;}
+    .com_undertake_header h2 {font-size: 10px;}
+    .com_undertake_header h3 {font-size: 10px;}
+    .com_undertake_confirmation {float: none;}
+    .cert_consent_cont {width: 100%; margin: 15px 0;}
+    .cert_consent_header {padding: 15px 0;}
+    .cert_consent_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .cert_consent_header h1 {font-size: 12px;}
+    .cert_consent_header h2 {font-size: 10px;}
+    .cert_consent_header h3 {font-size: 10px;}
+    .com_undertake_confirmation {float: none;}    
 }
 
 /*******SLIDER EVENTS*********/
