@@ -4,8 +4,7 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=latin-ext');
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
-
-/*****---------------------------------------- 1) font-family: 'Rajdhani', sans-serif;
+@import "https: //cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css";/*****---------------------------------------- 1) font-family: 'Rajdhani', sans-serif;
  2) font-family: 'Poppins', sans-serif;
  ----------------------------------------*****/
 
@@ -16,6 +15,7 @@
 @import url(owl.carousel.min.css);
 @import url(slick.css);
 @import url(jquery-ui.css);
+
 @import url(nice-select.css)
 
 /*--------------------------------------------------------------------- skeleton ---------------------------------------------------------------------*/
@@ -47,12 +47,7 @@ a {
 	transition: all .3s ease-in-out;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
 	letter-spacing: 0;
 	font-weight: normal;
 	position: relative;
@@ -86,20 +81,13 @@ h6 {
 	font-size: 13px
 }
 
-*,
-*::after,
-*::before {
+*, *::after, *::before {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
-h1 a,
-h2 a,
-h3 a,
-h4 a,
-h5 a,
-h6 a {
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 	color: #212121;
 	text-decoration: none !important;
 	opacity: 1;
@@ -109,9 +97,7 @@ button:focus {
 	outline: none;
 }
 
-ul,
-li,
-ol {
+ul, li, ol {
 	margin: 0px;
 	padding: 0px;
 }
@@ -162,13 +148,12 @@ a {
 	height: auto;
 }
 
-ul .nav-item .nav-link,
-.header a {
+ul .nav-item .nav-link, .header a {
 	color: #222222 !important;
 }
 
 #nav-last {
-	margin-top: -6px; 
+	margin-top: -6px;
 	margin-left: -65px;
 }
 
@@ -293,7 +278,7 @@ ul .nav-item .nav-link,
 	float: left;
 }
 
-.navbar-nav.lg-auto li.last{
+.navbar-nav.lg-auto li.last {
 	float: right;
 }
 
@@ -398,24 +383,17 @@ ul .nav-item .nav-link,
 	transition: 0.5s;
 }
 
-.programs_offered_1:hover,
-.programs_offered_2:hover {
+.programs_offered_1:hover, .programs_offered_2:hover {
 	transform: translateY(-5px);
 	cursor: pointer;
 }
 
-.programs_offered_1 i,
-.programs_offered_1 h1,
-.programs_offered_1 p,
-.programs_offered_2 i,
-.programs_offered_2 h1,
-.programs_offered_2 p {
+.programs_offered_1 i, .programs_offered_1 h1, .programs_offered_1 p, .programs_offered_2 i, .programs_offered_2 h1, .programs_offered_2 p {
 	background: transparent;
 	color: white;
 }
 
-.programs_offered_1 .btn_main,
-.programs_offered_2 .btn_main {
+.programs_offered_1 .btn_main, .programs_offered_2 .btn_main {
 	float: left;
 }
 
@@ -555,7 +533,6 @@ ul .nav-item .nav-link,
 	overflow: hidden;
 }
 
-
 .blog-slider__img img {
 	width: 100%;
 	height: 100%;
@@ -620,8 +597,7 @@ ul .nav-item .nav-link,
 	color: #000;
 }
 
-.copyright_text a:hover,
-.copyright_text a:focus {
+.copyright_text a:hover, .copyright_text a:focus {
 	color: #fff;
 }
 
@@ -751,8 +727,7 @@ button.main_bt {
 	border-radius: 35px;
 }
 
-#main_slider .carousel-control-prev,
-#main_slider .carousel-control-next {
+#main_slider .carousel-control-prev, #main_slider .carousel-control-next {
 	width: 62px;
 	height: 60px;
 	opacity: 1;
@@ -760,8 +735,7 @@ button.main_bt {
 	color: white;
 }
 
-#main_slider .carousel-control-prev,
-#main_slider .carousel-control-next {
+#main_slider .carousel-control-prev, #main_slider .carousel-control-next {
 	width: 62px;
 	height: 60px;
 	opacity: 1;
@@ -771,13 +745,11 @@ button.main_bt {
 	top: 40% !important;
 }
 
-#main_slider .carousel-control-next:hover,
-#main_slider .carousel-control-next:focus {
+#main_slider .carousel-control-next:hover, #main_slider .carousel-control-next:focus {
 	transform: translateX(10px);
 }
 
-#main_slider .carousel-control-prev:hover,
-#main_slider .carousel-control-prev:focus {
+#main_slider .carousel-control-prev:hover, #main_slider .carousel-control-prev:focus {
 	transform: translateX(-10px);
 }
 
@@ -793,6 +765,10 @@ button.main_bt {
 	height: 250px;
 	padding-top: 20px;
 	background-size: cover;
+}
+
+.banner_news_events span {
+	font-weight: 100;
 }
 
 .titlepage-h1-news_events {
@@ -910,23 +886,18 @@ button.main_bt {
 	line-height: 25px;
 }
 
-.previous-page,
-.next-page {
+.previous-page, .next-page {
 	color: #2222;
 	width: 80px;
 	border-radius: 50px;
 }
 
-.current-page,
-.dots {
+.current-page, .dots {
 	background: #ccc;
 	width: 45px;
 }
 
-.pagination > li > a:focus,
-.pagination > li > a:hover,
-.pagination > li > span:focus,
-.pagination > li > span:hover {
+.pagination > li > a:focus, .pagination > li > a:hover, .pagination > li > span:focus, .pagination > li > span:hover {
 	color: #8c8c8c;
 	background-color: #eee;
 	border-color: #ddd;
@@ -988,9 +959,7 @@ button.main_bt {
 	overflow-x: scroll;
 }
 
-.events-section ul,
-.events-section ol,
-.events-section li {
+.events-section ul, .events-section ol, .events-section li {
 	list-style: none;
 }
 
@@ -1057,7 +1026,7 @@ button.main_bt {
 }
 
 /************ About Area ********************/
-.mission_vision_section{
+.mission_vision_section {
 	width: 100%;
 	box-shadow: 0px 0px 10px 0px;
 	color: white;
@@ -1084,7 +1053,7 @@ button.main_bt {
 	text-align: center;
 }
 
-.obj_section{
+.obj_section {
 	margin-bottom: 50px;
 }
 
@@ -1153,6 +1122,7 @@ button.main_bt {
 	font-weight: bold;
 	color: #222222;
 }
+
 /************ Grades View Area ********************/
 .year_title_view {
 	font-size: 18px;
@@ -1169,7 +1139,7 @@ button.main_bt {
 	overflow-x: auto;
 }
 
-.grades-content-view th{
+.grades-content-view th {
 	text-align: center;
 	font-size: 12px;
 }
@@ -1182,7 +1152,6 @@ button.main_bt {
 	margin: 15px;
 	float: right;
 }
-
 
 /************ Grades Area ********************/
 .grades-section {
@@ -1199,12 +1168,12 @@ button.main_bt {
 	width: 100%;
 }
 
-.grades-section th, .grades-section td{
-  border: 1px solid black;
-  font-size: 6px;
-  color: black;
-  border-spacing: 0;
-  border-collapse: collapse;
+.grades-section th, .grades-section td {
+	border: 1px solid black;
+	font-size: 6px;
+	color: black;
+	border-spacing: 0;
+	border-collapse: collapse;
 }
 
 .grades-section th {
@@ -1363,10 +1332,8 @@ button.main_bt {
 	margin-top: -10px;
 }
 
-
 /********** View Item Area ******************/
-
-.item_container{
+.item_container {
 	margin-left: 50px;
 	margin-right: 50px;
 	margin-bottom: 50px;
@@ -1377,7 +1344,7 @@ button.main_bt {
 	float: left;
 }
 
-.item_container img{
+.item_container img {
 	max-width: 100%;
 	width: 100%;
 	height: auto;
@@ -1385,27 +1352,26 @@ button.main_bt {
 	box-shadow: 0px 0px 5px 0px;
 }
 
-.item_container p, .item_container h1{
+.item_container p, .item_container h1 {
 	text-align: left;
 }
 
-.item_container h1{
+.item_container h1 {
 	font-weight: 700;
 	letter-spacing: 1px;
 }
 
-.item_container p{
+.item_container p {
 	max-height: 400px;
 	overflow-y: auto;
 }
-
 
 .more-news-container {
 	margin-left: 50px;
 	margin-right: 50px;
 }
 
-.more-news-container h3{
+.more-news-container h3 {
 	font-weight: 600;
 	letter-spacing: 1px;
 	margin-bottom: -20px;
@@ -1421,9 +1387,7 @@ button.main_bt {
 	padding-bottom: 20px;
 }
 
-.more-news-slider ul,
-.more-news-slider ol,
-.more-news-slider li {
+.more-news-slider ul, .more-news-slider ol, .more-news-slider li {
 	list-style: none;
 }
 
@@ -1476,10 +1440,7 @@ button.main_bt {
 	margin-top: -10px;
 }
 
-
 /************ Faculty Area ********************/
-
-
 .container_faculty {
 	width: 100%;
 	display: flex;
@@ -1520,7 +1481,6 @@ button.main_bt {
 	line-height: 30px;
 }
 
-
 .timeline-content p {
 	font-size: 16px;
 	line-height: 30px;
@@ -1535,7 +1495,7 @@ button.main_bt {
 	color: #222222;
 }
 
-.timeline-content img{
+.timeline-content img {
 	width: 100%;
 	margin-top: -70px;
 }
@@ -1554,11 +1514,11 @@ button.main_bt {
 	text-align: center;
 	border-bottom: 1px solid #000;
 	width: 22%;
-	margin: 0 auto;	
+	margin: 0 auto;
 	font-weight: bold;
 }
 
-.profile_left_section{
+.profile_left_section {
 	box-shadow: 1px 0px 10px rgba(34, 35, 58, 0.2);
 	margin: auto;
 	float: right;
@@ -1611,12 +1571,12 @@ button.main_bt {
 }
 
 .upload_status {
-	color: red; 
+	color: red;
 	margin-left: 100px;
 	float: right;
 }
 
-.profile_right_section{
+.profile_right_section {
 	margin-bottom: 20px;
 	float: left;
 	text-align: center;
@@ -1626,14 +1586,14 @@ button.main_bt {
 
 .profile_right_section::-webkit-scrollbar {
 	height: auto;
-  	width: 8px;
-  	border: 1px solid #8c8c8c;
-  	border-radius: 10px;
+	width: 8px;
+	border: 1px solid #8c8c8c;
+	border-radius: 10px;
 }
 
-.profile_right_section::-webkit-scrollbar-thumb:vertical{
-    background: #222222;
-    border-radius: 10px;
+.profile_right_section::-webkit-scrollbar-thumb:vertical {
+	background: #222222;
+	border-radius: 10px;
 }
 
 .profile_right_section span {
@@ -1641,7 +1601,6 @@ button.main_bt {
 }
 
 /************ Blocking Area ********************/
-
 .blocking_content {
 	box-shadow: 1px 0px 10px rgba(34, 35, 58, 0.2);
 	margin: 20px;
@@ -1660,18 +1619,14 @@ button.main_bt {
 	margin-top: -10px;
 }
 
-
 /************ Footer Area ********************/
-
 .footer {
 	width: 100%;
 	background-color: #222222;
 	height: auto;
 }
 
-.footer ul,
-.footer ol,
-.footer li {
+.footer ul, .footer ol, .footer li {
 	list-style: none;
 	width: 90%;
 }
@@ -1826,4 +1781,469 @@ button.main_bt {
 
 .reg_content h5, .reg_content label {
 	font-weight: 600;
+}
+
+/********* Academics Area **************/
+
+/*********** BSIT Area *****************/
+
+.bsit_cont {
+	width: 100%;
+	box-shadow: 0px 1px 2px;
+	border-radius: 10px;
+	text-align: left;
+	margin: 20px;
+	padding: 20px;
+}
+
+.bsit_cont h1 {
+	font-size: 18px;
+	font-weight: 700;
+	width: 25%;
+	padding-left: 10px;
+	padding-top: 10px;
+	border-left: 1px solid #222222;
+	border-bottom: 1px solid #222222;
+	border-bottom-left-radius: 15px;
+}
+
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.popup {
+	padding: 30px 50px;
+	background: #222222;
+	border-radius: 10px;
+	box-sizing: border-box;
+	z-index: 2;
+	text-align: center;
+	opacity: 0;
+	top: -200%;
+	transform: translate(-50%, -50%) scale(0.5);
+	transition: opacity 300ms ease-in-out, top 1000ms ease-in-out, transform 1000ms ease-in-out;
+	color: white;
+}
+
+.popup.active {
+	position: absolute;
+	opacity: 1;
+	top: 100%;
+	transform: translate(-50%, -50%) scale(1);
+	transition: transform 300ms cubic-bezier(0.18, 0.89, 0.43, 1.19);
+}
+
+.popup .icon {
+	margin: 5px 0px;
+	width: 50px;
+	height: 50px;
+	border: 2px solid #34f234;
+	text-align: center;
+	display: inline-block;
+	border-radius: 50%;
+	line-height: 60px;
+}
+
+.popup .icon i.fa {
+	font-size: 30px;
+	color: white;
+}
+
+.popup .title {
+	margin: 5px 0px;
+	font-size: 30px;
+	font-weight: 600;
+}
+
+.popup .description {
+	color: white;
+	font-size: 15px;
+	padding: 5px;
+	margin: 20px;
+}
+
+.popup .applicant-btn {
+	margin-top: 15px;
+}
+
+.popup .applicant-btn button {
+	padding: 10px 20px;
+	background: #111;
+	color: #f5f5f5;
+	border: 2px solid #111;
+	font-size: 16px;
+	font-weight: 600;
+	outline: none;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: all 300ms ease-in-out;
+}
+
+.popup .applicant-btn button:hover {
+	color: #111;
+	background: #f5f5f5;
+}
+
+.popup > div {
+	position: relative;
+	top: 10px;
+	opacity: 0;
+}
+
+.popup.active > div {
+	top: 0px;
+	opacity: 1;
+}
+
+.popup.active .icon {
+	transition: all 300ms ease-in-out 250ms;
+}
+
+.popup.active .title {
+	transition: all 300ms ease-in-out 300ms;
+}
+
+.popup.active .description {
+	transition: all 300ms ease-in-out 350ms;
+}
+
+.popup.active .dismiss-btn {
+	transition: all 300ms ease-in-out 400ms;
+}
+
+/********* Health Declaration Area **************/
+.health_df_cont {
+	font-family: arial;
+	width: 60%;
+	border: 2px solid black;
+	float: left;
+	margin: 2% 20%;
+}
+
+.health_df_header {
+	align-items: center;
+	align-content: center;
+	display: flex;
+  	justify-content: space-evenly;
+  	padding: 20px;
+  	text-align: center;
+}
+
+.health_df_header img {
+	width: 70px;
+	height: 70px;
+}
+
+.health_df_header h1 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.health_df_header h2 {
+	font-size: 16px;
+}
+
+.health_df_header h3 {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.health_df_cont p {
+	font-size: 12px;
+}
+
+.health_df_input {
+	display: flex;
+	padding-right: 5%;
+	align-items: center;
+}
+
+.health_df_input input {
+	border: 0;
+  	outline: 0;
+  	background: transparent;
+  	border-bottom: 1px solid black;
+  	width: 100%;
+  	margin-bottom: 2px;
+  	margin-left: 2px;
+  	font-size: 12px;
+}
+
+.health_df_input label {
+	white-space: nowrap;
+	font-size: 12px;
+	margin: 0;
+}
+
+.health_df_student_info {
+	padding: 20px;
+}
+
+.health_df_student_info p {
+	margin: 10px 0;
+}
+
+.health_df_input_purpose {
+	padding: 0 30px;
+}
+
+.health_df_input_purpose p {
+	padding: 0;
+}
+
+.health_df_input_purpose label, .health_df_input_purpose input {
+	font-size: 12px;
+	margin: 0;
+}
+
+.temp_cont h1 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.temp_cont p {
+	 font-size: 12px;
+	 margin: 0;
+}
+
+.temp_box {
+	width: 100px;
+	height: 100px;
+	border: 2px solid black;
+}
+
+.illness_section{
+	margin: 5px;
+}
+
+.illness_section table, .illness_section td, .illness_section tr {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+.illness_section table tr td {
+	padding: 5px 10px;
+}
+
+.illness_section table tr td p {
+	width: 250px;
+}
+
+.illness_section table tr td input {
+	border: 0;
+  	outline: 0;
+  	background: transparent;
+  	border-bottom: 1px solid black;
+  	margin-bottom: 2px;
+  	margin-left: 2px;
+  	font-size: 12px;
+}
+
+.health_df_confirmation {
+	font-size: 14px;
+	text-align: center;
+}
+
+.custom_breakline {
+	width: 250px;
+	border-bottom: 2px solid black;
+	text-align: center;
+	margin: auto;
+}
+
+.health_df_confirmation h4 {
+	font-size: 14px;
+	text-align: center;
+	margin: 5px;
+}
+
+/********* Commitment of Undertaking Area **************/
+.com_undertake_cont {
+	font-family: arial;
+	width: 60%;
+	border: 2px solid black;
+	float: left;
+	margin: 2% 20%;
+}
+
+.com_undertake_header {
+	align-items: center;
+	align-content: center;
+	display: flex;
+  	justify-content: space-evenly;
+  	padding: 20px;
+  	text-align: center;
+}
+
+.com_undertake_header img {
+	width: 70px;
+	height: 70px;
+	margin-top: -40px;
+}
+
+.com_undertake_header h1 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.com_undertake_header h2 {
+	font-size: 16px;
+	font-weight: 700;
+	margin-top: 20px;
+}
+
+.com_undertake_header h3 {
+	font-size: 10px;
+	font-weight: 800;
+}
+
+.com_undertake_cont p {
+	font-size: 12px;
+}
+
+.dos_section {
+	margin-left: 2%;
+	width: 95%;
+}
+
+.dos_section h1 {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.dos_section ol {
+	margin-left: 15px;
+}
+
+.dos_section li {
+	margin: 0;
+	line-height: 20px;
+	font-size: 12px;
+}
+
+.donts_section {
+	margin-left: 2%;
+	width: 95%;
+}
+
+.donts_section h1 {
+	margin-top: 20px;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.donts_section ol {
+	margin-left: 15px;
+}
+
+.donts_section li {
+	margin: 0;
+	line-height: 20px;
+	font-size: 12px;
+}
+
+.donts_section table {
+	margin-left: 5%;
+}
+
+.donts_section td {
+	width: 300px;
+	margin-right: 20px;
+}
+
+.com_undertake_confirmation {
+	margin-top: 50px;
+	float: right;
+	font-size: 14px;
+	text-align: center;
+}
+
+.com_undertake_confirmation h4 {
+	font-size: 14px;
+	text-align: center;
+	margin: 5px;
+}
+
+/********* Certificate of Concent Area **************/
+.cert_consent_cont {
+	width: 60%;
+	border: 2px solid black;
+	float: left;
+	margin: 2% 20%;
+}
+
+.cert_consent_header {
+	align-items: center;
+	align-content: center;
+	display: flex;
+  	justify-content: space-evenly;
+  	padding: 20px;
+  	text-align: center;
+}
+
+.cert_consent_header img {
+	width: 70px;
+	height: 70px;
+	margin-top: -40px;
+}
+
+.cert_consent_header h1 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.cert_consent_header h2 {
+	font-size: 16px;
+	font-weight: 700;
+	margin-top: 20px;
+}
+
+.cert_consent_header h3 {
+	font-size: 10px;
+	font-weight: 800;
+}
+
+.cert_consent_cont p {
+	font-size: 14px;
+}
+
+.cert_content_section {
+	margin-left: 2%;
+	width: 95%;
+}
+
+.cert_content_section h1 {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.cert_content_section ol {
+	margin-left: 15px;
+}
+
+.cert_content_section li {
+	margin: 0;
+	line-height: 20px;
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+.com_undertake_confirmation {
+	margin-top: 50px;
+	float: right;
+	font-size: 14px;
+	text-align: center;
+}
+
+.com_undertake_confirmation h4 {
+	font-size: 14px;
+	text-align: center;
+	margin: 5px;
+}
+
+.cert_content_section label{
+	margin: 0;
 }
