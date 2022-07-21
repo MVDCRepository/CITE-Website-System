@@ -18,7 +18,6 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="../images/cite_logo.png">
         <!-- bootstrap css -->
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -85,7 +84,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                     <li class="nav-item">
                                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">ACADEMICS</a>
                                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
-                                                            <a class="dropdown-item" href="#">BSIT</a>
+                                                            <a class="dropdown-item" href="acad_bsit.php">BSIT</a>
                                                             <div class="dropdown-divider"></div>
                                                             <a class="dropdown-item" href="#">BLIS</a>
                                                         </div>
@@ -347,8 +346,9 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                             <center><a href="news_and_events.php" class="blog-slider__button mb-3">View All News & Events</a></center>
                         </div>
                         <!--End Events Section --------------------------------->
+                        <!--start footer Section --------------------------------->
                         <?php include 'footer.php';?>
-                        
+                        <!--End footer Section --------------------------------->
                             <!--Start Copyright Section ---------------------------->
                             <div class="copyright">
                                 <div class="container">

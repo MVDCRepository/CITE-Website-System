@@ -2103,3 +2103,281 @@ th {
     font-weight: bold;
     text-align: -internal-center;
 }
+
+/********* Academics Area **************/
+
+/*********** BSIT Area *****************/
+
+.bsit_cont {
+	width: 100%;
+	box-shadow: 0px 1px 2px;
+	border-radius: 10px;
+	text-align: left;
+	margin: 20px;
+	padding: 20px;
+}
+
+.bsit_cont h1 {
+	font-size: 18px;
+	font-weight: 700;
+	width: 25%;
+	padding-left: 10px;
+	padding-top: 10px;
+	border-left: 1px solid #222222;
+	border-bottom: 1px solid #222222;
+	border-bottom-left-radius: 15px;
+}
+
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.popup {
+	padding: 30px 50px;
+	background: #222222;
+	border-radius: 10px;
+	box-sizing: border-box;
+	z-index: 2;
+	text-align: center;
+	opacity: 0;
+	top: -200%;
+	transform: translate(-50%, -50%) scale(0.5);
+	transition: opacity 300ms ease-in-out, top 1000ms ease-in-out, transform 1000ms ease-in-out;
+	color: white;
+}
+
+.popup.active {
+	position: absolute;
+	opacity: 1;
+	top: 100%;
+	transform: translate(-50%, -50%) scale(1);
+	transition: transform 300ms cubic-bezier(0.18, 0.89, 0.43, 1.19);
+}
+
+.popup .icon {
+	margin: 5px 0px;
+	width: 50px;
+	height: 50px;
+	border: 2px solid #34f234;
+	text-align: center;
+	display: inline-block;
+	border-radius: 50%;
+	line-height: 60px;
+}
+
+.popup .icon i.fa {
+	font-size: 30px;
+	color: white;
+}
+
+.popup .title {
+	margin: 5px 0px;
+	font-size: 30px;
+	font-weight: 600;
+}
+
+.popup .description {
+	color: white;
+	font-size: 15px;
+	padding: 5px;
+	margin: 20px;
+}
+
+.popup .applicant-btn {
+	margin-top: 15px;
+}
+
+.popup .applicant-btn button {
+	padding: 10px 20px;
+	background: #111;
+	color: #f5f5f5;
+	border: 2px solid #111;
+	font-size: 16px;
+	font-weight: 600;
+	outline: none;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: all 300ms ease-in-out;
+}
+
+.popup .applicant-btn button:hover {
+	color: #111;
+	background: #f5f5f5;
+}
+
+.popup > div {
+	position: relative;
+	top: 10px;
+	opacity: 0;
+}
+
+.popup.active > div {
+	top: 0px;
+	opacity: 1;
+}
+
+.popup.active .icon {
+	transition: all 300ms ease-in-out 250ms;
+}
+
+.popup.active .title {
+	transition: all 300ms ease-in-out 300ms;
+}
+
+.popup.active .description {
+	transition: all 300ms ease-in-out 350ms;
+}
+
+.popup.active .dismiss-btn {
+	transition: all 300ms ease-in-out 400ms;
+}
+
+/********* Health Declaration Area **************/
+.health_df_cont {
+	font-family: arial;
+	width: 60%;
+	border: 2px solid black;
+	float: left;
+	margin: 2% 20%;
+}
+
+.health_df_header {
+	align-items: center;
+	align-content: center;
+	display: flex;
+  	justify-content: space-evenly;
+  	padding: 20px;
+  	text-align: center;
+}
+
+.health_df_header img {
+	width: 70px;
+	height: 70px;
+}
+
+.health_df_header h1 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.health_df_header h2 {
+	font-size: 16px;
+}
+
+.health_df_header h3 {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.health_df_cont p {
+	font-size: 12px;
+}
+
+.health_df_input {
+	display: flex;
+	padding-right: 5%;
+	align-items: center;
+}
+
+.health_df_input input {
+	border: 0;
+  	outline: 0;
+  	background: transparent;
+  	border-bottom: 1px solid black;
+  	width: 100%;
+  	margin-bottom: 2px;
+  	margin-left: 2px;
+  	font-size: 12px;
+}
+
+.health_df_input label {
+	white-space: nowrap;
+	font-size: 12px;
+	margin: 0;
+}
+
+.health_df_student_info {
+	padding: 20px;
+}
+
+.health_df_student_info p {
+	margin: 10px 0;
+}
+
+.health_df_input_purpose {
+	padding: 0 30px;
+}
+
+.health_df_input_purpose p {
+	padding: 0;
+}
+
+.health_df_input_purpose label, .health_df_input_purpose input {
+	font-size: 12px;
+	margin: 0;
+}
+
+.temp_cont h1 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.temp_cont p {
+	 font-size: 12px;
+	 margin: 0;
+}
+
+.temp_box {
+	width: 100px;
+	height: 100px;
+	border: 2px solid black;
+}
+
+.illness_section{
+	margin: 5px;
+}
+
+.illness_section table, .illness_section td, .illness_section tr {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+.illness_section table tr td {
+	padding: 5px 10px;
+}
+
+.illness_section table tr td p {
+	width: 250px;
+}
+
+.illness_section table tr td input {
+	border: 0;
+  	outline: 0;
+  	background: transparent;
+  	border-bottom: 1px solid black;
+  	margin-bottom: 2px;
+  	margin-left: 2px;
+  	font-size: 12px;
+}
+
+.health_df_confirmation {
+	font-size: 14px;
+	text-align: center;
+}
+
+.custom_breakline {
+	width: 250px;
+	border-bottom: 2px solid black;
+	text-align: center;
+	margin: auto;
+}
+
+.health_df_confirmation h4 {
+	font-size: 14px;
+	text-align: center;
+	margin: 5px;
+}
+
