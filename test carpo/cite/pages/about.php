@@ -18,6 +18,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
+        <link rel="icon" href="../images/cite_logo.png">
         <!-- bootstrap css -->
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -197,42 +198,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                         </div>
                         <!--End Evaluation Section ----------------------------->
                         <!--Start Footer Section ------------------------------->
-                        <div class="contact_main">
-                            <div class="contact_section_2">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="map_icon">
-                                                <img src="../images/ucu_logo.png">
-                                                <img src="../images/cite_logo.png">
-                                                <ul style="margin-top: 20px;">
-                                                    <li><a href="#">College of Information and Technology Education</a></li>
-                                                    <li><a href="#">Urdaneta City University</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="map_icon">
-                                                <h2>Quick Links</h2>
-                                                <ul>
-                                                    <li><a href="#">Announcements</a></li>
-                                                    <li><a href="#">News and Events</a></li>
-                                                    <li><a href="#">About</a></li>
-                                                    <li><a href="#">Faculty</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="map_icon">
-                                                <h2>Follow us:</h2>
-                                                <a href="#"><i class="fab fa-facebook-f"> </i></a>
-                                                <a href="#"><i class="fab fa-twitter"> </i></a>
-                                                <a href="#"><i class="fab fa-instagram"> </i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <?php include 'footer.php';?>
                             <!--End Footer Section --------------------------------->
                             <!--Start Copyright Section ---------------------------->
                             <div class="copyright">
