@@ -38,8 +38,7 @@
         integrity="sha512-VbPb+KrNIjcE5nM/Y+ZBvKvQF7+B/alQCQLPdIUAP3KsmDWkv0EdiyX4gfTwtJ3Sfais/nGJ0whTxjSwhQ1C8g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Jquery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- body -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <body>
     <div class="header_pages">
@@ -119,7 +118,7 @@
     </div>
     <!-- end header end -->
     <!--Start Content Section ----------------------------->
-    <form>
+    <form action="../php/health_df_php.php" method="POST" id="health_df_form" enctype="multipart/form-data">
         <div class="health_df_cont">
             <div class="container">
                 <div class="row">
@@ -144,31 +143,32 @@
                                     <div class="col-md-6">
                                         <div class="health_df_input">
                                             <label for="health_df_date">Date:</label>
-                                            <input type="text" id="health_df_date">
+                                            <input type="date" id="health_df_date" name="health_df_date" required>
                                         </div>
                                         <div class="health_df_input">
                                             <label for="health_df_name">Name:</label>
-                                            <input type="text" id="health_df_name">
+                                            <input type="text" id="health_df_name" name="health_df_name" required>
                                         </div>
                                         <div class="health_df_input">
                                             <label for="health_df_address">Address:</label>
-                                            <input type="text" id="health_df_address">
+                                            <input type="text" id="health_df_address" name="health_df_address" required>
                                         </div>
                                         <div class="health_df_input">
                                             <label for="health_df_contact">Contact Number:</label>
-                                            <input type="text" id="health_df_contact">
+                                            <input type="text" id="health_df_contact" name="health_df_contact" required>
                                         </div>
                                         <p>Purpose of Visit:</p>
                                         <div class="health_df_input_purpose">
-                                            <input type="checkbox" id="purpose_cb">
+                                            <input type="checkbox" id="purpose_cb" name="health_df_purpose[]"
+                                                value="Attend limited face-to-face classes" onclick="disableTextBox">
                                             <label for="purpose_cb">Attend limited face-to-face classes</label>
                                             <div class="health_df_input">
                                                 <label for="health_df_office">Office transaction:</label>
-                                                <input type="text" id="health_df_office">
+                                                <input type="text" id="health_df_office" name="health_df_purpose[]">
                                             </div>
                                             <div class="health_df_input">
                                                 <label for="health_df_others">Others:</label>
-                                                <input type="text" id="health_df_others">
+                                                <input type="text" id="health_df_others" name="health_df_purpose[]">
                                             </div>
                                         </div>
                                     </div>
@@ -207,93 +207,93 @@
                                 <tr>
                                     <td>a. Sore throat</td>
                                     <td>
-                                        <input type="radio" name="sore_throat" id="st_yes">
+                                        <input type="radio" name="sore_throat" id="st_yes" value="Yes">
                                     </td>
                                     <td>
-                                        <input type="radio" name="sore_throat" id="st_no">
+                                        <input type="radio" name="sore_throat" id="st_no" value="No">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>b. Shortness of Breath</td>
                                     <td>
-                                        <input type="radio" name="shortness_of_breath" id="sb_yes">
+                                        <input type="radio" name="shortness_of_breath" id="sb_yes" value="Yes">
                                     </td>
                                     <td>
-                                        <input type="radio" name="shortness_of_breath" id="sb_no">
+                                        <input type="radio" name="shortness_of_breath" id="sb_no" value="No">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>c. Body pains</td>
                                     <td>
-                                        <input type="radio" name="body_pain" id="bp_yes">
+                                        <input type="radio" name="body_pain" id="bp_yes" value="Yes">
                                     </td>
                                     <td>
-                                        <input type="radio" name="body_pain" id="bp_no">
+                                        <input type="radio" name="body_pain" id="bp_no" value="No">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>d. Headache</td>
                                     <td>
-                                        <input type="radio" name="headache" id="ha_yes">
+                                        <input type="radio" name="headache" id="ha_yes" value="Yes">
                                     </td>
                                     <td>
-                                        <input type="radio" name="headache" id="ha_no">
+                                        <input type="radio" name="headache" id="ha_no" value="No">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>e. Fever for the past few days</td>
                                     <td>
-                                        <input type="radio" name="fever" id="fvr_yes">
+                                        <input type="radio" name="fever" id="fvr_yes" value="Yes">
                                     </td>
                                     <td>
-                                        <input type="radio" name="fever" id="fvr_no">
+                                        <input type="radio" name="fever" id="fvr_no" value="No">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>f. Loss of taste or smell</td>
                                     <td>
-                                        <input type="radio" name="loss" id="lss_yes">
+                                        <input type="radio" name="loss" id="lss_yes" value="Yes">
                                     </td>
                                     <td>
-                                        <input type="radio" name="loss" id="lss_no">
+                                        <input type="radio" name="loss" id="lss_no" value="No">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>g. Cough and/or cold</td>
                                     <td>
-                                        <input type="radio" name="cough_cold" id="cc_yes">
+                                        <input type="radio" name="cough_cold" id="cc_yes" value="Yes">
                                     </td>
                                     <td>
-                                        <input type="radio" name="cough_cold" id="cc_no">
+                                        <input type="radio" name="cough_cold" id="cc_no" value="No">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>h. Diarrhea</td>
                                     <td>
-                                        <input type="radio" name="diarrhea" id="drh_yes">
+                                        <input type="radio" name="diarrhea" id="drh_yes" value="Yes">
                                     </td>
                                     <td>
-                                        <input type="radio" name="diarrhea" id="drh_no">
+                                        <input type="radio" name="diarrhea" id="drh_no" value="No">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">2. Have you worked together or stayed in the same close environment
                                         of a confirmed COVID-19 case?</td>
                                     <td>
-                                        <input type="radio" name="question_2" id="qstn_2_yes">
+                                        <input type="radio" name="question_2" id="qstn_2_yes" value="Yes">
                                     </td>
                                     <td>
-                                        <input type="radio" name="question_2" id="qstn_2_no">
+                                        <input type="radio" name="question_2" id="qstn_2_no" value="No">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">3. Have you had contact with anyone with cough, colds, fever, and
                                         sore throat?</td>
                                     <td>
-                                        <input type="radio" name="question_3" id="qstn_3_yes">
+                                        <input type="radio" name="question_3" id="qstn_3_yes" value="Yes">
                                     </td>
                                     <td>
-                                        <input type="radio" name="question_3" id="qstn_3_no">
+                                        <input type="radio" name="question_3" id="qstn_3_no" value="No">
                                     </td>
                                 </tr>
                                 <tr>
@@ -303,10 +303,10 @@
                                         <input type="text" name="question_4_where">
                                     </td>
                                     <td>
-                                        <input type="radio" name="question_4" id="qstn_4_yes">
+                                        <input type="radio" name="question_4" id="qstn_4_yes" value="Yes">
                                     </td>
                                     <td>
-                                        <input type="radio" name="question_4" id="qstn_4_no">
+                                        <input type="radio" name="question_4" id="qstn_4_no" value="No">
                                     </td>
                                 </tr>
                                 <tr>
@@ -316,32 +316,33 @@
                                         <input type="text" name="question_5_where">
                                     </td>
                                     <td>
-                                        <input type="radio" name="question_5" id="qstn_5_yes">
+                                        <input type="radio" name="question_5" id="qstn_5_yes" value="Yes">
                                     </td>
                                     <td>
-                                        <input type="radio" name="question_5" id="qstn_5_no">
+                                        <input type="radio" name="question_5" id="qstn_5_no" value="No">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">6. Are you considered fully vaccinated against covid-19?</td>
                                     <td>
-                                        <input type="radio" name="question_6" id="qstn_6_yes">
+                                        <input type="radio" name="question_6" id="qstn_6_yes" value="Yes">
                                     </td>
                                     <td>
-                                        <input type="radio" name="question_6" id="qstn_6_no">
+                                        <input type="radio" name="question_6" id="qstn_6_no" value="No">
                                     </td>
                                 </tr>
                             </table>
                         </div>
                         <div class="health_df_confirmation">
                             <p>I confirm that the above information is correct and accurate.</p>
-                            <input class="custom_upload" type="file" name="upload_signature" id="upload_signature">
+                            <input class="custom_upload" type="file" name="file">
                             <div class="custom_breakline"></div>
                             <h4>Signature</h4>
                         </div>
                     </div>
                 </div>
             </div>
+            <button style="margin: 10px;" type="submit" name="submit" class="btn btn-success">Submit</button>
         </div>
     </form>
     <!--End Content Section ------------------------------->

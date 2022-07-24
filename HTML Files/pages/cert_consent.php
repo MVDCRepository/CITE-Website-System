@@ -2,7 +2,7 @@
 session_start();
 include '../db_connect.php';
 $sel = "SELECT * FROM users WHERE fname = 'Raen Jercee';";
-$query = $con->query($sel);
+$query = $conn->query($sel);
 while ($row = $query -> fetch_assoc()) {
 ?>
 <!DOCTYPE html>
