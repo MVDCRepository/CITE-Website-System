@@ -7,7 +7,13 @@
 		$health_df_name = $_POST['health_df_name'];
 		$health_df_address = $_POST['health_df_address'];
 		$health_df_contact = $_POST['health_df_contact'];
-        $health_df_purpose = $_POST['health_df_purpose'];
+		// Purpose of visit
+        $purpose_f2f = $_POST['purpose_f2f'.','];
+        $health_df_office = $_POST['health_df_office'];
+        $health_df_office_text = $_POST['health_df_office_text'.','];
+		$health_df_others = $_POST['health_df_others'];
+        $health_df_others_text = $_POST['health_df_others_text'];
+		$health_df_purpose = $purpose_f2f . $health_df_office . $health_df_office_text . $health_df_others . $health_df_others_text;
 
         // Illnes Information
         // Question 1

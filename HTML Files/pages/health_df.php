@@ -40,6 +40,27 @@
     <!-- Jquery -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+    <script type="text/javascript">
+
+    function disableTextBoxOffice(health_df_office) {
+        var health_df_office_text = document.getElementById("health_df_office_text");
+        health_df_office_text.disabled = health_df_office.checked ? false : true;
+
+        if (!health_df_office_text.disabled) {
+            health_df_office_text.focus();
+        }
+    }
+
+    function disableTextBoxOthers(health_df_others) {
+        var health_df_others_text = document.getElementById("health_df_others_text");
+        health_df_others_text.disabled = health_df_others.checked ? false : true;
+
+        if (!health_df_others_text.disabled) {
+            health_df_others_text.focus();
+        }
+    }
+    </script>
+
 <body>
     <div class="header_pages">
         <div class="container">
@@ -159,18 +180,36 @@
                                         </div>
                                         <p>Purpose of Visit:</p>
                                         <div class="health_df_input_purpose">
-                                            <input type="checkbox" id="purpose_cb" name="health_df_purpose[]"
-                                                value="Attend limited face-to-face classes" onclick="disableTextBox">
+                                            <div class="purpose_input">
+                                                <input type="checkbox" id="purpose_f2f" name="purpose_f2f"
+                                                    value="Attend limited face-to-face classes">
+                                                <label for="purpose_cb">Attend limited face-to-face classes</label>
+                                            </div>
+                                            <div class="purpose_input">
+                                                <input type="checkbox" id="health_df_office" name="health_df_office" value="Office transaction: "
+                                                onclick="disableTextBoxOffice(this)">
+                                                <label for="health_df_office">Office transaction:<input type="text"
+                                                        id="health_df_office_text" name="health_df_office_text" disabled="disabled"></label>
+                                            </div>
+                                            <div class="purpose_input">
+                                                <input type="checkbox" id="health_df_others" name="health_df_others" value="Others:" onclick="disableTextBoxOthers(this)">
+                                                <label for="health_df_others">Others:<input type="text"
+                                                        id="health_df_others_text" name="health_df_others_text" disabled="disabled"></label>
+                                            </div>
+                                        </div>
+                                        <!---
+                                        <div class="health_df_input_purpose">
+                                            <input type="checkbox" id="purpose_cb" name="health_df_purpose[]" value="Attend limited face-to-face classes" onclick="disableTextBox(this)">
                                             <label for="purpose_cb">Attend limited face-to-face classes</label>
                                             <div class="health_df_input">
                                                 <label for="health_df_office">Office transaction:</label>
-                                                <input type="text" id="health_df_office" name="health_df_purpose[]">
+                                                <input type="text" id="health_df_office" name="health_df_purpose[]" disabled>
                                             </div>
                                             <div class="health_df_input">
                                                 <label for="health_df_others">Others:</label>
                                                 <input type="text" id="health_df_others" name="health_df_purpose[]">
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="col-md-6">
                                         <div class="temp_cont">
