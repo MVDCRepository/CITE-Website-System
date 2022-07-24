@@ -1,9 +1,3 @@
-<?php
-session_start();
-
-if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status'])) {
-  include '../db_conn.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,12 +12,13 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
+        <link rel="icon" href="images/cite_logo.png">
         <!-- bootstrap css -->
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <!-- style css -->
-        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <!-- Responsive-->
         <link rel="stylesheet" href="../css/responsive.css">
         <!-- Scrollbar Custom CSS -->
@@ -48,10 +43,10 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="logo1"><a href="../index.html"><img src="../images/cite_logo_title.png"></a></div>
+                                <div class="logo1"><a href="index.php"><img src="images/cite_logo_title.png"></a></div>
                             </div>
                             <div class="col-md-6">
-                                <div class="logo2"><a href="https://ucu.edu.ph" target="_blank"><img src="../images/ucu_logo.png"></a></div>
+                                <div class="logo2"><a href="https://ucu.edu.ph" target="_blank"><img src="images/ucu_logo.png"></a></div>
                             </div>
                         </div>
                     </div>
@@ -80,22 +75,15 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                     <li class="nav-item">
                                                         <a  style="font-weight: 600;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">ACADEMICS</a>
                                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
-                                                            <a class="dropdown-item" href="acad_bsit.php">BSIT</a>
+                                                            <a style="font-weight: 600;" class="dropdown-item" href="#">BSIT</a>
                                                             <div class="dropdown-divider"></div>
                                                             <a class="dropdown-item" href="#">BLIS</a>
                                                         </div>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="admission.php">ADMISSION</a></li>
-                                                        <li id="nav" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['fname'];?></a>
-                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
-                                                        <a class="dropdown-item" href="profile.php"><!-- <img src="images/xiao.png"> -->Profile Settings</a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="grades.php">Grades</a>
-                                                        <a class="dropdown-item" href="blocking.php">Blocking</a>
-                                                        <a style="color: red !important;" class="dropdown-item" href="../php/logout.php"><i class="bi bi-box-arrow-left"></i>&nbsp;Logout</a>
-                                                    </div>
-                                                </li>
+                                                        <a class="nav-link" href="admission.php">ADMISSION</a>
+                                                    </li>
+                                                    <li class="last"><a href="login.php">LOGIN</a></li>
                                                 </ul>
                                             </div>
                                         </nav>
@@ -121,16 +109,37 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                             <p>The Bachelor of Science in Information Technology is a four-year program that provides fundamental studies to advance in all aspects of computer-related studies such as web development, mobile development, database, programming, networking technologies, and more. The Bachelor of Science in Information Technology program will aim to train well and prepare students to be IT professionals.</p>
                                             <p>The Bachelor of Science in Information Technology program is a study of the utilization of computer hardware and software. Programming with different languages like C++, Java, PHP, and more. Students will also learn web development for backend and frontend and web development for e-commerce. Also, students will learn Database management, Algorithms, Networking, and more.</p>
                                             <p>The curriculum is based on Commission on Higher Education (CHED).</p>
+                                            
+                                            <button class="btn btn-success" id="open-popup-btn" name="" >Enroll Now!</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+                        <div class="popup center">
+                            <div class="icon">
+                                <i class="fa fa-info"></i>
+                            </div>
+                            <div class="title">
+                                Enroll Now!
+                            </div>
+                            <div class="description">
+                                What type of Applicant are you?
+                            </div>
+                            <div class="applicant-btn">
+                                <button id="dismiss-popup-btn">
+                                Freshmen
+                                </button>
+
+                                <button id="dismiss-popup-btn">
+                                Transferee
+                                </button>
+                            </div>
+                        </div>
                         <!--End Content Section ------------------------------->
                         <!--Start Footer Section ------------------------------->
                         <?php include 'footer.php';?>
-                        <!--End Footer Section --------------------------------->
+                            <!--End Footer Section --------------------------------->
                         <!--Start Copyright Section ---------------------------->
                         <div class="copyright">
                             <div class="container">
@@ -148,13 +157,14 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                         <script src="../js/jquery.min.js"></script>
                         <script src="../js/popper.min.js"></script>
                         <script src="../js/bootstrap.bundle.min.js"></script>
+                        <script>
+                        document.getElementById("open-popup-btn").addEventListener("click",function(){
+                        document.getElementsByClassName("popup")[0].classList.add("active");
+                        });
+                        
+                        document.getElementById("dismiss-popup-btn").addEventListener("click",function(){
+                        document.getElementsByClassName("popup")[0].classList.remove("active");
+                        });
+                        </script>
                     </body>
                 </html>
-<?php
-} 
-else {
-  header("Location: ../user_login.php");
-  exit();
-}
-
-?>

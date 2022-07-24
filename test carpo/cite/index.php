@@ -79,7 +79,7 @@
                                                     <li class="nav-item">
                                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">ACADEMICS</a>
                                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
-                                                            <a class="dropdown-item" href="#">BSIT</a>
+                                                            <a class="dropdown-item" href="acad_bsit.php">BSIT</a>
                                                             <div class="dropdown-divider"></div>
                                                             <a class="dropdown-item" href="#">BLIS</a>
                                                         </div>
@@ -111,20 +111,20 @@
                                             <div class="titlepage-h1">
                                                 <h1 class="bnner_title">Welcome To<br>
                                                 <span>COLLEGE OF INFORMATION AND TECHNOLOGY EDUCATION</span></h1>
-                                                <p class="long_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed molestie leo. Vivamus nec elit lacus. </p>
+                                                <p class="long_text">The Bachelor of Science in Information Technology is a four-year program that provides fundamental studies to advance in all aspects of computer-related studies such as web development, mobile development, database, programming, networking technologies, and more. The Bachelor of Science in Information Technology program will aim to train well and prepare students to be IT professionals.</p>
                                             </div>
                                             <div class="btn_main">
-                                                <button type="button" class="btn btn-dark btn-lg"><a href="contact.html">Contact</a></button>
+                                                <button type="button" class="btn btn-dark btn-lg"><a href="acad_bsit.php">Learn More</a></button>
                                             </div>
                                         </div>
                                         <div class="carousel-item">
                                             <div class="titlepage-h1">
                                                 <h1 class="bnner_title">Welcome To<br>
                                                 <span>COLLEGE OF INFORMATION AND TECHNOLOGY EDUCATION</span></h1>
-                                                <p class="long_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed molestie leo. Vivamus nec elit lacus. </p>
+                                                <p class="long_text">The Bachelor of Science in Information Technology is a four-year program that provides fundamental studies to advance in all aspects of computer-related studies such as web development, mobile development, database, programming, networking technologies, and more. The Bachelor of Science in Information Technology program will aim to train well and prepare students to be IT professionals.</p>
                                             </div>
                                             <div class="btn_main">
-                                                <button type="button" class="btn btn-dark btn-lg">Contact</button>
+                                                <button type="button" class="btn btn-dark btn-lg"><a href="acad_bsit.php">Learn More</a></button>
                                             </div>
                                         </div>
                                     </div>
@@ -199,9 +199,9 @@
                                                 <div class="programs_offered_1">
                                                     <i class="bi bi-code-slash fa-2x"></i>
                                                     <h1 class="written_text">Bachelor of Science in Information Technology</h1>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum sapien nunc, at pellentesque tortor egestas eget. Pellentesque egestas vehicula eros ullamcorper commodo. Mauris sagittis blandit egestas. Sed lacinia rhoncus arcu eget dictum. Sed ut blandit lorem, in faucibus mauris. Proin eleifend elit quis vehicula volutpat. Phasellus id fermentum ipsum. </p>
+                                                    <p>The Bachelor of Science in Information Technology is a four-year program that provides fundamental studies to advance in all aspects of computer-related studies such as web development, mobile development, database, programming, networking technologies, and more. The Bachelor of Science in Information Technology program will aim to train well and prepare students to be IT professionals.</p>
                                                     <div class="btn_main">
-                                                        <button type="button" class="btn btn-light btn-lg">Learn More</button>
+                                                    <a href="acad_bsit.php" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Learn More</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -209,9 +209,9 @@
                                                 <div class="programs_offered_2">
                                                     <i class="bi bi-book fa-2x"></i>
                                                     <h1 class="written_text">Bachelor in Library & Information Science</h1>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum sapien nunc, at pellentesque tortor egestas eget. Pellentesque egestas vehicula eros ullamcorper commodo. Mauris sagittis blandit egestas. Sed lacinia rhoncus arcu eget dictum. Sed ut blandit lorem, in faucibus mauris. Proin eleifend elit quis vehicula volutpat. Phasellus id fermentum ipsum. </p>
+                                                    <p>The Bachelor of Science in Information Technology is a four-year program that provides fundamental studies to advance in all aspects of computer-related studies such as web development, mobile development, database, programming, networking technologies, and more. The Bachelor of Science in Information Technology program will aim to train well and prepare students to be IT professionals.</p>
                                                     <div class="btn_main">
-                                                        <button type="button" class="btn btn-light btn-lg">Learn More</button>
+                                                    <a href="acad_bsit.php" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Learn More</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -233,7 +233,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="yt_embed">
-                                            <iframe width="1223" height="430" src="https://www.youtube.com/embed/watch?v=oK7N45sTuNI&list=TLGGkhUXXppwdy8xMzA2MjAyMg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe width="100%" height="450" class="embed-responsive-item" src="https://www.youtube.com/embed/oK7N45sTuNI?playlist=oK7N45sTuNI&amp;rel=0&amp;autoplay=1&amp;controls=0&amp;mute=1&amp;loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" __idm_id__="2596866"></iframe>
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +250,7 @@
                                     <div class="col-md-6">
                                         <h3>Featured News</h3>
                                         <div class="yt_embed">
-                                            <iframe width="100" height="300" src="https://www.youtube.com/embed/KOI-_TqMMwk?list=TLGGtzbvUjBWm44zMTA1MjAyMg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe width="1223" height="430" src="https://www.youtube.com/embed/oK7N45sTuNI?list=TLGGkhUXXppwdy8yNDA3MjAyMg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                             <i class="bi bi-calendar-date"> <span> 6 May 2022</span> </i>
                                             <h3>UCU News Update</h3> <br>
                                             <p>These are just a few events, programs, and activities in achieving a common goal of Urdaneta City University in continuing the passion and commitment that holds in the institution.</p>
@@ -295,89 +295,9 @@
                             </div>
                         </div>
                         <!--End UCU News Section ------------------------------->
-                        
-                        <!--Start Events Section ------------------------------->
-                        <div class="service_main">
-                            <div class="section_service_2 mb-5">
-                                <h1 class="service_text">News & Events</h1>
-                            </div>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <?php
-                                            include "db_conn.php";
-                                            $sql = "SELECT * FROM news_events_tbl ORDER BY bulletin_id DESC LIMIT 1";
-                                            $result = $conn->query($sql);
-                                              if($result->num_rows > 0) {
-                                                while ($row=$result->fetch_assoc()) {
-                                        ?>
-                                        <div class="blog-slider">
-                                            <div class="blog-slider__wrp">
-                                                <div class="blog-slider__item">
-                                                    <div class="blog-slider__img">
-                                                        <img class="img-fluid" src="../admin/php/images/<?php echo $row['photo'];?>">
-                                                    </div>
-                                                    <div class="blog-slider__content">
-                                                        <span class="blog-slider__code"><?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></span>
-                                                        <div class="blog-slider__title"><?php echo $row['title'];?></div>
-                                                        <div class="blog-slider__text"><?php echo $row['content'];?></div>
-                                                        <a href="news_and_events_details.php?bulletin_id=<?=$row['bulletin_id'];?>" class="blog-slider__button mb-3">Read More</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <?php
-                                                    }
-                                                }
-                                                else {
-                                                    echo "<center><h1 class='error_msg'>No News & Events available</h1></center>";
-                                                }
-                                            ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <center><a href="news_and_events.php" class="blog-slider__button mb-3">View All News & Events</a></center>
-                        </div>
-                        <!--End Events Section --------------------------------->
-                        <!--Start Footer Section ------------------------------->
-                <div class="footer">
-                    <div class="footer_container">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="map_icon">
-                                        <a href="index.php"><img src="images/cite_logo.png"></a>
-                                        <a href="https://ucu.edu.ph" target="_blank"><img src="images/ucu_mis_logo.png"></a>
-                                        <h4>Contact Us:</h4>
-                                        <h5><i class="bi bi-geo-alt"></i>1 San Vicente West Urdaneta City Pangasinan 2428</h5>
-                                        <h5><i class="bi bi-telephone"></i>(075) 204-9020</h5>
-                                        <h5><i class="bi bi-envelope"></i>univpresidentofficial@gmail.com</h5>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="map_icon">
-                                        <h2>Quick Links</h2>
-                                        <ul>
-                                            <li><a href="#">Announcements</a></li>
-                                            <li><a href="news_and_events.php">News and Events</a></li>
-                                            <li><a href="about.php">About</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="map_icon">
-                                        <h2>Follow UCU</h2>
-                                        <a href="https://www.facebook.com/UCUOfficial" target="_blank"><i class="fab fa-facebook-f"> </i></a>
-                                        <a href="https://www.youtube.com/c/UcuEduPhOfficial" target="_blank"><i style="padding-right: 25px;" class="fab fa-youtube"> </i></a>
-                                        <a href="https://www.instagram.com/ucuofficial/" target="_blank"><i class="fab fa-instagram"> </i></a>
-                                        <a href="https://mis.ucu.edu.ph" target="_blank"><p>UCU-MIS+ 2022</p></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--End Footer Section --------------------------------->
+                            <!--Start Footer Section ------------------------------->
+                            <?php include 'footer.php';?>
+                            <!--End Footer Section --------------------------------->
                             <!--Start Copyright Section ---------------------------->
                             <div class="copyright">
                                 <div class="container">

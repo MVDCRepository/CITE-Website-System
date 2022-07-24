@@ -81,7 +81,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                     <li class="nav-item">
                                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">ACADEMICS</a>
                                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
-                                                            <a class="dropdown-item" href="#">BSIT</a>
+                                                            <a class="dropdown-item" href="acad_bsit.php">BSIT</a>
                                                             <div class="dropdown-divider"></div>
                                                             <a class="dropdown-item" href="#">BLIS</a>
                                                         </div>
@@ -111,92 +111,99 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                             </div>
                         </div>
                         <!--End Banner Section -------------------------------->
-                        <!--Start Content Section ----------------------------->
-                        <div class="service_main">
+                        <!--Start Mission & Vision Section ----------------------------->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mission_vision_cont">
+                                        <h1 class="goals_obj_cont_title"><i class="bi bi-flag fa-1x"></i><br>Mission</h1>
+                                        <p>To train and develop a new breed of globally competitive, innovative, and values-oriented
+                                            individuals through quality and advance instruction, relevant project study and researches, and
+                                            sustainable community based extensions, partnerships or linkages.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mission_vision_cont">
+                                        <h1 class="goals_obj_cont_title"><i class="bi bi-eye fa-1x"></i><br>Vision</h1>
+                                        <p>A Center of Excellence in Information and Technology Education.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Mission & Vision Section ------------------------------->
+                        <div class="goals_section">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        <h1 class="service_text">Mission and Vision</h1>
-                                        <div class="container_mission_and_vision">
-                                            <div class="timeline">
-                                                <ul>
-                                                    <li>
-                                                        <div class="timeline-content">
-                                                            <h3 class="date"><!---Date----></h3>
-                                                            <h1>Mission</h1>
-                                                            <p>To train and develop new breed of globally competitive, innovative, and values-oriented individual through quality and advance instruction, relevant project study and researches, and sustainable community based extensions, partnerships or linkages.</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="timeline-content">
-                                                            <h3 class="date"><!---Date----></h3>
-                                                            <h1>Vision</h1>
-                                                            <p>A Center of Excellence in Information and Technology Education.</p>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                    <div class="col-sm-4">
+                                        <img class="goals_obj_cont_img" src="../images/ucu_logo.png">
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="goals_obj_cont">
+                                            <h1 class="goals_obj_cont_title"><i class="bi bi-bullseye fa-1x"></i><br>Goals</h1>
+                                            <ol>
+                                                <li>To provide advanced knowledge, and skills through outcomes based education and quality
+                                                    instructions in order to meet the demands and challenges of globalization;</li>
+                                                <li>To nurture the students in creating advanced researches and develop capstones that will
+                                                    provide industry-based information and technology solutions for stakeholders and
+                                                    community;</li>
+                                                <li>To implement responsive and sustainable development programs through mobilization of
+                                                    community that leads to strong partnerships and linkages in pursuing the country’s
+                                                    development goal.</li>
+                                            </ol>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="goals_section">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <img class="goals_obj_cont_img" src="../images/ucu_logo.png">
+                        </div>
+                        <div class="obj_section">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="goals_obj_cont">
+                                            <h1 class="goals_obj_cont_title"><i class="bi bi-pin-map fa-1x"></i><br>Objectives</h1>
+                                            <ol>
+                                                <li>To add professional, technical, and expert individuals in information technology and
+                                                    information science;</li>
+                                                <li>To design and develop scientific researches and capstones in information & technology to
+                                                    meet the demands and challenges of the time;</li>
+                                                <li>To implement boundless innovations and outputs that will benefit or uplift the quality
+                                                    of life of the members of community.</li>
+                                            </ol>
                                         </div>
-                                        <div class="col-sm-8">
-                                            <div class="goals_obj_cont">
-                                                <h1 class="goals_obj_cont_title"><i class="bi bi-bullseye fa-1x"></i><br>Goals</h1>
-                                                <ol>
-                                                    <li>To provide advanced knowledge, and skills through outcomes based education and quality instructions in order to meet the demands and challenges of globalization;</li>
-                                                    <li>To nurture the students in creating advanced researches and develop capstones that will provide industry-based information and technology solutions for stakeholders and community;</li>
-                                                    <li>To implement responsive and sustainable development programs through mobilization of community that leads to strong partnerships and linkages in pursuing the country’s development goal.</li>
-                                                </ol>
-                                            </div>
-                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <img class="goals_obj_cont_img" src="../images/ucu_logo.png">
                                     </div>
                                 </div>
                             </div>
-                            <div class="obj_section">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                            <div class="goals_obj_cont">
-                                                <h1 class="goals_obj_cont_title"><i class="bi bi-pin-map fa-1x"></i><br>Objectives</h1>
-                                                <ol>
-                                                    <li>To add professional, technical, and expert individuals in information technology and information science;</li>
-                                                    <li>To design and develop scientific researches and capstones in information & technology to meet the demands and challenges of the time;</li>
-                                                    <li>To implement boundless innovations and outputs that will benefit or uplift the quality of life of the members of community.</li>
-                                                </ol>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <img class="goals_obj_cont_img" src="../images/ucu_logo.png">
+                        </div>
+                        <div class="history_section">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                        <div class="history_content goals_obj_cont mb-4">
+                                            <h1><i class="bi bi-clock-history fa-1x"></i><br>History</h1>
+                                            <p>The College of Computer Studies humbly began as a Computer Department of Urdaneta Community
+                                                College (UCC). The initiatives and leaderships of its former department heads made it
+                                                possible to pioneer and open two-year programs, namely: Computer Secretarial (Comp Sec) and
+                                                Associate in Computer Science (ACS), which is then renamed as Associate in Computer
+                                                Technology (ACT).</p>
+                                            <p>In 2006, when the community college claimed its university status as Urdaneta City
+                                                University, the Computer Department also upgraded into a full-fledged College of Computer
+                                                Studies (CCS) due to its population increase. Tantamount to this achievement, CCS offered a
+                                                four-year Bachelor in Information Technology along with the two-year Associate in Computer
+                                                Technology.</p>
+                                            <p>The college has gained tremendous national android development accomplishments, society-based
+                                                IS developments, and research-based IT developments. In September 2019, the college reached
+                                                another milestone and became the College of Information and Technology Education (CITE). At
+                                                present, the college offers two bachelor programs, namely: Bachelor of Science in
+                                                Information Technology (BSIT) and Bachelor of Library and Information Science (BLIS).</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!--End Content Section ------------------------------->
-                        <!--Start Evaluation Section -------------------------->
-                        <div class="evaluation_section">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h1>Request for Evaluation</h1>
-                                        <p> Good news! You can now request for evaluation online to see your grades. </p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="evaluation_btn">
-                                            <button type="button" class="btn btn-dark btn-lg">Request now!</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--End Evaluation Section ----------------------------->
                         <!--Start Footer Section ------------------------------->
                         <?php include 'footer.php';?>
                             <!--End Footer Section --------------------------------->
