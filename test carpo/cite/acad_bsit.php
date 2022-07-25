@@ -95,7 +95,7 @@
                         <!--Start Banner Section ------------------------------>
                         <div class="banner_news_events">
                             <div class="titlepage-h1-news_events">
-                                <h1 class="bnner_title_news_events"><span>Academics</span> / Bachelor of Science in Information Technology</h1>
+                                <h1 class="bnner_title_news_events">Bachelor of Science in Information Technology</h1>
                             </div>
                         </div>
                         <!--End Banner Section -------------------------------->
