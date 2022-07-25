@@ -229,7 +229,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                 <!--End Programs Offered Section ------------------------>
                             </div>
                         </div>
-
+                        
                         <!--Start Year Theme Section ---------------------->
                         <div class="year_theme">
                             <div class="container">
@@ -241,13 +241,84 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                     </div>
                                     <div class="col-md-8">
                                         <div class="yt_embed">
-                                            <iframe width="100%" height="450" class="embed-responsive-item" src="https://www.youtube.com/embed/oK7N45sTuNI?playlist=oK7N45sTuNI&amp;rel=0&amp;autoplay=1&amp;controls=0&amp;mute=1&amp;loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" __idm_id__="2596866"></iframe>
+                                            <iframe width="100%" height="450" class="embed-responsive-item" src="https://www.youtube.com/embed/oK7N45sTuNI?playlist=oK7N45sTuNI&amp;rel=0&amp;autoplay=1&amp;controls=&amp;mute=1&amp;loop=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" __idm_id__="2596866"></iframe>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--End Year Theme Section --------------------------->                        
+                        <!--End Year Theme Section --------------------------->   
+                                                <!--Start UCU News Section --------------------------->
+                                                <div class="ucu_news mb-0">
+                            <div class="section_service_2">
+                                <h1 class="service_text">University News</h1> <br>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <?php
+                                        include "../db_conn.php";
+                                        $sql = "SELECT * FROM news_events_tbl WHERE post = 'featured' ORDER BY bulletin_id DESC LIMIT 1";
+                                        $result = $conn->query($sql);
+                                          if($result->num_rows > 0) {
+                                            while ($row=$result->fetch_assoc()) {
+                                    ?>
+                                    <div class="col-md-6">
+                                        <h3>Featured News & Event</h3>
+                                        <div class="yt_embed">
+                                            <!-- <iframe width="100" height="300" src="../admin/php/images/<?php echo $row['photo'];?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                                            <div class="img_post_holder">
+                                                <img class="img-fluid mb-2" src="../../admin/php/images/<?php echo $row['photo'];?>">
+                                            </div>
+                                            <br>
+                                            <i class="bi bi-calendar-date"> <span> <?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></span></i>
+                                            <h3 class="mt-3"><?php echo $row['title'];?></h3>
+                                            <br>
+                                            <p class="featured_text"><?php echo $row['content'];?></p>
+                                            <a href="news_and_events_details.php?bulletin_id=<?=$row['bulletin_id'];?>"> Read more... </a>
+                                        </div>
+                                    </div>
+                                    <?php
+                                            }
+                                        }
+                                        else {
+                                            echo "<center><h1 class='error_msg'>No featured News & Events available</h1></center>";
+                                        }
+                                    ?>
+                                    <div class="col-md-6">
+                                        <div class="card-list">
+                                            <div class="row" style="max-height: 500px; overflow-x: hidden; overflow-y: auto;">
+                                                <?php
+                                                    include "../db_conn.php";
+                                                    $sql = "SELECT * FROM news_events_tbl WHERE post = '' OR post = 'featured'";
+                                                    $result = $conn->query($sql);
+                                                      if($result->num_rows > 0) {
+                                                        while ($row=$result->fetch_assoc()) {
+                                                ?>
+                                                <div class="col-md-6">
+                                                    <img class="img-fluid" src="../../admin/php/images/<?php echo $row['photo'];?>">
+                                                    <h4><a href="news_and_events_details.php?bulletin_id=<?=$row['bulletin_id'];?>"><?php echo $row['title'];?></a></h4>
+                                                    <p><?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></p>
+                                                </div>
+                                                <?php
+                                                        }
+                                                    }
+                                                    else {
+                                                        echo "<center><h1 class='error_msg'>No News & Events available</h1></center>";
+                                                    }
+                                                ?>
+                                            </div>
+                                            <br>
+                                            <div class="btn_main">
+                                                <button type="button" class="btn btn-dark btn-lg">
+                                                    <a href="news_and_events.php" style="color: white; font-style: normal;">See all</a>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End UCU News Section ------------------------------->                     
                         <!--start footer Section --------------------------------->
                         <?php include 'footer.php';?>
                         <!--End footer Section --------------------------------->

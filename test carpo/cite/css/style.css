@@ -128,6 +128,16 @@ a {
 	outline: none !important;
 }
 
+.required_sign {
+	color: #ff0000;
+	font-weight: bold;
+	transform: scale(2.1);
+}
+
+.input-group-text {
+	border: none;
+}
+
 .no-display {
 	display: none;
 }
@@ -527,7 +537,7 @@ ul .nav-item .nav-link,
 	max-width: 800px;
 	margin: auto;
 	background: #fff;
-	box-shadow: 0px 0px 10px 5px rgba(34, 35, 58, 0.2);
+	box-shadow: 0px 10px 8px rgba(34, 35, 58, 0.2);
 	padding: 25px;
 	border-radius: 25px;
 	height: 400px;
@@ -851,6 +861,11 @@ button.main_bt {
 	background-size: cover;
 }
 
+.img_post_holder {
+	height: auto; width: 300px;
+	overflow: hidden;
+}
+
 .titlepage-h1-news_events {
 	width: 100%;
 	float: left;
@@ -883,6 +898,12 @@ button.main_bt {
 	border-bottom-left-radius: 15px;
 	padding: 10px;
 	padding-right: 50px;
+}
+
+.featured_text {
+	color: #4e4a67;
+	height: 100px;
+	overflow: hidden;
 }
 
 .container-card-news-events {
@@ -1113,22 +1134,36 @@ button.main_bt {
 }
 
 /************ About Area ********************/
-.mission_vision_cont {
+.mission_vision_section {
 	width: 100%;
-	float: left;
-	background-color: #ffffff;
-	padding-bottom: 30px;
-	padding-top: 30px;
-	padding-right: 30px;
-	padding-left: 30px;
-	box-shadow: 0px 0px 5px 0px;
-	color: #000;
-	margin-top: 20px;
+	box-shadow: 0px 0px 10px 0px;
+	color: white;
 	border-radius: 10px;
-	min-height: 315px;
 	text-align: center;
 }
 
+.mission_vision_cont {
+	width: 100%;
+	height: 280px;
+	background-color: white;
+	padding-bottom: 30px;
+	padding-top: 30px;
+	padding-right: 50px;
+	padding-left: 50px;
+	box-shadow: 0px 0px 1px 0px;
+	color: #222222;
+	margin: 30px;
+	border-radius: 10px;
+	text-align: left;
+}
+
+.mission_vision_cont p {
+	text-align: center;
+}
+
+.obj_section {
+	margin-bottom: 50px;
+}
 
 .goals_obj_cont {
 	width: 100%;
@@ -1138,9 +1173,10 @@ button.main_bt {
 	padding-top: 30px;
 	padding-right: 50px;
 	padding-left: 50px;
-	box-shadow: 0px 0px 5px 0px;
+	box-shadow: 0px 0px 1px 0px;
 	color: #222222;
-	margin-top: 20px;
+	margin: 20px;
+	margin-bottom: 0;
 	border-radius: 10px;
 	text-align: left;
 }
@@ -1169,61 +1205,31 @@ button.main_bt {
 	list-style-type: upper-roman;
 }
 
-.container_mission_and_vision {
+.history_content {
 	width: 100%;
-	display: flex;
-	margin-top: -40px;
-	margin-bottom: -50px;
-	align-items: center;
-	justify-content: center;
-	padding: 100px 0;
 	background-color: white;
-}
-
-.timeline {
-	width: 80%;
-	height: auto;
-	max-width: 800px;
-	margin: 0 auto;
-	position: relative;
-}
-
-.timeline ul {
-	list-style: none;
-}
-
-.timeline ul li {
-	padding: 20px;
-	background-color: #222222;
-	color: white;
+	box-shadow: 0px 0px 1px 0px;
+	color: #222222;
+	margin: 10px;
+	margin-bottom: 50px;
 	border-radius: 10px;
-	margin-bottom: 20px;
+	text-align: left;
+	padding-bottom: 30px;
+	padding-top: 30px;
+	padding-right: 50px;
+	padding-left: 50px;
 }
 
-.timeline ul li:last-child {
-	margin-bottom: 0;
+.history_content h1 {
+	font-size: 22pt;
+	text-align: center;
+	border-bottom: 1px solid #000;
+	width: 46%;
+	margin: 0 auto;
+	text-align: center;
+	font-weight: bold;
+	color: #222222;
 }
-
-.timeline-content h1 {
-	font-weight: 500;
-	font-size: 25px;
-	line-height: 30px;
-	margin-bottom: 10px;
-}
-
-.timeline-content p {
-	font-size: 16px;
-	line-height: 30px;
-	font-weight: 300;
-}
-
-.timeline-content .date {
-	font-size: 12px;
-	font-weight: 300;
-	margin-bottom: 10px;
-	letter-spacing: 2px;
-}
-
 /************ Grades View Area ********************/
 .year_title_view {
 	font-size: 18px;
@@ -1881,29 +1887,29 @@ button.main_bt {
 }
 
 /*form error*/
-form .error input {
+#upd_student_cred_form, .error input {
 	border: 3px solid #e74c3c;
 }
 
-form .success input {
+#upd_student_cred_form, .success input {
 	border-color: #2ecc71;
 }
 
-form .error textarea {
+#upd_student_cred_form, .error textarea {
 	border: 3px solid #e74c3c;
 }
 
-form .success textarea {
+#upd_student_cred_form, .success textarea {
 	border-color: #2ecc71;
 }
 
-form small {
+#upd_student_cred_form, small {
 	color: #e74c3c;
 	display: block;
 	display: none;
 }
 
-form .error small {
+#upd_student_cred_form, .error small {
 	display: block;
 }
 
@@ -2018,6 +2024,20 @@ form .error small {
 }
 
 /* action button theme */
+.greenBtn {
+	padding: 7px 10px;
+	background-color: #4caf50;
+	color: #fff;
+	font-weight: 300;
+	border: none;
+	border-radius: 5px;
+	font-size: 15px;
+}
+
+.greenBtn:hover {
+	background-color: #3e8e41;
+}
+
 .redBtn {
 	padding: 7px 10px;
 	background-color: #ff0000;
@@ -2030,206 +2050,6 @@ form .error small {
 
 .redBtn:hover {
 	background-color: #990000;
-}
-
-/* form order list */
-
-/* profile table */
-.table {
-    margin-bottom: 0;
-}
-.table-bordered {
-    border: 1px solid #ebedf2;
-}
-.table {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #212529;
-}
-table {
-    border-collapse: collapse;
-}
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-user agent stylesheet
-table {
-    display: table;
-    border-collapse: separate;
-    box-sizing: border-box;
-    text-indent: initial;
-    border-spacing: 2px;
-    border-color: grey;
-
-}
-tbody {
-    display: table-row-group;
-    vertical-align: middle;
-    border-color: inherit;
-}
-.table th, .table td {
-    vertical-align: middle;
-    font-size: 0.875rem;
-    line-height: 1;
-}
-.table-bordered th, .table-bordered td {
-    border: 1px solid #ebedf2;
-}
-.table th, .table td {
-    padding: 0.9375rem;
-    vertical-align: top;
-    border-top: 1px solid #ebedf2;
-}
-
-th {
-    text-align: inherit;
-    
-}
-td {
-    display: table-cell;
-    vertical-align: inherit;
-    
-}
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-user agent stylesheet
-th {
-    display: table-cell;
-    vertical-align: inherit;
-    font-weight: bold;
-    text-align: -internal-center;
-}
-
-/********* Academics Area **************/
-
-/*********** BSIT Area *****************/
-
-.bsit_cont {
-	width: 100%;
-	box-shadow: 0px 1px 2px;
-	border-radius: 10px;
-	text-align: left;
-	margin: 20px;
-	padding: 20px;
-}
-
-.bsit_cont h1 {
-	font-size: 18px;
-	font-weight: 700;
-	width: 25%;
-	padding-left: 10px;
-	padding-top: 10px;
-	border-left: 1px solid #222222;
-	border-bottom: 1px solid #222222;
-	border-bottom-left-radius: 15px;
-}
-
-.center {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-.popup {
-	padding: 30px 50px;
-	background: #222222;
-	border-radius: 10px;
-	box-sizing: border-box;
-	z-index: 2;
-	text-align: center;
-	opacity: 0;
-	top: -200%;
-	transform: translate(-50%, -50%) scale(0.5);
-	transition: opacity 300ms ease-in-out, top 1000ms ease-in-out, transform 1000ms ease-in-out;
-	color: white;
-}
-
-.popup.active {
-	position: absolute;
-	opacity: 1;
-	top: 100%;
-	transform: translate(-50%, -50%) scale(1);
-	transition: transform 300ms cubic-bezier(0.18, 0.89, 0.43, 1.19);
-}
-
-.popup .icon {
-	margin: 5px 0px;
-	width: 50px;
-	height: 50px;
-	border: 2px solid #34f234;
-	text-align: center;
-	display: inline-block;
-	border-radius: 50%;
-	line-height: 60px;
-}
-
-.popup .icon i.fa {
-	font-size: 30px;
-	color: white;
-}
-
-.popup .title {
-	margin: 5px 0px;
-	font-size: 30px;
-	font-weight: 600;
-}
-
-.popup .description {
-	color: white;
-	font-size: 15px;
-	padding: 5px;
-	margin: 20px;
-}
-
-.popup .applicant-btn {
-	margin-top: 15px;
-}
-
-.popup .applicant-btn button {
-	padding: 10px 20px;
-	background: #111;
-	color: #f5f5f5;
-	border: 2px solid #111;
-	font-size: 16px;
-	font-weight: 600;
-	outline: none;
-	border-radius: 10px;
-	cursor: pointer;
-	transition: all 300ms ease-in-out;
-}
-
-.popup .applicant-btn button:hover {
-	color: #111;
-	background: #f5f5f5;
-}
-
-.popup > div {
-	position: relative;
-	top: 10px;
-	opacity: 0;
-}
-
-.popup.active > div {
-	top: 0px;
-	opacity: 1;
-}
-
-.popup.active .icon {
-	transition: all 300ms ease-in-out 250ms;
-}
-
-.popup.active .title {
-	transition: all 300ms ease-in-out 300ms;
-}
-
-.popup.active .description {
-	transition: all 300ms ease-in-out 350ms;
-}
-
-.popup.active .dismiss-btn {
-	transition: all 300ms ease-in-out 400ms;
 }
 
 /********* Health Declaration Area **************/
@@ -2317,6 +2137,27 @@ th {
 	margin: 0;
 }
 
+
+.purpose_input {
+	display: flex;
+	padding-right: 5%;
+	align-items: center;
+}
+
+.purpose_input input {
+	border: 0;
+  	outline: 0;
+  	background: transparent;
+  	border-bottom: 1px solid black;
+  	font-size: 12px;
+}
+
+.purpose_input label {
+	white-space: nowrap;
+	font-size: 12px;
+	margin: 0 10px;
+}
+
 .temp_cont h1 {
 	font-size: 18px;
 	font-weight: 700;
@@ -2378,3 +2219,259 @@ th {
 	margin: 5px;
 }
 
+
+
+/********* Commitment of Undertaking Area **************/
+.com_undertake_cont {
+	font-family: arial;
+	width: 60%;
+	border: 2px solid black;
+	float: left;
+	margin: 2% 20%;
+}
+
+.com_undertake_header {
+	align-items: center;
+	align-content: center;
+	display: flex;
+  	justify-content: space-evenly;
+  	padding: 20px;
+  	text-align: center;
+}
+
+.com_undertake_header img {
+	width: 70px;
+	height: 70px;
+	margin-top: -40px;
+}
+
+.com_undertake_header h1 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.com_undertake_header h2 {
+	font-size: 16px;
+	font-weight: 700;
+	margin-top: 20px;
+}
+
+.com_undertake_header h3 {
+	font-size: 10px;
+	font-weight: 800;
+}
+
+.com_undertake_cont p {
+	font-size: 12px;
+}
+
+.dos_section {
+	margin-left: 2%;
+	width: 95%;
+}
+
+.dos_section h1 {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.dos_section ol {
+	margin-left: 15px;
+}
+
+.dos_section li {
+	margin: 0;
+	line-height: 20px;
+	font-size: 12px;
+}
+
+.donts_section {
+	margin-left: 2%;
+	width: 95%;
+}
+
+.donts_section h1 {
+	margin-top: 20px;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.donts_section ol {
+	margin-left: 15px;
+}
+
+.donts_section li {
+	margin: 0;
+	line-height: 20px;
+	font-size: 12px;
+}
+
+.donts_section table {
+	margin-left: 5%;
+}
+
+.donts_section td {
+	width: 300px;
+	margin-right: 20px;
+}
+
+.com_undertake_confirmation {
+	margin-top: 50px;
+	float: right;
+	font-size: 14px;
+	text-align: center;
+}
+
+.com_undertake_confirmation h4 {
+	font-size: 14px;
+	text-align: center;
+	margin: 5px;
+}
+
+/********* Certificate of Concent Area **************/
+.cert_consent_cont {
+	width: 60%;
+	border: 2px solid black;
+	float: left;
+	margin: 2% 20%;
+}
+
+.cert_consent_header {
+	align-items: center;
+	align-content: center;
+	display: flex;
+  	justify-content: space-evenly;
+  	padding: 20px;
+  	text-align: center;
+}
+
+.cert_consent_header img {
+	width: 70px;
+	height: 70px;
+	margin-top: -40px;
+}
+
+.cert_consent_header h1 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.cert_consent_header h2 {
+	font-size: 16px;
+	font-weight: 700;
+	margin-top: 20px;
+}
+
+.cert_consent_header h3 {
+	font-size: 10px;
+	font-weight: 800;
+}
+
+.cert_consent_cont p {
+	font-size: 14px;
+}
+
+.cert_content_section {
+	margin-left: 2%;
+	width: 95%;
+}
+
+.cert_content_section h1 {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.cert_content_section ol {
+	margin-left: 15px;
+}
+
+.cert_content_section li {
+	margin: 0;
+	line-height: 20px;
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+.com_undertake_confirmation {
+	margin-top: 50px;
+	float: right;
+	font-size: 14px;
+	text-align: center;
+}
+
+.com_undertake_confirmation h4 {
+	font-size: 14px;
+	text-align: center;
+	margin: 5px;
+}
+
+.cert_content_section label{
+	margin: 0;
+}
+
+/* profile table */
+.table {
+    margin-bottom: 0;
+}
+.table-bordered {
+    border: 1px solid #ebedf2;
+}
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+table {
+    border-collapse: collapse;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+user agent stylesheet
+table {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 2px;
+    border-color: grey;
+
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.table th, .table td {
+    vertical-align: middle;
+    font-size: 0.875rem;
+    line-height: 1;
+}
+.table-bordered th, .table-bordered td {
+    border: 1px solid #ebedf2;
+}
+.table th, .table td {
+    padding: 0.9375rem;
+    vertical-align: top;
+    border-top: 1px solid #ebedf2;
+}
+
+th {
+    text-align: inherit;
+    
+}
+td {
+    display: table-cell;
+    vertical-align: inherit;
+    
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+user agent stylesheet
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: -internal-center;
+}

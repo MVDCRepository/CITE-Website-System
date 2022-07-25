@@ -100,11 +100,11 @@
                         </div>
                         <!--End Banner Section -------------------------------->
                         <!--Start Content Section ----------------------------->
-                        <div class="acad_content">
+                        <div class="acad_content mb-3 mt">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="bsit_cont">
+                                        <div class="bsit_cont mt-3">
                                             <h1>Program Overview</h1>
                                             <p>The Bachelor of Science in Information Technology is a four-year program that provides fundamental studies to advance in all aspects of computer-related studies such as web development, mobile development, database, programming, networking technologies, and more. The Bachelor of Science in Information Technology program will aim to train well and prepare students to be IT professionals.</p>
                                             <p>The Bachelor of Science in Information Technology program is a study of the utilization of computer hardware and software. Programming with different languages like C++, Java, PHP, and more. Students will also learn web development for backend and frontend and web development for e-commerce. Also, students will learn Database management, Algorithms, Networking, and more.</p>
@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="popup center">
+                        <!-- <div class="popup center">
                             <div class="icon">
                                 <i class="fa fa-info"></i>
                             </div>
@@ -135,7 +135,7 @@
                                 Transferee
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
                         <!--End Content Section ------------------------------->
                         <!--Start Footer Section ------------------------------->
                         <?php include 'footer.php';?>
@@ -157,7 +157,7 @@
                         <script src="../js/jquery.min.js"></script>
                         <script src="../js/popper.min.js"></script>
                         <script src="../js/bootstrap.bundle.min.js"></script>
-                        <script>
+                        <!-- <script>
                         document.getElementById("open-popup-btn").addEventListener("click",function(){
                         document.getElementsByClassName("popup")[0].classList.add("active");
                         });
@@ -165,6 +165,6 @@
                         document.getElementById("dismiss-popup-btn").addEventListener("click",function(){
                         document.getElementsByClassName("popup")[0].classList.remove("active");
                         });
-                        </script>
+                        </script> -->
                     </body>
                 </html>
