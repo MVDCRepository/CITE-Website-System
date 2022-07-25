@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status']) && isset($_SESSION['status'])) {
+if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status'])) {
     include '../db_conn.php';
     $student_id = $_SESSION['student_id'];
 ?>
@@ -45,6 +45,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
         <!--- PDF Generator --->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js"></script>
         <script type="text/javascript" src="../js/generate-pdf.js"></script>
+        <link href="custom.css" rel="stylesheet" />
     </head>
     <!-- body -->
     <body>
@@ -109,195 +110,501 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                     </div>
                 </div>
                 <!-- end header end -->
+
                 <!--Start Content Section ----------------------------->
                 <div class="profile_content">
                     <div class="profile_title_container">
                         <h1 class="profile_title">Student Profile</h1>
                     </div>
+
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="profile_left_section text-center">
-                                    <!-- <img src="../images/xiao.png"> -->
-                                    <h2><?php echo $_SESSION['lname']." ,".$_SESSION['fname'];?></h2>
-                                    <p>Bachelor of Science in Information Technology <br> <?php echo $_SESSION['yr_lvl']." Year";?></p>
-                                </div>
+                            <div class="col-md-12">
+                                <div class="reg_content">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <p hidden id="student_status"><?php echo $_SESSION['status'];?></p>
+                                            <center>
+                                                <?php if (isset($_GET['error_msg'])) { ?>
+                                                    <p class="error_msg mt-5 mb-5" style="width: 40%"><?php echo $_GET['error_msg']; ?></p>
+                                                <?php } ?>
+                                                <?php if (isset($_GET['success_upd_cred'])) { ?>
+                                                    <p class="success_msg mt-5 mb-5" style="width: 40%"><?php echo $_GET['success_upd_cred']; ?></p>
+                                                <?php } ?>
+                                            </center>
+                                            <table class="table table-condensed table-bordered  table-hover">
+                                                <tbody>
+                                                    <tr class="table-dark">
+                                                        <th>TYPE</th>
+                                                        <th>STORED</th>
+                                                    </tr>
+                                                    <?php
+                                                        include "../db_conn.php";
+                                                        $sql = "SELECT * FROM student_pri_info_tbl WHERE student_id = '$student_id'";
+                                                        $result = $conn->query($sql);
+                                                          if($result->num_rows > 0) {
+                                                            while ($row=$result->fetch_assoc()) {
+                                                    ?>
+                                                    <tr class="table-active">
+                                                        <th colspan="2">PRIMARY INFORMATION :</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Full Name</th>
+                                                        <td><?php echo $row['mname'].", ".$row['fname']." ".$row['lname']." ".$row['sname'];?></td>
+                                                    </tr>
+                                                    <tr class="table-active">
+                                                        <th colspan="2">PERMANENT ADDRESS :</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Province</th>
+                                                        <td><?php echo $row['province'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>City/Municipality</th>
+                                                        <td><?php echo $row['city'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Barangay</th>
+                                                        <td><?php echo $row['barangay'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>House Number</th>
+                                                        <td><?php echo $row['house_num'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Zip Code</th>
+                                                        <td><?php echo $row['zip_code'];?></td>
+                                                    </tr>
+                                                    <?php
+                                                            }
+                                                        }
 
-                                <div class="profile_left_section">
-                                    <h2 class="text-center">Requirements</h2>
-                                    <p hidden id="student_status"><?php echo $_SESSION['status'];?></p>
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <center>
-                                                    <?php if (isset($_GET['submit_error'])) { ?>
-                                                      <p class="error_msg"><?php echo $_GET['submit_error'];?></p>
-                                                    <?php } ?>
-                                                    <?php if (isset($_GET['submit_success'])) { ?>
-                                                      <p class="success_msg"><?php echo $_GET['submit_success']; ?></p>
-                                                    <?php } ?>
-                                                </center>
-                                                <div class="alert alert-warning text-center mb-3 mt-3">
-                                                    <h5 class="alert-heading">Note!</h5>
-                                                    Rename your files according to the requirements, else it will be rejected.
-                                                </div>
+                                                        else {
+                                                            echo "<tr><td colspan='2'><h1 class='error_msg'>Primary Information Unavailable</h1></td></tr>";
+                                                        }
+                                                    ?>
+                                                    <?php
+                                                        include "../db_conn.php";
+                                                        $sql = "SELECT * FROM student_basic_info_tbl WHERE student_id = '$student_id'";
+                                                        $result = $conn->query($sql);
+                                                          if($result->num_rows > 0) {
+                                                            while ($row=$result->fetch_assoc()) {
+                                                    ?>
+                                                    <tr class="table-active">
+                                                        <th colspan="2">BASIC INFORMATION :</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Birthdate</th>
+                                                        <td><?php echo $row['bdate'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Nationality</th>
+                                                        <td><?php echo $row['nationality'];?></td>
+                                                    </tr>
+                                                    <tr class="table-active">
+                                                        <th colspan="2">BIRTH PLACE :</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Province</th>
+                                                        <td><?php echo $row['birth_province'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>City/Municipality</th>
+                                                        <td><?php echo $row['birth_city'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Barangay</th>
+                                                        <td><?php echo $row['birth_barangay'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>House Number</th>
+                                                        <td><?php echo $row['birth_house_num'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Zip Code</th>
+                                                        <td><?php echo $row['birth_zip_code'];?></td>
+                                                    </tr>
+                                                    <tr class="table-active">
+                                                        <th colspan="2">CONTACT & OTHER INFO :</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Email Address</th>
+                                                        <td><?php echo $row['email'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Contact Number</th>
+                                                        <td><?php echo $row['contact_num'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Sex</th>
+                                                        <td><?php echo $row['gender'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Religion</th>
+                                                        <td><?php echo $row['religion'];?></td>
+                                                    </tr>
+                                                    <?php
+                                                            }
+                                                        }
 
-                                                <form action="../php/profilePHP.php" method="POST" enctype="multipart/form-data" class="no-display" id="grad_requirements">
-                                                    <div>
-                                                        <p>FORM 137</p>
-                                                        <p>FORM 138</p>
-                                                        <p>Good Moral Certification</p>
-                                                        <p>Updated Evaluation form</p>
-                                                        <p>Application for Graduation</p>
-                                                        <p>2 Picture (Passport Size with Name)</p>
-                                                        <p>Barangay Clearance</p>
-                                                        <p>Birth Certificate (NSO/PSA)</p>
-                                                        <p>Capstone 1 & Capstone 2 Certificate</p>
-                                                        <p>Medical Certificate</p>
-                                                        
-                                                        <input type="hidden" name="student_id" value="<?php echo $student_id;?>">
-                                                        <input type="file" name="file[]" id="file" class="custom_upload" accept="image/png, image/gif, image/jpeg" multiple required>
-                                                    </div>
+                                                        else {
+                                                            echo "<tr><td colspan='2'><h1 class='error_msg'>Basic Information Unavailable</h1></td></tr>";
+                                                        }
+                                                    ?>
+                                                    <?php
+                                                        include "../db_conn.php";
+                                                        $sql = "SELECT * FROM student_fam_info_tbl WHERE student_id = '$student_id'";
+                                                        $result = $conn->query($sql);
+                                                          if($result->num_rows > 0) {
+                                                            while ($row=$result->fetch_assoc()) {
+                                                    ?>
+                                                    <tr class="table-active">
+                                                        <th colspan="2">FATHER'S INFORMATION :</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Father's Name</th>
+                                                        <td><?php echo $row['father_lname'].", ".$row['father_fname']." ".$row['father_mname']." ".$row['father_sname'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Contact Number</th>
+                                                        <td><?php echo $row['father_contact'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Occupation</th>
+                                                        <td><?php echo $row['father_occupation'];?></td>
+                                                    </tr>
+                                                    <tr class="table-active">
+                                                        <th colspan="2">MOTHER'S INFORMATION :</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Mother's Name</th>
+                                                        <td><?php echo $row['mother_lname'].", ".$row['mother_fname']." ".$row['mother_mname'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Contact Number</th>
+                                                        <td><?php echo $row['mother_contact'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Occupation</th>
+                                                        <td><?php echo $row['mother_occupation'];?></td>
+                                                    </tr>
+                                                    <?php
+                                                            }
+                                                        }
 
-                                                    <input type="submit" name="submit_reqBtn" value="Submit" class="btn btn-success float-right">
-                                                </form>
-                                            </div>
+                                                        else {
+                                                            echo "<tr><td colspan='2'><h1 class='error_msg'>Family Information Unavailable</h1></td></tr>";
+                                                        }
+                                                    ?>
+                                                    <?php
+                                                        include "../db_conn.php";
+                                                        $sql = "SELECT * FROM student_guardian_info_tbl WHERE student_id = '$student_id'";
+                                                        $result = $conn->query($sql);
+                                                          if($result->num_rows > 0) {
+                                                            while ($row=$result->fetch_assoc()) {
+                                                    ?>
+                                                    <tr class="table-active">
+                                                        <th colspan="2">GUARDIAN'S INFORMATION :</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <td><?php echo $row['guardian_lname'].", ".$row['guardian_fname']." ".$row['guardian_mname']." ".$row['guardian_sname'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Contact Number</th>
+                                                        <td><?php echo $row['guardian_contact'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Occupation</th>
+                                                        <td><?php echo $row['guardian_occupation'];?></td>
+                                                    </tr>
+                                                    <?php
+                                                            }
+                                                        }
+
+                                                        else {
+                                                            echo "<tr><td colspan='2'><h1 class='error_msg'>Guardian Information Unavailable</h1></td></tr>";
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                                <tbody id="tbody_acad_info">
+                                                    <?php
+                                                        include "../db_conn.php";
+                                                        $sql = "SELECT * FROM student_acad_info_tbl WHERE student_id = '$student_id'";
+                                                        $result = $conn->query($sql);
+                                                          if($result->num_rows > 0) {
+                                                            while ($row=$result->fetch_assoc()) {
+                                                    ?>
+                                                    <tr class="table-active">
+                                                        <th colspan="2">ACADEMIC INFORMATION :</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Course Enrolled</th>
+                                                        <td><?php echo $row['course'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Second Choice of Course</th>
+                                                        <td><?php echo $row['second_course'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Graduated Senior High School</th>
+                                                        <td><?php echo $row['graduated_shs'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Graduated Elementary School</th>
+                                                        <td><?php echo $row['graduated_es'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Year Graduated Elementary School</th>
+                                                        <td><?php echo $row['graduated_year_es'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Strand</th>
+                                                        <td><?php echo $row['strand'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Learners Reference Number</th>
+                                                        <td><?php echo $row['learners_ref_num'];?></td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <th>Form 138 GWA</th>
+                                                        <td><?php echo $row['form_138'];?></td>
+                                                    </tr>
+                                                    <?php
+                                                            }
+                                                        }
+
+                                                        else {
+                                                            echo "<tr><td colspan='2'><h1 class='error_msg'>Academic Information Unavailable</h1></td></tr>";
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                                <tbody id="tbody_acad_info_transferee">
+                                                    <?php
+                                                        include "../db_conn.php";
+                                                        $sql = "SELECT * FROM student_acad_info_transferee_tbl WHERE student_id = '$student_id'";
+                                                        $result = $conn->query($sql);
+                                                          if($result->num_rows > 0) {
+                                                            while ($row=$result->fetch_assoc()) {
+                                                    ?>
+                                                    <tr class="table-active">
+                                                        <th colspan="2">ACADEMIC INFORMATION :</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Present Course</th>
+                                                        <td><?php echo $row['present_course'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Transfered From</th>
+                                                        <td><?php echo $row['transfered_from'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Cecond Course</th>
+                                                        <td><?php echo $row['second_course'];?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Graduated Elementary School</th>
+                                                        <td><?php echo $row['graduated_es'];?></td>
+                                                    </tr><tr>
+                                                        <th>Graduated Year Elementary School</th>
+                                                        <td><?php echo $row['graduated_year_es'];?></td>
+                                                    </tr>
+                                                    <?php
+                                                            }
+                                                        }
+
+                                                        else {
+                                                            echo "<tr><td colspan='2'><h1 class='error_msg'>Academic Information Unavailable</h1></td></tr>";
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                                <tbody>
+                                                    <form action="../php/profilePHP.php" method="POST" id="upd_student_cred_form">
+                                                        <tr class="table-active">
+                                                            <th>Password</th>
+                                                            <th>Confirm Password</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 50%">
+                                                                <input type="hidden" name="student_id" value="<?php echo $_SESSION['student_id'];?>">
+                                                                <div class="control-form">
+                                                                    <input type="password" class="form-control" id="password" name="password">
+                                                                    <small></small>
+                                                                </div>
+                                                            </td>
+                                                            <td style="width: 50%">
+                                                                <div class="control-form">
+                                                                    <input type="password" class="form-control" id="confirmPass" name="confirmPass">
+                                                                    <small></small>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <input type="submit" class="btn btn-success" name="change_passBtn" value="Confirm">
+                                                            </td>
+                                                        </tr>
+                                                    </form>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="profile_left_section" id="requirement_container">
-                                    <h2 class="text-center">Submitted Requirements</h2>
-                                    <?php
-                                        $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id'";
-                                        $result = $conn->query($sql);
-                                          if($result->num_rows > 0) {
-                                            while ($row=$result->fetch_assoc()) {
-                                    ?>
-                                    <p><?php echo $row['file_name'];?>
-                                        <span class="upload_status">
-                                            <?php
-                                                if ($row['status'] == "Confirmed") {
-                                                    echo "<span class='upload_status_green'>".$row['status']."</span>";
-                                                }
-                                                else {
-                                                    echo "<span class='upload_status_red'>".$row['status']."</span>";
-                                                }
-                                            ?>
-                                        </span>
-                                    </p>
-                                    <?php
-                                            }
-                                        }
-                                        else {
-                                            echo "<script>document.getElementById('requirement_container').style.display = 'none';</script>";
-                                        }
-                                    ?>
-                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="profile_right_section">
-                                    <?php
-                                        $sql = "SELECT * FROM student_pri_info_tbl WHERE student_id = '$student_id'";
-                                        $result = $conn->query($sql);
-                                          if($result->num_rows > 0) {
-                                            while ($row=$result->fetch_assoc()) {
-                                    ?>
-                                    <table class="table table-striped table-responsive-md">
-                                        <thead>
-                                            <th colspan="3">Primary Information</th>
-                                        </thead>
-                                        <tr>
-                                            <td>Full Name:</td>
-                                            <td colspan="2"><span><?php echo $row['lname']." ,".$row['fname']." ".$row['mname'];?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>ID Number:</td>
-                                            <td colspan="2"><span><?php echo $row['id_number'];?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Province:</td>
-                                            <td colspan="2"><span><?php echo $row['province'];?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>City:</td>
-                                            <td colspan="2"><span><?php echo $row['city'];?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Barangay:</td>
-                                            <td colspan="2"><span><?php echo $row['barangay'];?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>House Number:</td>
-                                            <td colspan="2"><span><?php echo $row['house_num'];?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zip Code:</td>
-                                            <td colspan="2"><span><?php echo $row['zip_code'];?></span></td>
-                                        </tr>
-                                    </table>
-                                    <?php
-                                            }
-                                        }
-                                        else {
-                                            echo "<center><h1 class='error_msg'>Information unavailable</h1></center>";
-                                        }
-                                    ?>
+                        </div>
+                    </div>
 
-                                    <form action="../php/profilePHP.php" method="POST" id="upd_student_cred_form">
-                                    <?php
-                                        $sql = "SELECT * FROM student_pri_info_tbl WHERE student_id = '$student_id'";
-                                        $result = $conn->query($sql);
-                                          if($result->num_rows > 0) {
-                                            while ($row=$result->fetch_assoc()) {
-                                    ?>
-                                        <input type="hidden" name="student_id" value="<?php echo $_SESSION['student_id'];?>">
-                                        <table class="table table-striped table-responsive-md">
-                                            <thead>
-                                                <th colspan="3">
-                                                    Student's Account Information
-                                                    <center>
-                                                        <?php if (isset($_GET['error_msg'])) { ?>
-                                                          <p class="error_msg mt-3 mb-2"><?php echo $_GET['error_msg'];?></p>
-                                                        <?php } ?>
-                                                        <?php if (isset($_GET['success_upd_cred'])) { ?>
-                                                          <p class="success_msg mt-3 mb-2"><?php echo $_GET['success_upd_cred']; ?></p>
-                                                        <?php } ?>
-                                                    </center>
-                                                </th>
-                                            </thead>
-                                            <tr>
-                                                <td>ID Number:</td>
-                                                <td colspan="2"><span><?php echo $row['id_number'];?></span></td>
-                                            </tr>
-                                                <tr>
-                                                    <td>Change Password:</td>
-                                                    <td colspan="2">
-                                                        <div class="control-form">
-                                                            <input type="password" class="form-control" placeholder="Enter Password" name="password" id="password" required>
-                                                            <small>error</small>
+                    <div class="container">
+                        <div class="reg_content">
+                            <h4>Fill up forms for limited face to face class</h4>
+                            <div class="d-grid gap-2 d-md-block">
+                                <a class="btn btn-primary" href="health_declaration_form.php" role="button">Health Declaration Form</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="reg_content">
+                                    <h2>Requirements</h2>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <!-- cancel reservation modal-->
+                                                <div class="modal" id="send_modal">
+                                                    <div class="modalBox">
+                                                        <div class="modal_header">
+                                                            <span class="close" id="close_modalReq">&times;</span>
+                                                            <h4>Submit Requirements</h4>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Confirm New Password:</td>
-                                                    <td colspan="2">
-                                                        <div class="control-form">
-                                                            <input type="password" class="form-control" placeholder="Confirm New Password" name="confirmPass" id="confirmPass" required>
-                                                            <small>error</small>
+                                                        <div class="modal_body">
+                                                            <form action="../php/submit_requirementsPHP.php" method="POST" enctype="multipart/form-data">
+                                                                <input type="hidden" name="student_id" id="student_id" value="<?php echo $_SESSION['student_id'];?>">
+                                                                <input type="hidden" id="file_name" name="file_name">
+                                                                <div class="alert alert-warning" role="alert">
+                                                                   In accordance with your choice, submit your requirement.
+                                                                </div>
+                                                                <h3 class="mt-4 mb-3">File Name: <span id="txt_fileName"></span></h3>
+                                                                <div class="input-group">
+                                                                    <input type="file" class="form-control form-control-sm" name="file" accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" required>
+                                                                    <span class="input-group-text"><span class="required_sign">*</span></span>
+                                                                </div>
+                                                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                                                    <button class="greenBtn" name="send_reqBtn" type="submit">Submit Requirement</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                        </table>
-                                        <?php
-                                                }
-                                            }
-                                            else {
-                                                echo "<center><h1 class='error_msg'>Credential unavailable</h1></center>";
-                                            }
-                                        ?>
-                                        <input type="submit" name="change_passBtn" value="Confirm Changes" class="btn btn-success">
-                                    </form>
+                                                    </div>
+                                                </div>
+                                                <!-- / cancel reservation modal -->
+                                                
+                                                <?php
+                                                    // $sql_requirements = mysqli_query($conn, "SELECT
+                                                    //                     student_pri_info_tbl.*,
+
+                                                    //                     student_requirement_tbl.*
+                                                                        
+                                                    //                     FROM student_pri_info_tbl
+
+                                                    //                     RIGHT JOIN student_requirement_tbl ON student_pri_info_tbl.student_id = student_requirement_tbl.student_id
+
+                                                    //                     WHERE student_requirement_tbl.student_id = '$student_id'");
+
+                                                    // $sql_requirements = mysqli_query($conn, "SELECT
+                                                    //                      student_pri_info_tbl.*,
+
+                                                    //                      student_requirement_tbl.*
+                                                                        
+                                                    //                      FROM student_pri_info_tbl
+
+                                                    //                      LEFT JOIN student_requirement_tbl ON student_pri_info_tbl.student_id = student_requirement_tbl.student_id
+
+                                                    //                      WHERE student_pri_info_tbl.student_id = '$student_id'");
+
+
+                                                    // while ($row = mysqli_fetch_assoc($sql_requirements)) {
+                                                    //     $fileName = $row['file_name'];
+                                                    //     $fileStatus = $row['status'];
+
+                                                    //     $test_array = array($fileName => $fileStatus);
+
+                                                    //     foreach ($test_array as $key => $value) {
+
+                                                    //         if ($key == "FORM 137" && $value == "Pending") {
+                                                    //             echo "FORM 137 Pending<br>";
+                                                    //             if ($key == "FORM 137" && $value == "") {
+                                                    //                 echo "FORM 137 Missing<br>";
+                                                    //             }
+                                                    //         }
+
+                                                    //         if ($key == "FORM 138" && $value == "Pending") {
+                                                    //             echo "FORM 138 Pending<br>";
+                                                    //             if ($key == "FORM 138" && $value != "Pending") {
+                                                    //                 echo "FORM 137 Missing<br>";
+                                                    //             }
+                                                    //         }
+                                                    //     }
+                                                    // }
+                                                ?>
+                                                <table class="table table-sm table-hover" id="requirements_tbl">
+                                                    <tbody id="regular_grad_requirements" style="display: none">
+                                                        <tr>
+                                                            <td class="col">FORM 137</td>
+                                                            <td>
+                                                                <?php
+
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">FORM 138</td>
+                                                            <td>
+                                                                <?php
+
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Good Moral Certification</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Updated Evaluation form</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Application for Graduation</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">2 Picture (Passport Size with Name)</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Barangay Clearance</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Birth Certificate (NSO/PSA)</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Capstone 1 & Capstone 2 Certificate</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Medical Certificate</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -335,7 +642,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         <a href="https://www.facebook.com/UCUOfficial" target="_blank"><i class="fab fa-facebook-f"> </i></a>
                                         <a href="https://www.youtube.com/c/UcuEduPhOfficial" target="_blank"><i style="padding-right: 25px;" class="fab fa-youtube"> </i></a>
                                         <a href="https://www.instagram.com/ucuofficial/" target="_blank"><i class="fab fa-instagram"> </i></a>
-                                        <a href="https://mis.ucu.edu.ph" target="_blank"><p>UCU-MIS+ 2022</p></a>
+                                        <!-- <a href="https://mis.ucu.edu.ph" target="_blank"><p>UCU-MIS+ 2022</p></a> -->
                                     </div>
                                 </div>
                             </div>

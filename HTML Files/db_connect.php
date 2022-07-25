@@ -7,7 +7,7 @@ $dbName = "test";
 
 //connection
 
-$con = mysqli_connect($serveName, $userName, $password, $dbName);
+$conn = mysqli_connect($serveName, $userName, $password, $dbName);
 
 if(mysqli_connect_errno()){
     echo "Failed to connect!";

@@ -3,7 +3,7 @@
 /*------------------------------------------------------------------- 991px x 768px ---------------------------------------------------------------------*/
 @media only screen and (min-width:768px) and (max-width:991px) {
     .header-search { padding: 15px 0px; }
-    #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 800px;}
+    #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 1500px;}
 }
 
 /*------------------------------------------------------------------- 767px x 599px ---------------------------------------------------------------------*/
@@ -32,6 +32,30 @@
     .profile_left_section {float: none;}
     .profile_right_section {float: none;}
     .profile_title {margin: 0; width: 50%;}
+    .health_df_cont {width: 100%; margin: 15px 0;}
+    .health_df_header {padding: 15px 0;}
+    .health_df_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .health_df_header h1 {font-size: 12px;}
+    .health_df_header h2 {font-size: 10px;}
+    .health_df_header h3 {font-size: 10px;}    
+    .temp_cont h1 {margin-top: 25px;}
+    .illness_section { overflow-x: auto; width: 100%;}
+    .illness_section table tr td {font-size: 8px;}
+    .illness_section table tr td p {font-size: 8px; width: 100px;}
+    .com_undertake_cont {width: 100%; margin: 15px 0;}
+    .com_undertake_header {padding: 15px 0;}
+    .com_undertake_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .com_undertake_header h1 {font-size: 12px;}
+    .com_undertake_header h2 {font-size: 10px;}
+    .com_undertake_header h3 {font-size: 10px;}
+    .com_undertake_confirmation {float: none;}
+    .cert_consent_cont {width: 100%; margin: 15px 0;}
+    .cert_consent_header {padding: 15px 0;}
+    .cert_consent_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .cert_consent_header h1 {font-size: 12px;}
+    .cert_consent_header h2 {font-size: 10px;}
+    .cert_consent_header h3 {font-size: 10px;}
+    .com_undertake_confirmation {float: none;} 
 }
 
 /*------------------------------------------------------------------- 599px x 280px ---------------------------------------------------------------------*/
@@ -89,9 +113,20 @@
     .service_text { width: 32%; }
     .touch_text { width: 40%; }
     .bnner_title { font-size: 34pt; }
-    .admission_conts button {margin-top: 55px;}
-    .admission_conts {height: 410px;}
-    #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 800px;}
+    #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 1000px;}
+    .mission_vision_cont {padding: 0; margin-left: -2px; padding: 15px; height: 320px;}
+    .health_df_cont {width: 100%; margin: 15px 0;}
+    .health_df_header {padding: 15px 0;}
+    .health_df_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .health_df_header h1 {font-size: 12px;}
+    .health_df_header h2 {font-size: 10px;}
+    .health_df_header h3 {font-size: 10px;}    
+    .temp_cont h1 {margin-top: 25px;}
+    .illness_section { overflow-x: auto; width: 100%;}
+    .illness_section table{ width: 100%;}
+    .illness_section table tr td {font-size: 8px;}
+    .illness_section table tr td p {font-size: 8px; width: 100px;}
+    
 }
 
 @media (min-width:576px) and (max-width:767px) {
@@ -134,10 +169,34 @@
     .item_container p, .item_container h1 { text-align: center; }
     .item_container p { max-height: 100%; text-align: left; }
     .availability { margin-top: -60px;}
-    .admission_conts button {margin-top: 55px;}
-    .admission_conts {height: 430px;}
-    #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 600px;}
+    #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 1000px;}
+    .health_df_cont {width: 100%; margin: 15px 0;}
+    .health_df_header {padding: 15px 0;}
+    .health_df_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .health_df_header h1 {font-size: 12px;}
+    .health_df_header h2 {font-size: 10px;}
+    .health_df_header h3 {font-size: 10px;}    
+    .temp_cont h1 {margin-top: 25px;}
+    .illness_section { overflow-x: auto; width: 100%;}
+    .illness_section table{ width: 100%;}
+    .illness_section table tr td {font-size: 8px;}
+    .illness_section table tr td p {font-size: 8px; width: 100px;}
+    .com_undertake_cont {width: 100%; margin: 15px 0;}
+    .com_undertake_header {padding: 15px 0;}
+    .com_undertake_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .com_undertake_header h1 {font-size: 12px;}
+    .com_undertake_header h2 {font-size: 10px;}
+    .com_undertake_header h3 {font-size: 10px;}
+    .com_undertake_confirmation {float: none;}
+    .cert_consent_cont {width: 100%; margin: 15px 0;}
+    .cert_consent_header {padding: 15px 0;}
+    .cert_consent_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .cert_consent_header h1 {font-size: 12px;}
+    .cert_consent_header h2 {font-size: 10px;}
+    .cert_consent_header h3 {font-size: 10px;}
+    .com_undertake_confirmation {float: none;} 
 }
+
 @media (max-width:575px) {
     .navbar-expand-lg .navbar-nav .nav-link { padding-left: 0; }
     .carousel-caption { display: none; }
@@ -146,11 +205,11 @@
     .logo2 { float: inherit; text-align: center; }
     .logo2 img { max-width: 50px; }
     .header_main .row .col-md-6 { width: 15%; }
-    .header_pages .row .col-md-6 { width: 40%; }
+    .header_pages .row .col-md-6 { width: 15%; }
     .card-list { padding: 0; margin-top: 25px; }
     .card-list .row .col-md-6 { width: 50%; }
     .card-list img { width: 45px; }
-    .card-list .btn_main { float: !important }
+    .card-list .btn_main { float: none !important }
     .btn-primary { max-width: 126px; margin-right: 2px; font-size: 14px; }
     .banner-main .carousel-caption h1 { font-size: 30px; line-height: 38px; }
     .titlepage h2 { font-size: 27px; }
@@ -184,8 +243,11 @@
     .map_icon { width: 100%; }
     .bnner_title { font-size: 26pt; padding-top: 0px; margin-top: 0px; }
     .long_text { font-size: 10pt; }
-    .navbar-nav.mr-auto li { float: left; width: 100%; }
-    .obj_section .row { flex-direction: column-reverse; }
+    .navbar-nav.mr-auto li { float: left; width: 100%;}
+    .mission_vision_cont {padding: 0; margin-left: -2px; padding: 5px; height: auto;}
+    .goals_obj_cont {float: none; margin-left: -2px; padding: 5px; text-align: left;}
+    .history_content {float: none; margin-left: -1px; padding: 5px;}
+    .obj_section .row { flex-direction: column-reverse;}
     .obj_section ol, .obj_section ul, .obj_section li { list-style: none; text-align: center; }
     .goals_obj_cont_title { text-align: center; margin: auto; font-size: 20px; }
     .banner_news_events { height: 100px; }
@@ -205,7 +267,36 @@
     .availability p{margin-top: -2px;}
     .admission_conts button {margin-top: 55px;}
     .admission_conts {height: 430px;}
-    #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 600px;}
+    #nav-last {margin-left: -210px; margin-top: 20px; border-top: 1px solid #222222; width: 525px;}
+    .reg_content img {display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;}
+    .reg_content {width: 100%; margin: 0; border-radius: 0;}
+    .bsit_cont {margin: 0; margin-top: 20px; margin-bottom: 20px;}
+    .bsit_cont h1{width: 75%;}
+    .health_df_cont {width: 100%; margin: 15px 0;}
+    .health_df_header {padding: 15px 0;}
+    .health_df_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .health_df_header h1 {font-size: 12px;}
+    .health_df_header h2 {font-size: 10px;}
+    .health_df_header h3 {font-size: 10px;}    
+    .temp_cont h1 {margin-top: 25px;}
+    .illness_section { overflow-x: auto; width: 100%;}
+    .illness_section table{ width: 100%;}
+    .illness_section table tr td {font-size: 8px;}
+    .illness_section table tr td p {font-size: 8px; width: 100px;}
+    .com_undertake_cont {width: 100%; margin: 15px 0;}
+    .com_undertake_header {padding: 15px 0;}
+    .com_undertake_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .com_undertake_header h1 {font-size: 12px;}
+    .com_undertake_header h2 {font-size: 10px;}
+    .com_undertake_header h3 {font-size: 10px;}
+    .com_undertake_confirmation {float: none;}
+    .cert_consent_cont {width: 100%; margin: 15px 0;}
+    .cert_consent_header {padding: 15px 0;}
+    .cert_consent_header img{width: 55px; height: 55px; margin-top: -15px;}
+    .cert_consent_header h1 {font-size: 12px;}
+    .cert_consent_header h2 {font-size: 10px;}
+    .cert_consent_header h3 {font-size: 10px;}
+    .com_undertake_confirmation {float: none;}    
 }
 
 /*******SLIDER EVENTS*********/

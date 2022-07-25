@@ -2000,6 +2000,27 @@ button.main_bt {
 	margin: 0;
 }
 
+
+.purpose_input {
+	display: flex;
+	padding-right: 5%;
+	align-items: center;
+}
+
+.purpose_input input {
+	border: 0;
+  	outline: 0;
+  	background: transparent;
+  	border-bottom: 1px solid black;
+  	font-size: 12px;
+}
+
+.purpose_input label {
+	white-space: nowrap;
+	font-size: 12px;
+	margin: 0 10px;
+}
+
 .temp_cont h1 {
 	font-size: 18px;
 	font-weight: 700;
@@ -2060,6 +2081,8 @@ button.main_bt {
 	text-align: center;
 	margin: 5px;
 }
+
+
 
 /********* Commitment of Undertaking Area **************/
 .com_undertake_cont {

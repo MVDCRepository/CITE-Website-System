@@ -5,6 +5,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
   include '../db_conn.php';
 
   $student_id = $_SESSION['student_id'];
+  $student_status = $_SESSION['status'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -121,7 +122,31 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                 <div class="grades-content-view">
                     <div class="grades-section-view">
                         <?php
-                            $sql = "SELECT * FROM student_acad_info_tbl WHERE student_id = '$student_id'";
+                            if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                              $sql = "SELECT
+                                    student_pri_info_tbl.student_id,
+                                    student_pri_info_tbl.fname,
+
+                                    student_acad_info_tbl.eval_id
+
+                                    FROM student_pri_info_tbl
+
+                                    INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                    WHERE student_acad_info_tbl.student_id = '$student_id'";
+                            }
+                            else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                              $sql = "SELECT
+                                    student_pri_info_tbl.student_id,
+                                    student_pri_info_tbl.fname,
+
+                                    student_acad_info_transferee_tbl.eval_id
+
+                                    FROM student_pri_info_tbl
+
+                                    INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+                                    WHERE student_acad_info_transferee_tbl.student_id = '$student_id'";
+                            }
+
                             $result = $conn->query($sql);
                               if($result->num_rows > 0) {
                                 while ($row=$result->fetch_assoc()) {
@@ -151,43 +176,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '1st'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '1st'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '1st'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -231,43 +298,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '2nd'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '2nd'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '2nd'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -315,43 +424,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '1st'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '1st'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '1st'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -395,43 +546,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '2nd'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '2nd'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '2nd'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -479,43 +672,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '1st'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '1st'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '1st'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -559,43 +794,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '2nd'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '2nd'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '2nd'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -643,43 +920,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                  $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                                  if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = 'Middle Term'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = 'Middle Term'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = 'Middle Term'";
+                                              }
+
                                                   $result_subjects = $conn->query($sql_subjects);
                                                     if($result_subjects->num_rows > 0) {
                                                       while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -728,43 +1047,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '1st'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '1st'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '1st'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -808,43 +1169,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '2nd'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '2nd'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '2nd'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -883,7 +1286,45 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                 <div class="grades-content">
                     <div id="element" class="grades-section">
                         <?php
-                            $sql = "SELECT * FROM student_acad_info_tbl WHERE student_id = '$student_id'";
+                            if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                              $sql = "SELECT
+                                    student_pri_info_tbl.student_id,
+                                    student_pri_info_tbl.fname,
+
+                                    student_acad_info_tbl.eval_id,
+
+                                    eval_cmo_series_tbl.eval_id,
+                                    eval_cmo_series_tbl.cmoNo,
+                                    eval_cmo_series_tbl.series
+
+                                    FROM student_pri_info_tbl
+
+                                    INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+
+                                    INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+
+                                    WHERE student_acad_info_tbl.student_id = '$student_id'";
+                            }
+                            else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                              $sql = "SELECT
+                                    student_pri_info_tbl.student_id,
+                                    student_pri_info_tbl.fname,
+
+                                    student_acad_info_transferee_tbl.eval_id,
+
+                                    eval_cmo_series_tbl.eval_id,
+                                    eval_cmo_series_tbl.cmoNo,
+                                    eval_cmo_series_tbl.series
+
+                                    FROM student_pri_info_tbl
+
+                                    INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                    INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                    WHERE student_acad_info_transferee_tbl.student_id = '$student_id'";
+                            }
+
                             $result = $conn->query($sql);
                               if($result->num_rows > 0) {
                                 while ($row=$result->fetch_assoc()) {
@@ -896,7 +1337,9 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         <h2>COLLEGE OF INFORMATION & TECHNOLOGY EDUCATION</h2>
                                         <p>San Vicente West, Urdaneta City, Pangasinan</p>
                                         <h2>BACHELORS OF SCIENCE IN INFORMATION TECHNOLOGY (BSIT)</h2>
-                                        <p>(as per CMO No. 25 Series of 2015)</p>
+                                        <p>
+                                          <?php echo "(as per CMO No. ".$row['cmoNo']." Series of ".$row['series'].")";?>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -924,43 +1367,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '1st'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '1st'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '1st'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -1004,43 +1489,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '2nd'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '2nd'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '1st' AND subject_tbl.sem = '2nd'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -1088,43 +1615,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '1st'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '1st'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '1st'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -1168,43 +1737,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '2nd'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '2nd'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '2nd' AND subject_tbl.sem = '2nd'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -1252,43 +1863,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '1st'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '1st'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '1st'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -1332,43 +1985,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '2nd'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '2nd'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = '2nd'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -1416,43 +2111,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                  $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                                  if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = 'Middle Term'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = 'Middle Term'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '3rd' AND subject_tbl.sem = 'Middle Term'";
+                                              }
+
                                                   $result_subjects = $conn->query($sql_subjects);
                                                     if($result_subjects->num_rows > 0) {
                                                       while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -1501,43 +2238,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '1st'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '1st'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '1st'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -1581,43 +2360,85 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         </thead>
                                         <tbody>
                                             <?php
-                                              $sql_subjects = "SELECT
-                                              student_pri_info_tbl.student_id,
-                                              student_pri_info_tbl.id_number,
-                                              student_pri_info_tbl.fname,
-                                              student_pri_info_tbl.Mname,
-                                              student_pri_info_tbl.lname,
+                                              if ($student_status == "Freshmen" || $student_status == "Regular" || $student_status == "Regular Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
 
-                                              student_acad_info_tbl.eval_id,
+                                                  student_acad_info_tbl.eval_id,
 
-                                              eval_cmo_series_tbl.eval_id,
-                                              eval_cmo_series_tbl.cmoNo,
-                                              eval_cmo_series_tbl.series,
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
 
-                                              subject_tbl.subj_id,
-                                              subject_tbl.courseCode,
-                                              subject_tbl.courseDesc,
-                                              subject_tbl.units,
-                                              subject_tbl.lec,
-                                              subject_tbl.lab,
-                                              subject_tbl.yr_lvl,
-                                              subject_tbl.sem,
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
 
-                                              student_grade_tbl.student_id,
-                                              student_grade_tbl.subj_id,
-                                              student_grade_tbl.grade
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
 
-                                              FROM student_pri_info_tbl
+                                                  FROM student_pri_info_tbl
 
-                                              INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
+                                                  INNER JOIN student_acad_info_tbl ON student_acad_info_tbl.student_id = student_pri_info_tbl.student_id
 
-                                              INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_tbl.eval_id
 
-                                              INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                                              INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
 
-                                              WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '2nd'";
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '2nd'";
+                                              }
+                                              else if ($student_status == "Transferee" || $student_status == "Transferee Graduating") {
+                                                $sql_subjects = "SELECT
+                                                  student_pri_info_tbl.student_id,
+                                                  student_pri_info_tbl.id_number,
+                                                  student_pri_info_tbl.fname,
+                                                  student_pri_info_tbl.Mname,
+                                                  student_pri_info_tbl.lname,
+
+                                                  student_acad_info_transferee_tbl.eval_id,
+
+                                                  eval_cmo_series_tbl.eval_id,
+                                                  eval_cmo_series_tbl.cmoNo,
+                                                  eval_cmo_series_tbl.series,
+
+                                                  subject_tbl.subj_id,
+                                                  subject_tbl.courseCode,
+                                                  subject_tbl.courseDesc,
+                                                  subject_tbl.units,
+                                                  subject_tbl.lec,
+                                                  subject_tbl.lab,
+                                                  subject_tbl.yr_lvl,
+                                                  subject_tbl.sem,
+
+                                                  student_grade_tbl.student_id,
+                                                  student_grade_tbl.subj_id,
+                                                  student_grade_tbl.grade
+
+                                                  FROM student_pri_info_tbl
+
+                                                  INNER JOIN student_acad_info_transferee_tbl ON student_acad_info_transferee_tbl.student_id = student_pri_info_tbl.student_id
+
+                                                  INNER JOIN eval_cmo_series_tbl ON eval_cmo_series_tbl.eval_id = student_acad_info_transferee_tbl.eval_id
+
+                                                  INNER JOIN subject_tbl ON subject_tbl.eval_id = eval_cmo_series_tbl.eval_id
+
+                                                  INNER JOIN student_grade_tbl ON student_grade_tbl.subj_id = subject_tbl.subj_id
+
+                                                  WHERE student_pri_info_tbl.student_id = '$student_id' AND student_acad_info_transferee_tbl.eval_id = '$row[eval_id]' AND subject_tbl.yr_lvl = '4th' AND subject_tbl.sem = '2nd'";
+                                              }
+
                                               $result_subjects = $conn->query($sql_subjects);
                                                 if($result_subjects->num_rows > 0) {
                                                   while ($row_subjects=$result_subjects->fetch_assoc()) {
@@ -1708,21 +2529,66 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                             <div class="signatures_item">
                                                 <h2>Prepared by:</h2>
                                                 <div class="signatures_item_contents">
-                                                    <h3>JASPER U. UNDAN</h3>
+                                                  <?php
+                                                      include "../db_conn.php";
+                                                      $sql = "SELECT * FROM faculty_tbl WHERE position = 'Secretary'";
+                                                      $result = $conn->query($sql);
+                                                        if($result->num_rows > 0) {
+                                                          while ($row=$result->fetch_assoc()) {
+                                                  ?>
+                                                  <h3><?php echo $row['fname']." ".$row['lname'];?></h3>
+                                                  <?php
+                                                          }
+                                                      }
+
+                                                      else {
+                                                          echo "<center><span>Compose Error</span></center>";
+                                                      }
+                                                  ?>
                                                     <h1>College Secretary</h1>
                                                 </div>
                                             </div>
                                             <div class="signatures_item">
                                                 <h2>Noted by:</h2>
                                                 <div class="signatures_item_contents">
-                                                    <h3>DANILO B. DORADO</h3>
+                                                  <?php
+                                                      include "../db_conn.php";
+                                                      $sql = "SELECT * FROM faculty_tbl WHERE position = 'Program Head'";
+                                                      $result = $conn->query($sql);
+                                                        if($result->num_rows > 0) {
+                                                          while ($row=$result->fetch_assoc()) {
+                                                  ?>
+                                                  <h3><?php echo $row['fname']." ".$row['lname'];?></h3>
+                                                  <?php
+                                                          }
+                                                      }
+
+                                                      else {
+                                                          echo "<center><span>Compose Error</span></center>";
+                                                      }
+                                                  ?>
                                                     <h1>Program Head</h1>
                                                 </div>
                                             </div>
                                             <div class="signatures_item">
                                                 <h2>Approaved by:</h2>
                                                 <div class="signatures_item_contents">
-                                                    <h3>JOHHANS B. RABAGO</h3>
+                                                  <?php
+                                                      include "../db_conn.php";
+                                                      $sql = "SELECT * FROM faculty_tbl WHERE position = 'College Dean'";
+                                                      $result = $conn->query($sql);
+                                                        if($result->num_rows > 0) {
+                                                          while ($row=$result->fetch_assoc()) {
+                                                  ?>
+                                                  <h3><?php echo $row['fname']." ".$row['lname'];?></h3>
+                                                  <?php
+                                                          }
+                                                      }
+
+                                                      else {
+                                                          echo "<center><span>Compose Error</span></center>";
+                                                      }
+                                                  ?>
                                                     <h1>DEAN, College of Information<br>& Technology Education</h1>
                                                 </div>
                                             </div>

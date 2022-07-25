@@ -26,7 +26,30 @@ if (isset($_POST['id_number']) && isset($_POST['password'])) {
 		exit();
 	}
 	else {
-		$sql = "SELECT * FROM student_pri_info_tbl WHERE id_number='$id_number' AND password='$password'";
+		$sql = "SELECT
+				student_pri_info_tbl.student_id,
+				student_pri_info_tbl.id_number,
+				student_pri_info_tbl.fname,
+				student_pri_info_tbl.mname,
+				student_pri_info_tbl.lname,
+				student_pri_info_tbl.sname,
+				student_pri_info_tbl.province,
+				student_pri_info_tbl.city,
+				student_pri_info_tbl.barangay,
+				student_pri_info_tbl.house_num,
+				student_pri_info_tbl.status,
+				student_pri_info_tbl.yr_lvl,
+				student_pri_info_tbl.eval_status,
+				student_pri_info_tbl.id_number,
+				student_pri_info_tbl.password,
+
+				student_basic_info_tbl.contact_num
+
+				FROM student_pri_info_tbl
+
+				INNER JOIN student_basic_info_tbl ON student_pri_info_tbl.student_id = student_basic_info_tbl.student_id
+
+				WHERE student_pri_info_tbl.id_number='$id_number' AND student_pri_info_tbl.password='$password'";
 
 		$result = mysqli_query($conn, $sql);
 
@@ -41,9 +64,16 @@ if (isset($_POST['id_number']) && isset($_POST['password'])) {
 				$_SESSION['mname'] = $row['mname'];
 				$_SESSION['lname'] = $row['lname'];
 				$_SESSION['sname'] = $row['sname'];
+				$_SESSION['province'] = $row['province'];
+				$_SESSION['city'] = $row['city'];
+				$_SESSION['barangay'] = $row['barangay'];
+				$_SESSION['house_num'] = $row['house_num'];
+				$_SESSION['zip_code'] = $row['zip_code'];
 				$_SESSION['yr_lvl'] = $row['yr_lvl'];
 				$_SESSION['eval_status'] = $row['eval_status'];
 				$_SESSION['status'] = $row['status'];
+
+				$_SESSION['contact_num'] = $row['contact_num'];
 				header("Location: ../pages/index.php");
 				exit();
 			}

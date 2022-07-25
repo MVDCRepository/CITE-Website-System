@@ -248,52 +248,68 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                         </div>
                         <!--End Year Theme Section --------------------------->
                         <!--Start UCU News Section --------------------------->
-                        <div class="ucu_news">
+                        <div class="ucu_news mb-0">
                             <div class="section_service_2">
                                 <h1 class="service_text">University News</h1> <br>
                             </div>
                             <div class="container">
                                 <div class="row">
+                                    <?php
+                                        include "../db_conn.php";
+                                        $sql = "SELECT * FROM news_events_tbl WHERE post = 'featured' ORDER BY bulletin_id DESC LIMIT 1";
+                                        $result = $conn->query($sql);
+                                          if($result->num_rows > 0) {
+                                            while ($row=$result->fetch_assoc()) {
+                                    ?>
                                     <div class="col-md-6">
-                                        <h3>Featured News</h3>
+                                        <h3>Featured News & Event</h3>
                                         <div class="yt_embed">
-                                            <iframe width="100" height="300" src="https://www.youtube.com/embed/KOI-_TqMMwk?list=TLGGtzbvUjBWm44zMTA1MjAyMg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                            <i class="bi bi-calendar-date"> <span> 6 May 2022</span> </i>
-                                            <h3>UCU News Update</h3> <br>
-                                            <p>These are just a few events, programs, and activities in achieving a common goal of Urdaneta City University in continuing the passion and commitment that holds in the institution.</p>
-                                            <a href="#"> Read more... </a>
+                                            <!-- <iframe width="100" height="300" src="../admin/php/images/<?php echo $row['photo'];?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                                            <div class="img_post_holder">
+                                                <img class="img-fluid mb-2" src="../../admin/php/images/<?php echo $row['photo'];?>">
+                                            </div>
+                                            <br>
+                                            <i class="bi bi-calendar-date"> <span> <?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></span></i>
+                                            <h3 class="mt-3"><?php echo $row['title'];?></h3>
+                                            <br>
+                                            <p class="featured_text"><?php echo $row['content'];?></p>
+                                            <a href="news_and_events_details.php?bulletin_id=<?=$row['bulletin_id'];?>"> Read more... </a>
                                         </div>
                                     </div>
+                                    <?php
+                                            }
+                                        }
+                                        else {
+                                            echo "<center><h1 class='error_msg'>No featured News & Events available</h1></center>";
+                                        }
+                                    ?>
                                     <div class="col-md-6">
                                         <div class="card-list">
-                                            <div class="row">
+                                            <div class="row" style="max-height: 500px; overflow-x: hidden; overflow-y: auto;">
+                                                <?php
+                                                    include "../db_conn.php";
+                                                    $sql = "SELECT * FROM news_events_tbl WHERE post = '' OR post = 'featured'";
+                                                    $result = $conn->query($sql);
+                                                      if($result->num_rows > 0) {
+                                                        while ($row=$result->fetch_assoc()) {
+                                                ?>
                                                 <div class="col-md-6">
-                                                    <img src="../images/ucu_logo.png">
-                                                    <h4><a href="#">UCU hails the 2022 board passers Electrical Engineers and Master Electricians</a></h4>
-                                                    <p>May 13, 2022, 2:36 PM</p>
+                                                    <img class="img-fluid" src="../../admin/php/images/<?php echo $row['photo'];?>">
+                                                    <h4><a href="news_and_events_details.php?bulletin_id=<?=$row['bulletin_id'];?>"><?php echo $row['title'];?></a></h4>
+                                                    <p><?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></p>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <img src="../images/ucu_logo.png">
-                                                    <h4><a href="#">UCU News Update</a></h4>
-                                                    <p>May 6, 2022, 4:19 PM</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <img src="../images/ucu_logo.png">
-                                                    <h4><a href="#">CamSur college visits UCU for research benchmark</a></h4>
-                                                    <p>Apr 28, 2022, 3:59 PM</p>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <img src="../images/ucu_logo.png">
-                                                    <h4><a href="#">UCU’s 56th Foundation Anniversary</a></h4>
-                                                    <p>Apr 12, 2022, 3:52 PM</p>
-                                                </div>
+                                                <?php
+                                                        }
+                                                    }
+                                                    else {
+                                                        echo "<center><h1 class='error_msg'>No News & Events available</h1></center>";
+                                                    }
+                                                ?>
                                             </div>
                                             <br>
                                             <div class="btn_main">
                                                 <button type="button" class="btn btn-dark btn-lg">
-                                                    <a href="news_and_events.html#news" style="color: white; font-style: normal;">See all</a>
+                                                    <a href="news_and_events.php" style="color: white; font-style: normal;">See all</a>
                                                 </button>
                                             </div>
                                         </div>
@@ -304,47 +320,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                         <!--End UCU News Section ------------------------------->
                         
                         <!--Start Events Section ------------------------------->
-                        <div class="service_main">
-                            <div class="section_service_2 mb-5">
-                                <h1 class="service_text">News & Events</h1>
-                            </div>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <?php
-                                            include "../db_conn.php";
-                                            $sql = "SELECT * FROM news_events_tbl ORDER BY bulletin_id DESC LIMIT 1";
-                                            $result = $conn->query($sql);
-                                              if($result->num_rows > 0) {
-                                                while ($row=$result->fetch_assoc()) {
-                                        ?>
-                                        <div class="blog-slider">
-                                            <div class="blog-slider__wrp">
-                                                <div class="blog-slider__item">
-                                                    <div class="blog-slider__img">
-                                                        <img class="img-fluid" src="../../admin/php/images/<?php echo $row['photo'];?>">
-                                                    </div>
-                                                    <div class="blog-slider__content">
-                                                        <span class="blog-slider__code"><?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></span>
-                                                        <div class="blog-slider__title"><?php echo $row['title'];?></div>
-                                                        <div class="blog-slider__text"><?php echo $row['content'];?></div>
-                                                        <a href="news_and_events_details.php?bulletin_id=<?=$row['bulletin_id'];?>" class="blog-slider__button mb-3">Read More</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <?php
-                                                    }
-                                                }
-                                                else {
-                                                    echo "<center><h1 class='error_msg'>No News & Events available</h1></center>";
-                                                }
-                                            ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <center><a href="news_and_events.php" class="blog-slider__button mb-3">View All News & Events</a></center>
-                        </div>
+                        
                         <!--End Events Section --------------------------------->
                         <!--Start Footer Section ------------------------------->
                 <div class="footer">

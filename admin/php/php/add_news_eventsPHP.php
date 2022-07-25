@@ -4,6 +4,7 @@
 
 		$photo = time() . '_' . $_FILES["photo"]["name"];
 		$title = $_POST['title'];
+		$post = $_POST['post'];
 		$content = $_POST['content'];
 		$time_date = $_POST['time_date'];
 
@@ -16,8 +17,8 @@
 		else {
 
 			if(move_uploaded_file($_FILES["photo"]["tmp_name"], $target_dir)) {
-				$sql = "INSERT INTO news_events_tbl (photo, title, content, time_date) VALUES ('$photo','$title','$content', '$time_date')";
-				$sql_result = mysqli_query($conn, $sql);
+				$sql = "INSERT INTO news_events_tbl (photo, title, post, content, time_date) VALUES ('$photo','$title', '$post', '$content', '$time_date')";
+				$sql_result = mysqli_query($conn, $sql) or die('Query failed: ' . mysqli_error($conn));
 
 				if ($sql_result) {
 					header("Location: ../news_events.php?success_msg=News and Events Uploaded");
@@ -36,6 +37,7 @@
 		$upd_bulletinID = $_POST['upd_bulletinID'];
 		$upd_photo = time() . '_' . $_FILES["upd_photo"]["name"];
 		$upd_title = $_POST['upd_title'];
+		$upd_post = $_POST['upd_post'];
 		$upd_content = $_POST['upd_content'];
 		$upd_time_date = $_POST['upd_time_date'];
 
@@ -47,7 +49,7 @@
 		}
 		else if ($upd_photo != "") {
 			if(move_uploaded_file($_FILES["upd_photo"]["tmp_name"], $target_dir)) {
-				$sql = "UPDATE news_events_tbl SET photo = '$upd_photo', title = '$upd_title', content = '$upd_content', time_date = '$upd_time_date' WHERE bulletin_id = '$upd_bulletinID'";
+				$sql = "UPDATE news_events_tbl SET photo = '$upd_photo', title = '$upd_title', post = '$upd_post', content = '$upd_content', time_date = '$upd_time_date' WHERE bulletin_id = '$upd_bulletinID'";
 				$sql_result = mysqli_query($conn, $sql);
 
 				if ($sql_result) {
@@ -60,7 +62,7 @@
 			}
 		}
 		if ($_FILES['upd_photo']['name'] == UPLOAD_ERR_OK){
-			$sql = "UPDATE news_events_tbl SET title = '$upd_title', content = '$upd_content', time_date = '$upd_time_date' WHERE bulletin_id = '$upd_bulletinID'";
+			$sql = "UPDATE news_events_tbl SET title = '$upd_title',  post = '$upd_post',content = '$upd_content', time_date = '$upd_time_date' WHERE bulletin_id = '$upd_bulletinID'";
 			$sql_result = mysqli_query($conn, $sql);
 
 			if ($sql_result) {

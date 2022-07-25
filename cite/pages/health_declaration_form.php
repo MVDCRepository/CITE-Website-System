@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status'])) {
+    include '../db_conn.php';
+    date_default_timezone_set('Asia/Manila');
+    $current_time = date("Y-m-d");
+    $date_time = strtotime($current_time);
+
+    $student_id = $_SESSION['student_id'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,28 +50,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Jquery -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <script type="text/javascript">
-
-    function disableTextBoxOffice(health_df_office) {
-        var health_df_office_text = document.getElementById("health_df_office_text");
-        health_df_office_text.disabled = health_df_office.checked ? false : true;
-
-        if (!health_df_office_text.disabled) {
-            health_df_office_text.focus();
-        }
-    }
-
-    function disableTextBoxOthers(health_df_others) {
-        var health_df_others_text = document.getElementById("health_df_others_text");
-        health_df_others_text.disabled = health_df_others.checked ? false : true;
-
-        if (!health_df_others_text.disabled) {
-            health_df_others_text.focus();
-        }
-    }
-    </script>
-
 <body>
     <div class="header_pages">
         <div class="container">
@@ -118,16 +107,13 @@
                                     <a class="nav-link" href="admission.php">ADMISSION</a>
                                 </li>
                                 <li id="nav-last" class="nav-item last"><a class="nav-link dropdown-toggle" href="#"
-                                        id="navbarDropdown" role="button" data-toggle="dropdown">Raen Jercee</a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown"
-                                        style="right: auto; left: auto;">
-                                        <a class="dropdown-item" href="profile.php"><img
-                                                src="../images/xiao.png">Profile Settings</a>
+                                        id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['fname'];?></a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
+                                        <a style="font-weight: 600;" class="dropdown-item" href="profile.php"><!-- <img src="../images/xiao.png"> -->Profile Settings</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="grades.php">Grades</a>
                                         <a class="dropdown-item" href="blocking.php">Blocking</a>
-                                        <a style="color: red !important;" class="dropdown-item" href="#"><i
-                                                class="bi bi-box-arrow-left"></i>&nbsp;Logout</a>
+                                        <a style="color: red !important;" class="dropdown-item" href="../php/logout.php"><i class="bi bi-box-arrow-left"></i>&nbsp;Logout</a>
                                     </div>
                                 </li>
                             </ul>
@@ -139,7 +125,15 @@
     </div>
     <!-- end header end -->
     <!--Start Content Section ----------------------------->
-    <form action="../php/health_df_php.php" method="POST" id="health_df_form" enctype="multipart/form-data">
+    <form action="../php/health_declaration_formPHP.php" method="POST" id="health_df_form" enctype="multipart/form-data">
+        <center>
+            <?php if (isset($_GET['error_msg'])) { ?>
+                <p class="error_msg mt-5" style="width: 40%"><?php echo $_GET['error_msg']; ?></p>
+            <?php } ?>
+            <?php if (isset($_GET['success_msg'])) { ?>
+                <p class="success_msg mt-5" style="width: 40%"><?php echo $_GET['success_msg']; ?></p>
+            <?php } ?>
+        </center>
         <div class="health_df_cont">
             <div class="container">
                 <div class="row">
@@ -162,54 +156,41 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-6">
+                                        <input type="hidden" name="student_id" value="<?php echo $_SESSION['student_id'];?>">
                                         <div class="health_df_input">
-                                            <label for="health_df_date">Date:</label>
-                                            <input type="date" id="health_df_date" name="health_df_date" required>
+                                            <label for="submit_date">Date:</label>
+                                            <input type="date" id="submit_date" name="submit_date" value="<?php echo $current_time;?>" required>
                                         </div>
                                         <div class="health_df_input">
                                             <label for="health_df_name">Name:</label>
-                                            <input type="text" id="health_df_name" name="health_df_name" required>
+                                            <input type="text" id="health_df_name" name="health_df_name" value="<?php echo $_SESSION['lname'].", ".$_SESSION['fname']." ".$_SESSION['mname']." ".$_SESSION['sname'];?>" required>
                                         </div>
                                         <div class="health_df_input">
                                             <label for="health_df_address">Address:</label>
-                                            <input type="text" id="health_df_address" name="health_df_address" required>
+                                            <input type="text" id="health_df_address" name="health_df_address" value="<?php echo $_SESSION['house_num']." ".$_SESSION['barangay'].", ".$_SESSION['city'].", ".$_SESSION['province'];?>" required>
                                         </div>
                                         <div class="health_df_input">
                                             <label for="health_df_contact">Contact Number:</label>
-                                            <input type="text" id="health_df_contact" name="health_df_contact" required>
+                                            <input type="text" id="health_df_contact" name="health_df_contact" value="<?php echo $_SESSION['contact_num'];?>" required>
                                         </div>
                                         <p>Purpose of Visit:</p>
                                         <div class="health_df_input_purpose">
                                             <div class="purpose_input">
-                                                <input type="checkbox" id="purpose_f2f" name="purpose_f2f"
-                                                    value="Attend limited face-to-face classes">
+                                                <input type="checkbox" id="chck_limited_f2f" name="chck_limited_f2f" value="checked">
                                                 <label for="purpose_cb">Attend limited face-to-face classes</label>
                                             </div>
                                             <div class="purpose_input">
                                                 <input type="checkbox" id="health_df_office" name="health_df_office" value="Office transaction: "
                                                 onclick="disableTextBoxOffice(this)">
                                                 <label for="health_df_office">Office transaction:<input type="text"
-                                                        id="health_df_office_text" name="health_df_office_text" disabled="disabled"></label>
+                                                        id="office_transaction_text" name="office_transaction_text" disabled="disabled"></label>
                                             </div>
                                             <div class="purpose_input">
                                                 <input type="checkbox" id="health_df_others" name="health_df_others" value="Others:" onclick="disableTextBoxOthers(this)">
                                                 <label for="health_df_others">Others:<input type="text"
-                                                        id="health_df_others_text" name="health_df_others_text" disabled="disabled"></label>
+                                                        id="others_text" name="others_text" disabled="disabled"></label>
                                             </div>
                                         </div>
-                                        <!---
-                                        <div class="health_df_input_purpose">
-                                            <input type="checkbox" id="purpose_cb" name="health_df_purpose[]" value="Attend limited face-to-face classes" onclick="disableTextBox(this)">
-                                            <label for="purpose_cb">Attend limited face-to-face classes</label>
-                                            <div class="health_df_input">
-                                                <label for="health_df_office">Office transaction:</label>
-                                                <input type="text" id="health_df_office" name="health_df_purpose[]" disabled>
-                                            </div>
-                                            <div class="health_df_input">
-                                                <label for="health_df_others">Others:</label>
-                                                <input type="text" id="health_df_others" name="health_df_purpose[]">
-                                            </div>
-                                        </div> -->
                                     </div>
                                     <div class="col-md-6">
                                         <div class="temp_cont">
@@ -246,128 +227,128 @@
                                 <tr>
                                     <td>a. Sore throat</td>
                                     <td>
-                                        <input type="radio" name="sore_throat" id="st_yes" value="Yes">
+                                        <input type="radio" name="sore_throat" id="st_yes" value="Yes" required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="sore_throat" id="st_no" value="No">
+                                        <input type="radio" name="sore_throat" id="st_no" value="No" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>b. Shortness of Breath</td>
                                     <td>
-                                        <input type="radio" name="shortness_of_breath" id="sb_yes" value="Yes">
+                                        <input type="radio" name="shortness_of_breath" id="sb_yes" value="Yes" required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="shortness_of_breath" id="sb_no" value="No">
+                                        <input type="radio" name="shortness_of_breath" id="sb_no" value="No" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>c. Body pains</td>
                                     <td>
-                                        <input type="radio" name="body_pain" id="bp_yes" value="Yes">
+                                        <input type="radio" name="body_pain" id="bp_yes" value="Yes" required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="body_pain" id="bp_no" value="No">
+                                        <input type="radio" name="body_pain" id="bp_no" value="No" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>d. Headache</td>
                                     <td>
-                                        <input type="radio" name="headache" id="ha_yes" value="Yes">
+                                        <input type="radio" name="headache" id="ha_yes" value="Yes" required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="headache" id="ha_no" value="No">
+                                        <input type="radio" name="headache" id="ha_no" value="No" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>e. Fever for the past few days</td>
                                     <td>
-                                        <input type="radio" name="fever" id="fvr_yes" value="Yes">
+                                        <input type="radio" name="fever" id="fvr_yes" value="Yes" required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="fever" id="fvr_no" value="No">
+                                        <input type="radio" name="fever" id="fvr_no" value="No" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>f. Loss of taste or smell</td>
                                     <td>
-                                        <input type="radio" name="loss" id="lss_yes" value="Yes">
+                                        <input type="radio" name="loss" id="lss_yes" value="Yes" required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="loss" id="lss_no" value="No">
+                                        <input type="radio" name="loss" id="lss_no" value="No" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>g. Cough and/or cold</td>
                                     <td>
-                                        <input type="radio" name="cough_cold" id="cc_yes" value="Yes">
+                                        <input type="radio" name="cough_cold" id="cc_yes" value="Yes" required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="cough_cold" id="cc_no" value="No">
+                                        <input type="radio" name="cough_cold" id="cc_no" value="No" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>h. Diarrhea</td>
                                     <td>
-                                        <input type="radio" name="diarrhea" id="drh_yes" value="Yes">
+                                        <input type="radio" name="diarrhea" id="drh_yes" value="Yes" required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="diarrhea" id="drh_no" value="No">
+                                        <input type="radio" name="diarrhea" id="drh_no" value="No" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">2. Have you worked together or stayed in the same close environment
                                         of a confirmed COVID-19 case?</td>
                                     <td>
-                                        <input type="radio" name="question_2" id="qstn_2_yes" value="Yes">
+                                        <input type="radio" name="question_2" id="qstn_2_yes" value="Yes" required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="question_2" id="qstn_2_no" value="No">
+                                        <input type="radio" name="question_2" id="qstn_2_no" value="No" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">3. Have you had contact with anyone with cough, colds, fever, and
                                         sore throat?</td>
                                     <td>
-                                        <input type="radio" name="question_3" id="qstn_3_yes" value="Yes">
+                                        <input type="radio" name="question_3" id="qstn_3_yes" value="Yes" required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="question_3" id="qstn_3_no" value="No">
+                                        <input type="radio" name="question_3" id="qstn_3_no" value="No" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
                                         4. Have your travelled outside of the Philippines in the last 14 days? <br> If
                                         yes, where:
-                                        <input type="text" name="question_4_where">
+                                        <input type="text" name="question_4_where" id="question_4_where" disabled required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="question_4" id="qstn_4_yes" value="Yes">
+                                        <input type="radio" name="question_4" id="qstn_4_yes" value="Yes" onclick="disableField_qstn4()" required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="question_4" id="qstn_4_no" value="No">
+                                        <input type="radio" name="question_4" id="qstn_4_no" value="No" onclick="disableField_qstn4()" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
                                         5. Have your travelled outside of your stated address in the last 14 days? <br>
                                         If yes, where:
-                                        <input type="text" name="question_5_where">
+                                        <input type="text" id="question_5_where" name="question_5_where" disabled required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="question_5" id="qstn_5_yes" value="Yes">
+                                        <input type="radio" name="question_5" id="qstn_5_yes" value="Yes" onclick="disableField_qstn5()" required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="question_5" id="qstn_5_no" value="No">
+                                        <input type="radio" name="question_5" id="qstn_5_no" value="No" onclick="disableField_qstn5()" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">6. Are you considered fully vaccinated against covid-19?</td>
                                     <td>
-                                        <input type="radio" name="question_6" id="qstn_6_yes" value="Yes">
+                                        <input type="radio" name="question_6" id="qstn_6_yes" value="Yes" required>
                                     </td>
                                     <td>
-                                        <input type="radio" name="question_6" id="qstn_6_no" value="No">
+                                        <input type="radio" name="question_6" id="qstn_6_no" value="No" required>
                                     </td>
                                 </tr>
                             </table>
@@ -448,7 +429,8 @@
     <script src="../js/jquery.min.js"></script>
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
-    <script>
+    <script type="text/javascript" src="../js/health_declaration_formJS.js"></script>
+    <!-- <script>
     document.getElementById("open-popup-btn").addEventListener("click", function() {
         document.getElementsByClassName("popup")[0].classList.add("active");
     });
@@ -456,7 +438,15 @@
     document.getElementById("dismiss-popup-btn").addEventListener("click", function() {
         document.getElementsByClassName("popup")[0].classList.remove("active");
     });
-    </script>
+    </script> -->
 </body>
 
 </html>
+<?php
+} 
+else {
+  header("Location: ../user_login.php");
+  exit();
+}
+
+?>

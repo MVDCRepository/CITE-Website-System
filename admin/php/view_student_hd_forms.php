@@ -288,28 +288,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
               <div class="d-flex flex-wrap">
                 <div class="p-2 flex-fill">
                   <!-- page title -->
-                  <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> Requirements</h4>
+                  <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> Other Forms</h4>
                 </div>
                 <div class="p-2 flex-fill">
                   <!-- search -->
-                  <?php 
-                    include "db_conn.php";
-                      $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id'";
-
-                    if (isset($_POST['search'])) {
-                      $search = $_POST['search'];
-                      $sql = "SELECT * FROM student_requirement_tbl WHERE file_name LIKE '%$search%' AND student_id = '$student_id'";
-                    }
-                    else {
-                      $search = "";
-                      $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id'";
-                    }
-
-                    $result = $conn->query($sql);
-                  ?>
-                  <form method="POST">
+                  
+                  <!-- <form method="POST">
                     <label>Search</label><input type="text" class="search" placeholder="Search..." name="search" value="<?php echo $search;?>">
-                  </form>
+                  </form> -->
                 </div>
               </div>
               
@@ -323,94 +309,37 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                 <?php } ?>
               </center>
               <div class="section-container card">
-                
-                <!-- accept modal-->
-                <div class="modal" id="modal_accept">
-                  <div class="modalBox row">
-                    <div class="modal_header">
-                      <span class="close" id="close_modalAccept">&times;</span>
-                      <h4>Accept student requirement?</h4>
-                    </div>
-                    <div class="modal_body">
-                      <form action="php/student_requirementPHP.php?student_id=<?=$student_id?>" method="POST">
-                        <div class="alert alert-dark">
-                          <h6 class="alert-heading fw-bold mb-1">Are you sure you want to accept this requirement?</h6>
-                        </div>
-                        <input type="hidden" name="accept_req_id" id="accept_req_id">
-                        <p><b>File name:</b> <span id="accept_file_name"></span></p>
-                        <p><b>Date & Time:</b> <span id="accept_dateTime"></span></p>
-                        <br>
-                        <button class="editbtn" type="submit" name="accept_req_btn">Yes, accept requirement</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <!-- / accept modal -->
-
-                <!-- decline modal-->
-                <div class="delete-modal" id="modal_decline">
-                  <div class="modalBox row">
-                    <div class="modal_header">
-                      <span class="close" id="close_modalDec">&times;</span>
-                      <h4>Decline student requirement?</h4>
-                    </div>
-                    <div class="modal_body">
-                      <form action="php/student_requirementPHP.php?student_id=<?=$student_id?>" method="POST">
-                        <div class="alert alert-danger">
-                          <h6 class="alert-heading fw-bold mb-1">Are you sure you want to decline this requirement?</h6>
-                          <p class="mb-0">Student will see the status of pending to declined requirement.</p>
-                        </div>
-                        <input type="hidden" name="dec_req_id" id="dec_req_id">
-                        <p><b>File name:</b> <span id="dec_file_name"></span></p>
-                        <p><b>Date & Time:</b> <span id="dec_dateTime"></span></p>
-                        <br>
-                        <button class="delbtn" type="submit" name="dec_req_btn">Yes, decline requirement</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <!-- / decline modal -->
 
                 <!-- table wrapper -->
                 <div class="table-wrapper">
+                  <h5>Health Declaration Form</h5>
                   <table class="table-cite" id="requirement_tbl">
                     <thead>
                       <tr>
                         <th scope="col" class="d-none">ID</th>
-                        <th scope="col">File Name</th>
-                        <th scope="col">Date & Time</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Submitted Date</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                     <?php
+                      include "db_conn.php";
+                      $sql = "SELECT * FROM health_df_tbl WHERE student_id = '$student_id'";
+                      $result = mysqli_query($conn, $sql);
+
                       if($result->num_rows > 0) {
                         while ($row=$result->fetch_assoc()) {
                     ?>
                     <tr>
-                      <td class="d-none"><?php echo $row['req_id'];?></td>
-                      <td>
-                        <a href="../../cite/student_requirements/<?php echo $row['file'];?>" target="_blank"><?php echo $row['file_name'];?>
-                        </a>
-                      </td>
-                      <td><?php $date = $row['date_time']; echo date("M d,Y - h:i a", strtotime($date));?></td>
-                      <td><?php echo $row['status'];?></td>
-                      <td>
-                        <div class="d-grid gap-2 d-md-block">
-                          <button class="editbtn" id="accept_student_req" data-modal="modal_accept">Accept</button>
-                          <button class="delbtn" id="dec_student_req" data-modal="modal_decline">Decline</button>
-                        </div>
-                      </td>
+                      <td class="d-none"><?php echo $row['id'];?></td>
+                      <td><?php echo $row['submit_date'];?></td>
+                      <td><a href="view_hd_form.php?student_id=<?=$row['student_id'];?>">View File</a></td>
                     </tr>
                     <?php
                         }
                       }
-                      else if($result->num_rows == 0 && $search != "") {
-                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>Requirement not found</center></td></tr>";
-                      }
                       else {
-                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>No requirements available</center></td></tr>";
+                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>No forms available</center></td></tr>";
                       }
                     ?>
                     </tbody>

@@ -1,38 +1,36 @@
 <?php
-	if (isset($_FILES['file_name']) && isset($_POST['submit_btn'])) {
+	if (isset($_FILES['file']) && isset($_POST['file_name']) && isset($_POST['send_reqBtn'])) {
 		include "../db_conn.php";
 
-		$sql_result = null;
-
-    	date_default_timezone_set('Asia/Manila');
+		date_default_timezone_set('Asia/Manila');
     	$current_time = date("Y-m-d H:i:s");
     	$date_time = strtotime($current_time);
 
-		$checked_array = $_POST['req_id'];
-		
-		$total_file = count($_FILES['file_name']['name']);
+    	$student_id = $_POST['student_id'];
+		$file_name = $_POST['file_name'];
+		$file = time() . '_' . $_FILES["file"]["name"];
 
-		for($i=0 ; $i < $total_file ; $i++) {
-			$student_id = $_POST['student_id'][$i];
-			$requirement = $_POST['requirement'][$i];
-			$file_name = time().'_'.$_FILES['file_name']['name'][$i];
-			$target_dir = '../student_requirements/' . $file_name;
+		$target_dir = '../student_requirements/' . $file;
 
-			$file_name = mysqli_real_escape_string($conn, $file_name);
-
-			if (move_uploaded_file($_FILES['file_name']['tmp_name'][$i], $target_dir)) {
-				$sql = "INSERT INTO student_requirement_tbl (student_id, requirement, file_name, date_time, status) VALUES ('$student_id', '$requirement', '$file_name', '$current_time', 'Pending')";
-						$sql_result = mysqli_query($conn, $sql) or die ('Query failed: ' . mysqli_error($conn));
-			}
-
-		}
-
-		if ($sql_result) {
-			header("Location: ../pages/profile.php?submit_success=Wait for the admin to review your requirements");
+		if (empty($file_name) || empty($file)) {
+			header("Location: ../pages/profile.php?error_msg=Fill All Inputs");
 			exit();
 		}
 		else {
-			echo "Submit error ".$conn->error;
+			if(move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir)) {
+				$sql = "INSERT INTO student_requirement_tbl (student_id, file_name, file, date_time, status) VALUES ('$student_id','$file_name','$file', '$current_time', 'Pending')";
+
+				$sql_result = mysqli_query($conn, $sql) or die ('Query failed: ' . mysqli_error($conn));
+
+				if ($sql_result) {
+					header("Location: ../pages/profile.php");
+					exit();
+				}
+				else {
+					header("Location: ../pages/profile.php?error_msg=Error submit requirements.");
+					exit();
+				}
+			}
 		}
 	}
 ?>

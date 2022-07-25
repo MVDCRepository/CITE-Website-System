@@ -309,12 +309,17 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   </div>
                   <br>
                   <div class="control-form">
+                    <input type="checkbox" class="form-check-input" id="chck_featured" name="post" value="featured">
+                    <label for="chck_featured">Featured Post</label>
+                  </div>
+                  <br>
+                  <div class="control-form">
                     <label>Date & Time</label>
                     <input type="datetime-local" class="ip-datetime" name="time_date" id="time_date" required>
                     <small>error message</small>
                   </div>
                   <br>
-                  <div class="control-form">
+                  <div class="control-form" >
                     <label>Content</label>
                     <textarea style="height: 200px;" class="text-area" name="content" id="content" required></textarea>
                     <small>error message</small>

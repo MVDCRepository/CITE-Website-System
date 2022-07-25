@@ -309,3 +309,9 @@ form .error small {
   -webkit-appearance: none;
   margin: 0;
 }
+
+/* form * required sign */
+.required_sign {
+	color: #ff0000;
+	font-weight: bold;
+}
