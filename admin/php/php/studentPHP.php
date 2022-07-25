@@ -69,7 +69,7 @@
 		$id_number = $_POST['id_number'];
 		$password = $_POST['password'];
 
-		if (empty($fname) || empty($mname) || empty($lname) || empty($sname) || empty($province) || empty($city) || empty($barangay) || empty($house_num) || empty($zip_code) || empty($bdate) || empty($nationality) || empty($birth_province) || empty($birth_city) || empty($birth_barangay) || empty($birth_house_num) || empty($birth_zip_code) || empty($email) || empty($contact_num) || empty($gender) || empty($religion) || empty($father_fname) || empty($father_mname) || empty($father_lname) || empty($father_sname) || empty($father_contact) || empty($father_occupation) || empty($mother_fname) || empty($mother_mname) || empty($mother_lname) || empty($mother_contact) || empty($mother_occupation) || empty($guardian_fname) || empty($guardian_mname) || empty($guardian_lname) || empty($guardian_sname) || empty($guardian_contact) || empty($guardian_occupation) || empty($guardian_relationship) || empty($spouse_fname) || empty($spouse_mname) || empty($spouse_lname) || empty($spouse_sname) || empty($spouse_contact) || empty($spouse_occupation) || empty($eval_id) || empty($yr_lvl) || empty($status) || empty($course) || empty($strand) || empty($second_course) || empty($graduated_shs) || empty($learners_ref_num) || empty($graduated_es) || empty($form_138) || empty($graduated_year_es) || empty($id_number) || empty($password)) {
+		if (empty($fname) || empty($lname) || empty($province) || empty($city) || empty($barangay) || empty($zip_code) || empty($bdate) || empty($nationality) || empty($birth_province) || empty($birth_city) || empty($birth_zip_code) || empty($email) || empty($contact_num) || empty($gender) || empty($guardian_fname) || empty($guardian_lname) || empty($guardian_relationship) || empty($eval_id) || empty($yr_lvl) || empty($status) || empty($course) || empty($strand) || empty($second_course) || empty($graduated_shs) || empty($graduated_es) || empty($graduated_year_es) || empty($id_number) || empty($password)) {
 			header("Location: ../add_student.php?error_msg=Fill All Inputs");
 			exit();
 		}
@@ -175,7 +175,7 @@
 		$id_number = $_POST['id_number'];
 		$password = $_POST['password'];
 
-		if (empty($fname) || empty($mname) || empty($lname) || empty($sname) || empty($province) || empty($city) || empty($barangay) || empty($house_num) || empty($zip_code) || empty($bdate) || empty($nationality) || empty($birth_province) || empty($birth_city) || empty($birth_barangay) || empty($birth_house_num) || empty($birth_zip_code) || empty($email) || empty($contact_num) || empty($gender) || empty($religion) || empty($father_fname) || empty($father_mname) || empty($father_lname) || empty($father_sname) || empty($father_contact) || empty($father_occupation) || empty($mother_fname) || empty($mother_mname) || empty($mother_lname) || empty($mother_contact) || empty($mother_occupation) || empty($guardian_fname) || empty($guardian_mname) || empty($guardian_lname) || empty($guardian_sname) || empty($guardian_contact) || empty($guardian_occupation) || empty($guardian_relationship) || empty($spouse_fname) || empty($spouse_mname) || empty($spouse_lname) || empty($spouse_sname) || empty($spouse_contact) || empty($spouse_occupation) || empty($present_course) || empty($transfered_from) || empty($second_course) || empty($graduated_es) || empty($yr_lvl) || empty($graduated_year_es) || empty($id_number) || empty($password)) {
+		if (empty($fname) || empty($lname) || empty($province) || empty($city) || empty($barangay) || empty($zip_code) || empty($bdate) || empty($nationality) || empty($birth_province) || empty($birth_city) || empty($birth_zip_code) || empty($email) || empty($contact_num) || empty($gender) || empty($guardian_fname) || empty($guardian_lname) || empty($guardian_relationship) || empty($present_course) || empty($transfered_from) || empty($second_course) || empty($graduated_es) || empty($yr_lvl) || empty($graduated_year_es) || empty($id_number) || empty($password)) {
 			header("Location: ../add_transferee_student.php?error_msg=Fill All Inputs");
 			exit();
 		}
@@ -208,6 +208,234 @@
 				}
 				else {
 					header("Location: ../add_transferee_student.php?error_msg=Registration Error");
+					exit();
+				}
+			}
+		}
+	}
+
+	// freshmen or regular update information
+	if (isset($_POST['upd_studentBtn'])) {
+		include "../db_conn.php";
+
+		$student_id = $_POST['student_id'];
+
+		// primary information
+		$fname = $_POST['fname'];
+		$mname = $_POST['mname'];
+		$lname = $_POST['lname'];
+		$sname = $_POST['sname'];
+		$province = $_POST['province'];
+		$city = $_POST['city'];
+		$barangay = $_POST['barangay'];
+		$house_num = $_POST['house_num'];
+		$zip_code = $_POST['zip_code'];
+		// basic information
+		$bdate = $_POST['bdate'];
+		$nationality = $_POST['nationality'];
+		$birth_province = $_POST['birth_province'];
+		$birth_city = $_POST['birth_city'];
+		$birth_barangay = $_POST['birth_barangay'];
+		$birth_house_num = $_POST['birth_house_num'];
+		$birth_zip_code = $_POST['birth_zip_code'];
+		$email = $_POST['email'];
+		$contact_num = $_POST['contact_num'];
+		$gender = $_POST['gender'];
+		$religion = $_POST['religion'];
+		// family information
+		$father_fname = $_POST['father_fname'];
+		$father_mname = $_POST['father_mname'];
+		$father_lname = $_POST['father_lname'];
+		$father_sname = $_POST['father_sname'];
+		$father_contact = $_POST['father_contact'];
+		$father_occupation = $_POST['father_occupation'];
+
+		$mother_fname = $_POST['mother_fname'];
+		$mother_mname = $_POST['mother_mname'];
+		$mother_lname = $_POST['mother_lname'];
+		$mother_contact = $_POST['mother_contact'];
+		$mother_occupation = $_POST['mother_occupation'];
+		// guardian info
+		$guardian_fname = $_POST['guardian_fname'];
+		$guardian_mname = $_POST['guardian_mname'];
+		$guardian_lname = $_POST['guardian_lname'];
+		$guardian_sname = $_POST['guardian_sname'];
+		$guardian_contact = $_POST['guardian_contact'];
+		$guardian_occupation = $_POST['guardian_occupation'];
+		$guardian_relationship = $_POST['guardian_relationship'];
+
+		$spouse_fname = $_POST['spouse_fname'];
+		$spouse_mname = $_POST['spouse_mname'];
+		$spouse_lname = $_POST['spouse_lname'];
+		$spouse_sname = $_POST['spouse_sname'];
+		$spouse_contact = $_POST['spouse_contact'];
+		$spouse_occupation = $_POST['spouse_occupation'];
+		// academic info
+		$eval_id = $_POST['eval_id'];
+		$yr_lvl = $_POST['yr_lvl'];
+		$status = $_POST['status'];
+		$course = $_POST['course'];
+		$strand = $_POST['strand'];
+		$second_course = $_POST['second_course'];
+		$graduated_shs = $_POST['graduated_shs'];
+		$learners_ref_num = $_POST['learners_ref_num'];
+		$graduated_es = $_POST['graduated_es'];
+		$form_138 = $_POST['form_138'];
+		$graduated_year_es = $_POST['graduated_year_es'];
+		// student credentials
+		$id_number = $_POST['id_number'];
+		$password = $_POST['password'];
+
+		if (empty($fname) || empty($lname) || empty($province) || empty($city) || empty($barangay) || empty($zip_code) || empty($bdate) || empty($nationality) || empty($birth_province) || empty($birth_city) || empty($birth_zip_code) || empty($email) || empty($contact_num) || empty($gender) || empty($guardian_fname) || empty($guardian_lname) || empty($guardian_relationship) || empty($eval_id) || empty($yr_lvl) || empty($status) || empty($course) || empty($strand) || empty($second_course) || empty($graduated_shs) || empty($graduated_es) || empty($graduated_year_es) || empty($id_number) || empty($password)) {
+			header("Location: ../upd_student.php?error_msg=Fill All Inputs");
+			exit();
+		}
+		else {
+			// queries
+			$sql_primary_info = "UPDATE student_pri_info_tbl SET id_number = '$id_number', yr_lvl = '$yr_lvl', fname = '$fname', mname = '$mname', lname = '$lname', sname = '$sname', province = '$province', city = '$city', barangay = '$barangay', house_num = '$house_num', zip_code = '$zip_code', status = '$status', password = '$password' WHERE student_id = '$student_id'";
+			$sql_primary_info_result = mysqli_query($conn, $sql_primary_info);
+
+			if ($sql_primary_info_result) {
+				// queries
+				$sql_basic_info = "UPDATE student_basic_info_tbl SET bdate = '$bdate', nationality = '$nationality', birth_province = '$birth_province', birth_city = '$birth_city', birth_barangay = '$birth_barangay', birth_house_num = '$birth_house_num', birth_zip_code = '$birth_zip_code', email = '$email', contact_num = '$contact_num', gender = '$gender', religion = '$religion' WHERE student_id = '$student_id'";
+
+				$sql_family_info = "UPDATE student_fam_info_tbl SET father_fname = '$father_fname', father_mname = '$father_mname', father_lname = '$father_lname', father_sname = '$father_sname', father_contact = '$father_contact', father_occupation = '$father_occupation', mother_fname = '$mother_fname', mother_mname = '$mother_mname', mother_lname = '$mother_lname', mother_contact = '$mother_contact', mother_occupation = '$mother_occupation' WHERE student_id = '$student_id'";
+
+				$sql_guardian_info = "UPDATE student_guardian_info_tbl SET guardian_fname = '$guardian_fname', guardian_mname = '$guardian_mname', guardian_lname = '$guardian_lname', guardian_sname = '$guardian_sname', guardian_contact = '$guardian_contact', guardian_occupation = '$guardian_occupation', guardian_relationship = '$guardian_relationship', spouse_fname = '$spouse_fname', spouse_mname = '$spouse_mname', spouse_lname = '$spouse_lname', spouse_sname = '$spouse_sname', spouse_contact = '$spouse_contact', spouse_occupation = '$spouse_occupation' WHERE student_id = '$student_id'";
+
+				$sql_academic_info = "UPDATE student_acad_info_tbl SET course = '$course', strand = '$strand', second_course = '$second_course', graduated_shs = '$graduated_shs', learners_ref_num = '$learners_ref_num', graduated_es = '$graduated_es', form_138 = '$form_138', graduated_year_es = '$graduated_year_es', eval_id = '$eval_id' WHERE student_id = '$student_id'";
+
+				// sql results
+				$sql_basic_info_result = mysqli_query($conn, $sql_basic_info);
+				$sql_family_info_result = mysqli_query($conn, $sql_family_info);
+				$sql_guardian_info_result = mysqli_query($conn, $sql_guardian_info);
+				$sql_academic_info_result = mysqli_query($conn, $sql_academic_info);
+
+				if ($sql_basic_info_result && $sql_family_info_result && $sql_guardian_info_result && $sql_academic_info_result) {
+					header('Location: ../upd_student.php?' . http_build_query(array(
+				    	'student_id' => $_GET['student_id'],
+				    	'success_msg' => "Updated Student Information"
+					)));
+					exit();
+				}
+				else {
+					header('Location: ../upd_student.php?' . http_build_query(array(
+				    	'student_id' => $_GET['student_id'],
+				    	'error_msg' => "Updated Error"
+					)));
+					exit();
+				}
+			}
+		}
+	}
+
+	// update transferee
+	if (isset($_POST['upd_student_transfereeBtn'])) {
+		include "../db_conn.php";
+
+		$student_id = $_POST['student_id'];
+
+		// primary information
+		$fname = $_POST['fname'];
+		$mname = $_POST['mname'];
+		$lname = $_POST['lname'];
+		$sname = $_POST['sname'];
+		$province = $_POST['province'];
+		$city = $_POST['city'];
+		$barangay = $_POST['barangay'];
+		$house_num = $_POST['house_num'];
+		$zip_code = $_POST['zip_code'];
+		// basic information
+		$bdate = $_POST['bdate'];
+		$nationality = $_POST['nationality'];
+		$birth_province = $_POST['birth_province'];
+		$birth_city = $_POST['birth_city'];
+		$birth_barangay = $_POST['birth_barangay'];
+		$birth_house_num = $_POST['birth_house_num'];
+		$birth_zip_code = $_POST['birth_zip_code'];
+		$email = $_POST['email'];
+		$contact_num = $_POST['contact_num'];
+		$gender = $_POST['gender'];
+		$religion = $_POST['religion'];
+		// family information
+		$father_fname = $_POST['father_fname'];
+		$father_mname = $_POST['father_mname'];
+		$father_lname = $_POST['father_lname'];
+		$father_sname = $_POST['father_sname'];
+		$father_contact = $_POST['father_contact'];
+		$father_occupation = $_POST['father_occupation'];
+
+		$mother_fname = $_POST['mother_fname'];
+		$mother_mname = $_POST['mother_mname'];
+		$mother_lname = $_POST['mother_lname'];
+		$mother_contact = $_POST['mother_contact'];
+		$mother_occupation = $_POST['mother_occupation'];
+		// guardian info
+		$guardian_fname = $_POST['guardian_fname'];
+		$guardian_mname = $_POST['guardian_mname'];
+		$guardian_lname = $_POST['guardian_lname'];
+		$guardian_sname = $_POST['guardian_sname'];
+		$guardian_contact = $_POST['guardian_contact'];
+		$guardian_occupation = $_POST['guardian_occupation'];
+		$guardian_relationship = $_POST['guardian_relationship'];
+
+		$spouse_fname = $_POST['spouse_fname'];
+		$spouse_mname = $_POST['spouse_mname'];
+		$spouse_lname = $_POST['spouse_lname'];
+		$spouse_sname = $_POST['spouse_sname'];
+		$spouse_contact = $_POST['spouse_contact'];
+		$spouse_occupation = $_POST['spouse_occupation'];
+		// academic info
+		$eval_id = $_POST['eval_id'];
+		$yr_lvl = $_POST['yr_lvl'];
+		$status = $_POST['status'];
+		$present_course = $_POST['present_course'];
+		$transfered_from = $_POST['transfered_from'];
+		$second_course = $_POST['second_course'];
+		$graduated_es = $_POST['graduated_es'];
+		$graduated_year_es = $_POST['graduated_year_es'];
+		// student credentials
+		$id_number = $_POST['id_number'];
+		$password = $_POST['password'];
+
+		if (empty($fname) || empty($lname) || empty($province) || empty($city) || empty($barangay) || empty($zip_code) || empty($bdate) || empty($nationality) || empty($birth_province) || empty($birth_city) || empty($birth_zip_code) || empty($email) || empty($contact_num) || empty($gender) || empty($guardian_fname) || empty($guardian_lname) || empty($guardian_relationship) || empty($present_course) || empty($transfered_from) || empty($second_course) || empty($graduated_es) || empty($yr_lvl) || empty($graduated_year_es) || empty($id_number) || empty($password)) {
+			header("Location: ../upd_student_transferee.php?error_msg=Fill All Inputs");
+			exit();
+		}
+		else {
+			// queries
+			$sql_primary_info = "UPDATE student_pri_info_tbl SET id_number = '$id_number', yr_lvl = '$yr_lvl', fname = '$fname', mname = '$mname', lname = '$lname', sname = '$sname', province = '$province', city = '$city', barangay = '$barangay', house_num = '$house_num', zip_code = '$zip_code', status = '$status', password = '$password' WHERE student_id = '$student_id'";
+
+			$sql_primary_info_result = mysqli_query($conn, $sql_primary_info);
+
+			if ($sql_primary_info_result) {
+				// queries
+				$sql_basic_info = "UPDATE student_basic_info_tbl SET bdate = '$bdate', nationality = '$nationality', birth_province = '$birth_province', birth_city = '$birth_city', birth_barangay = '$birth_barangay', birth_house_num = '$birth_house_num', birth_zip_code = '$birth_zip_code', email = '$email', contact_num = '$contact_num', gender = '$gender', religion = '$religion' WHERE student_id = '$student_id'";
+
+				$sql_family_info = "UPDATE student_fam_info_tbl SET father_fname = '$father_fname', father_mname = '$father_mname', father_lname = '$father_lname', father_sname = '$father_sname', father_contact = '$father_contact', father_occupation = '$father_occupation', mother_fname = '$mother_fname', mother_mname = '$mother_mname', mother_lname = '$mother_lname', mother_contact = '$mother_contact', mother_occupation = '$mother_occupation' WHERE student_id = '$student_id'";
+
+				$sql_guardian_info = "UPDATE student_guardian_info_tbl SET guardian_fname = '$guardian_fname', guardian_mname = '$guardian_mname', guardian_lname = '$guardian_lname', guardian_sname = '$guardian_sname', guardian_contact = '$guardian_contact', guardian_occupation = '$guardian_occupation', guardian_relationship = '$guardian_relationship', spouse_fname = '$spouse_fname', spouse_mname = '$spouse_mname', spouse_lname = '$spouse_lname', spouse_sname = '$spouse_sname', spouse_contact = '$spouse_contact', spouse_occupation = '$spouse_occupation' WHERE student_id = '$student_id'";
+
+				$sql_academic_info = "UPDATE student_acad_info_transferee_tbl SET present_course = '$present_course', transfered_from = '$transfered_from', second_course = '$second_course', graduated_es = '$graduated_es', graduated_year_es = '$graduated_year_es', eval_id = '$eval_id' WHERE student_id = '$student_id'";
+
+				// sql results
+				$sql_basic_info_result = mysqli_query($conn, $sql_basic_info);
+				$sql_family_info_result = mysqli_query($conn, $sql_family_info);
+				$sql_guardian_info_result = mysqli_query($conn, $sql_guardian_info);
+				$sql_academic_info_result = mysqli_query($conn, $sql_academic_info);
+
+				if ($sql_basic_info_result && $sql_family_info_result && $sql_guardian_info_result && $sql_academic_info_result) {
+					header('Location: ../upd_student_transferee.php?' . http_build_query(array(
+				    	'student_id' => $_GET['student_id'],
+				    	'success_msg' => "Updated Student Information"
+					)));
+					exit();
+				}
+				else {
+					header('Location: ../upd_student_transferee.php?' . http_build_query(array(
+				    	'student_id' => $_GET['student_id'],
+				    	'error_msg' => "Updated Error"
+					)));
 					exit();
 				}
 			}

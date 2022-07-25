@@ -297,7 +297,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   <p class="success_msg mb-3"><?php echo $_GET['success_msg'];?></p>
                 <?php } ?>
               </center>
-              <form action="php/studentPHP.php" method="POST">
+              <form action="php/studentPHP.php?student_id=<?=$student_id?>" method="POST">
+                <input type="hidden" name="student_id" value="<?php echo $student_id;?>">
                 <!-- student information -->
                 <?php
                   $sql = "SELECT * FROM student_pri_info_tbl WHERE student_id = '$student_id'";
@@ -312,42 +313,60 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label class="form-label">First Name</label>
-                      <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" value="<?php echo $row['fname'];?>" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" value="<?php echo $row['fname'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Middle Name</label>
-                      <input type="text" class="form-control" id="mname" name="mname" placeholder="Middle Name" value="<?php echo $row['mname'];?>" required>
+                      <input type="text" class="form-control" id="mname" name="mname" placeholder="Middle Name" value="<?php echo $row['mname'];?>">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Last Name</label>
-                      <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" value="<?php echo $row['lname'];?>" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" value="<?php echo $row['lname'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Suffix Name</label>
-                      <input type="text" class="form-control" id="sname" name="sname" placeholder="Suffix Name" value="<?php echo $row['sname'];?>" required>
+                      <input type="text" class="form-control" id="sname" name="sname" placeholder="Suffix Name" value="<?php echo $row['sname'];?>">
                     </div>
                   </div>
                   <h5>Permanent Address</h5>
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Province</label>
-                      <input type="text" class="form-control" id="province" name="province" placeholder="Province" value="<?php echo $row['province'];?>" required>
+                      <div class="input-group">  
+                        <input type="text" class="form-control" id="province" name="province" placeholder="Province" value="<?php echo $row['province'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">City/Municipality</label>
-                      <input type="text" class="form-control" id="city" name="city" placeholder="City/Municipality" value="<?php echo $row['city'];?>" required>
+                      <div class="input-group">  
+                        <input type="text" class="form-control" id="city" name="city" placeholder="City/Municipality" value="<?php echo $row['city'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Barangay</label>
-                      <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Barangay" value="<?php echo $row['barangay'];?>" required>
+                      <div class="input-group">  
+                        <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Barangay" value="<?php echo $row['barangay'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-3 mb-3">
                       <label class="form-label">House Number</label>
-                      <input type="text" class="form-control" id="house_num" name="house_num" placeholder="House Number" value="<?php echo $row['house_num'];?>" required>
+                      <input type="text" class="form-control" id="house_num" name="house_num" placeholder="House Number" value="<?php echo $row['house_num'];?>">
                     </div>
                     <div class="col-md-3 mb-3">
                       <label class="form-label">Zip Code</label>
-                      <input type="text" class="form-control" id="zip_code" name="zip_code" placeholder="Zip Code" value="<?php echo $row['zip_code'];?>" required>
+                      <div class="input-group">  
+                        <input type="text" class="form-control" id="zip_code" name="zip_code" placeholder="Zip Code" value="<?php echo $row['zip_code'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -370,51 +389,71 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Birthdate</label>
-                      <input type="date" class="form-control" id="bdate" name="bdate" placeholder="Birthdate" value="<?php echo $row['bdate'];?>" required>
+                      <div class="input-group">
+                        <input type="date" class="form-control" id="bdate" name="bdate" placeholder="Birthdate" value="<?php echo $row['bdate'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Nationality</label>
-                      <input type="text" class="form-control" id="nationality" name="nationality" placeholder="Nationality" value="<?php echo $row['nationality'];?>" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="nationality" name="nationality" placeholder="Nationality" value="<?php echo $row['nationality'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <h5>Birth Place</h5>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Province</label>
-                      <input type="text" class="form-control" id="birth_province" name="birth_province" placeholder="Province" value="<?php echo $row['birth_province'];?>" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="birth_province" name="birth_province" placeholder="Province" value="<?php echo $row['birth_province'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">City/Municipality</label>
-                      <input type="text" class="form-control" id="birth_city" name="birth_city" placeholder="City/Municipality" value="<?php echo $row['birth_city'];?>" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="birth_city" name="birth_city" placeholder="City/Municipality" value="<?php echo $row['birth_city'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Barangay</label>
-                      <input type="text" class="form-control" id="birth_barangay" name="birth_barangay" placeholder="Barangay" value="<?php echo $row['birth_barangay'];?>" required>
+                      <input type="text" class="form-control" id="birth_barangay" name="birth_barangay" placeholder="Barangay" value="<?php echo $row['birth_barangay'];?>">
                     </div>
                     <div class="col-md-3 mb-3">
                       <label class="form-label">House Number</label>
-                      <input type="text" class="form-control" id="birth_house_num" name="birth_house_num" placeholder="House Number" value="<?php echo $row['birth_house_num'];?>" required>
+                      <input type="text" class="form-control" id="birth_house_num" name="birth_house_num" placeholder="House Number" value="<?php echo $row['birth_house_num'];?>">
                     </div>
                     <div class="col-md-3 mb-3">
                       <label class="form-label">Zip Code</label>
-                      <input type="text" class="form-control" id="birth_zip_code" name="birth_zip_code" placeholder="Zip Code" value="<?php echo $row['birth_zip_code'];?>" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="birth_zip_code" name="birth_zip_code" placeholder="Zip Code" value="<?php echo $row['birth_zip_code'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <h5>Contact & Other Info.</h5>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Email</label>
-                      <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo $row['email'];?>" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo $row['email'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Contact Number</label>
-                      <input type="text" class="form-control" id="contact_num" name="contact_num" placeholder="Contact Number" value="<?php echo $row['contact_num'];?>" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="contact_num" name="contact_num" placeholder="Contact Number" value="<?php echo $row['contact_num'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label class="form-label">Gender</label><br>
+                      <label class="form-label">Gender</label><span class="required_sign"> *</span><br>
                       <input type="radio" class="form-check-input" name="gender" <?php if ($row['gender'] == 'Male') {echo "checked";}?> value="Male" required> Male
                       <input type="radio" class="form-check-input" name="gender" <?php if ($row['gender'] == 'Female') {echo "checked";}?> value="Female" required> Female
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Religion</label>
-                      <select class="form-control" id="religion" name="religion" required>
-                        <!-- <option selected disabled>Select Religion</option> -->
+                      <select class="form-control" id="religion" name="religion">
                         <option value="<?php echo $row['religion'];?>"><?php echo $row['religion'];?></option>
                         <option value="ROMAN CATHOLIC">ROMAN CATHOLIC</option>
                         <option value="IGLESIA NI CRISTO">IGLESIA NI CRISTO</option>
@@ -460,27 +499,27 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                         <p>Father's Information</p>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">First Name</label>
-                          <input type="text" class="form-control" id="father_fname" name="father_fname" placeholder="First Name" value="<?php echo $row['father_fname'];?>" required>
+                          <input type="text" class="form-control" id="father_fname" name="father_fname" placeholder="First Name" value="<?php echo $row['father_fname'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Middle Name</label>
-                          <input type="text" class="form-control" id="father_mname" name="father_mname" placeholder="Middle Name" value="<?php echo $row['father_mname'];?>" required>
+                          <input type="text" class="form-control" id="father_mname" name="father_mname" placeholder="Middle Name" value="<?php echo $row['father_mname'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Last Name</label>
-                          <input type="text" class="form-control" id="father_lname" name="father_lname" placeholder="Last Name" value="<?php echo $row['father_lname'];?>" required>
+                          <input type="text" class="form-control" id="father_lname" name="father_lname" placeholder="Last Name" value="<?php echo $row['father_lname'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Suffix Name</label>
-                          <input type="text" class="form-control" id="father_sname" name="father_sname" placeholder="Suffix Name" value="<?php echo $row['father_sname'];?>" required>
+                          <input type="text" class="form-control" id="father_sname" name="father_sname" placeholder="Suffix Name" value="<?php echo $row['father_sname'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Contact Number</label>
-                          <input type="text" class="form-control" id="father_contact" name="father_contact" placeholder="Contact Number" value="<?php echo $row['father_contact'];?>" required>
+                          <input type="text" class="form-control" id="father_contact" name="father_contact" placeholder="Contact Number" value="<?php echo $row['father_contact'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Occupation</label>
-                          <input type="text" class="form-control" id="father_occupation" name="father_occupation" placeholder="Occupation" value="<?php echo $row['father_occupation'];?>" required>
+                          <input type="text" class="form-control" id="father_occupation" name="father_occupation" placeholder="Occupation" value="<?php echo $row['father_occupation'];?>">
                         </div>
                       </div>
                     </div>
@@ -489,23 +528,23 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                         <p>Mother's Information</p>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">First Name</label>
-                          <input type="text" class="form-control" id="mother_fname" name="mother_fname" placeholder="First Name" value="<?php echo $row['mother_fname'];?>" required>
+                          <input type="text" class="form-control" id="mother_fname" name="mother_fname" placeholder="First Name" value="<?php echo $row['mother_fname'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Middle Name</label>
-                          <input type="text" class="form-control" id="mother_mname" name="mother_mname" placeholder="Middle Name" value="<?php echo $row['mother_mname'];?>" required>
+                          <input type="text" class="form-control" id="mother_mname" name="mother_mname" placeholder="Middle Name" value="<?php echo $row['mother_mname'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Last Name</label>
-                          <input type="text" class="form-control" id="mother_lname" name="mother_lname" placeholder="Last Name" value="<?php echo $row['mother_lname'];?>" required>
+                          <input type="text" class="form-control" id="mother_lname" name="mother_lname" placeholder="Last Name" value="<?php echo $row['mother_lname'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Contact Number</label>
-                          <input type="text" class="form-control" id="mother_contact" name="mother_contact" placeholder="Contact Number" value="<?php echo $row['mother_contact'];?>" required>
+                          <input type="text" class="form-control" id="mother_contact" name="mother_contact" placeholder="Contact Number" value="<?php echo $row['mother_contact'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Occupation</label>
-                          <input type="text" class="form-control" id="mother_occupation" name="mother_occupation" placeholder="Occupation" value="<?php echo $row['mother_occupation'];?>" required>
+                          <input type="text" class="form-control" id="mother_occupation" name="mother_occupation" placeholder="Occupation" value="<?php echo $row['mother_occupation'];?>">
                         </div>
                       </div>
                     </div>
@@ -530,31 +569,40 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                         <p>Guardian's Information</p>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">First Name</label>
-                          <input type="text" class="form-control" id="guardian_fname" name="guardian_fname" placeholder="First Name" value="<?php echo $row['guardian_fname'];?>" required>
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="guardian_fname" name="guardian_fname" placeholder="First Name" value="<?php echo $row['guardian_fname'];?>" required>
+                            <span class="input-group-text"><span class="required_sign">*</span></span>
+                          </div>
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Middle Name</label>
-                          <input type="text" class="form-control" id="guardian_mname" name="guardian_mname" placeholder="Middle Name" value="<?php echo $row['guardian_mname'];?>" required>
+                          <input type="text" class="form-control" id="guardian_mname" name="guardian_mname" placeholder="Middle Name" value="<?php echo $row['guardian_mname'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Last Name</label>
-                          <input type="text" class="form-control" id="guardian_lname" name="guardian_lname" placeholder="Last Name" value="<?php echo $row['guardian_lname'];?>" required>
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="guardian_lname" name="guardian_lname" placeholder="Last Name" value="<?php echo $row['guardian_lname'];?>" required>
+                            <span class="input-group-text"><span class="required_sign">*</span></span>
+                          </div>
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Suffix Name</label>
-                          <input type="text" class="form-control" id="guardian_sname" name="guardian_sname" placeholder="Suffix Name" value="<?php echo $row['guardian_sname'];?>" required>
+                          <input type="text" class="form-control" id="guardian_sname" name="guardian_sname" placeholder="Suffix Name" value="<?php echo $row['guardian_sname'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Contact Number</label>
-                          <input type="text" class="form-control" id="guardian_contact" name="guardian_contact" placeholder="Contact Number" value="<?php echo $row['guardian_contact'];?>" required>
+                          <input type="text" class="form-control" id="guardian_contact" name="guardian_contact" placeholder="Contact Number" value="<?php echo $row['guardian_contact'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Occupation</label>
-                          <input type="text" class="form-control" id="guardian_occupation" name="guardian_occupation" placeholder="Occupation" value="<?php echo $row['guardian_occupation'];?>" required>
+                          <input type="text" class="form-control" id="guardian_occupation" name="guardian_occupation" placeholder="Occupation" value="<?php echo $row['guardian_occupation'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Relationship</label>
-                          <input type="text" class="form-control" id="guardian_relationship" name="guardian_relationship" placeholder="Relationship" value="<?php echo $row['guardian_relationship'];?>" required>
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="guardian_relationship" name="guardian_relationship" placeholder="Relationship" value="<?php echo $row['guardian_relationship'];?>" required>
+                            <span class="input-group-text"><span class="required_sign">*</span></span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -563,27 +611,27 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                         <p>Spouse's (if married)</p>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">First Name</label>
-                          <input type="text" class="form-control" id="spouse_fname" name="spouse_fname" placeholder="First Name" value="<?php echo $row['spouse_fname'];?>" required>
+                          <input type="text" class="form-control" id="spouse_fname" name="spouse_fname" placeholder="First Name" value="<?php echo $row['spouse_fname'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Middle Name</label>
-                          <input type="text" class="form-control" id="spouse_mname" name="spouse_mname" placeholder="Middle Name" value="<?php echo $row['spouse_mname'];?>" required>
+                          <input type="text" class="form-control" id="spouse_mname" name="spouse_mname" placeholder="Middle Name" value="<?php echo $row['spouse_mname'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Last Name</label>
-                          <input type="text" class="form-control" id="spouse_lname" name="spouse_lname" placeholder="Last Name" value="<?php echo $row['spouse_lname'];?>" required>
+                          <input type="text" class="form-control" id="spouse_lname" name="spouse_lname" placeholder="Last Name" value="<?php echo $row['spouse_lname'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Suffix Name</label>
-                          <input type="text" class="form-control" id="spouse_lname" name="spouse_sname" placeholder="Suffix Name" value="<?php echo $row['spouse_lname'];?>" required>
+                          <input type="text" class="form-control" id="spouse_lname" name="spouse_sname" placeholder="Suffix Name" value="<?php echo $row['spouse_lname'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Contact Number</label>
-                          <input type="text" class="form-control" id="spouse_contact" name="spouse_contact" placeholder="Contact Number" value="<?php echo $row['spouse_contact'];?>" required>
+                          <input type="text" class="form-control" id="spouse_contact" name="spouse_contact" placeholder="Contact Number" value="<?php echo $row['spouse_contact'];?>">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Occupation</label>
-                          <input type="text" class="form-control" id="spouse_occupation" name="spouse_occupation" placeholder="Occupation" value="<?php echo $row['spouse_occupation'];?>" required>
+                          <input type="text" class="form-control" id="spouse_occupation" name="spouse_occupation" placeholder="Occupation" value="<?php echo $row['spouse_occupation'];?>">
                         </div>
                       </div>
                     </div>
@@ -616,9 +664,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
 
                           FROM student_acad_info_tbl
 
-                          INNER JOIN eval_cmo_series_tbl ON student_acad_info_tbl.eval_id = eval_cmo_series_tbl.eval_id
+                          LEFT JOIN eval_cmo_series_tbl ON student_acad_info_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
                   WHERE student_acad_info_tbl.student_id = '$student_id'";
+                // $sql = "SELECT * FROM student_acad_info_tbl WHERE student_id = '$student_id'";
+
                   $result = $conn->query($sql);
                     if($result->num_rows > 0) {
                       while ($row=$result->fetch_assoc()) {
@@ -628,98 +678,132 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label class="form-label">CMO No. and Series</label>
-                      <select class="form-control" id="eval_id" name="eval_id" required>
-                        <option value="<?php echo $row['eval_id'];?>"><?php echo "CMO No. ".$row['cmoNo']." & Series of ".$row['series'];?></option>
-                          <?php
-                            include "db_conn.php";
-                            $sql = "SELECT * FROM eval_cmo_series_tbl";
-                            $result = $conn->query($sql);
-                              if($result->num_rows > 0) {
-                                while ($row_cmoSeries=$result->fetch_assoc()) {
-                          ?>
-                          <option value="<?php echo $row_cmoSeries['eval_id'];?>"><?php echo "CMO No. ".$row_cmoSeries['cmoNo']." & Series of ".$row_cmoSeries['series'];?></option>
-                          <?php
+                      <div class="input-group">
+                        <select class="form-control" id="eval_id" name="eval_id" required>
+                          <option value="<?php echo $row['eval_id'];?>">
+                            <?php
+                              if ($row['eval_id'] == NULL) {
+                                echo "CMO No. and Series not yet assigned";
                               }
-                            }
-                            else {
-                              echo "<option value=''>No CMO No. & Series available</option>";
-                            }
-                          ?>
-                      </select>
+                              else {
+                                echo "CMO No. ".$row['cmoNo']." & Series of ".$row['series'];
+                              }
+                            ?>
+                          </option>
+                            <?php
+                              include "db_conn.php";
+                              $sql = "SELECT * FROM eval_cmo_series_tbl";
+                              $result = $conn->query($sql);
+                                if($result->num_rows > 0) {
+                                  while ($row_cmoSeries=$result->fetch_assoc()) {
+                            ?>
+                            <option value="<?php echo $row_cmoSeries['eval_id'];?>"><?php echo "CMO No. ".$row_cmoSeries['cmoNo']." & Series of ".$row_cmoSeries['series'];?></option>
+                            <?php
+                                }
+                              }
+                              else {
+                                echo "<option value=''>No CMO No. & Series available</option>";
+                              }
+                            ?>
+                        </select>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Select Year Level</label>
-                      <select class="form-control" id="yr_lvl" name="yr_lvl" required>
-                        <option value="<?php echo $student_yr_lvl;?>"><?php echo $student_yr_lvl." Year";?></option>
-                        <option value="1st">1st Year</option>
-                        <option value="2nd">2nd Year</option>
-                        <option value="3rd">3rd Year</option>
-                        <option value="4th">4th Year</option>
-                      </select>
+                      <div class="input-group">
+                        <select class="form-control" id="yr_lvl" name="yr_lvl" required>
+                          <option value="<?php echo $student_yr_lvl;?>"><?php echo $student_yr_lvl." Year";?></option>
+                          <option value="1st">1st Year</option>
+                          <option value="2nd">2nd Year</option>
+                          <option value="3rd">3rd Year</option>
+                          <option value="4th">4th Year</option>
+                        </select>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Select Status</label>
-                      <select class="form-control" id="status" name="status" required>
-                        <option value="<?php echo $student_status;?>"><?php echo $student_status;?></option>
-                        <option value="Freshmen">Freshmen</option>
-                        <!-- <option value="Transferee">Transferee</option> -->
-                        <option value="Regular">Regular</option>
-                        <option value="Regular Graduating">Regular Graduating</option>
-                        <!-- <option value="Transferee Graduating">Transferee Graduating</option> -->
-                      </select>
+                      <div class="input-group">
+                        <select class="form-control" id="status" name="status" required>
+                          <option value="<?php echo $student_status;?>"><?php echo $student_status;?></option>
+                          <option value="Freshmen">Freshmen</option>
+                          <option value="Regular">Regular</option>
+                          <option value="Regular Graduating">Regular Graduating</option>
+                        </select>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Course to be Enroll</label>
-                      <select class="form-control" id="course" name="course" required>
-                          <option value="<?php echo $row['course'];?>"><?php echo $row['course'];?></option>
-                          <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
-                          <option value="Bachelor in Library & Information Science">Bachelor in Library & Information Science</option>
-                      </select>
+                      <div class="input-group">
+                        <select class="form-control" id="course" name="course" required>
+                            <option value="<?php echo $row['course'];?>"><?php echo $row['course'];?></option>
+                            <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
+                            <option value="Bachelor in Library & Information Science">Bachelor in Library & Information Science</option>
+                        </select>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Select Strand</label>
-                      <select class="form-control" id="strand" name="strand" required>
-                          <option value="<?php echo $row['strand'];?>"><?php echo $row['strand'];?></option>
-                          <option value="STEM">STEM</option>
-                          <option value="HUMMS">HUMMS</option>
-                          <option value="ABM">ABM</option>
-                          <option value="GAS">GAS</option>
-                          <option value="ICT">ICT</option>
-                          <option value="TVL">TVL</option>
-                          <option value="HOME ECONOMICS">HOME ECONOMICS</option>
-                          <option value="AGRI-FISHERY ARTS">AGRI-FISHERY ARTS</option>
-                          <option value="INDUSTRIAL ARTS">INDUSTRIAL ARTS</option>
-                          <option value="SPORTS">SPORTS</option>
-                          <option value="ARTS AND DESIGN">ARTS AND DESIGN</option>
-                      </select>
+                      <div class="input-group">
+                        <select class="form-control" id="strand" name="strand" required>
+                            <option value="<?php echo $row['strand'];?>"><?php echo $row['strand'];?></option>
+                            <option value="STEM">STEM</option>
+                            <option value="HUMMS">HUMMS</option>
+                            <option value="ABM">ABM</option>
+                            <option value="GAS">GAS</option>
+                            <option value="ICT">ICT</option>
+                            <option value="TVL">TVL</option>
+                            <option value="HOME ECONOMICS">HOME ECONOMICS</option>
+                            <option value="AGRI-FISHERY ARTS">AGRI-FISHERY ARTS</option>
+                            <option value="INDUSTRIAL ARTS">INDUSTRIAL ARTS</option>
+                            <option value="SPORTS">SPORTS</option>
+                            <option value="ARTS AND DESIGN">ARTS AND DESIGN</option>
+                        </select>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Second choice of course</label>
-                      <select class="form-control" id="second_course" name="second_course" required>
-                          <option value="<?php echo $row['second_course'];?>"><?php echo $row['second_course'];?></option>
-                          <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
-                          <option value="Bachelor in Library & Information Science">Bachelor in Library & Information Science</option>
-                      </select>
+                      <div class="input-group">
+                        <select class="form-control" id="second_course" name="second_course" required>
+                            <option value="<?php echo $row['second_course'];?>"><?php echo $row['second_course'];?></option>
+                            <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
+                            <option value="Bachelor in Library & Information Science">Bachelor in Library & Information Science</option>
+                        </select>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Graduated Senior High School</label>
-                      <input type="text" class="form-control" id="graduated_shs" name="graduated_shs" placeholder="Graduated Senior High School" value="<?php echo $row['graduated_shs'];?>" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="graduated_shs" name="graduated_shs" placeholder="Graduated Senior High School" value="<?php echo $row['graduated_shs'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Learners Reference Number</label>
-                      <input type="text" class="form-control" id="learners_ref_num" name="learners_ref_num" placeholder="Learners Reference Number" value="<?php echo $row['learners_ref_num'];?>" required>
+                      <input type="text" class="form-control" id="learners_ref_num" name="learners_ref_num" placeholder="Learners Reference Number" value="<?php echo $row['learners_ref_num'];?>">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Graduated Elementary School</label>
-                      <input type="text" class="form-control" id="graduated_es" name="graduated_es" placeholder="Graduated Elementary School" value="<?php echo $row['graduated_es'];?>" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="graduated_es" name="graduated_es" placeholder="Graduated Elementary School" value="<?php echo $row['graduated_es'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Form 138 GWA</label>
-                      <input type="text" class="form-control" id="form_138" name="form_138" placeholder="Form 138 GWA" value="<?php echo $row['form_138'];?>" required>
+                      <input type="text" class="form-control" id="form_138" name="form_138" placeholder="Form 138 GWA" value="<?php echo $row['form_138'];?>">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Graduated Year from Elementary School</label>
-                      <input type="text" class="form-control" id="graduated_year_es" name="graduated_year_es" placeholder="Graduated Year from Elementary School" value="<?php echo $row['graduated_year_es'];?>" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="graduated_year_es" name="graduated_year_es" placeholder="Graduated Year from Elementary School" value="<?php echo $row['graduated_year_es'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -742,7 +826,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Identification Card Number</label>
-                      <input type="text" class="form-control" name="id_number" id="id_number"  value="<?php echo $row['id_number'];?>" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" name="id_number" id="id_number"  value="<?php echo $row['id_number'];?>" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Credentials</label>
@@ -757,7 +844,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   </div>
 
                   <div class="d-grid gap-2 d-md-block mt-4">
-                    <button class="main-button" type="submit" name="upd_studentBtn">Add Student</button>
+                    <button class="main-button" type="submit" name="upd_studentBtn">Update Student</button>
                   </div>
                 </div>
                 <?php

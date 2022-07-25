@@ -128,6 +128,16 @@ a {
 	outline: none !important;
 }
 
+.required_sign {
+	color: #ff0000;
+	font-weight: bold;
+	transform: scale(2.1);
+}
+
+.input-group-text {
+	border: none;
+}
+
 .no-display {
 	display: none;
 }
@@ -851,6 +861,11 @@ button.main_bt {
 	background-size: cover;
 }
 
+.img_post_holder {
+	height: auto; width: 300px;
+	overflow: hidden;
+}
+
 .titlepage-h1-news_events {
 	width: 100%;
 	float: left;
@@ -883,6 +898,12 @@ button.main_bt {
 	border-bottom-left-radius: 15px;
 	padding: 10px;
 	padding-right: 50px;
+}
+
+.featured_text {
+	color: #4e4a67;
+	height: 100px;
+	overflow: hidden;
 }
 
 .container-card-news-events {
@@ -1884,29 +1905,29 @@ button.main_bt {
 }
 
 /*form error*/
-form .error input {
+#upd_student_cred_form, .error input {
 	border: 3px solid #e74c3c;
 }
 
-form .success input {
+#upd_student_cred_form, .success input {
 	border-color: #2ecc71;
 }
 
-form .error textarea {
+#upd_student_cred_form, .error textarea {
 	border: 3px solid #e74c3c;
 }
 
-form .success textarea {
+#upd_student_cred_form, .success textarea {
 	border-color: #2ecc71;
 }
 
-form small {
+#upd_student_cred_form, small {
 	color: #e74c3c;
 	display: block;
 	display: none;
 }
 
-form .error small {
+#upd_student_cred_form, .error small {
 	display: block;
 }
 
@@ -2021,6 +2042,20 @@ form .error small {
 }
 
 /* action button theme */
+.greenBtn {
+	padding: 7px 10px;
+	background-color: #4caf50;
+	color: #fff;
+	font-weight: 300;
+	border: none;
+	border-radius: 5px;
+	font-size: 15px;
+}
+
+.greenBtn:hover {
+	background-color: #3e8e41;
+}
+
 .redBtn {
 	padding: 7px 10px;
 	background-color: #ff0000;
@@ -2035,4 +2070,359 @@ form .error small {
 	background-color: #990000;
 }
 
-/* form order list */
+/********* Health Declaration Area **************/
+.health_df_cont {
+	font-family: arial;
+	width: 60%;
+	border: 2px solid black;
+	float: left;
+	margin: 2% 20%;
+}
+
+.health_df_header {
+	align-items: center;
+	align-content: center;
+	display: flex;
+  	justify-content: space-evenly;
+  	padding: 20px;
+  	text-align: center;
+}
+
+.health_df_header img {
+	width: 70px;
+	height: 70px;
+}
+
+.health_df_header h1 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.health_df_header h2 {
+	font-size: 16px;
+}
+
+.health_df_header h3 {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.health_df_cont p {
+	font-size: 12px;
+}
+
+.health_df_input {
+	display: flex;
+	padding-right: 5%;
+	align-items: center;
+}
+
+.health_df_input input {
+	border: 0;
+  	outline: 0;
+  	background: transparent;
+  	border-bottom: 1px solid black;
+  	width: 100%;
+  	margin-bottom: 2px;
+  	margin-left: 2px;
+  	font-size: 12px;
+}
+
+.health_df_input label {
+	white-space: nowrap;
+	font-size: 12px;
+	margin: 0;
+}
+
+.health_df_student_info {
+	padding: 20px;
+}
+
+.health_df_student_info p {
+	margin: 10px 0;
+}
+
+.health_df_input_purpose {
+	padding: 0 30px;
+}
+
+.health_df_input_purpose p {
+	padding: 0;
+}
+
+.health_df_input_purpose label, .health_df_input_purpose input {
+	font-size: 12px;
+	margin: 0;
+}
+
+
+.purpose_input {
+	display: flex;
+	padding-right: 5%;
+	align-items: center;
+}
+
+.purpose_input input {
+	border: 0;
+  	outline: 0;
+  	background: transparent;
+  	border-bottom: 1px solid black;
+  	font-size: 12px;
+}
+
+.purpose_input label {
+	white-space: nowrap;
+	font-size: 12px;
+	margin: 0 10px;
+}
+
+.temp_cont h1 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.temp_cont p {
+	 font-size: 12px;
+	 margin: 0;
+}
+
+.temp_box {
+	width: 100px;
+	height: 100px;
+	border: 2px solid black;
+}
+
+.illness_section{
+	margin: 5px;
+}
+
+.illness_section table, .illness_section td, .illness_section tr {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+.illness_section table tr td {
+	padding: 5px 10px;
+}
+
+.illness_section table tr td p {
+	width: 250px;
+}
+
+.illness_section table tr td input {
+	border: 0;
+  	outline: 0;
+  	background: transparent;
+  	border-bottom: 1px solid black;
+  	margin-bottom: 2px;
+  	margin-left: 2px;
+  	font-size: 12px;
+}
+
+.health_df_confirmation {
+	font-size: 14px;
+	text-align: center;
+}
+
+.custom_breakline {
+	width: 250px;
+	border-bottom: 2px solid black;
+	text-align: center;
+	margin: auto;
+}
+
+.health_df_confirmation h4 {
+	font-size: 14px;
+	text-align: center;
+	margin: 5px;
+}
+
+
+
+/********* Commitment of Undertaking Area **************/
+.com_undertake_cont {
+	font-family: arial;
+	width: 60%;
+	border: 2px solid black;
+	float: left;
+	margin: 2% 20%;
+}
+
+.com_undertake_header {
+	align-items: center;
+	align-content: center;
+	display: flex;
+  	justify-content: space-evenly;
+  	padding: 20px;
+  	text-align: center;
+}
+
+.com_undertake_header img {
+	width: 70px;
+	height: 70px;
+	margin-top: -40px;
+}
+
+.com_undertake_header h1 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.com_undertake_header h2 {
+	font-size: 16px;
+	font-weight: 700;
+	margin-top: 20px;
+}
+
+.com_undertake_header h3 {
+	font-size: 10px;
+	font-weight: 800;
+}
+
+.com_undertake_cont p {
+	font-size: 12px;
+}
+
+.dos_section {
+	margin-left: 2%;
+	width: 95%;
+}
+
+.dos_section h1 {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.dos_section ol {
+	margin-left: 15px;
+}
+
+.dos_section li {
+	margin: 0;
+	line-height: 20px;
+	font-size: 12px;
+}
+
+.donts_section {
+	margin-left: 2%;
+	width: 95%;
+}
+
+.donts_section h1 {
+	margin-top: 20px;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.donts_section ol {
+	margin-left: 15px;
+}
+
+.donts_section li {
+	margin: 0;
+	line-height: 20px;
+	font-size: 12px;
+}
+
+.donts_section table {
+	margin-left: 5%;
+}
+
+.donts_section td {
+	width: 300px;
+	margin-right: 20px;
+}
+
+.com_undertake_confirmation {
+	margin-top: 50px;
+	float: right;
+	font-size: 14px;
+	text-align: center;
+}
+
+.com_undertake_confirmation h4 {
+	font-size: 14px;
+	text-align: center;
+	margin: 5px;
+}
+
+/********* Certificate of Concent Area **************/
+.cert_consent_cont {
+	width: 60%;
+	border: 2px solid black;
+	float: left;
+	margin: 2% 20%;
+}
+
+.cert_consent_header {
+	align-items: center;
+	align-content: center;
+	display: flex;
+  	justify-content: space-evenly;
+  	padding: 20px;
+  	text-align: center;
+}
+
+.cert_consent_header img {
+	width: 70px;
+	height: 70px;
+	margin-top: -40px;
+}
+
+.cert_consent_header h1 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.cert_consent_header h2 {
+	font-size: 16px;
+	font-weight: 700;
+	margin-top: 20px;
+}
+
+.cert_consent_header h3 {
+	font-size: 10px;
+	font-weight: 800;
+}
+
+.cert_consent_cont p {
+	font-size: 14px;
+}
+
+.cert_content_section {
+	margin-left: 2%;
+	width: 95%;
+}
+
+.cert_content_section h1 {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.cert_content_section ol {
+	margin-left: 15px;
+}
+
+.cert_content_section li {
+	margin: 0;
+	line-height: 20px;
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+.com_undertake_confirmation {
+	margin-top: 50px;
+	float: right;
+	font-size: 14px;
+	text-align: center;
+}
+
+.com_undertake_confirmation h4 {
+	font-size: 14px;
+	text-align: center;
+	margin: 5px;
+}
+
+.cert_content_section label{
+	margin: 0;
+}

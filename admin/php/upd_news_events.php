@@ -318,6 +318,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   </div>
                   <br>
                   <div class="control-form">
+                    <input type="checkbox" class="form-check-input" id="chck_featured" name="upd_post" <?php if ($row['post'] == 'featured') { echo 'checked';}?> value="featured">
+                    <label for="chck_featured">Featured Post</label>
+                  </div>
+                  <br>
+                  <div class="control-form">
                     <label>Date & Time</label>
                     <input type="datetime-local" class="ip-datetime" name="upd_time_date" id="upd_time_date" value="<?php $date = $row['time_date']; echo date("Y-m-d\TH:i:s", strtotime($date));?>" required>
                     <small>error message</small>

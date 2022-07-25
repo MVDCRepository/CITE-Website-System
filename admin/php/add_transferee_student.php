@@ -310,42 +310,60 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label class="form-label">First Name</label>
-                      <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Middle Name</label>
-                      <input type="text" class="form-control" id="mname" name="mname" placeholder="Middle Name" required>
+                      <input type="text" class="form-control" id="mname" name="mname" placeholder="Middle Name">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Last Name</label>
-                      <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Suffix Name</label>
-                      <input type="text" class="form-control" id="sname" name="sname" placeholder="Suffix Name" required>
+                      <input type="text" class="form-control" id="sname" name="sname" placeholder="Suffix Name">
                     </div>
                   </div>
                   <h5>Permanent Address</h5>
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Province</label>
-                      <input type="text" class="form-control" id="province" name="province" placeholder="Province" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="province" name="province" placeholder="Province" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">City/Municipality</label>
-                      <input type="text" class="form-control" id="city" name="city" placeholder="City/Municipality" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="city" name="city" placeholder="City/Municipality" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Barangay</label>
-                      <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Barangay" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Barangay" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-3 mb-3">
                       <label class="form-label">House Number</label>
-                      <input type="text" class="form-control" id="house_num" name="house_num" placeholder="House Number" required>
+                      <input type="text" class="form-control" id="house_num" name="house_num" placeholder="House Number">
                     </div>
                     <div class="col-md-3 mb-3">
                       <label class="form-label">Zip Code</label>
-                      <input type="text" class="form-control" id="zip_code" name="zip_code" placeholder="Zip Code" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="zip_code" name="zip_code" placeholder="Zip Code" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -354,51 +372,72 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Birthdate</label>
-                      <input type="date" class="form-control" id="bdate" name="bdate" placeholder="Birthdate" required>
+                      <div class="input-group">
+                        <input type="date" class="form-control" id="bdate" name="bdate" placeholder="Birthdate" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Nationality</label>
-                      <input type="text" class="form-control" id="nationality" name="nationality" placeholder="Nationality" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="nationality" name="nationality" placeholder="Nationality" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <h5>Birth Place</h5>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Province</label>
-                      <input type="text" class="form-control" id="birth_province" name="birth_province" placeholder="Province" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="birth_province" name="birth_province" placeholder="Province" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">City/Municipality</label>
-                      <input type="text" class="form-control" id="birth_city" name="birth_city" placeholder="City/Municipality" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="birth_city" name="birth_city" placeholder="City/Municipality" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Barangay</label>
-                      <input type="text" class="form-control" id="birth_barangay" name="birth_barangay" placeholder="Barangay" required>
+                      <input type="text" class="form-control" id="birth_barangay" name="birth_barangay" placeholder="Barangay">
                     </div>
                     <div class="col-md-3 mb-3">
                       <label class="form-label">House Number</label>
-                      <input type="text" class="form-control" id="birth_house_num" name="birth_house_num" placeholder="House Number" required>
+                      <input type="text" class="form-control" id="birth_house_num" name="birth_house_num" placeholder="House Number">
                     </div>
                     <div class="col-md-3 mb-3">
                       <label class="form-label">Zip Code</label>
-                      <input type="text" class="form-control" id="birth_zip_code" name="birth_zip_code" placeholder="Zip Code" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="birth_zip_code" name="birth_zip_code" placeholder="Zip Code" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <h5>Contact & Other Info.</h5>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Email</label>
-                      <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Contact Number</label>
-                      <input type="text" class="form-control" id="contact_num" name="contact_num" placeholder="Contact Number" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="contact_num" name="contact_num" placeholder="Contact Number" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label class="form-label">Gender</label><br>
+                      <label class="form-label">Gender</label><span class="required_sign"> *</span><br>
                       <input type="radio" class="form-check-input" name="gender" value="Male" required> Male
                       <input type="radio" class="form-check-input" name="gender" value="Female" required> Female
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Religion</label>
-                      <select class="form-control" id="religion" name="religion" required>
-                        <option selected disabled>Select Religion</option>
+                      <select class="form-control" id="religion" name="religion">
+                        <option value="">Select Religion</option>
                         <option value="ROMAN CATHOLIC">ROMAN CATHOLIC</option>
                         <option value="IGLESIA NI CRISTO">IGLESIA NI CRISTO</option>
                         <option value="JEHOVAH WITNESSES">JEHOVAH WITNESSES</option>
@@ -430,27 +469,27 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                         <p>Father's Information</p>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">First Name</label>
-                          <input type="text" class="form-control" id="father_fname" name="father_fname" placeholder="First Name" required>
+                          <input type="text" class="form-control" id="father_fname" name="father_fname" placeholder="First Name">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Middle Name</label>
-                          <input type="text" class="form-control" id="father_mname" name="father_mname" placeholder="Middle Name" required>
+                          <input type="text" class="form-control" id="father_mname" name="father_mname" placeholder="Middle Name">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Last Name</label>
-                          <input type="text" class="form-control" id="father_lname" name="father_lname" placeholder="Last Name" required>
+                          <input type="text" class="form-control" id="father_lname" name="father_lname" placeholder="Last Name">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Suffix Name</label>
-                          <input type="text" class="form-control" id="father_sname" name="father_sname" placeholder="Suffix Name" required>
+                          <input type="text" class="form-control" id="father_sname" name="father_sname" placeholder="Suffix Name">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Contact Number</label>
-                          <input type="text" class="form-control" id="father_contact" name="father_contact" placeholder="Contact Number" required>
+                          <input type="text" class="form-control" id="father_contact" name="father_contact" placeholder="Contact Number">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Occupation</label>
-                          <input type="text" class="form-control" id="father_occupation" name="father_occupation" placeholder="Occupation" required>
+                          <input type="text" class="form-control" id="father_occupation" name="father_occupation" placeholder="Occupation">
                         </div>
                       </div>
                     </div>
@@ -459,23 +498,23 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                         <p>Mother's Information</p>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">First Name</label>
-                          <input type="text" class="form-control" id="mother_fname" name="mother_fname" placeholder="First Name" required>
+                          <input type="text" class="form-control" id="mother_fname" name="mother_fname" placeholder="First Name">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Middle Name</label>
-                          <input type="text" class="form-control" id="mother_mname" name="mother_mname" placeholder="Middle Name" required>
+                          <input type="text" class="form-control" id="mother_mname" name="mother_mname" placeholder="Middle Name">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Last Name</label>
-                          <input type="text" class="form-control" id="mother_lname" name="mother_lname" placeholder="Last Name" required>
+                          <input type="text" class="form-control" id="mother_lname" name="mother_lname" placeholder="Last Name">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Contact Number</label>
-                          <input type="text" class="form-control" id="mother_contact" name="mother_contact" placeholder="Contact Number" required>
+                          <input type="text" class="form-control" id="mother_contact" name="mother_contact" placeholder="Contact Number">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Occupation</label>
-                          <input type="text" class="form-control" id="mother_occupation" name="mother_occupation" placeholder="Occupation" required>
+                          <input type="text" class="form-control" id="mother_occupation" name="mother_occupation" placeholder="Occupation">
                         </div>
                       </div>
                     </div>
@@ -487,31 +526,40 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                         <p>Guardian's Information</p>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">First Name</label>
-                          <input type="text" class="form-control" id="guardian_fname" name="guardian_fname" placeholder="First Name" required>
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="guardian_fname" name="guardian_fname" placeholder="First Name" required>
+                            <span class="input-group-text"><span class="required_sign">*</span></span>
+                          </div>
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Middle Name</label>
-                          <input type="text" class="form-control" id="guardian_mname" name="guardian_mname" placeholder="Middle Name" required>
+                          <input type="text" class="form-control" id="guardian_mname" name="guardian_mname" placeholder="Middle Name">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Last Name</label>
-                          <input type="text" class="form-control" id="guardian_lname" name="guardian_lname" placeholder="Last Name" required>
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="guardian_lname" name="guardian_lname" placeholder="Last Name" required>
+                            <span class="input-group-text"><span class="required_sign">*</span></span>
+                          </div>
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Suffix Name</label>
-                          <input type="text" class="form-control" id="guardian_sname" name="guardian_sname" placeholder="Suffix Name" required>
+                          <input type="text" class="form-control" id="guardian_sname" name="guardian_sname" placeholder="Suffix Name">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Contact Number</label>
-                          <input type="text" class="form-control" id="guardian_contact" name="guardian_contact" placeholder="Contact Number" required>
+                          <input type="text" class="form-control" id="guardian_contact" name="guardian_contact" placeholder="Contact Number">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Occupation</label>
-                          <input type="text" class="form-control" id="guardian_occupation" name="guardian_occupation" placeholder="Occupation" required>
+                          <input type="text" class="form-control" id="guardian_occupation" name="guardian_occupation" placeholder="Occupation">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Relationship</label>
-                          <input type="text" class="form-control" id="guardian_relationship" name="guardian_relationship" placeholder="Relationship" required>
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="guardian_relationship" name="guardian_relationship" placeholder="Relationship" required>
+                            <span class="input-group-text"><span class="required_sign">*</span></span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -520,27 +568,27 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                         <p>Spouse's (if married)</p>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">First Name</label>
-                          <input type="text" class="form-control" id="spouse_fname" name="spouse_fname" placeholder="First Name" required>
+                          <input type="text" class="form-control" id="spouse_fname" name="spouse_fname" placeholder="First Name">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Middle Name</label>
-                          <input type="text" class="form-control" id="spouse_mname" name="spouse_mname" placeholder="Middle Name" required>
+                          <input type="text" class="form-control" id="spouse_mname" name="spouse_mname" placeholder="Middle Name">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Last Name</label>
-                          <input type="text" class="form-control" id="spouse_lname" name="spouse_lname" placeholder="Last Name" required>
+                          <input type="text" class="form-control" id="spouse_lname" name="spouse_lname" placeholder="Last Name">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Suffix Name</label>
-                          <input type="text" class="form-control" id="spouse_lname" name="spouse_sname" placeholder="Suffix Name" required>
+                          <input type="text" class="form-control" id="spouse_lname" name="spouse_sname" placeholder="Suffix Name">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Contact Number</label>
-                          <input type="text" class="form-control" id="spouse_contact" name="spouse_contact" placeholder="Contact Number" required>
+                          <input type="text" class="form-control" id="spouse_contact" name="spouse_contact" placeholder="Contact Number">
                         </div>
                         <div class="col-md-6 mb-3">
                           <label class="form-label">Occupation</label>
-                          <input type="text" class="form-control" id="spouse_occupation" name="spouse_occupation" placeholder="Occupation" required>
+                          <input type="text" class="form-control" id="spouse_occupation" name="spouse_occupation" placeholder="Occupation">
                         </div>
                       </div>
                     </div>
@@ -552,73 +600,94 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label class="form-label">CMO No. and Series</label>
-                      <select class="form-control" id="eval_id" name="eval_id" required>
-                          <option selected disabled>CMO No. and Series</option>
-                          <?php
-                            include "db_conn.php";
-                            $sql = "SELECT * FROM eval_cmo_series_tbl";
-                            $result = $conn->query($sql);
-                              if($result->num_rows > 0) {
-                                while ($row=$result->fetch_assoc()) {
-                          ?>
-                          <option value="<?php echo $row['eval_id'];?>"><?php echo "CMO No. ".$row['cmoNo']." & Series of ".$row['series'];?></option>
-                          <?php
+                      <div class="input-group">
+                        <select class="form-control" id="eval_id" name="eval_id" required>
+                            <option value="">CMO No. and Series</option>
+                            <?php
+                              include "db_conn.php";
+                              $sql = "SELECT * FROM eval_cmo_series_tbl";
+                              $result = $conn->query($sql);
+                                if($result->num_rows > 0) {
+                                  while ($row=$result->fetch_assoc()) {
+                            ?>
+                            <option value="<?php echo $row['eval_id'];?>"><?php echo "CMO No. ".$row['cmoNo']." & Series of ".$row['series'];?></option>
+                            <?php
+                                }
                               }
-                            }
-                            else {
-                              echo "<option value=''>No CMO No. & Series available</option>";
-                            }
-                          ?>
-                      </select>
+                              else {
+                                echo "<option value=''>No CMO No. & Series available</option>";
+                              }
+                            ?>
+                        </select>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Select Year Level</label>
-                      <select class="form-control" id="yr_lvl" name="yr_lvl" required>
-                          <option selected disabled>Select Year Level</option>
-                          <option value="1st">1st Year</option>
-                          <option value="2nd">2nd Year</option>
-                          <option value="3rd">3rd Year</option>
-                          <option value="4th">4th Year</option>
-                      </select>
+                      <div class="input-group">
+                        <select class="form-control" id="yr_lvl" name="yr_lvl" required>
+                            <option value="">Select Year Level</option>
+                            <option value="1st">1st Year</option>
+                            <option value="2nd">2nd Year</option>
+                            <option value="3rd">3rd Year</option>
+                            <option value="4th">4th Year</option>
+                        </select>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Select Status</label>
-                      <select class="form-control" id="status" name="status" required>
-                          <option selected disabled>Select Status</option>
-                          <!-- <option value="Freshmen">Freshmen</option> -->
-                          <option value="Transferee">Transferee</option>
-                          <!-- <option value="Regular">Regular</option>
-                          <option value="Regular Graduating">Regular Graduating</option>
-                          <option value="Transferee Graduating">Transferee Graduating</option> -->
-                      </select>
+                      <div class="input-group">
+                        <select class="form-control" id="status" name="status" required>
+                            <option value="">Select Status</option>
+                            <option value="Transferee">Transferee</option>
+                            <option value="Transferee Graduating">Transferee Graduating</option>
+                        </select>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Present Course</label>
-                      <select class="form-control" id="present_course" name="present_course" required>
-                          <option selected disabled>Present Course</option>
-                          <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
-                          <option value="Bachelor in Library & Information Science">Bachelor in Library & Information Science</option>
-                      </select>
+                      <div class="input-group">
+                        <select class="form-control" id="present_course" name="present_course" required>
+                            <option value="">Present Course</option>
+                            <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
+                            <option value="Bachelor in Library & Information Science">Bachelor in Library & Information Science</option>
+                        </select>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Second choice of course</label>
-                      <select class="form-control" id="second_course" name="second_course" required>
-                          <option selected disabled>Second choice of course</option>
-                          <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
-                          <option value="Bachelor in Library & Information Science">Bachelor in Library & Information Science</option>
-                      </select>
+                      <div class="input-group">
+                        <select class="form-control" id="second_course" name="second_course" required>
+                            <option value="">Second choice of course</option>
+                            <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
+                            <option value="Bachelor in Library & Information Science">Bachelor in Library & Information Science</option>
+                        </select>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Transfered From</label>
-                      <input type="text" class="form-control" id="transfered_from" name="transfered_from" placeholder="Transfered From" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="transfered_from" name="transfered_from" placeholder="Transfered From" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Graduated Elementary School</label>
-                      <input type="text" class="form-control" id="graduated_es" name="graduated_es" placeholder="Graduated Elementary School" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="graduated_es" name="graduated_es" placeholder="Graduated Elementary School" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Graduated Year from Elementary School</label>
-                      <input type="text" class="form-control" id="graduated_year_es" name="graduated_year_es" placeholder="Graduated Year from Elementary School" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="graduated_year_es" name="graduated_year_es" placeholder="Graduated Year from Elementary School" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -628,7 +697,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Identification Card Number</label>
-                      <input type="text" class="form-control" name="id_number" id="id_number" required>
+                      <div class="input-group">
+                        <input type="text" class="form-control" name="id_number" id="id_number" required>
+                        <span class="input-group-text"><span class="required_sign">*</span></span>
+                      </div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Credentials</label>

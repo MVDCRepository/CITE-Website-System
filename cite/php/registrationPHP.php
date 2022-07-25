@@ -54,6 +54,7 @@
 		$spouse_contact = $_POST['spouse_contact'];
 		$spouse_occupation = $_POST['spouse_occupation'];
 		// academic info
+		$eval_id = $_POST['eval_id'];
 		$course = $_POST['course'];
 		$strand = $_POST['strand'];
 		$second_course = $_POST['second_course'];
@@ -66,7 +67,7 @@
 		$id_number = $_POST['id_number'];
 		$password = $_POST['password'];
 
-		if (empty($fname) || empty($mname) || empty($lname) || empty($sname) || empty($province) || empty($city) || empty($barangay) || empty($house_num) || empty($zip_code) || empty($bdate) || empty($nationality) || empty($birth_province) || empty($birth_city) || empty($birth_barangay) || empty($birth_house_num) || empty($birth_zip_code) || empty($email) || empty($contact_num) || empty($gender) || empty($religion) || empty($father_fname) || empty($father_mname) || empty($father_lname) || empty($father_sname) || empty($father_contact) || empty($father_occupation) || empty($mother_fname) || empty($mother_mname) || empty($mother_lname) || empty($mother_contact) || empty($mother_occupation) || empty($guardian_fname) || empty($guardian_mname) || empty($guardian_lname) || empty($guardian_sname) || empty($guardian_contact) || empty($guardian_occupation) || empty($guardian_relationship) || empty($spouse_fname) || empty($spouse_mname) || empty($spouse_lname) || empty($spouse_sname) || empty($spouse_contact) || empty($spouse_occupation) || empty($course) || empty($strand) || empty($second_course) || empty($graduated_shs) || empty($learners_ref_num) || empty($graduated_es) || empty($form_138) || empty($graduated_year_es) || empty($id_number) || empty($password)) {
+		if (empty($fname) || empty($lname) || empty($province) || empty($city) || empty($barangay) || empty($zip_code) || empty($bdate) || empty($nationality) || empty($birth_province) || empty($birth_city) || empty($birth_zip_code) || empty($email) || empty($contact_num) || empty($gender) || empty($guardian_fname) || empty($guardian_lname) || empty($guardian_relationship) || empty($course) || empty($strand) || empty($second_course) || empty($graduated_shs) || empty($graduated_es) || empty($graduated_year_es) || empty($id_number) || empty($password)) {
 			header("Location: ../registration_freshmen.php?error_msg=Fill All Inputs");
 			exit();
 		}
@@ -85,7 +86,7 @@
 
 				$sql_guardian_info = "INSERT INTO student_guardian_info_tbl (student_id, guardian_fname, guardian_mname, guardian_lname, guardian_sname, guardian_contact, guardian_occupation, guardian_relationship, spouse_fname, spouse_mname, spouse_lname, spouse_sname, spouse_contact, spouse_occupation) VALUES ('$student_id', '$guardian_fname', '$guardian_mname', '$guardian_lname', '$guardian_sname', '$guardian_contact', '$guardian_occupation', '$guardian_relationship', '$spouse_fname', '$spouse_mname', '$spouse_lname', '$spouse_sname', '$spouse_contact', '$spouse_occupation')";
 
-				$sql_academic_info = "INSERT INTO student_acad_info_tbl (student_id, course, strand, second_course, graduated_shs, learners_ref_num, graduated_es, form_138, graduated_year_es, eval_id) VALUES ('$student_id', '$course', '$strand', '$second_course', '$graduated_shs', '$learners_ref_num', '$graduated_es', '$form_138', '$graduated_year_es', NULL)";
+				$sql_academic_info = "INSERT INTO student_acad_info_tbl (student_id, course, strand, second_course, graduated_shs, learners_ref_num, graduated_es, form_138, graduated_year_es, eval_id) VALUES ('$student_id', '$course', '$strand', '$second_course', '$graduated_shs', '$learners_ref_num', '$graduated_es', '$form_138', '$graduated_year_es', '$eval_id')";
 
 				// sql results
 				$sql_basic_info_result = mysqli_query($conn, $sql_basic_info);
@@ -160,6 +161,7 @@
 		$spouse_contact = $_POST['spouse_contact'];
 		$spouse_occupation = $_POST['spouse_occupation'];
 		// academic info
+		$eval_id = $_POST['eval_id'];
 		$present_course = $_POST['present_course'];
 		$transfered_from = $_POST['transfered_from'];
 		$second_course = $_POST['second_course'];
@@ -170,7 +172,7 @@
 		$id_number = $_POST['id_number'];
 		$password = $_POST['password'];
 
-		if (empty($fname) || empty($mname) || empty($lname) || empty($sname) || empty($province) || empty($city) || empty($barangay) || empty($house_num) || empty($zip_code) || empty($bdate) || empty($nationality) || empty($birth_province) || empty($birth_city) || empty($birth_barangay) || empty($birth_house_num) || empty($birth_zip_code) || empty($email) || empty($contact_num) || empty($gender) || empty($religion) || empty($father_fname) || empty($father_mname) || empty($father_lname) || empty($father_sname) || empty($father_contact) || empty($father_occupation) || empty($mother_fname) || empty($mother_mname) || empty($mother_lname) || empty($mother_contact) || empty($mother_occupation) || empty($guardian_fname) || empty($guardian_mname) || empty($guardian_lname) || empty($guardian_sname) || empty($guardian_contact) || empty($guardian_occupation) || empty($guardian_relationship) || empty($spouse_fname) || empty($spouse_mname) || empty($spouse_lname) || empty($spouse_sname) || empty($spouse_contact) || empty($spouse_occupation) || empty($present_course) || empty($transfered_from) || empty($second_course) || empty($graduated_es) || empty($yr_lvl) || empty($graduated_year_es) || empty($id_number) || empty($password)) {
+		if (empty($fname) || empty($lname) || empty($province) || empty($city) || empty($barangay) || empty($zip_code) || empty($bdate) || empty($nationality) || empty($birth_province) || empty($birth_city) || empty($birth_zip_code) || empty($email) || empty($contact_num) || empty($gender) || empty($guardian_fname) || empty($guardian_lname) || empty($guardian_relationship) || empty($present_course) || empty($transfered_from) || empty($second_course) || empty($graduated_es) || empty($yr_lvl) || empty($graduated_year_es) || empty($id_number) || empty($password)) {
 			header("Location: ../registration_transferee.php?error_msg=Fill All Inputs");
 			exit();
 		}
@@ -189,7 +191,7 @@
 
 				$sql_guardian_info = "INSERT INTO student_guardian_info_tbl (student_id, guardian_fname, guardian_mname, guardian_lname, guardian_sname, guardian_contact, guardian_occupation, guardian_relationship, spouse_fname, spouse_mname, spouse_lname, spouse_sname, spouse_contact, spouse_occupation) VALUES ('$student_id', '$guardian_fname', '$guardian_mname', '$guardian_lname', '$guardian_sname', '$guardian_contact', '$guardian_occupation', '$guardian_relationship', '$spouse_fname', '$spouse_mname', '$spouse_lname', '$spouse_sname', '$spouse_contact', '$spouse_occupation')";
 
-				$sql_academic_info = "INSERT INTO student_acad_info_transferee_tbl (student_id, present_course, transfered_from, second_course, graduated_es, graduated_year_es, eval_id) VALUES ('$student_id', '$present_course', '$transfered_from', '$second_course', '$graduated_es', '$graduated_year_es', NULL)";
+				$sql_academic_info = "INSERT INTO student_acad_info_transferee_tbl (student_id, present_course, transfered_from, second_course, graduated_es, graduated_year_es, eval_id) VALUES ('$student_id', '$present_course', '$transfered_from', '$second_course', '$graduated_es', '$graduated_year_es', '$eval_id')";
 
 				// sql results
 				$sql_basic_info_result = mysqli_query($conn, $sql_basic_info);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2022 at 09:44 PM
+-- Generation Time: Jul 25, 2022 at 06:37 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -195,6 +195,44 @@ INSERT INTO `faculty_tbl` (`faculty_id`, `profile_pic`, `fname`, `lname`, `email
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `health_df_tbl`
+--
+
+CREATE TABLE `health_df_tbl` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `submit_date` date NOT NULL,
+  `attend_limited_f2f` varchar(10) NOT NULL,
+  `office_transaction` varchar(50) NOT NULL,
+  `others` varchar(50) NOT NULL,
+  `sore_throat` varchar(3) NOT NULL,
+  `shortness_of_breath` varchar(3) NOT NULL,
+  `body_pain` varchar(3) NOT NULL,
+  `headache` varchar(3) NOT NULL,
+  `fever` varchar(3) NOT NULL,
+  `loss` varchar(3) NOT NULL,
+  `cough_cold` varchar(3) NOT NULL,
+  `diarrhea` varchar(3) NOT NULL,
+  `question_2` varchar(3) NOT NULL,
+  `question_3` varchar(3) NOT NULL,
+  `question_4` varchar(3) NOT NULL,
+  `question_4_where` varchar(50) NOT NULL,
+  `question_5` varchar(3) NOT NULL,
+  `question_5_where` varchar(50) NOT NULL,
+  `question_6` varchar(3) NOT NULL,
+  `signature` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `health_df_tbl`
+--
+
+INSERT INTO `health_df_tbl` (`id`, `student_id`, `submit_date`, `attend_limited_f2f`, `office_transaction`, `others`, `sore_throat`, `shortness_of_breath`, `body_pain`, `headache`, `fever`, `loss`, `cough_cold`, `diarrhea`, `question_2`, `question_3`, `question_4`, `question_4_where`, `question_5`, `question_5_where`, `question_6`, `signature`) VALUES
+(7, 26, '2022-07-25', 'checked', 'test transaction', 'test others', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'test where 4', 'No', '', 'Yes', '62dd99592092d8.89951779.png');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `news_events_tbl`
 --
 
@@ -202,6 +240,7 @@ CREATE TABLE `news_events_tbl` (
   `bulletin_id` int(11) NOT NULL,
   `photo` varchar(255) NOT NULL,
   `title` varchar(30) NOT NULL,
+  `post` varchar(10) DEFAULT NULL,
   `content` varchar(1000) NOT NULL,
   `time_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -210,8 +249,8 @@ CREATE TABLE `news_events_tbl` (
 -- Dumping data for table `news_events_tbl`
 --
 
-INSERT INTO `news_events_tbl` (`bulletin_id`, `photo`, `title`, `content`, `time_date`) VALUES
-(31, '1656345505_fun run.jfif', 'Fun Run', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at augue at ante molestie porttitor. Donec laoreet elit vel erat maximus, vel varius quam vehicula. Vivamus dictum posuere sem, at placerat dolor tristique at. Maecenas accumsan odio justo, vitae lacinia velit iaculis a. Donec vel massa et quam posuere auctor et a dolor. Ut tellus turpis, tincidunt in tincidunt id, consectetur non ligula. Nullam ante urna, porta sit amet pellentesque sed, viverra non elit. Nunc elit orci, porta nec sapien id, feugiat pharetra purus. Nulla ac dolor at urna varius fermentum nec et dolor. Integer non porta tortor. Sed consequat tortor vitae nunc aliquet, non mattis est aliquam. Suspendisse nec gravida lacus. Nunc lectus ligula, scelerisque non nibh in, pretium congue mauris. Morbi non augue sit amet mauris condimentum scelerisque. Mauris scelerisque congue aliquet. Aenean vestibulum massa sit amet massa porta, a pharetra leo molestie.', '2022-06-27 23:58:00');
+INSERT INTO `news_events_tbl` (`bulletin_id`, `photo`, `title`, `post`, `content`, `time_date`) VALUES
+(43, '1658333686_fun run.jfif', 'Fun Run', 'featured', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget consequat est, fermentum accumsan massa. Etiam sagittis lorem ac urna consequat sodales. Mauris nec dolor quis metus mattis malesuada. Sed interdum ornare mattis. Ut facilisis pretium rutrum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti. Cras dictum, nibh vel consequat blandit, neque nisi interdum turpis, vel faucibus justo augue varius metus. Phasellus accumsan scelerisque congue. Curabitur in purus velit. Aliquam eget viverra ipsum. Praesent aliquet, enim et faucibus eleifend, arcu lacus imperdiet arcu, non aliquet ipsum orci eu nisl. Quisque in consectetur ipsum.', '2022-07-21 01:14:00');
 
 -- --------------------------------------------------------
 
@@ -225,13 +264,6 @@ CREATE TABLE `reserve_block_tbl` (
   `student_id` int(11) NOT NULL,
   `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `reserve_block_tbl`
---
-
-INSERT INTO `reserve_block_tbl` (`id`, `block_id`, `student_id`, `status`) VALUES
-(17, 18, 20, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -258,7 +290,7 @@ CREATE TABLE `student_acad_info_tbl` (
 --
 
 INSERT INTO `student_acad_info_tbl` (`id`, `student_id`, `course`, `strand`, `second_course`, `graduated_shs`, `learners_ref_num`, `graduated_es`, `form_138`, `graduated_year_es`, `eval_id`) VALUES
-(5, 20, 'Bachelor of Science in Information Technology', 'ICT', 'Bachelor of Science in Information Technology', 'Luciano Millan National High School', 'N/A', 'Narciso R. Ramos Elementary School', 'N/A', '2012', '1');
+(9, 26, 'Bachelor of Science in Information Technology', 'ICT', 'Bachelor of Science in Information Technology', 'Luciano Millan National High School', '', 'Narciso R. Ramos Elementary School', '', '2012', '1');
 
 -- --------------------------------------------------------
 
@@ -282,7 +314,7 @@ CREATE TABLE `student_acad_info_transferee_tbl` (
 --
 
 INSERT INTO `student_acad_info_transferee_tbl` (`id`, `student_id`, `present_course`, `transfered_from`, `second_course`, `graduated_es`, `graduated_year_es`, `eval_id`) VALUES
-(4, 21, 'Bachelor in Library & Information Science', 'PSU Asingan', 'Bachelor of Science in Information Technology', 'Narciso R. Ramos Elementary School', '2015', '2');
+(6, 27, 'Bachelor of Science in Information Technology', 'PSU Asingan', 'Bachelor of Science in Information Technology', 'Narciso R. Ramos Elementary School', '2012', '2');
 
 -- --------------------------------------------------------
 
@@ -311,8 +343,8 @@ CREATE TABLE `student_basic_info_tbl` (
 --
 
 INSERT INTO `student_basic_info_tbl` (`id`, `student_id`, `bdate`, `nationality`, `birth_province`, `birth_city`, `birth_barangay`, `birth_house_num`, `birth_zip_code`, `email`, `contact_num`, `gender`, `religion`) VALUES
-(7, 20, '2000-03-26', 'Filipino', 'Pangasinan', 'Urdaneta City', 'N/A', 'N/A', '2428', 'russeljeannepinlac@gmail.com', '09705778540', 'Male', 'IGLESIA NI CRISTO'),
-(8, 21, '2002-10-31', 'Filipino', 'Pangasinan', 'Urdaneta City', 'N/A', 'N/A', '2428', 'lhoressel@gmail.com', 'N/A', 'Female', 'ROMAN CATHOLIC');
+(13, 26, '2000-03-26', 'Filipino', 'Pangaisnan', 'Urdaneta City', '', '', '2428', 'russeljeannepinlac@gmail.com', '09705778540', 'Male', 'IGLESIA NI CRISTO'),
+(14, 27, '2002-10-31', 'Filipino', 'Pangasinan', 'Urdaneta City', '', '', '2428', 'lhoressel@gmail.com', '09705778540', 'Female', 'ROMAN CATHOLIC');
 
 -- --------------------------------------------------------
 
@@ -341,8 +373,8 @@ CREATE TABLE `student_fam_info_tbl` (
 --
 
 INSERT INTO `student_fam_info_tbl` (`id`, `student_id`, `father_fname`, `father_mname`, `father_lname`, `father_sname`, `father_contact`, `father_occupation`, `mother_fname`, `mother_mname`, `mother_lname`, `mother_contact`, `mother_occupation`) VALUES
-(8, 20, 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'Milagros', 'Marquez', 'Vinoya', 'N/A', 'Teacher'),
-(9, 21, 'Salvador', 'N/A', 'Salayog', 'N/A', 'N/A', 'Vendor', 'Lorena', 'N/A', 'Salayog', 'N/A', 'Vendor');
+(14, 26, '', '', '', '', '', '', 'Milagros', 'Marquez', 'Vinoya', '', 'Teacher'),
+(15, 27, 'Salvador', '', 'Salayog', '', '', 'Vendor', 'Lorena', '', 'Salayog', '', 'Vendor');
 
 -- --------------------------------------------------------
 
@@ -356,71 +388,6 @@ CREATE TABLE `student_grade_tbl` (
   `subj_id` int(11) NOT NULL,
   `grade` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `student_grade_tbl`
---
-
-INSERT INTO `student_grade_tbl` (`id`, `student_id`, `subj_id`, `grade`) VALUES
-(849, 20, 61, '85'),
-(850, 20, 62, ''),
-(851, 20, 63, ''),
-(852, 20, 64, ''),
-(853, 20, 65, ''),
-(854, 20, 66, ''),
-(855, 20, 67, ''),
-(856, 20, 68, ''),
-(857, 20, 69, ''),
-(858, 20, 70, ''),
-(859, 20, 71, '85'),
-(860, 20, 72, ''),
-(861, 20, 73, ''),
-(862, 20, 74, ''),
-(863, 20, 75, ''),
-(864, 20, 76, ''),
-(865, 20, 77, ''),
-(866, 20, 78, ''),
-(867, 20, 79, '85'),
-(868, 20, 80, ''),
-(869, 20, 81, ''),
-(870, 20, 82, ''),
-(871, 20, 83, ''),
-(872, 20, 84, ''),
-(873, 20, 85, ''),
-(874, 20, 86, ''),
-(875, 20, 87, ''),
-(876, 20, 88, '85'),
-(877, 20, 89, ''),
-(878, 20, 90, ''),
-(879, 20, 91, ''),
-(880, 20, 92, ''),
-(881, 20, 93, ''),
-(882, 20, 94, ''),
-(883, 20, 95, ''),
-(884, 20, 96, '85'),
-(885, 20, 97, ''),
-(886, 20, 98, ''),
-(887, 20, 99, ''),
-(888, 20, 100, ''),
-(889, 20, 101, ''),
-(890, 20, 102, ''),
-(891, 20, 103, ''),
-(892, 20, 104, '85'),
-(893, 20, 105, ''),
-(894, 20, 106, ''),
-(895, 20, 107, ''),
-(896, 20, 108, ''),
-(897, 20, 109, ''),
-(898, 20, 110, '85'),
-(899, 20, 111, ''),
-(900, 20, 112, '85'),
-(901, 20, 113, ''),
-(902, 20, 114, ''),
-(903, 20, 115, ''),
-(904, 20, 130, '90'),
-(905, 21, 120, '85'),
-(906, 21, 121, ''),
-(907, 21, 122, '');
 
 -- --------------------------------------------------------
 
@@ -451,8 +418,8 @@ CREATE TABLE `student_guardian_info_tbl` (
 --
 
 INSERT INTO `student_guardian_info_tbl` (`id`, `student_id`, `guardian_fname`, `guardian_mname`, `guardian_lname`, `guardian_sname`, `guardian_contact`, `guardian_occupation`, `guardian_relationship`, `spouse_fname`, `spouse_mname`, `spouse_lname`, `spouse_sname`, `spouse_contact`, `spouse_occupation`) VALUES
-(8, 20, 'Milagros', 'Marquez', 'Vinoya', 'N/A', 'N/A', 'Teacher', 'Mother', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A'),
-(9, 21, 'Lorena', 'N/A', 'Salayog', 'N/A', 'N/A', 'Vendor', 'Mother', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A');
+(14, 26, 'Milagros', 'Marquez', 'Vinoya', '', '', 'Teacher', 'Mother', '', '', '', '', '', ''),
+(15, 27, 'Lorena', '', 'Salayog', '', '', 'Vendor', 'Mother', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -483,8 +450,8 @@ CREATE TABLE `student_pri_info_tbl` (
 --
 
 INSERT INTO `student_pri_info_tbl` (`student_id`, `id_number`, `yr_lvl`, `fname`, `mname`, `lname`, `sname`, `province`, `city`, `barangay`, `house_num`, `zip_code`, `eval_status`, `status`, `password`) VALUES
-(20, '20181636', '4th', 'Russel Jeanne', 'Vinoya', 'Pinlac', 'N/A', 'Pangasinan', 'Asingan', 'Bantog', 'N/A', '2439', 'Evaluated', 'Regular Graduating', '032600'),
-(21, '10312002', '2nd', 'Lhoressa Mae', 'Mercado', 'Salayog', 'N/A', 'Pangasinan', 'Asingan', 'Zone 1 Macalong', 'N/A', '2439', 'Evaluated', 'Transferee', 'lhoressel');
+(26, '20181636', '4th', 'Russel Jeanne', 'Vinoya', 'Pinlac', '', 'Pangasinan', 'Asingan', 'Bantog', '153', '2439', 'Evaluate', 'Regular Graduating', '032600'),
+(27, '10312002', '1st', 'Lhoressa Mae', 'Mercado', 'Salayog', '', 'Pangasinan', 'Asingan', 'Zone 1 Macalong', '', '2439', 'Evaluate', 'Transferee', 'lhoressel');
 
 -- --------------------------------------------------------
 
@@ -496,6 +463,7 @@ CREATE TABLE `student_requirement_tbl` (
   `req_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `file_name` varchar(100) NOT NULL,
+  `file` varchar(255) NOT NULL,
   `date_time` datetime NOT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -504,8 +472,9 @@ CREATE TABLE `student_requirement_tbl` (
 -- Dumping data for table `student_requirement_tbl`
 --
 
-INSERT INTO `student_requirement_tbl` (`req_id`, `student_id`, `file_name`, `date_time`, `status`) VALUES
-(178, 20, 'admin icon.png', '2022-07-17 04:31:42', 'Pending');
+INSERT INTO `student_requirement_tbl` (`req_id`, `student_id`, `file_name`, `file`, `date_time`, `status`) VALUES
+(180, 26, 'FORM 137', '1658673451_church.jpg', '2022-07-24 22:37:31', 'Pending'),
+(181, 26, 'FORM 138', '1658695312_vcard.png', '2022-07-25 04:41:52', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -642,6 +611,12 @@ ALTER TABLE `faculty_tbl`
   ADD PRIMARY KEY (`faculty_id`);
 
 --
+-- Indexes for table `health_df_tbl`
+--
+ALTER TABLE `health_df_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `news_events_tbl`
 --
 ALTER TABLE `news_events_tbl`
@@ -659,25 +634,29 @@ ALTER TABLE `reserve_block_tbl`
 -- Indexes for table `student_acad_info_tbl`
 --
 ALTER TABLE `student_acad_info_tbl`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`);
 
 --
 -- Indexes for table `student_acad_info_transferee_tbl`
 --
 ALTER TABLE `student_acad_info_transferee_tbl`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`);
 
 --
 -- Indexes for table `student_basic_info_tbl`
 --
 ALTER TABLE `student_basic_info_tbl`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`);
 
 --
 -- Indexes for table `student_fam_info_tbl`
 --
 ALTER TABLE `student_fam_info_tbl`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`);
 
 --
 -- Indexes for table `student_grade_tbl`
@@ -691,7 +670,8 @@ ALTER TABLE `student_grade_tbl`
 -- Indexes for table `student_guardian_info_tbl`
 --
 ALTER TABLE `student_guardian_info_tbl`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`);
 
 --
 -- Indexes for table `student_pri_info_tbl`
@@ -759,10 +739,16 @@ ALTER TABLE `faculty_tbl`
   MODIFY `faculty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `health_df_tbl`
+--
+ALTER TABLE `health_df_tbl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `news_events_tbl`
 --
 ALTER TABLE `news_events_tbl`
-  MODIFY `bulletin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `bulletin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `reserve_block_tbl`
@@ -774,49 +760,49 @@ ALTER TABLE `reserve_block_tbl`
 -- AUTO_INCREMENT for table `student_acad_info_tbl`
 --
 ALTER TABLE `student_acad_info_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `student_acad_info_transferee_tbl`
 --
 ALTER TABLE `student_acad_info_transferee_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `student_basic_info_tbl`
 --
 ALTER TABLE `student_basic_info_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `student_fam_info_tbl`
 --
 ALTER TABLE `student_fam_info_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `student_grade_tbl`
 --
 ALTER TABLE `student_grade_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=908;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=964;
 
 --
 -- AUTO_INCREMENT for table `student_guardian_info_tbl`
 --
 ALTER TABLE `student_guardian_info_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `student_pri_info_tbl`
 --
 ALTER TABLE `student_pri_info_tbl`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `student_requirement_tbl`
 --
 ALTER TABLE `student_requirement_tbl`
-  MODIFY `req_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
+  MODIFY `req_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
 
 --
 -- AUTO_INCREMENT for table `subject_tbl`
@@ -850,11 +836,41 @@ ALTER TABLE `reserve_block_tbl`
   ADD CONSTRAINT `reserve_block_tbl_ibfk_2` FOREIGN KEY (`block_id`) REFERENCES `blocking_tbl` (`block_id`);
 
 --
+-- Constraints for table `student_acad_info_tbl`
+--
+ALTER TABLE `student_acad_info_tbl`
+  ADD CONSTRAINT `student_acad_info_tbl_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student_pri_info_tbl` (`student_id`);
+
+--
+-- Constraints for table `student_acad_info_transferee_tbl`
+--
+ALTER TABLE `student_acad_info_transferee_tbl`
+  ADD CONSTRAINT `student_acad_info_transferee_tbl_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student_pri_info_tbl` (`student_id`);
+
+--
+-- Constraints for table `student_basic_info_tbl`
+--
+ALTER TABLE `student_basic_info_tbl`
+  ADD CONSTRAINT `student_basic_info_tbl_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student_pri_info_tbl` (`student_id`);
+
+--
+-- Constraints for table `student_fam_info_tbl`
+--
+ALTER TABLE `student_fam_info_tbl`
+  ADD CONSTRAINT `student_fam_info_tbl_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student_pri_info_tbl` (`student_id`);
+
+--
 -- Constraints for table `student_grade_tbl`
 --
 ALTER TABLE `student_grade_tbl`
   ADD CONSTRAINT `student_grade_tbl_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student_pri_info_tbl` (`student_id`),
   ADD CONSTRAINT `student_grade_tbl_ibfk_2` FOREIGN KEY (`subj_id`) REFERENCES `subject_tbl` (`subj_id`);
+
+--
+-- Constraints for table `student_guardian_info_tbl`
+--
+ALTER TABLE `student_guardian_info_tbl`
+  ADD CONSTRAINT `student_guardian_info_tbl_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student_pri_info_tbl` (`student_id`);
 
 --
 -- Constraints for table `subject_tbl`

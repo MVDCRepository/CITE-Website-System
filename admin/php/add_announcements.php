@@ -167,11 +167,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                     <div>Add</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="students.php" class="menu-link">
-                    <div>Students</div>
-                  </a>
-                </li>
               </ul>
             </li>
 

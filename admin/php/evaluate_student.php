@@ -443,7 +443,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                           <td><?php echo $row_subjects['lab'];?></td>
                           <td><?php echo $row_subjects['courseCode'];?></td>
                           <td><?php echo $row_subjects['courseDesc'];?></td>
-                          <td><input type="number" class="grade_input" name="grade[]" max="99" maxlength="2"></td>
+                          <td><input type="text" class="grade_input" name="grade[]" max="99" maxlength="2"></td>
                         </tr>
                         <?php
                             }
@@ -1304,7 +1304,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   }
                 }
                 else {
-                  echo "No data available";
+                  echo "No data available <br> Make sure the student academic info CMO No. and Sereies is updated or not empty";
                 }
               ?>
               <div class="content-backdrop fade"></div>

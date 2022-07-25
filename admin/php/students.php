@@ -343,7 +343,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       <td><?php echo $row['id_number'];?></td>
                       <td><?php echo $row['lname'].", ".$row['fname']." ".$row['mname'];?></td>
                       <td><?php echo $row['yr_lvl']." Year";?></td>
-                      <td><a href="view_student_req.php?student_id=<?=$row['student_id'];?>">View Requirements</a></td>
+                      <td>
+                        <a href="view_student_req.php?student_id=<?=$row['student_id'];?>">View Requirements</a>
+                        <br>
+                        <a href="view_student_hd_forms.php?student_id=<?=$row['student_id'];?>">View Health Declaration Forms</a>
+                      </td>
                       <td>
                         <div class="d-grid gap-2 d-md-block">
                           <?php 
