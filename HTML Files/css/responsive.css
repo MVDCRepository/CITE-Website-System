@@ -195,6 +195,9 @@
     .cert_consent_header h2 {font-size: 10px;}
     .cert_consent_header h3 {font-size: 10px;}
     .com_undertake_confirmation {float: none;} 
+    .cert_content_confirmation {width: 100%;}
+    .cert_content_confirmation input[type=date] {margin: 0; margin-top: -40px;}
+    .cert_content_confirmation h4 {margin: 5; margin-bottom: 10px;}
 }
 
 @media (max-width:575px) {
@@ -296,7 +299,10 @@
     .cert_consent_header h1 {font-size: 12px;}
     .cert_consent_header h2 {font-size: 10px;}
     .cert_consent_header h3 {font-size: 10px;}
-    .com_undertake_confirmation {float: none;}    
+    .com_undertake_confirmation {float: none;}
+    .cert_content_confirmation {width: 100%;}
+    .cert_content_confirmation input[type=date] {margin: 0; margin-top: -40px;}
+    .cert_content_confirmation h4 {margin: 5; margin-bottom: 10px;}
 }
 
 /*******SLIDER EVENTS*********/

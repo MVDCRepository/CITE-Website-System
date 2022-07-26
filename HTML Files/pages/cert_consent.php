@@ -126,69 +126,131 @@ while ($row = $query -> fetch_assoc()) {
     </div>
     <!-- end header end -->
     <!--Start Content Section ----------------------------->
-    <div class="cert_consent_cont">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="cert_consent_header">
-                        <img src="../images/ucu_logo.png">
-                        <div class="com_undertake_title">
-                            <h1>URDANETA CITY UNIVERSITY</h1>
-                            <h3>COLLEGE OF INFORMATION AND TECHNOLOGY EDUCATION</h3>
-                            <h2>CERTIFICATE OF CONSENT</h2>
+    <form action="../php/cert_consent_php.php" method="POST" id="cert_consent" enctype="multipart/form-data">
+        <div class="cert_consent_cont">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="cert_consent_header">
+                            <img src="../images/ucu_logo.png">
+                            <div class="com_undertake_title">
+                                <h1>URDANETA CITY UNIVERSITY</h1>
+                                <h3>COLLEGE OF INFORMATION AND TECHNOLOGY EDUCATION</h3>
+                                <h2>CERTIFICATE OF CONSENT</h2>
+                            </div>
+                            <img src="../images/cite_logo.png">
                         </div>
-                        <img src="../images/cite_logo.png">
+                        <p>&emsp;&emsp;&emsp;I, <strong><?php echo $row['fname']; ?>
+                                <?php echo $row['lname']; ?></strong>,
+                            a Filipino citizen, of legal age, and resident of
+                            <strong><?php echo $row['address']; ?></strong>, hereby, declare that:
+                        </p>
+                        <div class="cert_content_section">
+                            <ol>
+                                <li>
+                                    I understand that the Urdaneta City University, College of Information and
+                                    Technology
+                                    Education is conducting the limited face-to-face classes for A.Y. 2022-2023.
+                                </li>
+                                <li>
+                                    I am participating in the limited face-to-face classes as: <br>
+                                    <input type="radio" name="participation" id="reg_student" value="Regular Student">
+                                    <label for="reg_student">Regular Student</label> <br>
+                                    <input type="radio" name="participation" id="cross_student"
+                                        value="Cross Enrollee Student">
+                                    <label for="cross_student">Cross Enrollee Student</label><br>
+                                </li>
+                                <li>
+                                    I am fully aware of continuing existence of the Corona Virus Disease (Covid-19) and
+                                    its
+                                    potentials health threats/risk.
+                                </li>
+                                <li>
+                                    I understand that all known precaution and health safety protocol, in accordance
+                                    with
+                                    the omnibus guidelines of the Inter-Agency task force (IATF) for the management of
+                                    emerging infectious diseases, to ensure my safety are taken/instituted by the
+                                    University
+                                    and College for the conduct of the limited face-to-face classes.
+                                </li>
+                                <li>
+                                    I understand that it is my responsibility to comply with the required precautionary
+                                    measure such as, but not limited to, submission of a duly and truthfully
+                                    accomplished
+                                    health declaration form, wearing of face mask and face shield, hand sanitizing as
+                                    often
+                                    as possible, physical distancing, and observance of the RT-PCR Testing and
+                                    Quarantine
+                                    Protocol as may be applicable in my case.
+                                </li>
+                                <li>
+                                    I understand that, despite taking all known precautions and health safety protocols,
+                                    exposure to COVID-19 is an ever-present risk for which my absolute safety or
+                                    protection
+                                    from potential contracting of the virus in the conduct of the limited face-to-face
+                                    classes is not and cannot be guaranteed.
+                                </li>
+                        </div>
+                        <p>With my fully knowledge and understanding of the above declaration, I hereby wholly give my
+                            consent and confirm my participation on my own free will and volition in the conduct of the
+                            limited face-to-face classes for A.Y. 2022-2023.</p>
+                        <p>According, I set UCU-CITE entirely free from any liability or responsibility if I contract
+                            covid-19 During the period of the limited face-to-face classes.</p>
+
+                        <div class="sig_name_cont">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="cert_content_confirmation">
+                                            <input class="custom_upload" type="file" name="student_sig" id="upload_signature">
+                                            <div class="health_df_input">
+                                                <input type="text" id="sig_name_student" name="sig_name_student">
+                                            </div>
+                                            <h4>Signature over printed name full name of Student</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="cert_content_confirmation">
+                                            <div class="health_df_input">
+                                                <input type="date" id="sig_name_student_date"
+                                                    name="sig_name_student_date" required>
+                                            </div>
+                                            <h4>Date</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sig_name_cont">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="cert_content_confirmation">
+                                            <input class="custom_upload" type="file" name="witness_sig" id="upload_signature">
+                                            <div class="health_df_input">
+                                                <input type="text" id="sig_name_witness" name="sig_name_witness">
+                                            </div>
+                                            <h4>Signature over printed name full name of witness</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="cert_content_confirmation">
+                                            <div class="health_df_input">
+                                                <input type="date" id="sig_name_witness_date"
+                                                    name="sig_name_witness_date" required>
+                                            </div>
+                                            <h4>Date</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p>&emsp;&emsp;&emsp;I, <strong><?php echo $row['fname']; ?> <?php echo $row['lname']; ?></strong>,
-                        a Filipino citizen, of legal age, and resident of
-                        <strong><?php echo $row['address']; ?></strong>, hereby, declare that:
-                    </p>
-                    <div class="cert_content_section">
-                        <ol>
-                            <li>
-                                I understand that the Urdaneta City University, College of Information and Technology
-                                Education is conducting the limited face-to-face classes for A.Y. 2022-2023.
-                            </li>
-                            <li>
-                                I am participating in the limited face-to-face classes as: <br>
-                                <input type="radio" name="particate_f2f" id="reg_student">
-                                <label for="reg_student">Regular Student</label> <br>
-                                <input type="radio" name="particate_f2f" id="cross_student">
-                                <label for="cross_student">Cross Enrollee Student</label><br><br>
-                            </li>
-                            <li>
-                                I am fully aware of continuing existence of the Corona Virus Disease (Covid-19) and its
-                                potentials health threats/risk.
-                            </li>
-                            <li>
-                                I understand that all known precaution and health safety protocol, in accordance with
-                                the omnibus guidelines of the Inter-Agency task force (IATF) for the management of
-                                emerging infectious diseases, to ensure my safety are taken/instituted by the University
-                                and College for the conduct of the limited face-to-face classes.
-                            </li>
-                            <li>
-                                I understand that it is my responsibility to comply with the required precautionary
-                                measure such as, but not limited to, submission of a duly and truthfully accomplished
-                                health declaration form, wearing of face mask and face shield, hand sanitizing as often
-                                as possible, physical distancing, and observance of the RT-PCR Testing and Quarantine
-                                Protocol as may be applicable in my case.
-                            </li>
-                            <li>
-                                I understand that, despite taking all known precautions and health safety protocols,
-                                exposure to COVID-19 is an ever-present risk for which my absolute safety or protection
-                                from potential contracting of the virus in the conduct of the limited face-to-face
-                                classes is not and cannot be guaranteed.
-                            </li>
-                    </div>
-                    <p>With my fully knowledge and understanding of the above declaration, I hereby wholly give my
-                        consent and confirm my participation on my own free will and volition in the conduct of the
-                        limited face-to-face classes for A.Y. 2022-2023.</p>
-                    <p>According, I set UCU-CITE entirely free from any liability or responsibility if I contract
-                        covid-19 During the period of the limited face-to-face classes.</p>
                 </div>
             </div>
+            <button style="margin: 10px;" type="submit" name="submit" class="btn btn-success">Submit</button>
         </div>
-    </div>
+    </form>
     <?php } ?>
     <!--End Content Section ------------------------------->
     <!--Start Footer Section ------------------------------->

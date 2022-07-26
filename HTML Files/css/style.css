@@ -2255,19 +2255,35 @@ button.main_bt {
 	margin-bottom: 10px;
 }
 
-.com_undertake_confirmation {
-	margin-top: 50px;
-	float: right;
+.cert_content_confirmation {
+	width: 80%;
 	font-size: 14px;
 	text-align: center;
+	margin-top: 40px;
 }
 
-.com_undertake_confirmation h4 {
-	font-size: 14px;
+.cert_content_confirmation input[type=date] {
+	margin-top: 43px;
+}
+
+.cert_content_confirmation h4 {
+	font-size: 12px;
 	text-align: center;
 	margin: 5px;
 }
 
 .cert_content_section label{
 	margin: 0;
+}
+
+.sig_name_cont {
+	width: 100%;
+}
+
+.sig_name_cont .health_df_input {
+	margin-top: -15px;
+}
+
+.cert_content_confirmation input[date]{
+	width: 500px;
 }
