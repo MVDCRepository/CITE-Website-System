@@ -49,7 +49,7 @@
 
 		if (in_array($upload_signature_file_actual_extension, $allowed_extension)) {
 			if ($upload_signature_file_error === 0) {
-				if ($upload_signature_file_size < 100000) {
+				if ($upload_signature_file_size < 1000000000) {
 					$upload_signature_file_new_name = uniqid('', true).".".$upload_signature_file_actual_extension;
 					$file_directory = '../files/health_df_signatures/'.$upload_signature_file_new_name;
 					move_uploaded_file($upload_signature_tmp_name, $file_directory);

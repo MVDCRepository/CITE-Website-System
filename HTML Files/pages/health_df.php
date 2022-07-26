@@ -41,7 +41,6 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script type="text/javascript">
-
     function disableTextBoxOffice(health_df_office) {
         var health_df_office_text = document.getElementById("health_df_office_text");
         health_df_office_text.disabled = health_df_office.checked ? false : true;
@@ -60,6 +59,7 @@
         }
     }
     </script>
+</head>
 
 <body>
     <div class="header_pages">
@@ -186,15 +186,18 @@
                                                 <label for="purpose_cb">Attend limited face-to-face classes</label>
                                             </div>
                                             <div class="purpose_input">
-                                                <input type="checkbox" id="health_df_office" name="health_df_office" value="Office transaction: "
-                                                onclick="disableTextBoxOffice(this)">
+                                                <input type="checkbox" id="health_df_office" name="health_df_office"
+                                                    value="Office transaction: " onclick="disableTextBoxOffice(this)">
                                                 <label for="health_df_office">Office transaction:<input type="text"
-                                                        id="health_df_office_text" name="health_df_office_text" disabled="disabled"></label>
+                                                        id="health_df_office_text" name="health_df_office_text"
+                                                        disabled="disabled"></label>
                                             </div>
                                             <div class="purpose_input">
-                                                <input type="checkbox" id="health_df_others" name="health_df_others" value="Others:" onclick="disableTextBoxOthers(this)">
+                                                <input type="checkbox" id="health_df_others" name="health_df_others"
+                                                    value="Others:" onclick="disableTextBoxOthers(this)">
                                                 <label for="health_df_others">Others:<input type="text"
-                                                        id="health_df_others_text" name="health_df_others_text" disabled="disabled"></label>
+                                                        id="health_df_others_text" name="health_df_others_text"
+                                                        disabled="disabled"></label>
                                             </div>
                                         </div>
                                         <!---

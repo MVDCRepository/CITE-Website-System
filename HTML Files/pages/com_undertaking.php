@@ -126,7 +126,7 @@ while ($row = $query -> fetch_assoc()) {
     </div>
     <!-- end header end -->
     <!--Start Content Section ----------------------------->
-    <form>
+    <form action="../php/com_undertaking_php.php" method="POST" id="com_undertaking" enctype="multipart/form-data">
         <div class="com_undertake_cont">
             <div class="container">
                 <div class="row">
@@ -246,13 +246,14 @@ while ($row = $query -> fetch_assoc()) {
                         <p>&emsp;&emsp;&emsp;Finally, I understand that I will be held liable and accountable before the
                             Urdaneta City University for any violation committed thereof</p>
                         <div class="com_undertake_confirmation">
-                            <input class="custom_upload" type="file" name="upload_signature" id="upload_signature">
+                            <input class="custom_upload" type="file" name="file" id="upload_signature">
                             <div class="custom_breakline"></div>
                             <h4>Signature</h4>
                         </div>
                     </div>
                 </div>
             </div>
+            <button style="margin: 10px;" type="submit" name="submit" class="btn btn-success">Submit</button>
         </div>
     </form>
     <?php } ?>
