@@ -42,8 +42,8 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.2.2/swiper-bundle.css" integrity="sha512-VbPb+KrNIjcE5nM/Y+ZBvKvQF7+B/alQCQLPdIUAP3KsmDWkv0EdiyX4gfTwtJ3Sfais/nGJ0whTxjSwhQ1C8g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Jquery -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <!-- body -->
     </head>
+        <!-- body -->
         <body>
             <div class="header_pages">
                 <div class="container">
