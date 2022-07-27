@@ -43,6 +43,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
         <!-- Jquery -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <!-- body -->
+    </head>
         <body>
             <div class="header_pages">
                 <div class="container">

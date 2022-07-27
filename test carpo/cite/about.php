@@ -39,7 +39,6 @@
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Jquery -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <!-- body -->
     </head>   
         <!-- body -->
         <body>
@@ -48,7 +47,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="logo1"><a href="index.html"><img src="images/cite_logo_title.png"></a></div>
+                                <div class="logo1"><a href="index.php"><img src="images/cite_logo_title.png"></a></div>
                             </div>
                             <div class="col-md-6">
                                 <div class="logo2"><a href="https://ucu.edu.ph" target="_blank"><img src="images/ucu_logo.png"></a></div>
