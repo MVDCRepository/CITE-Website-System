@@ -44,10 +44,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="logo1"><a href="index.php"><img src="../images/cite_logo_title.png"></a></div>
+                                <div class="logo1"><a href="index.php"><img src="images/cite_logo_title.png"></a></div>
                             </div>
                             <div class="col-md-6">
-                                <div class="logo2"><a href="https://ucu.edu.ph" target="_blank"><img src="../images/ucu_logo.png"></a></div>
+                                <div class="logo2"><a href="https://ucu.edu.ph" target="_blank"><img src="images/ucu_logo.png"></a></div>
                             </div>
                         </div>
                     </div>
