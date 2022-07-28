@@ -65,11 +65,11 @@
 			$sql_health_df_info_result = mysqli_query($conn, $sql_health_df_info);
 
 			if ($sql_health_df_info_result) {
-				header("Location: ../pages/com_undertaking.php?success_msg=Successfully Submitted");
+				header("Location: ../pages/cert_consent.php?success_msg=Successfully Submitted");
 				exit();
 			}
 			else {
-				header("Location: ../pages/com_undertaking.php?error_msg=Registration Error");
+				header("Location: ../pages/cert_consent.php?error_msg=Registration Error");
 				exit();
 			}
 
