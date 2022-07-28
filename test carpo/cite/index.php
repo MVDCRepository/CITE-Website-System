@@ -81,7 +81,7 @@
                                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
                                                             <a class="dropdown-item" href="acad_bsit.php">BSIT</a>
                                                             <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item" href="#">BLIS</a>
+                                                            <a class="dropdown-item" href="acad_blis.php">BLIS</a>
                                                         </div>
                                                     </li>
                                                     <li class="nav-item">
@@ -111,7 +111,10 @@
                                             <div class="titlepage-h1">
                                                 <h1 class="bnner_title">Welcome To<br>
                                                 <span>COLLEGE OF INFORMATION AND TECHNOLOGY EDUCATION</span></h1>
-                                                <p class="long_text">The Bachelor of Science in Information Technology is a four-year program that provides fundamental studies to advance in all aspects of computer-related studies such as web development, mobile development, database, programming, networking technologies, and more. The Bachelor of Science in Information Technology program will aim to train well and prepare students to be IT professionals.</p>
+                                                <p class="long_text">The Bachelor of Science in Information Technology is a four-year program that 
+                                                    provides fundamental studies to advance in all aspects of computer-related studies such as web development, 
+                                                    mobile development, database, programming, networking technologies, and more. The Bachelor of Science in 
+                                                    Information Technology program will aim to train well and prepare students to be IT professionals.</p>
                                             </div>
                                             <div class="btn_main">
                                                 <button type="button" class="btn btn-dark btn-lg"><a href="acad_bsit.php">Learn More</a></button>
@@ -120,11 +123,14 @@
                                         <div class="carousel-item">
                                             <div class="titlepage-h1">
                                                 <h1 class="bnner_title">Welcome To<br>
-                                                <span>COLLEGE OF INFORMATION AND TECHNOLOGY EDUCATION</span></h1>
-                                                <p class="long_text">The Bachelor of Science in Information Technology is a four-year program that provides fundamental studies to advance in all aspects of computer-related studies such as web development, mobile development, database, programming, networking technologies, and more. The Bachelor of Science in Information Technology program will aim to train well and prepare students to be IT professionals.</p>
+                                                <span>BATCHELOR IN LIBRARY & INFORMATION SCIENCE</span></h1>
+                                                <p class="long_text">The Bachelor in Library and Information Science (BLIS) is a four-year program that
+                                                    educates students to be professional librarians. Information-related careers in library
+                                                    science are the focus of this program. The several facets of library science are taught to
+                                                    students here.</p>
                                             </div>
                                             <div class="btn_main">
-                                                <button type="button" class="btn btn-dark btn-lg"><a href="acad_bsit.php">Learn More</a></button>
+                                                <button type="button" class="btn btn-dark btn-lg"><a href="acad_blis.php">Learn More</a></button>
                                             </div>
                                         </div>
                                     </div>
@@ -211,7 +217,7 @@
                                                     <h1 class="written_text">Bachelor in Library & Information Science</h1>
                                                     <p>The Bachelor of Science in Information Technology is a four-year program that provides fundamental studies to advance in all aspects of computer-related studies such as web development, mobile development, database, programming, networking technologies, and more. The Bachelor of Science in Information Technology program will aim to train well and prepare students to be IT professionals.</p>
                                                     <div class="btn_main">
-                                                    <a href="acad_bsit.php" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Learn More</a>
+                                                    <a href="acad_blis.php" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Learn More</a>
                                                     </div>
                                                 </div>
                                             </div>

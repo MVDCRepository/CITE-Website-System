@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <!-- site metas -->
-        <title>BSIT | CITE</title>
+        <title>BLIS | CITE</title>
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -74,7 +74,7 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="faculty.php">FACULTY</a></li>
                                                     <li class="nav-item">
-                                                        <a  style="font-weight: 600;" class="nav-link dropdown-toggle" href="acad_blis.php" id="navbarDropdown" role="button" data-toggle="dropdown">ACADEMICS</a>
+                                                        <a  style="font-weight: 600;" class="nav-link dropdown-toggle" href="acad_bsit.php" id="navbarDropdown" role="button" data-toggle="dropdown">ACADEMICS</a>
                                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
                                                             <a class="dropdown-item" href="acad_bsit.php">BSIT</a>
                                                             <div class="dropdown-divider"></div>
@@ -96,7 +96,7 @@
                         <!--Start Banner Section ------------------------------>
                         <div class="banner_news_events">
                             <div class="titlepage-h1-news_events">
-                                <h1 class="bnner_title_news_events">Bachelor of Science in Information Technology</h1>
+                                <h1 class="bnner_title_news_events">Bachelor in Library & Information Science</h1>
                             </div>
                         </div>
                         <!--End Banner Section -------------------------------->
@@ -106,10 +106,19 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="bsit_cont mt-3">
-                                            <h1>Program Overview</h1>
-                                            <p>The Bachelor of Science in Information Technology is a four-year program that provides fundamental studies to advance in all aspects of computer-related studies such as web development, mobile development, database, programming, networking technologies, and more. The Bachelor of Science in Information Technology program will aim to train well and prepare students to be IT professionals.</p>
-                                            <p>The Bachelor of Science in Information Technology program is a study of the utilization of computer hardware and software. Programming with different languages like C++, Java, PHP, and more. Students will also learn web development for backend and frontend and web development for e-commerce. Also, students will learn Database management, Algorithms, Networking, and more.</p>
-                                            <p>The curriculum is based on Commission on Higher Education (CHED).</p>
+                                        <h1>Program Overview</h1>
+                                        <p>The Bachelor in Library and Information Science (BLIS) is a four-year program that
+                                            educates students to be professional librarians. Information-related careers in library
+                                            science are the focus of this program. The several facets of library science are taught to
+                                            students here. such as how they would manage, maintain, and preserve both the technological
+                                            information and all the sources of information.
+                                            Students receive training to become qualified librarians. The BLIS program is created to
+                                            provide knowledge and abilities in the administration of library operations.
+                                            This curriculum teaches students how to manage the resources they have. In this degree,
+                                            students will learn everything they need to know about the information in order to prevent
+                                            receiving conflicting or inaccurate information.</p>
+                                        <p>The Bachelor in Library and Information Science program is a study of the utilization of
+                                            Library Management, Library and Information Science, Collection Management, and etc.</p>
                                             
                                             <button class="btn btn-success" id="open-popup-btn" name="" >Enroll Now!</button>
                                         </div>
