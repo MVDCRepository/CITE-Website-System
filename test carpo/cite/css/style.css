@@ -176,10 +176,9 @@ a {
 	height: auto;
 }
 
-ul .nav-item .nav-link,
-.header a {
+ul .nav-item .nav-link,.header a {
 	color: #222222 !important;
-	margin-left: -12px;
+	white-space: nowrap;
 }
 
 #nav-last {

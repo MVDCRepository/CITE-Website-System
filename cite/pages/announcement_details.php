@@ -144,7 +144,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                             ?>
 
                             <div class="more-news-container">
-                                <h3>More news</h3>
+                                <h3>More announcements</h3>
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-sm-12">

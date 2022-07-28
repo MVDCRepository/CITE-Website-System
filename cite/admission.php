@@ -74,18 +74,20 @@
                                                     <li class="nav-item">
                                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">ACADEMICS</a>
                                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
-                                                            <a class="dropdown-item" href="#">BSIT</a>
+                                                            <a class="dropdown-item" href="acad_bsit.php">BSIT</a>
                                                             <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item" href="#">BLIS</a>
+                                                            <a class="dropdown-item" href="acad_blis.php">BLIS</a>
                                                         </div>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a style="font-weight: 600;" class="nav-link" href="admission.php">ADMISSION</a></li>
-                                                        <li id="nav-last" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Log In</a>
-                                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
-                                                            <a class="dropdown-item" href="user_login.php">Go To Log In</a>
-                                                        </div>
+                                                        <a class="nav-link" href="admission.php">ADMISSION</a>
                                                     </li>
+                                                <!-- <li id="nav-last" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Log In</a>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
+                                                        <a class="dropdown-item" href="login.php">Go To Log In</a>
+                                                    </div>
+                                                </li> -->
+                                                <li class="last"><a href="login.php">LOGIN</a></li>
                                                 </ul>
                                             </div>
                                         </nav>

@@ -242,7 +242,7 @@ ul .nav-item .nav-link,
 .banner-main {
 	width: 100%;
 	float: left;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../images/banner.png);
+	background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../images/ucu_banner.png);
 	height: auto;
 	padding-top: 50px;
 	padding-bottom: 250px;
@@ -571,7 +571,7 @@ ul .nav-item .nav-link,
 .blog-slider__img img {
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
+	/* object-fit: cover; */
 	object-position: left;
 	display: block;
 	opacity: 1;
@@ -853,7 +853,7 @@ button.main_bt {
 .banner_news_events {
 	width: 100%;
 	float: left;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(../images/banner.png);
+	background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(../images/ucu_banner.png);
 	background-repeat: no-repeat;
 	background-position: center center;
 	height: 250px;

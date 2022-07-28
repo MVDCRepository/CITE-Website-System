@@ -155,13 +155,13 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                         <!--services start -->
                         <div class="services_main">
                             <div class="container">
-                                <!-- <div class="creative_taital">
+                                <div class="creative_taital">
                                     <h1 class="creative_text">Lorem Ipsum</h1>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum sapien nunc, at pellentesque tortor egestas eget. Pellentesque egestas vehicula eros ullamcorper commodo. Mauris sagittis blandit egestas. Sed lacinia rhoncus arcu eget dictum. Sed ut blandit lorem, in faucibus mauris. Proin eleifend elit quis vehicula volutpat. Phasellus id fermentum ipsum. <br> <br> Sed non convallis nibh. Suspendisse diam est, malesuada at elit vel, gravida dapibus lacus. Mauris in magna odio. Etiam auctor efficitur laoreet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec eros purus, varius eget neque vitae, placerat lacinia enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse ac mattis ipsum, quis porta libero. Duis fermentum iaculis consectetur. Aliquam arcu elit, egestas ac tortor condimentum, sodales pretium nibh.</p>
                                     <div class="btn_main">
                                         <button type="button" class="btn btn-dark btn-lg">Get started</button>
                                     </div>
-                                </div> -->
+                                </div>
                                 <div class="container">
                                     <div class="row">
                                         <div class="section_service_2 mb-5">
