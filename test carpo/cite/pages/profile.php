@@ -674,7 +674,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
 <?php
 } 
 else {
-  header("Location: ../user_login.php");
+  header("Location: ../login.php");
   exit();
 }
 

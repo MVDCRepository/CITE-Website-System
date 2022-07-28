@@ -48,12 +48,88 @@ load_student_requirements();
 function load_student_requirements() {
 	var student_status = document.getElementById('student_status').innerHTML;
 
-	var grad_requirements = document.getElementById('grad_requirements');
+	var regular_grad_requirements = document.getElementById('regular_grad_requirements');
 
-	if (student_status == 'Regular Graduating') {
-		grad_requirements.style.display = "block";
+	if (student_status == 'Regular') {
+		// grad_requirements.style.display = "block";
 	}
 	else {
-		grad_requirements.style.display = "none";
+		// grad_requirements.style.display = "none";
+	}
+
+	if (student_status == 'Regular Graduating') {
+		regular_grad_requirements.style.display = "block";
+	}
+	else {
+		regular_grad_requirements.style.display = "none";
+	}
+
+	if (student_status == 'Freshmen') {
+		// grad_requirements.style.display = "block";
+	}
+	else {
+		// grad_requirements.style.display = "none";
+	}
+
+	if (student_status == 'Transferee') {
+		// grad_requirements.style.display = "block";
+	}
+	else {
+		// grad_requirements.style.display = "none";
+	}
+
+	if (student_status == 'Transferee Graduating') {
+		// grad_requirements.style.display = "block";
+	}
+	else {
+		// grad_requirements.style.display = "none";
 	}
 }
+
+// load academic year
+load_academic_info();
+function load_academic_info() {
+	var student_status = document.getElementById('student_status');
+	var tbody_acad_info = document.getElementById('tbody_acad_info');
+	var tbody_acad_info_transferee = document.getElementById('tbody_acad_info_transferee');
+
+	if (student_status.innerHTML == 'Regular' || student_status.innerHTML == 'Freshmen' || student_status.innerHTML == 'Regular Graduating') {
+		tbody_acad_info_transferee.style.display = 'none';
+	}
+	if (student_status.innerHTML == 'Transferee' || student_status.innerHTML == 'Transferee Graduating') {
+		tbody_acad_info.style.display = 'none';
+	}
+}
+
+//accept modal evaluation table
+var upload_reqBtn = document.querySelectorAll('#upload_reqBtn');
+	
+upload_reqBtn.forEach( function(btn) {
+	btn.onclick = function() {
+		var modal = btn.getAttribute("data-modal");
+
+		document.getElementById(modal).style.display = "block";
+
+		var requirements_tbl = document.getElementById('requirements_tbl');
+		for (var i = 0; i < requirements_tbl.rows.length; i++) {
+			requirements_tbl.rows[i].onclick = function() {
+				document.getElementById('file_name').value = this.cells[0].innerHTML;
+				document.getElementById('txt_fileName').innerHTML = this.cells[0].innerHTML;
+			};
+		}
+	};
+});
+	
+var close_modalReq = document.querySelectorAll("#close_modalReq");
+
+close_modalReq.forEach(function(btn) {
+	btn.onclick = function() {
+		var modal = (btn.closest(".modal").style.display = "none");
+	}
+});
+
+window.addEventListener('click', function(i) {
+	if(i.target.className === "modal") {
+		i.target.style.display = "none";
+	}
+});

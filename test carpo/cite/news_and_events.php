@@ -78,7 +78,7 @@
                                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
                                                             <a class="dropdown-item" href="acad_bsit.php">BSIT</a>
                                                             <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item" href="#">BLIS</a>
+                                                            <a class="dropdown-item" href="acad_blis.php">BLIS</a>
                                                         </div>
                                                     </li>
                                                     <li class="nav-item">

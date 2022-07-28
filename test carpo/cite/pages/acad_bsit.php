@@ -78,11 +78,11 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="faculty.php">FACULTY</a></li>
                                                     <li class="nav-item">
-                                                        <a  style="font-weight: 600;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">ACADEMICS</a>
+                                                        <a  style="font-weight: 600;" class="nav-link dropdown-toggle" href="acad_blis.php" id="navbarDropdown" role="button" data-toggle="dropdown">ACADEMICS</a>
                                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
                                                             <a class="dropdown-item" href="acad_bsit.php">BSIT</a>
                                                             <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item" href="#">BLIS</a>
+                                                            <a class="dropdown-item" href="acad_blis.php">BLIS</a>
                                                         </div>
                                                     </li>
                                                     <li class="nav-item">
@@ -153,7 +153,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
 <?php
 } 
 else {
-  header("Location: ../user_login.php");
+  header("Location: ../login.php");
   exit();
 }
 
