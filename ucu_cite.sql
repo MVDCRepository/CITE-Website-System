@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2022 at 06:37 AM
+-- Generation Time: Jul 28, 2022 at 09:43 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -65,7 +65,7 @@ CREATE TABLE `admin_table` (
 --
 
 INSERT INTO `admin_table` (`id`, `profile_pic`, `username`, `password`, `fname`, `lname`, `email`, `phoneNum`, `address`, `zipCode`, `position`) VALUES
-(1, '1654628907_admin icon.png', 'admin', 'admin', 'Russel Jeanne', 'Pinlac', 'russeljeannepinlac@gmail.com', '9705778540', 'Bantog, Asingan, Pangasinan', '2439', 'Admin');
+(1, '1654628907_admin icon.png', 'admin', 'admin', 'Dionnel', 'Caguin', 'caguindionnel@gmail.com', 'xxxxxxxxxx', 'unsettled', 'N/A', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -141,6 +141,48 @@ INSERT INTO `blocking_tbl` (`block_id`, `block_no`, `yr_lvl`, `sem`, `acad_id`, 
 (19, '2', '4th', '1st', 2, '35', 1),
 (20, '1', '4th', '2nd', 2, '30', 1),
 (21, '1', '4th', '1st', 2, '1', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cert_consent_tbl`
+--
+
+CREATE TABLE `cert_consent_tbl` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `student_type` varchar(100) NOT NULL,
+  `student_sig` varchar(255) NOT NULL,
+  `witness_sig` varchar(255) NOT NULL,
+  `submit_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cert_consent_tbl`
+--
+
+INSERT INTO `cert_consent_tbl` (`id`, `student_id`, `student_type`, `student_sig`, `witness_sig`, `submit_date`) VALUES
+(2, 26, 'Regular Student', '62e045feca40f1.96042015.png', '62e045feca4177.21469625.png', '2022-07-27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `commitment_undertaking_tbl`
+--
+
+CREATE TABLE `commitment_undertaking_tbl` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `signature` varchar(255) NOT NULL,
+  `submit_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `commitment_undertaking_tbl`
+--
+
+INSERT INTO `commitment_undertaking_tbl` (`id`, `student_id`, `signature`, `submit_date`) VALUES
+(9, 26, '62e024e008c835.59177831.png', '2022-07-27');
 
 -- --------------------------------------------------------
 
@@ -228,7 +270,7 @@ CREATE TABLE `health_df_tbl` (
 --
 
 INSERT INTO `health_df_tbl` (`id`, `student_id`, `submit_date`, `attend_limited_f2f`, `office_transaction`, `others`, `sore_throat`, `shortness_of_breath`, `body_pain`, `headache`, `fever`, `loss`, `cough_cold`, `diarrhea`, `question_2`, `question_3`, `question_4`, `question_4_where`, `question_5`, `question_5_where`, `question_6`, `signature`) VALUES
-(7, 26, '2022-07-25', 'checked', 'test transaction', 'test others', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'test where 4', 'No', '', 'Yes', '62dd99592092d8.89951779.png');
+(7, 26, '2022-07-26', 'checked', 'test transaction', 'test others', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'test where 4', 'No', '', 'Yes', '62dd99592092d8.89951779.png');
 
 -- --------------------------------------------------------
 
@@ -250,7 +292,8 @@ CREATE TABLE `news_events_tbl` (
 --
 
 INSERT INTO `news_events_tbl` (`bulletin_id`, `photo`, `title`, `post`, `content`, `time_date`) VALUES
-(43, '1658333686_fun run.jfif', 'Fun Run', 'featured', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget consequat est, fermentum accumsan massa. Etiam sagittis lorem ac urna consequat sodales. Mauris nec dolor quis metus mattis malesuada. Sed interdum ornare mattis. Ut facilisis pretium rutrum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti. Cras dictum, nibh vel consequat blandit, neque nisi interdum turpis, vel faucibus justo augue varius metus. Phasellus accumsan scelerisque congue. Curabitur in purus velit. Aliquam eget viverra ipsum. Praesent aliquet, enim et faucibus eleifend, arcu lacus imperdiet arcu, non aliquet ipsum orci eu nisl. Quisque in consectetur ipsum.', '2022-07-21 01:14:00');
+(43, '1658333686_fun run.jfif', 'Fun Run', 'featured', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget consequat est, fermentum accumsan massa. Etiam sagittis lorem ac urna consequat sodales. Mauris nec dolor quis metus mattis malesuada. Sed interdum ornare mattis. Ut facilisis pretium rutrum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti. Cras dictum, nibh vel consequat blandit, neque nisi interdum turpis, vel faucibus justo augue varius metus. Phasellus accumsan scelerisque congue. Curabitur in purus velit. Aliquam eget viverra ipsum. Praesent aliquet, enim et faucibus eleifend, arcu lacus imperdiet arcu, non aliquet ipsum orci eu nisl. Quisque in consectetur ipsum.', '2022-07-21 01:14:00'),
+(50, '1658904712_event.png', 'Enrollment is Now Ongoing', 'featured', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada id sem et consequat. Phasellus faucibus quam neque, vitae viverra nulla convallis sit amet. Donec tincidunt nulla eget facilisis feugiat. Phasellus in auctor justo, quis blandit lacus. Etiam ornare tellus finibus ligula sodales accumsan. Integer quis nisl bibendum, ullamcorper orci vitae, egestas metus. Suspendisse potenti. Donec sed felis ipsum. Donec sed tortor imperdiet, facilisis ex ac, bibendum dolor. Maecenas sit amet diam ac ante egestas viverra. Morbi at mauris posuere, vestibulum erat eget, condimentum leo.', '2022-07-27 14:51:00');
 
 -- --------------------------------------------------------
 
@@ -474,7 +517,8 @@ CREATE TABLE `student_requirement_tbl` (
 
 INSERT INTO `student_requirement_tbl` (`req_id`, `student_id`, `file_name`, `file`, `date_time`, `status`) VALUES
 (180, 26, 'FORM 137', '1658673451_church.jpg', '2022-07-24 22:37:31', 'Pending'),
-(181, 26, 'FORM 138', '1658695312_vcard.png', '2022-07-25 04:41:52', 'Pending');
+(181, 26, 'FORM 138', '1658695312_vcard.png', '2022-07-25 04:41:52', 'Pending'),
+(183, 26, 'Updated Evaluation form', '1658940409_ming.jpg', '2022-07-28 00:46:49', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -599,6 +643,18 @@ ALTER TABLE `blocking_tbl`
   ADD KEY `eval_id` (`eval_id`);
 
 --
+-- Indexes for table `cert_consent_tbl`
+--
+ALTER TABLE `cert_consent_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `commitment_undertaking_tbl`
+--
+ALTER TABLE `commitment_undertaking_tbl`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `eval_cmo_series_tbl`
 --
 ALTER TABLE `eval_cmo_series_tbl`
@@ -712,7 +768,7 @@ ALTER TABLE `admin_table`
 -- AUTO_INCREMENT for table `announcement_tbl`
 --
 ALTER TABLE `announcement_tbl`
-  MODIFY `bulletin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `bulletin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `blocking_subj_tbl`
@@ -725,6 +781,18 @@ ALTER TABLE `blocking_subj_tbl`
 --
 ALTER TABLE `blocking_tbl`
   MODIFY `block_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `cert_consent_tbl`
+--
+ALTER TABLE `cert_consent_tbl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `commitment_undertaking_tbl`
+--
+ALTER TABLE `commitment_undertaking_tbl`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `eval_cmo_series_tbl`
@@ -742,13 +810,13 @@ ALTER TABLE `faculty_tbl`
 -- AUTO_INCREMENT for table `health_df_tbl`
 --
 ALTER TABLE `health_df_tbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `news_events_tbl`
 --
 ALTER TABLE `news_events_tbl`
-  MODIFY `bulletin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `bulletin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `reserve_block_tbl`
@@ -802,7 +870,7 @@ ALTER TABLE `student_pri_info_tbl`
 -- AUTO_INCREMENT for table `student_requirement_tbl`
 --
 ALTER TABLE `student_requirement_tbl`
-  MODIFY `req_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `req_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
 
 --
 -- AUTO_INCREMENT for table `subject_tbl`

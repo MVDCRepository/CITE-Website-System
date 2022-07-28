@@ -3,7 +3,10 @@ session_start();
 
 if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['fname'])) {
   include 'db_conn.php';
-  $admin_id = $_SESSION['id'];
+
+  date_default_timezone_set('Asia/Manila');
+  $current_time = date("Y-m-d");
+  $date_time = strtotime($current_time);
 ?>
 <!DOCTYPE html>
 
@@ -23,7 +26,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Admin</title>
+    <title>Health Statement</title>
 
     <meta name="description" content="" />
 
@@ -212,7 +215,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
             </li>
 
             <!-- health declaration form -->
-            <li class="menu-item">
+            <li class="menu-item active open">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <div data-i18n="Layouts">Health Statement Form</div>
               </a>
@@ -224,12 +227,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="" class="menu-link" >
-                    <div>Commitement of Undertaking</div>
+                  <a href="commitment_undertaking.php" class="menu-link" >
+                    <div>Commitment of Undertaking</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="" class="menu-link" >
+                <li class="menu-item active">
+                  <a href="certificate_consent.php" class="menu-link" >
                     <div>Certificate of Consent</div>
                   </a>
                 </li>
@@ -272,7 +275,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="view_adminDetails.php">
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
@@ -309,74 +312,152 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-              <!-- page title -->
-              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Account Settings /</span> Update Credential</h4>
-
-              <!-- tabbed buttons -->
-              <ul class="nav nav-pills flex-column flex-sm-row mb-3">
-                <li class="nav-item">
-                  <a class="nav-link" href="view_adminDetails.php">Account</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="upd_admin.php">Update</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" href="javascript:void(0);">Credential</a>
-                </li>
-              </ul>
-              <!-- / tabbed buttons -->
-
-              <!-- fetch information -->
-              <form action="php/adminPHP.php" method="POST" id="upd_adminCred_form">
-                <div class="p-4 card">
-                  <h5>Admin Credentials</h5>
-                  <input type="hidden" name="upd_admin_id_cred" id="upd_admin_id_cred" value="<?php echo $_SESSION['id']?>">
-                  <center>
-                    <?php if (isset($_GET['error_credential'])) { ?>
-                      <p class="error_msg mb-5" style="margin: 0px 0px 10px 0px"><?php echo $_GET['error_credential']; ?></p>
-                    <?php } ?>
-                    <?php if (isset($_GET['success_upd_cred'])) { ?>
-                      <p class="success_msg mb-5" style="margin: 0px 0px 10px 0px"><?php echo $_GET['success_upd_cred']; ?></p>
-                    <?php } ?>
-                  </center>
-                  <div class="row">
-                    <div class="col-md-6 mb-3">
-                      <div class="control-form">
-                        <label class="form-label">Username</label>
-                        <input type="text" class="form-control" name="username" id="username">
-                        <small>error</small>
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <div class="control-form">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" id="password">
-                        <small>error</small>
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                      <div class="control-form">
-                        <label class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" name="confirmPass" id="confirmPass">
-                        <small>error</small>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="d-grid gap-2 d-md-block mt-4">
-                    <button class="main-button" type="submit" name="upd_adminCred">Update Credential</button>
-                  </div>
+              <!-- page header and search -->
+              <div class="d-flex flex-wrap">
+                <div class="p-2 flex-fill">
+                  <!-- page title -->
+                  <h4 class="fw-bold p-2"><span class="text-muted fw-light">Health Statement /</span> Certificate of Consent</h4>
                 </div>
-              </form>
-              <!-- / fetch information -->
+                <div class="p-2 flex-fill">
+                  <!-- search -->
+                  <?php 
+                    include "db_conn.php";
+                      $sql = "SELECT
+                              student_pri_info_tbl.student_id,
+                              student_pri_info_tbl.id_number,
+                              student_pri_info_tbl.yr_lvl,
+                              student_pri_info_tbl.fname,
+                              student_pri_info_tbl.mname,
+                              student_pri_info_tbl.lname,
+                              student_pri_info_tbl.sname,
+
+                              cert_consent_tbl.*
+
+                              FROM student_pri_info_tbl
+
+                              INNER JOIN cert_consent_tbl ON student_pri_info_tbl.student_id = cert_consent_tbl.student_id LIMIT 10";
+
+                    if (isset($_POST['filter_date_btn'])) {
+                      $search = $_POST['search'];
+                      $sql = "SELECT
+                              student_pri_info_tbl.student_id,
+                              student_pri_info_tbl.id_number,
+                              student_pri_info_tbl.yr_lvl,
+                              student_pri_info_tbl.fname,
+                              student_pri_info_tbl.mname,
+                              student_pri_info_tbl.lname,
+                              student_pri_info_tbl.sname,
+
+                              cert_consent_tbl.*
+
+                              FROM student_pri_info_tbl
+
+                              INNER JOIN cert_consent_tbl ON student_pri_info_tbl.student_id = cert_consent_tbl.student_id
+                              WHERE cert_consent_tbl.submit_date = '$search' LIMIT 10";
+
+                              if (empty($search)) {
+                                $sql = "SELECT
+                                  student_pri_info_tbl.student_id,
+                                  student_pri_info_tbl.id_number,
+                                  student_pri_info_tbl.yr_lvl,
+                                  student_pri_info_tbl.fname,
+                                  student_pri_info_tbl.mname,
+                                  student_pri_info_tbl.lname,
+                                  student_pri_info_tbl.sname,
+
+                                  cert_consent_tbl.*
+
+                                  FROM student_pri_info_tbl
+
+                                  INNER JOIN cert_consent_tbl ON student_pri_info_tbl.student_id = cert_consent_tbl.student_id LIMIT 10";
+                              }
+                    }
+                    else {
+                      $search = "";
+                      $sql = "SELECT
+                              student_pri_info_tbl.student_id,
+                              student_pri_info_tbl.id_number,
+                              student_pri_info_tbl.yr_lvl,
+                              student_pri_info_tbl.fname,
+                              student_pri_info_tbl.mname,
+                              student_pri_info_tbl.lname,
+                              student_pri_info_tbl.sname,
+
+                              commitment_undertaking_tbl.*
+
+                              FROM student_pri_info_tbl
+
+                              INNER JOIN commitment_undertaking_tbl ON student_pri_info_tbl.student_id = commitment_undertaking_tbl.student_id LIMIT 10";
+                    }
+
+                    $result = $conn->query($sql);
+                  ?>
+                  <form method="POST">
+                    <label>Search</label><input type="date" class="search" placeholder="Search..." name="search" value="<?php echo $search;?>" max="<?php echo $current_time?>">
+                    <button type="submit" name="filter_date_btn" class="main-button">Filter</button>
+                  </form>
+                </div>
+              </div>
+              
+              <!-- section container -->
+              <center>
+                <?php if (isset($_GET['success_msg'])) { ?>
+                  <p class="success_msg mb-3"><?php echo $_GET['success_msg']; ?></p>
+                <?php } ?>
+                <?php if (isset($_GET['error_msg'])) { ?>
+                  <p class="error_msg mb-3"><?php echo $_GET['error_msg']; ?></p>
+                <?php } ?>
+              </center>
+              <div class="section-container card">
+
+                <!-- table wrapper -->
+                <div class="table-wrapper">
+                  <table class="table-cite" id="requirement_tbl">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="d-none">ID</th>
+                        <th scope="col">ID Number</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Year Level</th>
+                        <th scope="col">Submitted Date</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                      if($result->num_rows > 0) {
+                        while ($row=$result->fetch_assoc()) {
+                    ?>
+                    <tr>
+                      <td class="d-none"><?php echo $row['id'];?></td>
+                      <td><?php echo $row['id_number'];?></td>
+                      <td><?php echo $row['lname'].", ".$row['fname']." ".$row['mname']." ".$row['sname'];?></td>
+                      <td><?php echo $row['yr_lvl']." Year";?></td>
+                      <td><?php $submit_date = $row['submit_date']; echo date("M d,Y", strtotime($submit_date));?></td>
+                      <td><a href="view_certificate_consent_form.php?student_id=<?=$row['student_id'];?>">View File</a></td>
+                    </tr>
+                    <?php
+                        }
+                      }
+                      else {
+                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>No forms available</center></td></tr>";
+                      }
+                    ?>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- / table wrapper -->
+              </div>
+              <!-- / section container -->
+              <!-- / Content -->
+
+              <div class="content-backdrop fade"></div>
             </div>
             <!-- / Content -->
-
-            <div class="content-backdrop fade"></div>
+          <!-- / Content wrapper -->
           </div>
-          <!-- Content wrapper -->
-        </div>
         <!-- / Layout container -->
-      </div>
+        </div>
 
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
@@ -405,8 +486,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
     <!-- Place this tag in your head or just before your close body tag. -->
     <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
 
-    <!-- cite js -->
-    <script type="text/javascript" src="js/upd_adminCredJS.js"></script>
+    <!-- my js -->
+    <script type="text/javascript" src="js/view_student_reqJS.js"></script>
 
   </body>
 </html>

@@ -1,12 +1,10 @@
 <?php
 session_start();
 
-if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status']) && isset($_SESSION['cmoNo']) && isset($_SESSION['series'])) {
+if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status'])) {
   include '../db_conn.php';
 
   $student_id = $_SESSION['student_id'];
-  $cmoNo = $_SESSION['cmoNo'];
-  $series = $_SESSION['series'];
 ?>
 <!DOCTYPE html>
 <html lang="en">

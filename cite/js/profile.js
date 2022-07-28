@@ -48,13 +48,16 @@ load_student_requirements();
 function load_student_requirements() {
 	var student_status = document.getElementById('student_status').innerHTML;
 
+	var freshmen_requirements = document.getElementById('freshmen_requirements');
+	var transferee_requirements = document.getElementById('transferee_requirements');
 	var regular_grad_requirements = document.getElementById('regular_grad_requirements');
+	var transferee_grad_requirements = document.getElementById('transferee_grad_requirements');
 
-	if (student_status == 'Regular') {
-		// grad_requirements.style.display = "block";
+	if (student_status == 'Regular' || student_status == 'Freshmen') {
+		freshmen_requirements.style.display = "block";
 	}
 	else {
-		// grad_requirements.style.display = "none";
+		freshmen_requirements.style.display = "none";
 	}
 
 	if (student_status == 'Regular Graduating') {
@@ -64,25 +67,18 @@ function load_student_requirements() {
 		regular_grad_requirements.style.display = "none";
 	}
 
-	if (student_status == 'Freshmen') {
-		// grad_requirements.style.display = "block";
-	}
-	else {
-		// grad_requirements.style.display = "none";
-	}
-
 	if (student_status == 'Transferee') {
-		// grad_requirements.style.display = "block";
+		transferee_requirements.style.display = "block";
 	}
 	else {
-		// grad_requirements.style.display = "none";
+		transferee_requirements.style.display = "none";
 	}
 
 	if (student_status == 'Transferee Graduating') {
-		// grad_requirements.style.display = "block";
+		transferee_grad_requirements.style.display = "block";
 	}
 	else {
-		// grad_requirements.style.display = "none";
+		transferee_grad_requirements.style.display = "none";
 	}
 }
 

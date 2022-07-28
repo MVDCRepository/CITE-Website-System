@@ -117,13 +117,15 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                             ?>
                             <div class="item_container">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-lg-3">
                                         <div class="item_img">
-                                            <img class="img-fluid" src="../../admin/php/images/<?php echo $row['photo'];?>">
+                                            <div class="img_post_holder_details">
+                                                <img class="img-fluid" style="height: 100%; width: auto; margin: auto; display: block;" src="../../admin/php/images/<?php echo $row['photo'];?>">
+                                            </div>
                                             <p><?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></p>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-lg-8">
                                         <h1><?php echo $row['title'];?></h1>
                                         <p>
                                             <?php echo $row['content'];?>

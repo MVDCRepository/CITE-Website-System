@@ -3,10 +3,7 @@ session_start();
 
 if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['fname'])) {
   include 'db_conn.php';
-
-  date_default_timezone_set('Asia/Manila');
-  $current_time = date("Y-m-d");
-  $date_time = strtotime($current_time);
+  $student_id = $_GET['student_id'];
 ?>
 <!DOCTYPE html>
 
@@ -141,7 +138,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="add_announcements.php" class="menu-link">
+                  <a href="upd_announcements.php" class="menu-link">
                     <div>Add</div>
                   </a>
                 </li>
@@ -217,11 +214,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
             <!-- health declaration form -->
             <li class="menu-item active open">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <div data-i18n="Layouts">Health Statement</div>
+                <div data-i18n="Layouts">Health Statement Form</div>
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="view_student_hd_forms.php" class="menu-link">
                     <div>Health Declaration</div>
                   </a>
@@ -231,7 +228,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                     <div>Commitment of Undertaking</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item active">
                   <a href="certificate_consent.php" class="menu-link" >
                     <div>Certificate of Consent</div>
                   </a>
@@ -318,85 +315,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   <!-- page title -->
                   <h4 class="fw-bold p-2"><span class="text-muted fw-light">Health Statement /</span> Health Declaration</h4>
                 </div>
-                <div class="p-2 flex-fill">
-                  <!-- search -->
-                  <?php 
-                    include "db_conn.php";
-                      $sql = "SELECT
-                              student_pri_info_tbl.student_id,
-                              student_pri_info_tbl.id_number,
-                              student_pri_info_tbl.yr_lvl,
-                              student_pri_info_tbl.fname,
-                              student_pri_info_tbl.mname,
-                              student_pri_info_tbl.lname,
-                              student_pri_info_tbl.sname,
-
-                              health_df_tbl.*
-
-                              FROM student_pri_info_tbl
-
-                              INNER JOIN health_df_tbl ON student_pri_info_tbl.student_id = health_df_tbl.student_id LIMIT 10";
-
-                    if (isset($_POST['filter_date_btn'])) {
-                      $search = $_POST['search'];
-                      $sql = "SELECT
-                              student_pri_info_tbl.student_id,
-                              student_pri_info_tbl.id_number,
-                              student_pri_info_tbl.yr_lvl,
-                              student_pri_info_tbl.fname,
-                              student_pri_info_tbl.mname,
-                              student_pri_info_tbl.lname,
-                              student_pri_info_tbl.sname,
-
-                              health_df_tbl.*
-
-                              FROM student_pri_info_tbl
-
-                              INNER JOIN health_df_tbl ON student_pri_info_tbl.student_id = health_df_tbl.student_id
-                              WHERE health_df_tbl.submit_date = '$search' LIMIT 10";
-
-                              if (empty($search)) {
-                                $sql = "SELECT
-                                  student_pri_info_tbl.student_id,
-                                  student_pri_info_tbl.id_number,
-                                  student_pri_info_tbl.yr_lvl,
-                                  student_pri_info_tbl.fname,
-                                  student_pri_info_tbl.mname,
-                                  student_pri_info_tbl.lname,
-                                  student_pri_info_tbl.sname,
-
-                                  health_df_tbl.*
-
-                                  FROM student_pri_info_tbl
-
-                                  INNER JOIN health_df_tbl ON student_pri_info_tbl.student_id = health_df_tbl.student_id LIMIT 10";
-                              }
-                    }
-                    else {
-                      $search = "";
-                      $sql = "SELECT
-                              student_pri_info_tbl.student_id,
-                              student_pri_info_tbl.id_number,
-                              student_pri_info_tbl.yr_lvl,
-                              student_pri_info_tbl.fname,
-                              student_pri_info_tbl.mname,
-                              student_pri_info_tbl.lname,
-                              student_pri_info_tbl.sname,
-
-                              health_df_tbl.*
-
-                              FROM student_pri_info_tbl
-
-                              INNER JOIN health_df_tbl ON student_pri_info_tbl.student_id = health_df_tbl.student_id LIMIT 10";
-                    }
-
-                    $result = $conn->query($sql);
-                  ?>
-                  <form method="POST">
-                    <label>Search</label><input type="date" class="search" placeholder="Search..." name="search" value="<?php echo $search;?>" max="<?php echo $current_time?>">
-                    <button type="submit" name="filter_date_btn" class="main-button">Filter</button>
-                  </form>
-                </div>
               </div>
               
               <!-- section container -->
@@ -408,45 +326,160 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   <p class="error_msg mb-3"><?php echo $_GET['error_msg']; ?></p>
                 <?php } ?>
               </center>
-              <div class="section-container card">
+              <div class="section-container" style="overflow: hidden;">
+                <?php
+                  include "db_conn.php";
+                  $sql = "SELECT
+                          student_pri_info_tbl.*,
 
-                <!-- table wrapper -->
-                <div class="table-wrapper">
-                  <table class="table-cite" id="requirement_tbl">
-                    <thead>
-                      <tr>
-                        <th scope="col" class="d-none">ID</th>
-                        <th scope="col">ID Number</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Year Level</th>
-                        <th scope="col">Submitted Date</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                      if($result->num_rows > 0) {
-                        while ($row=$result->fetch_assoc()) {
-                    ?>
-                    <tr>
-                      <td class="d-none"><?php echo $row['id'];?></td>
-                      <td><?php echo $row['id_number'];?></td>
-                      <td><?php echo $row['lname'].", ".$row['fname']." ".$row['mname']." ".$row['sname'];?></td>
-                      <td><?php echo $row['yr_lvl']." Year";?></td>
-                      <td><?php $submit_date = $row['submit_date']; echo date("M d,Y", strtotime($submit_date));?></td>
-                      <td><a href="view_hd_form.php?student_id=<?=$row['student_id'];?>">View File</a></td>
-                    </tr>
-                    <?php
-                        }
-                      }
-                      else {
-                        echo "<tr><td colspan='5' style='color: #ff0000;'><center>No forms available</center></td></tr>";
-                      }
-                    ?>
-                    </tbody>
-                  </table>
+                          student_basic_info_tbl.*,
+
+                          student_guardian_info_tbl.*,
+                          
+                          cert_consent_tbl.*
+
+                          FROM student_pri_info_tbl
+
+                          INNER JOIN student_guardian_info_tbl ON student_pri_info_tbl.student_id = student_guardian_info_tbl.student_id
+
+                          INNER JOIN student_basic_info_tbl ON student_pri_info_tbl.student_id = student_basic_info_tbl.student_id
+                          
+                          INNER JOIN cert_consent_tbl ON student_pri_info_tbl.student_id = cert_consent_tbl.student_id
+
+                          WHERE cert_consent_tbl.student_id = '$student_id'";
+                  $result = mysqli_query($conn, $sql);
+
+                  if($result->num_rows > 0) {
+                    while ($row=$result->fetch_assoc()) {
+                ?>
+                <div class="cert_consent_cont">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="cert_consent_header">
+                                    <img src="../../cite/images/ucu_logo.png">
+                                    <div class="com_undertake_title">
+                                        <h1>URDANETA CITY UNIVERSITY</h1>
+                                        <h3>COLLEGE OF INFORMATION AND TECHNOLOGY EDUCATION</h3>
+                                        <h2>CERTIFICATE OF CONSENT</h2>
+                                    </div>
+                                    <img src="../../cite/images/cite_logo.png">
+                                </div>
+                                <p>&emsp;&emsp;&emsp;I, <strong><u><?php echo $row['lname'].", ".$row['fname']." ".$row['mname']." ".$row['sname']?></u></strong>,
+                                    a Filipino citizen, of legal age, and resident of
+                                    <strong><u><?php echo $row['house_num']." ".$row['barangay'].", ".$row['city']." ".$row['province']?></u></strong>, hereby, declare that:
+                                </p>
+                                <div class="cert_content_section">
+                                    <ol>
+                                        <li>
+                                            I understand that the Urdaneta City University, College of Information and
+                                            Technology
+                                            Education is conducting the limited face-to-face classes for A.Y. 2022-2023.
+                                        </li>
+                                        <li>
+                                            I am participating in the limited face-to-face classes as: <br>
+                                            <input type="radio" <?php if($row['student_type']=='Regular Student') {echo "checked";}?> name="participation" id="reg_student" value="Regular Student" required disabled>
+                                            <label for="reg_student">Regular Student</label> <br>
+                                            <input type="radio" <?php if($row['student_type']=='Cross Enrollee Student') {echo "checked";}?> name="participation" id="cross_student"
+                                                value="Cross Enrollee Student" required disabled>
+                                            <label for="cross_student">Cross Enrollee Student</label><br>
+                                        </li>
+                                        <li>
+                                            I am fully aware of continuing existence of the Corona Virus Disease (Covid-19) and
+                                            its
+                                            potentials health threats/risk.
+                                        </li>
+                                        <li>
+                                            I understand that all known precaution and health safety protocol, in accordance
+                                            with
+                                            the omnibus guidelines of the Inter-Agency task force (IATF) for the management of
+                                            emerging infectious diseases, to ensure my safety are taken/instituted by the
+                                            University
+                                            and College for the conduct of the limited face-to-face classes.
+                                        </li>
+                                        <li>
+                                            I understand that it is my responsibility to comply with the required precautionary
+                                            measure such as, but not limited to, submission of a duly and truthfully
+                                            accomplished
+                                            health declaration form, wearing of face mask and face shield, hand sanitizing as
+                                            often
+                                            as possible, physical distancing, and observance of the RT-PCR Testing and
+                                            Quarantine
+                                            Protocol as may be applicable in my case.
+                                        </li>
+                                        <li>
+                                            I understand that, despite taking all known precautions and health safety protocols,
+                                            exposure to COVID-19 is an ever-present risk for which my absolute safety or
+                                            protection
+                                            from potential contracting of the virus in the conduct of the limited face-to-face
+                                            classes is not and cannot be guaranteed.
+                                        </li>
+                                </div>
+                                <p>With my fully knowledge and understanding of the above declaration, I hereby wholly give my
+                                    consent and confirm my participation on my own free will and volition in the conduct of the
+                                    limited face-to-face classes for A.Y. 2022-2023.</p>
+                                <p>According, I set UCU-CITE entirely free from any liability or responsibility if I contract
+                                    covid-19 During the period of the limited face-to-face classes.</p>
+
+                                <div class="sig_name_cont">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <div class="cert_content_confirmation">
+                                                    <img style="width: 150px; height: auto" src="../../cite/student_signatures/<?php echo $row['student_sig'];?>">
+                                                    <div class="health_df_input">
+                                                        <input type="text" id="sig_name_student" name="sig_name_student" value="<?php echo strtoupper($row['fname']." ".$row['mname'][0].". ".$row['lname']." ".$row['sname']);?>" style="max-width: 60%;" readonly>
+                                                    </div>
+                                                    <p>Signature over printed name full name of Student</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="cert_content_confirmation">
+                                                    <div class="health_df_input mt-5">
+                                                        <input type="date" id="sig_name_student_date"
+                                                            name="sig_name_student_date" value="<?php echo $row['submit_date'];?>" style="max-width: 60%;" readonly>
+                                                    </div>
+                                                    <p>Date</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sig_name_cont">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <div class="cert_content_confirmation">
+                                                    <img style="width: 150px; height: auto" src="../../cite/student_signatures/<?php echo $row['witness_sig'];?>">
+                                                    <div class="health_df_input">
+                                                        <input type="text" id="sig_name_witness" name="sig_name_witness" value="<?php echo strtoupper($row['guardian_fname']." ".$row['guardian_mname'][0].". ".$row['guardian_lname']." ".$row['guardian_sname']);?>" style="max-width: 60%;" readonly>
+                                                    </div>
+                                                    <p>Signature over printed name full name of witness</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="cert_content_confirmation">
+                                                    <div class="health_df_input mt-5">
+                                                        <input type="date" id="sig_name_witness_date"
+                                                            name="sig_name_witness_date" value="<?php echo $row['submit_date'];?>" style="max-width: 60%;" readonly>
+                                                    </div>
+                                                    <p>Date</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- / table wrapper -->
+                <?php
+                    }
+                  }
+                  else {
+                    echo "<h1 class='error_msg' style='width: 100%'>Form Unavailable</h1>";
+                  }
+                ?>
               </div>
               <!-- / section container -->
               <!-- / Content -->
