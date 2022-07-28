@@ -915,7 +915,7 @@ button.main_bt {
 }
 
 .container-card-news-events {
-	margin-top: -50px;
+	/*margin-top: -50px;*/
 	min-height: 100vh;
 	display: flex;
 	justify-content: center;

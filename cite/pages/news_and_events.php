@@ -116,35 +116,47 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                         <div class="service_main">
                             <div class="container">
                                 <div class="row">
-                                    <div class="vh-100-wrapper">
-                                        <?php
-                                            include "../db_conn.php";
-                                            $sql = "SELECT * FROM news_events_tbl ORDER BY bulletin_id DESC LIMIT 10";
-                                            $result = $conn->query($sql);
-                                              if($result->num_rows > 0) {
-                                                while ($row=$result->fetch_assoc()) {
-                                        ?>
-                                            <div class="col-md-12">
-                                                <div class="blog-slider">
-                                                    <div class="blog-slider__wrp">
-                                                        <div class="blog-slider__item">
-                                                            <div class="blog-slider__img">
-                                                                <img class="img-fluid" src="../../admin/php/images/<?php echo $row['photo'];?>">
-                                                            </div>
-                                                            <div class="blog-slider__content">
-                                                                <span class="blog-slider__code"><?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></span>
-                                                                <div class="blog-slider__title"><?php echo $row['title'];?></div>
-                                                                <div class="blog-slider__text"><?php echo $row['content'];?></div>
-                                                                <a href="news_and_events_details.php?bulletin_id=<?=$row['bulletin_id'];?>" class="blog-slider__button">READ MORE</a>
-                                                            </div>
+                                    <div class="col-md-12">
+                                        <div class="container-card-news-events">
+                                            <div class="card-content">
+                                                <?php
+                                                    include "../db_conn.php";
+                                                    $sql = "SELECT * FROM news_events_tbl ORDER BY bulletin_id DESC";
+                                                    $result = $conn->query($sql);
+                                                      if($result->num_rows > 0) {
+                                                        while ($row=$result->fetch_assoc()) {
+                                                ?>
+                                                <a style="color: #000;" href="news_and_events_details.php?bulletin_id=<?=$row['bulletin_id'];?>">
+                                                    <div class="card">
+                                                        <div class="card-image">
+                                                            <img class="img-fluid" src="../../admin/php/images/<?php echo $row['photo'];?>">
+                                                        </div>
+                                                        <div class="card-info">
+                                                            <h3><?php echo $row['title'];?></h3>
+                                                            <p><?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></p>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </a>
+                                                <?php
+                                                        }
+                                                    }
+
+                                                    else {
+                                                        echo "<center><h1 class='error_msg'>No News & Events available</h1></center>";
+                                                    }
+                                                ?>
                                             </div>
-                                        <?php
-                                                }
-                                            }
-                                        ?>
+                                            <div class="pagination">
+                                                <!--<li class="page-item previous-page disable"><a class="page-link" href="#">Prev</a></li>
+                                                                    <li class="page-item current-page active"><a class="page-link" href="#">1</a></li>
+                                                                    <li class="page-item dots"><a class="page-link" href="#">...</a></li>
+                                                                    <li class="page-item current-page"><a class="page-link" href="#">5</a></li>
+                                                                    <li class="page-item current-page"><a class="page-link" href="#">6</a></li>
+                                                                    <li class="page-item dots"><a class="page-link" href="#">...</a></li>
+                                                                    <li class="page-item current-page"><a class="page-link" href="#">10</a></li>
+                                                                    <li class="page-item next-page"><a class="page-link" href="#">Next</a></li>-->
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
