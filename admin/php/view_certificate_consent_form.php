@@ -313,7 +313,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
               <div class="d-flex flex-wrap">
                 <div class="p-2 flex-fill">
                   <!-- page title -->
-                  <h4 class="fw-bold p-2"><span class="text-muted fw-light">Health Statement /</span> Health Declaration</h4>
+                  <h4 class="fw-bold p-2"><span class="text-muted fw-light">Health Statement /</span> Certificate of Consent</h4>
                 </div>
               </div>
               

@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status'])) {
+if (isset($_SESSION['std_student_id']) && isset($_SESSION['std_id_number']) && isset($_SESSION['std_fname']) && isset($_SESSION['std_mname']) && isset($_SESSION['std_lname']) && isset($_SESSION['std_yr_lvl']) && isset($_SESSION['std_eval_status'])) {
     include '../db_conn.php';
     date_default_timezone_set('Asia/Manila');
     $current_time = date("Y-m-d");
     $date_time = strtotime($current_time);
 
-    $student_id = $_SESSION['student_id'];
+    $student_id = $_SESSION['std_student_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,7 +107,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                     <a class="nav-link" href="admission.php">ADMISSION</a>
                                 </li>
                                 <li id="nav-last" class="nav-item last"><a class="nav-link dropdown-toggle" href="#"
-                                        id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['fname'];?></a>
+                                        id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['std_fname'];?></a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
                                         <a style="font-weight: 600;" class="dropdown-item" href="profile.php"><!-- <img src="../images/xiao.png"> -->Profile Settings</a>
                                         <div class="dropdown-divider"></div>
@@ -156,22 +156,22 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="hidden" name="student_id" value="<?php echo $_SESSION['student_id'];?>">
+                                        <input type="hidden" name="student_id" value="<?php echo $_SESSION['std_student_id'];?>">
                                         <div class="health_df_input">
                                             <label for="submit_date">Date:</label>
                                             <input type="date" id="submit_date" name="submit_date" value="<?php echo $current_time;?>" required readonly>
                                         </div>
                                         <div class="health_df_input">
                                             <label for="health_df_name">Name:</label>
-                                            <input type="text" id="health_df_name" name="health_df_name" value="<?php echo $_SESSION['lname'].", ".$_SESSION['fname']." ".$_SESSION['mname']." ".$_SESSION['sname'];?>" required readonly>
+                                            <input type="text" id="health_df_name" name="health_df_name" value="<?php echo $_SESSION['std_lname'].", ".$_SESSION['std_fname']." ".$_SESSION['std_mname']." ".$_SESSION['std_sname'];?>" required readonly>
                                         </div>
                                         <div class="health_df_input">
                                             <label for="health_df_address">Address:</label>
-                                            <input type="text" id="health_df_address" name="health_df_address" value="<?php echo $_SESSION['house_num']." ".$_SESSION['barangay'].", ".$_SESSION['city'].", ".$_SESSION['province'];?>" required readonly>
+                                            <input type="text" id="health_df_address" name="health_df_address" value="<?php echo $_SESSION['std_house_num']." ".$_SESSION['std_barangay'].", ".$_SESSION['std_city'].", ".$_SESSION['std_province'];?>" required readonly>
                                         </div>
                                         <div class="health_df_input">
                                             <label for="health_df_contact">Contact Number:</label>
-                                            <input type="text" id="health_df_contact" name="health_df_contact" value="<?php echo $_SESSION['contact_num'];?>" required readonly>
+                                            <input type="text" id="health_df_contact" name="health_df_contact" value="<?php echo $_SESSION['std_contact_num'];?>" required readonly>
                                         </div>
                                         <p>Purpose of Visit:</p>
                                         <div class="health_df_input_purpose">
@@ -447,7 +447,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
 <?php
 } 
 else {
-  header("Location: ../user_login.php");
+  header("Location: ../login.php");
   exit();
 }
 
