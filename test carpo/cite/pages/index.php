@@ -253,16 +253,15 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                 </div>
                             </div>
                         </div>
-                        <!--End Year Theme Section --------------------------->   
-                                                <!--Start UCU News Section --------------------------->
-                                                <div class="ucu_news mb-0">
+                        <!--Start UCU News Section --------------------------->
+                        <div class="ucu_news mb-0">
                             <div class="section_service_2">
                                 <h1 class="service_text">University News</h1> <br>
                             </div>
                             <div class="container">
                                 <div class="row">
                                     <?php
-                                        include "../db_conn.php";
+                                        include "db_conn.php";
                                         $sql = "SELECT * FROM news_events_tbl WHERE post = 'featured' ORDER BY bulletin_id DESC LIMIT 1";
                                         $result = $conn->query($sql);
                                           if($result->num_rows > 0) {
@@ -273,7 +272,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         <div class="yt_embed">
                                             <!-- <iframe width="100" height="300" src="../admin/php/images/<?php echo $row['photo'];?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
                                             <div class="img_post_holder">
-                                                <img class="img-fluid mb-2" src="../../admin/php/images/<?php echo $row['photo'];?>">
+                                                <img class="img-fluid mb-2" src="../admin/php/images/<?php echo $row['photo'];?>">
                                             </div>
                                             <br>
                                             <i class="bi bi-calendar-date"> <span> <?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></span></i>
@@ -294,14 +293,14 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         <div class="card-list">
                                             <div class="row" style="max-height: 500px; overflow-x: hidden; overflow-y: auto;">
                                                 <?php
-                                                    include "../db_conn.php";
+                                                    include "db_conn.php";
                                                     $sql = "SELECT * FROM news_events_tbl WHERE post = '' OR post = 'featured'";
                                                     $result = $conn->query($sql);
                                                       if($result->num_rows > 0) {
                                                         while ($row=$result->fetch_assoc()) {
                                                 ?>
                                                 <div class="col-md-6">
-                                                    <img class="img-fluid" src="../../admin/php/images/<?php echo $row['photo'];?>">
+                                                    <img class="img-fluid" src="../admin/php/images/<?php echo $row['photo'];?>">
                                                     <h4><a href="news_and_events_details.php?bulletin_id=<?=$row['bulletin_id'];?>"><?php echo $row['title'];?></a></h4>
                                                     <p><?php $date = $row['time_date']; echo date("M d,Y H:i a", strtotime($date));?></p>
                                                 </div>

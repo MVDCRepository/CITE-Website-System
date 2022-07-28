@@ -14,7 +14,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <!-- site metas -->
-        <title>Faculty | CITE</title>
+        <title>BSIT | CITE</title>
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -42,26 +42,24 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.2.2/swiper-bundle.css" integrity="sha512-VbPb+KrNIjcE5nM/Y+ZBvKvQF7+B/alQCQLPdIUAP3KsmDWkv0EdiyX4gfTwtJ3Sfais/nGJ0whTxjSwhQ1C8g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Jquery -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    </head>
-    <!-- body -->
-    <body>
-        <div class="header_pages">
-            <div class="container">
+        <body>
+        <!-- body -->
+            <div class="header_pages">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="logo1"><a href="index.php"><img src="../images/cite_logo_title.png"></a></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="logo2"><a href="https://ucu.edu.ph" target="_blank"><img src="../images/ucu_logo.png"></a></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="logo1"><a href="../index.php"><img src="images/cite_logo_title.png"></a></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="logo2"><a href="https://ucu.edu.ph" target="_blank"><img src="../images/ucu_logo.png"></a></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="header">
+        <div class="header">
             <div class="container">
                 <!--  header inner -->
                 <div class="col-sm-12">
@@ -79,18 +77,18 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                             <li class="nav-item">
                                                 <a class="nav-link" href="about.php">ABOUT</a></li>
                                                 <li class="nav-item">
-                                                    <a style="font-weight: 600;" class="nav-link" href="#">FACULTY</a></li>
+                                                    <a class="nav-link" href="faculty.php">FACULTY</a></li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">ACADEMICS</a>
+                                                        <a  style="font-weight: 600;" class="nav-link dropdown-toggle" href="acad_blis.php" id="navbarDropdown" role="button" data-toggle="dropdown">ACADEMICS</a>
                                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
-                                                        <a class="dropdown-item" href="acad_bsit.php">BSIT</a>
+                                                            <a class="dropdown-item" href="acad_bsit.php">BSIT</a>
                                                             <div class="dropdown-divider"></div>
                                                             <a class="dropdown-item" href="acad_blis.php">BLIS</a>
                                                         </div>
                                                     </li>
                                                     <li class="nav-item">
-                                                    <a class="nav-link" href="admission.php">ADMISSION</a></li>
-                                                    <li id="nav" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['fname'];?></a>
+                                                        <a class="nav-link" href="admission.php">ADMISSION</a></li>
+                                                        <li id="nav" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['fname'];?></a>
                                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
                                                         <a class="dropdown-item" href="profile.php"><!-- <img src="images/xiao.png"> -->Profile Settings</a>
                                                         <div class="dropdown-divider"></div>
@@ -99,71 +97,41 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                         <a style="color: red !important;" class="dropdown-item" href="../php/logout.php"><i class="bi bi-box-arrow-left"></i>&nbsp;Logout</a>
                                                     </div>
                                                 </li>
-                                            </ul>
-                                        </div>
-                                    </nav>
+                                                </ul>
+                                            </div>
+                                        </nav>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- end header end -->
-                    <!--Start Banner Section ------------------------------>
-                    <div class="banner_news_events">
-                        <div class="titlepage-h1-news_events">
-                            <h1 class="bnner_title_news_events">Faculty</h1>
+                        <!-- end header end -->
+                        <!--Start Banner Section ------------------------------>
+                        <div class="banner_news_events">
+                            <div class="titlepage-h1-news_events">
+                                <h1 class="bnner_title_news_events">Bachelor of Science in Information Technology</h1>
+                            </div>
                         </div>
-                    </div>
-                    <!--End Banner Section -------------------------------->
-                    <!--Start Content Section ----------------------------->
-                    <div class="service_main">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="container_faculty">
-                                        <div class="timeline">
-                                            <ul>
-                                                <?php
-                                                    include "../db_conn.php";
-                                                    $sql = "SELECT * FROM faculty_tbl";
-                                                    $result = $conn->query($sql);
-                                                      if($result->num_rows > 0) {
-                                                        while ($row=$result->fetch_assoc()) {
-                                                ?>
-                                                <li>
-                                                    <div class="timeline-content">
-                                                        <h3 class="date"><?php echo $row['position'];?></h3>
-                                                        <h1 data-aos="fade-right" data-aos-duration="2000"><?php echo $row['fname'].' '.$row['lname'];?></h1>
-                                                        <img data-aos="fade-left" data-aos-duration="1000" src="../../admin/php/faculties/<?php echo $row['profile_pic'];?>">
-                                                        <p><?php echo $row['subjects'];?></p>
-                                                    </div>
-                                                </li>
-                                                <?php
-                                                        }
-                                                    }
-
-                                                    else {
-                                                        echo "<center><h1 class='error_msg'>Compose Error</h1></center>";
-                                                    }
-                                                ?>
-                                                <!-- <li>
-                                                    <div class="timeline-content">
-                                                        <h3 class="date">Internship/Practicum Coordinator</h3>
-                                                        <h1 data-aos="fade-right" data-aos-duration="2000" >Dionnel M. Caguin</h1>
-                                                        <img data-aos="fade-left" data-aos-duration="1000" data-aos="fade-up" src="../images/faculty_members/sir_dionnel.png">
-                                                        <p>Subjects:</p>
-                                                    </div>
-                                                </li> -->
-                                            </ul>
+                        <!--End Banner Section -------------------------------->
+                        <!--Start Content Section ----------------------------->
+                        <div class="acad_content mb-3">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="bsit_cont mt-3">
+                                            <h1>Program Overview</h1>
+                                            <p>The Bachelor of Science in Information Technology is a four-year program that provides fundamental studies to advance in all aspects of computer-related studies such as web development, mobile development, database, programming, networking technologies, and more. The Bachelor of Science in Information Technology program will aim to train well and prepare students to be IT professionals.</p>
+                                            <p>The Bachelor of Science in Information Technology program is a study of the utilization of computer hardware and software. Programming with different languages like C++, Java, PHP, and more. Students will also learn web development for backend and frontend and web development for e-commerce. Also, students will learn Database management, Algorithms, Networking, and more.</p>
+                                            <p>The curriculum is based on Commission on Higher Education (CHED).</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!--End Content Section -------------------------------->
-                    <!--Start Footer Section ------------------------------->
-                    <?php include 'footer.php';?>
-                    <!--End Footer Section --------------------------------->
+                        
+                        <!--End Content Section ------------------------------->
+                        <!--Start Footer Section ------------------------------->
+                        <?php include 'footer.php';?>
+                        <!--End Footer Section --------------------------------->
                         <!--Start Copyright Section ---------------------------->
                         <div class="copyright">
                             <div class="container">
@@ -181,16 +149,12 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                         <script src="../js/jquery.min.js"></script>
                         <script src="../js/popper.min.js"></script>
                         <script src="../js/bootstrap.bundle.min.js"></script>
-                        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-                        <script>
-                        AOS.init();
-                        </script>
                     </body>
                 </html>
 <?php
 } 
 else {
-  header("Location: ../user_login.php");
+  header("Location: ../login.php");
   exit();
 }
 
