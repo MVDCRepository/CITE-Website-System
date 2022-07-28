@@ -338,7 +338,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                     <div class="col-md-5">
                       <input type="file" class="form-control" name="upload_csv_regular" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
                     </div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
                       <button class="main-button me-md-2" type="submit" name="upload_csv_regular_btn">Upload CSV</button>
                     </div>
                   </div>
@@ -351,7 +351,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                     <div class="col-md-5">
                       <input type="file" class="form-control" name="upload_csv_transferee" required>
                     </div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
                       <button class="main-button me-md-2" type="submit" name="upload_csv_transferee_btn">Upload CSV</button>
                     </div>
                   </div>
