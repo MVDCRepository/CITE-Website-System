@@ -217,7 +217,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
             <!-- health declaration form -->
             <li class="menu-item active open">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <div data-i18n="Layouts">Health Statement</div>
+                <div data-i18n="Layouts">Health Statement Form</div>
               </a>
 
               <ul class="menu-sub">

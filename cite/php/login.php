@@ -14,15 +14,15 @@ if (isset($_POST['id_number']) && isset($_POST['password'])) {
 	$password = validate($_POST['password']);
 
 	if (empty($id_number) && empty($password)) {
-		header("Location: ../user_login.php?error=ID Number and Password is required");
+		header("Location: ../login.php?error=ID Number and Password is required");
 		exit();
 	}
 	else if (empty($id_number)) {
-		header("Location: ../user_login.php?error=ID Number is required");
+		header("Location: ../login.php?error=ID Number is required");
 		exit();
 	}
 	else if (empty($password)) {
-		header("Location: ../user_login.php?error=Password is required");
+		header("Location: ../login.php?error=Password is required");
 		exit();
 	}
 	else {
@@ -77,18 +77,18 @@ if (isset($_POST['id_number']) && isset($_POST['password'])) {
 				exit();
 			}
 			else {
-				header("Location: ../user_login.php?error=Incorrect ID Number or password");
+				header("Location: ../login.php?error=Incorrect ID Number or password");
 				exit();
 			}
 		}
 		else {
-			header("Location: ../user_login.php?error=Incorrect ID Number or password");
+			header("Location: ../login.php?error=Incorrect ID Number or password");
 			exit();
 		}
 	}
 }
 else {
-	header("Location: ../user_login.php");
+	header("Location: ../login.php");
 	exit();
 }
 
