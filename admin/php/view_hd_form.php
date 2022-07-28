@@ -23,7 +23,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Students</title>
+    <title>Health Statement</title>
 
     <meta name="description" content="" />
 
@@ -60,11 +60,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
 
     <!-- cite theme css -->
     <link rel="stylesheet" href="css/cite_theme.css" />
-
-    <!-- style css -->
-    <link rel="stylesheet" type="text/css" href="../../cite/css/style.css">
-    <!-- Responsive-->
-    <link rel="stylesheet" href="../../cite/css/responsive.css">
   </head>
 
   <body>
@@ -177,7 +172,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
             </li>
 
             <!-- Students -->
-            <li class="menu-item active open">
+            <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <div data-i18n="Layouts">Students</div>
               </a>
@@ -211,6 +206,31 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                 <li class="menu-item">
                   <a href="add_schedule.php" class="menu-link" >
                     <div>Add</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- health declaration form -->
+            <li class="menu-item active open">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <div data-i18n="Layouts">Health Statement Form</div>
+              </a>
+
+              <ul class="menu-sub">
+                <li class="menu-item active">
+                  <a href="view_student_hd_forms.php" class="menu-link">
+                    <div>Health Declaration</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="commitment_undertaking.php" class="menu-link" >
+                    <div>Commitment of Undertaking</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="certificate_consent.php" class="menu-link" >
+                    <div>Certificate of Consent</div>
                   </a>
                 </li>
               </ul>
@@ -293,14 +313,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
               <div class="d-flex flex-wrap">
                 <div class="p-2 flex-fill">
                   <!-- page title -->
-                  <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> Health Declaration Form</h4>
-                </div>
-                <div class="p-2 flex-fill">
-                  <!-- search -->
-                  
-                  <!-- <form method="POST">
-                    <label>Search</label><input type="text" class="search" placeholder="Search..." name="search" value="<?php echo $search;?>">
-                  </form> -->
+                  <h4 class="fw-bold p-2"><span class="text-muted fw-light">Health Statement /</span> Health Declaration</h4>
                 </div>
               </div>
               
@@ -367,11 +380,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                                               </div>
                                               <div class="health_df_input">
                                                   <label for="health_df_address">Address:</label>
-                                                  <input type="text" id="health_df_address" name="health_df_address" value="<?php echo $row['province'].", ".$row['city'].", ".$row['house_num']." ".$row['barangay'];?>" required>
+                                                  <input type="text" id="health_df_address" name="health_df_address" value="<?php echo $row['province'].", ".$row['city'].", ".$row['house_num']." ".$row['barangay'];?>" readonly>
                                               </div>
                                               <div class="health_df_input">
                                                   <label for="health_df_contact">Contact Number:</label>
-                                                  <input type="text" id="health_df_contact" name="health_df_contact" value="<?php echo $row['contact_num'];?>" required>
+                                                  <input type="text" id="health_df_contact" name="health_df_contact" value="<?php echo $row['contact_num'];?>" readonly>
                                               </div>
                                               <p>Purpose of Visit:</p>
                                               <div class="health_df_input_purpose">
@@ -552,7 +565,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                                       </tr>
                                   </table>
                               </div>
-                              <div class="health_df_confirmation">
+                              <div class="health_df_confirmation mt-5 mb-3">
                                   <p>I confirm that the above information is correct and accurate.</p>
                                   <img style="width: 150px; height: auto" src="../../cite/student_signatures/<?php echo $row['signature'];?>">
                                   <div class="custom_breakline"></div>

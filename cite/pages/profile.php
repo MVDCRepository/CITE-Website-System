@@ -124,6 +124,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <p hidden id="student_status"><?php echo $_SESSION['status'];?></p>
+                                            <!-- <p hidden id="student_status">Transferee Graduating</p> -->
                                             <center>
                                                 <?php if (isset($_GET['error_msg'])) { ?>
                                                     <p class="error_msg mt-5 mb-5" style="width: 40%"><?php echo $_GET['error_msg']; ?></p>
@@ -376,7 +377,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                         }
 
                                                         else {
-                                                            echo "<tr><td colspan='2'><h1 class='error_msg'>Academic Information Unavailable</h1></td></tr>";
+                                                            echo "<tr><td colspan='2'><h1 class='error_msg'>Regular Academic Information Unavailable</h1></td></tr>";
                                                         }
                                                     ?>
                                                 </tbody>
@@ -415,7 +416,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                         }
 
                                                         else {
-                                                            echo "<tr><td colspan='2'><h1 class='error_msg'>Academic Information Unavailable</h1></td></tr>";
+                                                            echo "<tr><td colspan='2'><h1 class='error_msg'>Transferee Academic Information Unavailable</h1></td></tr>";
                                                         }
                                                     ?>
                                                 </tbody>
@@ -459,7 +460,9 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                         <div class="reg_content">
                             <h4>Fill up forms for limited face to face class</h4>
                             <div class="d-grid gap-2 d-md-block">
-                                <a class="btn btn-primary" href="health_declaration_form.php" role="button">Health Declaration Form</a>
+                                <a class="btn btn-secondary" href="health_declaration_form.php" role="button">Health Declaration Form</a>
+                                <a class="btn btn-secondary" href="com_undertaking.php" role="button">Commitment of Undertaking</a>
+                                <a class="btn btn-secondary" href="cert_consent.php" role="button">Certificate of Consent</a>
                             </div>
                         </div>
                     </div>
@@ -500,61 +503,28 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                 </div>
                                                 <!-- / cancel reservation modal -->
                                                 
-                                                <?php
-                                                    // $sql_requirements = mysqli_query($conn, "SELECT
-                                                    //                     student_pri_info_tbl.*,
-
-                                                    //                     student_requirement_tbl.*
-                                                                        
-                                                    //                     FROM student_pri_info_tbl
-
-                                                    //                     RIGHT JOIN student_requirement_tbl ON student_pri_info_tbl.student_id = student_requirement_tbl.student_id
-
-                                                    //                     WHERE student_requirement_tbl.student_id = '$student_id'");
-
-                                                    // $sql_requirements = mysqli_query($conn, "SELECT
-                                                    //                      student_pri_info_tbl.*,
-
-                                                    //                      student_requirement_tbl.*
-                                                                        
-                                                    //                      FROM student_pri_info_tbl
-
-                                                    //                      LEFT JOIN student_requirement_tbl ON student_pri_info_tbl.student_id = student_requirement_tbl.student_id
-
-                                                    //                      WHERE student_pri_info_tbl.student_id = '$student_id'");
-
-
-                                                    // while ($row = mysqli_fetch_assoc($sql_requirements)) {
-                                                    //     $fileName = $row['file_name'];
-                                                    //     $fileStatus = $row['status'];
-
-                                                    //     $test_array = array($fileName => $fileStatus);
-
-                                                    //     foreach ($test_array as $key => $value) {
-
-                                                    //         if ($key == "FORM 137" && $value == "Pending") {
-                                                    //             echo "FORM 137 Pending<br>";
-                                                    //             if ($key == "FORM 137" && $value == "") {
-                                                    //                 echo "FORM 137 Missing<br>";
-                                                    //             }
-                                                    //         }
-
-                                                    //         if ($key == "FORM 138" && $value == "Pending") {
-                                                    //             echo "FORM 138 Pending<br>";
-                                                    //             if ($key == "FORM 138" && $value != "Pending") {
-                                                    //                 echo "FORM 137 Missing<br>";
-                                                    //             }
-                                                    //         }
-                                                    //     }
-                                                    // }
-                                                ?>
                                                 <table class="table table-sm table-hover" id="requirements_tbl">
-                                                    <tbody id="regular_grad_requirements" style="display: none">
+                                                    <tbody id="freshmen_requirements" style="display: none;">
                                                         <tr>
                                                             <td class="col">FORM 137</td>
                                                             <td>
                                                                 <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'FORM 137'";
+                                                                    $result = $conn->query($sql);
 
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
                                                                 ?>
                                                             </td>
                                                             <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
@@ -563,41 +533,666 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                             <td class="col">FORM 138</td>
                                                             <td>
                                                                 <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'FORM 138'";
+                                                                    $result = $conn->query($sql);
 
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
                                                                 ?>
                                                             </td>
                                                             <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="col">Good Moral Certification</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Good Moral Certification'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
                                                             <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="col">Updated Evaluation form</td>
-                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="col">Application for Graduation</td>
-                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="col">2 Picture (Passport Size with Name)</td>
+                                                            <td class="col">2x2 Picture (3 Pieces)</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = '2x2 Picture (3 Pieces)'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
                                                             <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="col">Barangay Clearance</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Barangay Clearance'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
                                                             <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="col">Birth Certificate (NSO/PSA)</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Birth Certificate (NSO/PSA)'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">NCAE Result (Temporary waived)</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'NCAE Result (Temporary waived)'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Medical Certificate (Chest x-ray, Urinalysis, CBC) (Temporary waived)</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Medical Certificate (Chest x-ray, Urinalysis, CBC) (Temporary waived)'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tbody id="transferee_requirements" style="display: none">
+                                                        <tr>
+                                                            <td class="col">OTR (Remarks copy for UCU)</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'OTR (Remarks copy for UCU)'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Copy of Grades</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Copy of Grades'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">NSTP2 Serial Number</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'NSTP2 Serial Number'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Good Moral Certification</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Good Moral Certification'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">2x2 Picture (3 Pieces)</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = '2x2 Picture (3 Pieces)'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Barangay Clearance</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Barangay Clearance'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Birth Certificate (NSO/PSA)</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Birth Certificate (NSO/PSA)'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Medical Certificate (Chest x-ray, Urinalysis, CBC) (Temporary waived)</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Medical Certificate (Chest x-ray, Urinalysis, CBC) (Temporary waived)'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tbody id="regular_grad_requirements" style="display: none">
+                                                        <tr>
+                                                            <td class="col">FORM 137</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'FORM 137'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">FORM 138</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'FORM 138'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Good Moral Certification</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Good Moral Certification'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Updated Evaluation form</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Updated Evaluation Form'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Application for Graduation</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Application for Graduation'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">2 Picture (Passport Size with Name)</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = '2 Picture (Passport Size with Name)'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Barangay Clearance</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Barangay Clearance'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Birth Certificate (NSO/PSA)</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Birth Certificate (NSO/PSA)'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
                                                             <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="col">Capstone 1 & Capstone 2 Certificate</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Captsone 1 & 2 Certificate'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
                                                             <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="col">Medical Certificate</td>
+                                                            <td>
+                                                                <?php
+                                                                    $sql = "SELECT * FROM student_requirement_tbl WHERE student_id = '$student_id' AND file_name = 'Medical Certificate'";
+                                                                    $result = $conn->query($sql);
+
+                                                                    if($result->num_rows > 0) {
+                                                                        while ($row=$result->fetch_assoc()) {
+                                                                            if ($row['status'] == 'Pending') {
+                                                                                echo "<span class='text-warning'>".$row['status']."</span>";
+                                                                            }
+                                                                            else if ($row['status'] == 'Confirmed') {
+                                                                                echo "<span class='text-success'>".$row['status']."</span>";
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else {
+                                                                        echo "<span class='text-danger'>Missing</span>";
+                                                                    }
+                                                                ?>
+                                                            </td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tbody id="transferee_grad_requirements" style="display: none">
+                                                        <tr>
+                                                            <td class="col">OTR (Remarks copy for UCU)</td>
+                                                            <td>status here</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Copy of Grades</td>
+                                                            <td>status here</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">NSTP2 Serial Number</td>
+                                                            <td>status here</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Good Moral Certification</td>
+                                                            <td>status here</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Substitution Form</td>
+                                                            <td>status here</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Updated Evaluation Form</td>
+                                                            <td>status here</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Application for Graduation</td>
+                                                            <td>status here</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">2 Picture (Passport Size with Name)</td>
+                                                            <td>status here</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Barangay Clearance</td>
+                                                            <td>status here</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Birth Certificate (NSO/PSA)</td>
+                                                            <td>status here</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Capstone 1 & Capstone 2 Certificate</td>
+                                                            <td>status here</td>
+                                                            <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col">Medical Certificate</td>
+                                                            <td>status here</td>
                                                             <td class="col"><input type="submit" value="Upload" id="upload_reqBtn" data-modal="send_modal" class="btn btn-primary btn-sm"></td>
                                                         </tr>
                                                     </tbody>

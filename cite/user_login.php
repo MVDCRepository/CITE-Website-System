@@ -24,7 +24,7 @@
 		<div class="login-container">
 			<div class="header-container">
 				<img src="images/cite_logo.png" style="height: 70px; width: 70px">
-				<span>UCU Cite Admin</span>
+				<span>UCU Cite</span>
 			</div>
 			<div class="login-form">
 				<form action="php/login.php" method="POST">

@@ -134,7 +134,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                 <p class="success_msg mt-5" style="width: 40%"><?php echo $_GET['success_msg']; ?></p>
             <?php } ?>
         </center>
-        <div class="health_df_cont">
+        <div class="health_df_cont mt-5 mb-5">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -159,19 +159,19 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                         <input type="hidden" name="student_id" value="<?php echo $_SESSION['student_id'];?>">
                                         <div class="health_df_input">
                                             <label for="submit_date">Date:</label>
-                                            <input type="date" id="submit_date" name="submit_date" value="<?php echo $current_time;?>" required>
+                                            <input type="date" id="submit_date" name="submit_date" value="<?php echo $current_time;?>" required readonly>
                                         </div>
                                         <div class="health_df_input">
                                             <label for="health_df_name">Name:</label>
-                                            <input type="text" id="health_df_name" name="health_df_name" value="<?php echo $_SESSION['lname'].", ".$_SESSION['fname']." ".$_SESSION['mname']." ".$_SESSION['sname'];?>" required>
+                                            <input type="text" id="health_df_name" name="health_df_name" value="<?php echo $_SESSION['lname'].", ".$_SESSION['fname']." ".$_SESSION['mname']." ".$_SESSION['sname'];?>" required readonly>
                                         </div>
                                         <div class="health_df_input">
                                             <label for="health_df_address">Address:</label>
-                                            <input type="text" id="health_df_address" name="health_df_address" value="<?php echo $_SESSION['house_num']." ".$_SESSION['barangay'].", ".$_SESSION['city'].", ".$_SESSION['province'];?>" required>
+                                            <input type="text" id="health_df_address" name="health_df_address" value="<?php echo $_SESSION['house_num']." ".$_SESSION['barangay'].", ".$_SESSION['city'].", ".$_SESSION['province'];?>" required readonly>
                                         </div>
                                         <div class="health_df_input">
                                             <label for="health_df_contact">Contact Number:</label>
-                                            <input type="text" id="health_df_contact" name="health_df_contact" value="<?php echo $_SESSION['contact_num'];?>" required>
+                                            <input type="text" id="health_df_contact" name="health_df_contact" value="<?php echo $_SESSION['contact_num'];?>" required readonly>
                                         </div>
                                         <p>Purpose of Visit:</p>
                                         <div class="health_df_input_purpose">
@@ -358,11 +358,13 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                             <input class="custom_upload" type="file" name="file">
                             <div class="custom_breakline"></div>
                             <h4>Signature</h4>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+                                <button class="btn btn-secondary me-md-2" type="submit" id="submit" name="submit">Submit</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <button style="margin: 10px;" type="submit" name="submit" class="btn btn-success">Submit</button>
         </div>
     </form>
     <!--End Content Section ------------------------------->

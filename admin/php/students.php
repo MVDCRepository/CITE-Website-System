@@ -137,7 +137,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="upd_announcements.php" class="menu-link">
+                  <a href="add_announcements.php" class="menu-link">
                     <div>Add</div>
                   </a>
                 </li>
@@ -205,6 +205,31 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                 <li class="menu-item">
                   <a href="add_schedule.php" class="menu-link" >
                     <div>Add</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- health declaration form -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <div data-i18n="Layouts">Health Statement Form</div>
+              </a>
+
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="view_student_hd_forms.php" class="menu-link">
+                    <div>Health Declaration</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="" class="menu-link" >
+                    <div>Commitement of Undertaking</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="" class="menu-link" >
+                    <div>Certificate of Consent</div>
                   </a>
                 </li>
               </ul>
@@ -345,8 +370,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       <td><?php echo $row['yr_lvl']." Year";?></td>
                       <td>
                         <a href="view_student_req.php?student_id=<?=$row['student_id'];?>">View Requirements</a>
-                        <br>
-                        <a href="view_student_hd_forms.php?student_id=<?=$row['student_id'];?>">View Health Declaration Forms</a>
                       </td>
                       <td>
                         <div class="d-grid gap-2 d-md-block">
