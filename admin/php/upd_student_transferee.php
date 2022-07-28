@@ -25,7 +25,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Students</title>
+    <title>Update Transferee</title>
 
     <meta name="description" content="" />
 
@@ -226,12 +226,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="" class="menu-link" >
+                  <a href="commitment_undertaking.php" class="menu-link" >
                     <div>Commitement of Undertaking</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="" class="menu-link" >
+                  <a href="certificate_consent.php" class="menu-link" >
                     <div>Certificate of Consent</div>
                   </a>
                 </li>

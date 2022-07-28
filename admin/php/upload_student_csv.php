@@ -3,7 +3,6 @@ session_start();
 
 if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['fname'])) {
   include 'db_conn.php';
-  $faculty_id = $_GET['faculty_id'];
 ?>
 <!DOCTYPE html>
 
@@ -23,7 +22,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Faculty</title>
+    <title>Upload Student CSV</title>
 
     <meta name="description" content="" />
 
@@ -86,7 +85,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
 
           <ul class="menu-inner py-1">
             <!-- faculty -->
-            <li class="menu-item active open">
+            <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <div data-i18n="Layouts">Faculty</div>
               </a>
@@ -172,7 +171,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
             </li>
 
             <!-- Students -->
-            <li class="menu-item">
+            <li class="menu-item active open">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <div data-i18n="Layouts">Students</div>
               </a>
@@ -183,7 +182,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                     <div>Manage</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item active">
                   <a href="add_student.php" class="menu-link">
                     <div>Add</div>
                   </a>
@@ -309,118 +308,64 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-              <!-- page title -->
-              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Faculty /</span> Personal Data</h4>
-              <!-- fetch information -->
-              <?php
-                include "db_conn.php";
-                $sql = "SELECT * FROM faculty_tbl WHERE faculty_id = $faculty_id";
-                $result = $conn->query($sql);
-                  if($result->num_rows > 0) {
-                    while ($row=$result->fetch_assoc()) {
-              ?>
-              <div class="p-4 card mb-4">
-                <h5 class="mb-4">Profile Details</h5>
-                <input type="hidden" name="upd_faculty_id" value="<?php echo $row['faculty_id'];?>">
-                <?php if (isset($_GET['error'])) { ?>
-                  <p class="error_msg" style="margin: 0px 0px 10px 0px"><?php echo $_GET['error']; ?></p>
+              <!-- page header title -->
+              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> Add Student Transferee</h4>
+              <ul class="nav nav-pills flex-column flex-sm-row mb-3">
+                <li class="nav-item">
+                  <a class="nav-link" href="add_student.php">Freshmen/Regular</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="add_transferee_student.php">Transferee</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="javascript:void(0);">Upload CSV</a>
+                </li>
+              </ul>
+              <!-- section container -->
+              <center>
+                <?php if (isset($_GET['error_msg'])) { ?>
+                  <p class="error_msg mb-3"><?php echo $_GET['error_msg'];?></p>
                 <?php } ?>
-                <div class="d-flex align-items-start align-items-sm-center gap-4">
-                  <img class="avatar-container" src="faculties/<?php echo $row['profile_pic'];?>" id="profileDisplay">
-                </div>
-                <hr class="my-0 mb-4 mt-4">
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">First Name</label>
-                    <input type="text" class="form-control" name="upd_fname" value="<?php echo $row['fname'];?>" disabled>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Last Name</label>
-                    <input type="text" class="form-control" name="upd_lname" value="<?php echo $row['lname'];?>" disabled>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control" name="upd_email" value="<?php echo $row['email'];?>" disabled>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Phone Number (+63)</label>
-                    <input type="text" maxlength="10" placeholder="+63" class="form-control" name="upd_phoneNum" value="<?php echo $row['phoneNum'];?>" disabled>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Address</label>
-                    <input type="text" class="form-control" name="upd_address" value="<?php echo $row['address'];?>" disabled>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Zip Code</label>
-                    <input type="text" class="form-control" name="upd_zipCode" value="<?php echo $row['zipCode'];?>" disabled>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Position</label>
-                    <select class="select2 form-select" name="upd_position" disabled>
-                      <option value="<?php echo $row['position'];?>"><?php echo $row['position'];?></option>
-                      <option value="Faculty">Faculty</option>
-                      <option value="other">other</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label class="form-label">Subjects</label>
-                    <input type="text" class="form-control" name="upd_subjects" value="<?php echo $row['subjects'];?>" disabled>
-                  </div>
-                </div>
-              </div>
-              <?php
-                  }
-                }
-                else {
-                  echo "<center>Faculty member unavailable</center>";
-                }
-              ?>
-              <!-- / fetch information -->
+                <?php if (isset($_GET['success_msg'])) { ?>
+                  <p class="success_msg mb-3"><?php echo $_GET['success_msg'];?></p>
+                <?php } ?>
+              </center>
 
-              <!-- delete member -->
-              <form action="php/facultyPHP.php?faculty_id=<?=$faculty_id?>" method="POST" id="form_delMember">
-                <?php
-                  include "db_conn.php";
-                  $sql = "SELECT * FROM faculty_tbl WHERE faculty_id = $faculty_id";
-                  $result = $conn->query($sql);
-                    if($result->num_rows > 0) {
-                      while ($row=$result->fetch_assoc()) {
-                ?>
-                  <div class="p-4 card">
-                    <h5>Remove Faculty Member</h5>
-                    <input type="hidden" name="del_faculty_id" id="del_faculty_id" value="<?php echo $row['faculty_id'];?>">
-                    <div class="alert alert-warning">
-                      <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete this member account?</h6>
-                      <p class="mb-0">Once you delete this member account, there is no going back. Please be certain.</p>
+              <form action="php/studentPHP.php" method="POST" enctype="multipart/form-data">
+                <div class="section-container card">
+                  <div class="row">
+                    <h5>Upload Regular/Freshmen Students CSV</h5>
+                    <div class="col-md-5">
+                      <input type="file" class="form-control" name="upload_csv_regular" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
                     </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="chck_confirm">
-                      <label class="form-check-label" for="chck_confirm">
-                        I confirm the termination of<br>faculty member account.
-                      </label>
-                    </div>
-                    <div class="d-grid gap-2 d-md-block mt-4">
-                      <button class="btn btn-danger deactivate-account" type="submit" name="delMember" id="delMember">Deactivate Account</button>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                      <button class="main-button me-md-2" type="submit" name="upload_csv_regular_btn">Upload CSV</button>
                     </div>
                   </div>
-                <?php
-                    }
-                  }
-                  else {
-                    echo "<center>Faculty credentials unavailable</center>";
-                  }
-                ?>
+                </div>
               </form>
-              <!-- / delete member -->
+
+                <div class="section-container card mt-4">
+                  <div class="row">
+                    <h5>Upload Transferee Students CSV</h5>
+                    <div class="col-md-5">
+                      <input type="file" class="form-control" name="upload_csv_transferee" required>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                      <button class="main-button me-md-2" type="submit" name="upload_csv_transferee_btn">Upload CSV</button>
+                    </div>
+                  </div>
+                </div>
+              <!-- / section container -->
+              <!-- / Content -->
+
+              <div class="content-backdrop fade"></div>
             </div>
             <!-- / Content -->
-
-            <div class="content-backdrop fade"></div>
+          <!-- / Content wrapper -->
           </div>
-          <!-- Content wrapper -->
-        </div>
         <!-- / Layout container -->
-      </div>
+        </div>
 
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
@@ -449,8 +394,44 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
     <!-- Place this tag in your head or just before your close body tag. -->
     <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
 
-    <!-- cite js -->
-    <script type="text/javascript" src="js/view_facultyDetailsJS.js"></script>
+    <!-- my js -->
+    <script type="text/javascript">
+      // generates student's credential
+      generate_cred();
+      function generate_cred() {
+        function makeid(length) {
+          var result           = '';
+          var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+          var charactersLength = characters.length;
+          for ( var i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() * 
+            charactersLength));
+          }
+          return result;
+        }
+        document.getElementById("password").value = (makeid(10));
+      }
+      // generates student's ID number
+      function generate_idNumber() {
+        var generate_idnumber = document.getElementById("generate_idnumber");
+        if (generate_idnumber.checked == true) {
+          function create_idNumber(length) {
+            var result           = '';
+            var characters       = '0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+              result += characters.charAt(Math.floor(Math.random() * 
+              charactersLength));
+            }
+            return result;
+          }
+          document.getElementById("id_number").value = (create_idNumber(8));
+        }
+        else {
+          document.getElementById("id_number").value = "";
+        }
+      }
+    </script>
 
   </body>
 </html>

@@ -441,4 +441,76 @@
 			}
 		}
 	}
+
+	// upload freshmen or regular student csv file
+	if (isset($_FILES['upload_csv_regular']) && isset($_POST['upload_csv_regular_btn'])) {
+		include "../db_conn.php";
+
+		$upload_csv_regular = $_FILES['upload_csv_regular']['tmp_name'];
+
+		$csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
+
+		if(!empty($_FILES['upload_csv_regular']['name']) && in_array($_FILES['upload_csv_regular']['type'], $csvMimes)) {
+			if(is_uploaded_file($_FILES['upload_csv_regular']['tmp_name'])) {
+				$csvFile = fopen($_FILES['upload_csv_regular']['tmp_name'], 'r');
+				fgetcsv($csvFile);
+
+				while (($line = fgetcsv($csvFile)) !== FALSE) {
+					$student_id = $line[0];
+					$id_number = $line[1];
+					$yr_lvl = $line[2];
+					$fname = $line[3];
+					$mname = $line[4];
+					$lname = $line[5];
+					$sname = $line[6];
+					$province = $line[7];
+					$city = $line[8];
+					$barangay = $line[9];
+					$house_num = $line[10];
+					$zip_code = $line[11];
+					$eval_status = $line[12];
+					$status = $line[13];
+					$password = $line[14];
+
+					//check query if exist
+					$sql_check = "SELECT * FROM student_pri_info_tbl WHERE student_id = '".$line[0]."'";
+					$sql_check_result = $conn->query($sql_check);
+
+					if ($sql_check_result->num_rows > 0) {
+						$sql_update = "UPDATE student_pri_info_tbl SET id_number = '".$line[1]."', yr_lvl = '".$line[2]."', fname = '".$line[3]."', mname = '".$line[4]."', lname = '".$line[5]."', sname = '".$line[6]."', province = '".$line[7]."', city = '".$line[8]."', barangay = '".$line[9]."', house_num = '".$line[10]."', zip_code = '".$line[1]."', eval_status = '".$line[12]."', status = '".$line[13]."', password = '".$line[14]."' WHERE student_id = '".$line[0]."'";
+						$sql_update_result = mysqli_query($conn, $sql_update);
+
+						if ($sql_update_result) {
+							header("Location: ../upload_student_csv.php?success_msg=Updated students information");
+							exit();
+						}
+						else {
+							header("Location: ../upload_student_csv.php?error_msg=Error update students information");
+							exit();
+						}
+					}
+					else {
+						$sql_insert = "INSERT INTO student_pri_info_tbl (student_id, id_number, yr_lvl, fname, mname, lname, sname, province, city, barangay, house_num, zip_code, eval_status, status, password) VALUES ('".$student_id."', '".$id_number."', '".$yr_lvl."', '".$fname."', '".$mname."', '".$lname."', '".$sname."', '".$province."', '".$city."', '".$barangay."', '".$house_num."', '".$zip_code."', '".$eval_status."', '".$status."', '".$password."')";
+						$sql_insert_result = mysqli_query($conn, $sql_insert);
+
+						if ($sql_insert_result) {
+							header("Location: ../upload_student_csv.php?success_msg=Students information has been imported successfully");
+							exit();
+						}
+						else {
+							header("Location: ../upload_student_csv.php?error_msg=Error import students information");
+							exit();
+						}
+					}
+				}
+				fclose($csvFile);
+			} else {
+				header("Location: ../upload_student_csv.php?error_msg=Error import file");
+				exit();
+			}
+		} else {
+			header("Location: ../upload_student_csv.php?error_msg=Error empty file");
+			exit();
+		}
+	}
 ?>

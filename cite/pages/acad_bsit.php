@@ -88,7 +88,7 @@ if (isset($_SESSION['std_student_id']) && isset($_SESSION['std_id_number']) && i
                                                     </li>
                                                     <li class="nav-item">
                                                         <a class="nav-link" href="admission.php">ADMISSION</a></li>
-                                                        <li id="nav" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['fname'];?></a>
+                                                        <li id="nav" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['std_fname'];?></a>
                                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
                                                         <a class="dropdown-item" href="profile.php"><!-- <img src="images/xiao.png"> -->Profile Settings</a>
                                                         <div class="dropdown-divider"></div>
