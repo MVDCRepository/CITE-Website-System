@@ -198,6 +198,7 @@
 }
 
 @media (max-width:575px) {
+    html,body{overflow-x: hidden;}
     .navbar-expand-lg .navbar-nav .nav-link { padding-left: 0; }
     .carousel-caption { display: none; }
     .logo1 { float: inherit; text-align: center; }
