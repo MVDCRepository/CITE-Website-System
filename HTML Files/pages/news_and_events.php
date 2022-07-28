@@ -212,6 +212,60 @@
                             </div>
                             <div class="card">
                                 <div class="card-image">
+                                    <img src="https://ucu.edu.ph/application/files/3516/5267/8034/thmb-ree.jpg">
+                                </div>
+                                <div class="card-info">
+                                    <h3>UCU hails the 2022 ...</h3>
+                                    <p>May 13, 2022, 2:36 PM</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="https://ucu.edu.ph/application/files/3516/5267/8034/thmb-ree.jpg">
+                                </div>
+                                <div class="card-info">
+                                    <h3>UCU hails the 2022 ...</h3>
+                                    <p>May 13, 2022, 2:36 PM</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="https://ucu.edu.ph/application/files/3516/5267/8034/thmb-ree.jpg">
+                                </div>
+                                <div class="card-info">
+                                    <h3>UCU hails the 2022 ...</h3>
+                                    <p>May 13, 2022, 2:36 PM</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="https://ucu.edu.ph/application/files/3516/5267/8034/thmb-ree.jpg">
+                                </div>
+                                <div class="card-info">
+                                    <h3>UCU hails the 2022 ...</h3>
+                                    <p>May 13, 2022, 2:36 PM</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="https://ucu.edu.ph/application/files/3516/5267/8034/thmb-ree.jpg">
+                                </div>
+                                <div class="card-info">
+                                    <h3>UCU hails the 2022 ...</h3>
+                                    <p>May 13, 2022, 2:36 PM</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="https://ucu.edu.ph/application/files/3516/5267/8034/thmb-ree.jpg">
+                                </div>
+                                <div class="card-info">
+                                    <h3>UCU hails the 2022 ...</h3>
+                                    <p>May 13, 2022, 2:36 PM</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-image">
                                     <img src="https://ucu.edu.ph/application/files/5716/4982/9944/thmb-ucunews.jpg">
                                 </div>
                                 <div class="card-info">

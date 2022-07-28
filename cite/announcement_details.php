@@ -128,7 +128,7 @@
                                 }
 
                                 else {
-                                    echo "<center><h1 class='error_msg'>No News & Events available</h1></center>";
+                                    echo "<center><h1 class='error_msg'>No Announcement available</h1></center>";
                                 }
                             ?>
 
