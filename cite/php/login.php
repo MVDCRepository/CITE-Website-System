@@ -58,22 +58,21 @@ if (isset($_POST['id_number']) && isset($_POST['password'])) {
 			$row = mysqli_fetch_assoc($result);
 
 			if ($row['id_number'] === $id_number && $row['password'] === $password) {
-				$_SESSION['student_id'] = $row['student_id'];
-				$_SESSION['id_number'] = $row['id_number'];
-				$_SESSION['fname'] = $row['fname'];
-				$_SESSION['mname'] = $row['mname'];
-				$_SESSION['lname'] = $row['lname'];
-				$_SESSION['sname'] = $row['sname'];
-				$_SESSION['province'] = $row['province'];
-				$_SESSION['city'] = $row['city'];
-				$_SESSION['barangay'] = $row['barangay'];
-				$_SESSION['house_num'] = $row['house_num'];
-				$_SESSION['zip_code'] = $row['zip_code'];
-				$_SESSION['yr_lvl'] = $row['yr_lvl'];
-				$_SESSION['eval_status'] = $row['eval_status'];
-				$_SESSION['status'] = $row['status'];
+				$_SESSION['std_student_id'] = $row['student_id'];
+				$_SESSION['std_id_number'] = $row['id_number'];
+				$_SESSION['std_fname'] = $row['fname'];
+				$_SESSION['std_mname'] = $row['mname'];
+				$_SESSION['std_lname'] = $row['lname'];
+				$_SESSION['std_sname'] = $row['sname'];
+				$_SESSION['std_province'] = $row['province'];
+				$_SESSION['std_city'] = $row['city'];
+				$_SESSION['std_barangay'] = $row['barangay'];
+				$_SESSION['std_house_num'] = $row['house_num'];
+				$_SESSION['std_yr_lvl'] = $row['yr_lvl'];
+				$_SESSION['std_eval_status'] = $row['eval_status'];
+				$_SESSION['std_status'] = $row['status'];
 
-				$_SESSION['contact_num'] = $row['contact_num'];
+				$_SESSION['std_contact_num'] = $row['contact_num'];
 				header("Location: ../pages/index.php");
 				exit();
 			}

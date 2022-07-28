@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status'])) {
+if (isset($_SESSION['std_student_id']) && isset($_SESSION['std_id_number']) && isset($_SESSION['std_fname']) && isset($_SESSION['std_mname']) && isset($_SESSION['std_lname']) && isset($_SESSION['std_yr_lvl']) && isset($_SESSION['std_eval_status'])) {
     include '../db_conn.php';
-    $student_id = $_SESSION['student_id'];
+    $student_id = $_SESSION['std_student_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,7 +94,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="admission.php">ADMISSION</a></li>
-                                                <li id="nav" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['fname'];?></a>
+                                                <li id="nav" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['std_fname'];?></a>
                                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
                                                     <a style="font-weight: 600;" class="dropdown-item" href="profile.php"><!-- <img src="../images/xiao.png"> -->Profile Settings</a>
                                                     <div class="dropdown-divider"></div>
@@ -124,7 +124,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                 <div class="reg_content">
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <p hidden id="student_status"><?php echo $_SESSION['status'];?></p>
+                                            <p hidden id="student_status"><?php echo $_SESSION['std_status'];?></p>
                                             <!-- <p hidden id="student_status">Transferee Graduating</p> -->
                                             <center>
                                                 <?php if (isset($_GET['error_msg'])) { ?>
@@ -429,7 +429,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 50%">
-                                                                <input type="hidden" name="student_id" value="<?php echo $_SESSION['student_id'];?>">
+                                                                <input type="hidden" name="student_id" value="<?php echo $_SESSION['std_student_id'];?>">
                                                                 <div class="control-form">
                                                                     <input type="password" class="form-control" id="password" name="password">
                                                                     <small></small>
@@ -485,7 +485,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                         </div>
                                                         <div class="modal_body">
                                                             <form action="../php/submit_requirementsPHP.php" method="POST" enctype="multipart/form-data">
-                                                                <input type="hidden" name="student_id" id="student_id" value="<?php echo $_SESSION['student_id'];?>">
+                                                                <input type="hidden" name="student_id" id="student_id" value="<?php echo $_SESSION['std_student_id'];?>">
                                                                 <input type="hidden" id="file_name" name="file_name">
                                                                 <div class="alert alert-warning" role="alert">
                                                                    In accordance with your choice, submit your requirement.
@@ -1234,7 +1234,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
 <?php
 } 
 else {
-  header("Location: ../user_login.php");
+  header("Location: ../login.php");
   exit();
 }
 

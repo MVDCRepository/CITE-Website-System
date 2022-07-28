@@ -383,11 +383,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                               student_pri_info_tbl.lname,
                               student_pri_info_tbl.sname,
 
-                              commitment_undertaking_tbl.*
+                              cert_consent_tbl.*
 
                               FROM student_pri_info_tbl
 
-                              INNER JOIN commitment_undertaking_tbl ON student_pri_info_tbl.student_id = commitment_undertaking_tbl.student_id LIMIT 10";
+                              INNER JOIN cert_consent_tbl ON student_pri_info_tbl.student_id = cert_consent_tbl.student_id LIMIT 10";
                     }
 
                     $result = $conn->query($sql);

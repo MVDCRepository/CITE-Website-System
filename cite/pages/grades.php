@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status']) && isset($_SESSION['status'])) {
+if (isset($_SESSION['std_student_id']) && isset($_SESSION['std_id_number']) && isset($_SESSION['std_fname']) && isset($_SESSION['std_mname']) && isset($_SESSION['std_lname']) && isset($_SESSION['std_yr_lvl']) && isset($_SESSION['std_eval_status']) && isset($_SESSION['std_status'])) {
   include '../db_conn.php';
 
-  $student_id = $_SESSION['student_id'];
-  $student_status = $_SESSION['status'];
+  $student_id = $_SESSION['std_student_id'];
+  $student_status = $_SESSION['std_status'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +95,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="admission.php">ADMISSION</a></li>
-                                                <li id="nav-last" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['fname'];?></a>
+                                                <li id="nav-last" class="nav-item last"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['std_fname'];?></a>
                                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
                                                     <a class="dropdown-item" href="profile.php"><!-- <img src="../images/xiao.png"> -->Profile Settings</a>
                                                     <div class="dropdown-divider"></div>
@@ -2627,7 +2627,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
 <?php
 } 
 else {
-  header("Location: ../user_login.php");
+  header("Location: ../login.php");
   exit();
 }
 

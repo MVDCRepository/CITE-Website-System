@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status'])) {
+if (isset($_SESSION['std_student_id']) && isset($_SESSION['std_id_number']) && isset($_SESSION['std_fname']) && isset($_SESSION['std_mname']) && isset($_SESSION['std_lname']) && isset($_SESSION['std_yr_lvl']) && isset($_SESSION['std_eval_status'])) {
     include '../db_conn.php';
-    $student_id = $_SESSION['student_id'];
+    $student_id = $_SESSION['std_student_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,7 +105,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                                     <a class="nav-link" href="admission.php">ADMISSION</a>
                                 </li>
                                 <li id="nav-last" class="nav-item last"><a class="nav-link dropdown-toggle" href="#"
-                                        id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['fname'];?></a>
+                                        id="navbarDropdown" role="button" data-toggle="dropdown"><?php echo $_SESSION['std_fname'];?></a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: auto; left: auto;">
                                         <a style="font-weight: 600;" class="dropdown-item" href="profile.php"><!-- <img src="../images/xiao.png"> -->Profile Settings</a>
                                         <div class="dropdown-divider"></div>
@@ -145,8 +145,8 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                             </div>
                             <img src="../images/cite_logo.png">
                         </div>
-                        <p>&emsp;&emsp;&emsp;I, <strong><u><?php echo $_SESSION['lname'].", ".$_SESSION["fname"]." ".$_SESSION["mname"]." ".$_SESSION['sname'];?></u></strong>, a Filipino citizen, of legal age, and resident of
-                            <strong><u><?php echo $_SESSION['house_num']." ".$_SESSION['barangay'].", ".$_SESSION['city'].", ".$_SESSION['province'];?></u></strong>, hereby, declare that I fully understand,
+                        <p>&emsp;&emsp;&emsp;I, <strong><u><?php echo $_SESSION['std_lname'].", ".$_SESSION["std_fname"]." ".$_SESSION["std_mname"]." ".$_SESSION['std_sname'];?></u></strong>, a Filipino citizen, of legal age, and resident of
+                            <strong><u><?php echo $_SESSION['std_house_num']." ".$_SESSION['std_barangay'].", ".$_SESSION['std_city'].", ".$_SESSION['std_province'];?></u></strong>, hereby, declare that I fully understand,
                             and commit to abide by, the following “Do’s” and “Don’ts” as integral part of the
                             responsibilities that I willingly assume as
                             student in and for the conduct of the limited face-to-face classes for A.Y. 2022-2023.</p>
@@ -250,7 +250,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                         <p>&emsp;&emsp;&emsp;Finally, I understand that I will be held liable and accountable before the
                             Urdaneta City University for any violation committed thereof</p>
                         <div class="com_undertake_confirmation">
-                            <input type="hidden" name="student_id" value="<?php echo $_SESSION['student_id'];?>">
+                            <input type="hidden" name="student_id" value="<?php echo $_SESSION['std_student_id'];?>">
                             <input class="custom_upload" type="file" name="upload_signature" id="upload_signature">
                             <div class="custom_breakline"></div>
                             <h4>Signature</h4>
@@ -341,7 +341,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
 <?php
 } 
 else {
-  header("Location: ../user_login.php");
+  header("Location: ../login.php");
   exit();
 }
 

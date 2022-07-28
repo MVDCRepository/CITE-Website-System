@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_SESSION['fname']) && isset($_SESSION['mname']) && isset($_SESSION['lname']) && isset($_SESSION['yr_lvl']) && isset($_SESSION['eval_status'])) {
+if (isset($_SESSION['std_student_id']) && isset($_SESSION['std_id_number']) && isset($_SESSION['std_fname']) && isset($_SESSION['std_mname']) && isset($_SESSION['std_lname']) && isset($_SESSION['std_yr_lvl']) && isset($_SESSION['std_eval_status'])) {
     include '../db_conn.php';
-    $student_id = $_SESSION['student_id'];
+    $student_id = $_SESSION['std_student_id'];
     $total_student = null;
     $total_reservationValue = null;
 ?>
@@ -94,7 +94,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['id_number']) && isset($_S
                     <input type="hidden" name="yr_lvlValue" id="yr_lvlValue" value="<?php echo $yr_lvl;?>">
                     <input type="hidden" name="semValue" id="semValue" value="<?php echo $sem;?>">
                     <input type="hidden" name="block_id" id="block_id" value="<?php echo $block_id;?>">
-                    <input type="hidden" name="student_id" id="student_id" value="<?php echo $_SESSION['student_id'];?>">
+                    <input type="hidden" name="student_id" id="student_id" value="<?php echo $_SESSION['std_student_id'];?>">
                     <h3>Availability:</h3>
                     <?php
                         $sql_duplicate_check = "SELECT * FROM reserve_block_tbl WHERE student_id = '$student_id' AND status = 'Pending'";
