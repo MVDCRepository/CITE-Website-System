@@ -405,7 +405,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                 ?>
                 <!-- basic information -->
                 <?php
-                  $sql = "SELECT * FROM student_basic_info_tbl WHERE student_id = '$student_id'";
+                  $sql = "SELECT
+                          student_pri_info_tbl.*,
+                          student_basic_info_tbl.*
+                          FROM student_pri_info_tbl 
+                          LEFT JOIN student_basic_info_tbl ON student_basic_info_tbl.student_id = student_pri_info_tbl.student_id
+                          WHERE student_pri_info_tbl.student_id = '$student_id'";
                   $result = $conn->query($sql);
                     if($result->num_rows > 0) {
                       while ($row=$result->fetch_assoc()) {
@@ -515,7 +520,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                 <div class="section-container card mt-4">
                   <h5 class="mb-4">Family Information</h5>
                   <?php
-                    $sql = "SELECT * FROM student_fam_info_tbl WHERE student_id = '$student_id'";
+                    $sql = "SELECT
+                            student_pri_info_tbl.*,
+                            student_fam_info_tbl.*
+                            FROM student_pri_info_tbl
+                            LEFT JOIN student_fam_info_tbl ON student_pri_info_tbl.student_id = student_fam_info_tbl.student_id
+                            WHERE student_pri_info_tbl.student_id = '$student_id'";
                     $result = $conn->query($sql);
                       if($result->num_rows > 0) {
                         while ($row=$result->fetch_assoc()) {
@@ -585,7 +595,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                   ?>
                   <br>
                   <?php
-                    $sql = "SELECT * FROM student_guardian_info_tbl WHERE student_id = '$student_id'";
+                    $sql = "SELECT
+                            student_pri_info_tbl.*,
+                            student_guardian_info_tbl.*
+                            FROM student_pri_info_tbl
+                            LEFT JOIN student_guardian_info_tbl ON student_pri_info_tbl.student_id = student_guardian_info_tbl.student_id
+                            WHERE student_pri_info_tbl.student_id = '$student_id'";
                     $result = $conn->query($sql);
                       if($result->num_rows > 0) {
                         while ($row=$result->fetch_assoc()) {
@@ -674,6 +689,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                 <!-- academic information -->
                 <?php
                   $sql = "SELECT
+                          student_pri_info_tbl.*,
+
                           student_acad_info_transferee_tbl.student_id,
                           student_acad_info_transferee_tbl.present_course,
                           student_acad_info_transferee_tbl.transfered_from,
@@ -686,11 +703,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                           eval_cmo_series_tbl.cmoNo,
                           eval_cmo_series_tbl.series
 
-                          FROM student_acad_info_transferee_tbl
+                          FROM student_pri_info_tbl
+
+                          LEFT JOIN student_acad_info_transferee_tbl ON student_pri_info_tbl.student_id = student_acad_info_transferee_tbl.student_id
 
                           LEFT JOIN eval_cmo_series_tbl ON student_acad_info_transferee_tbl.eval_id = eval_cmo_series_tbl.eval_id
 
-                  WHERE student_acad_info_transferee_tbl.student_id = '$student_id'";
+                  WHERE student_pri_info_tbl.student_id = '$student_id'";
                   $result = $conn->query($sql);
                     if($result->num_rows > 0) {
                       while ($row=$result->fetch_assoc()) {
@@ -705,7 +724,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                           <option value="<?php echo $row['eval_id'];?>">
                             <?php
                               if ($row['eval_id'] == NULL) {
-                                echo "CMO No. and Series assigned";
+                                echo "CMO No. and Series not yet entered.";
                               }
                               else {
                                 echo "CMO No. ".$row['cmoNo']." & Series of ".$row['series'];

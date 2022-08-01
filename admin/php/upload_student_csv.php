@@ -309,7 +309,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
               <!-- page header title -->
-              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> Add Student Transferee</h4>
+              <h4 class="fw-bold p-2"><span class="text-muted fw-light">Students /</span> Upload CSV</h4>
               <ul class="nav nav-pills flex-column flex-sm-row mb-3">
                 <li class="nav-item">
                   <a class="nav-link" href="add_student.php">Freshmen/Regular</a>
@@ -334,18 +334,18 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
               <form action="php/studentPHP.php" method="POST" enctype="multipart/form-data">
                 <div class="section-container card">
                   <div class="row">
-                    <h5>Upload Regular/Freshmen Students CSV</h5>
+                    <h5>Import Students List CSV File</h5>
                     <div class="col-md-5">
-                      <input type="file" class="form-control" name="upload_csv_regular" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
+                      <input type="file" class="form-control" name="upload_csv_student" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
                     </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-                      <button class="main-button me-md-2" type="submit" name="upload_csv_regular_btn">Upload CSV</button>
+                      <button class="main-button me-md-2" type="submit" name="upload_csv_student_btn">Upload CSV</button>
                     </div>
                   </div>
                 </div>
               </form>
 
-                <div class="section-container card mt-4">
+                <!-- <div class="section-container card mt-4">
                   <div class="row">
                     <h5>Upload Transferee Students CSV</h5>
                     <div class="col-md-5">
@@ -355,7 +355,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                       <button class="main-button me-md-2" type="submit" name="upload_csv_transferee_btn">Upload CSV</button>
                     </div>
                   </div>
-                </div>
+                </div> -->
               <!-- / section container -->
               <!-- / Content -->
 

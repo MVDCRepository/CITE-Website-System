@@ -386,7 +386,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                             if ($row['status'] == "Freshmen" || $row['status'] == "Regular" || $row['status'] == "Regular Graduating") {
                               echo "<a href='upd_student.php?student_id={$row['student_id']}'><button class='editbtn'>Edit</button></a>";
                             }
-                            if ($row['status'] == "Transferee" || $row['status'] == "Graduating Transferee") {
+                            if ($row['status'] == "Transferee" || $row['status'] == "Transferee Graduating") {
                               echo "<a href='upd_student_transferee.php?student_id={$row['student_id']}'><button class='editbtn'>Edit</button></a>";
                             }
                           ?>

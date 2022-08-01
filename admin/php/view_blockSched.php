@@ -321,71 +321,73 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                 <!-- table wrapper -->
                 <div class="section-container card">
                   <h5 class="mt-2 mb-4"><span class="text-muted fw-light"><?php echo "Block ".$block_no;?> /</span> <?php echo $yr_lvl." Year";?></h5>
-                  <table class="table-cite mb-4">
-                    <thead>
-                      <tr>
-                        <th scope="col" colspan="5"><p class="my-0 text-center"><?php echo $yr_lvl." Year ".$sem." Semester";?></p></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td scope="col"><span class="fw-bold">Course Code</span></td>
-                        <td scope="col"><span class="fw-bold">Course Description</span></td>
-                        <td scope="col"><span class="fw-bold">Units</span></td>
-                        <td scope="col"><span class="fw-bold">Time</span></td>
-                        <td scope="col"><span class="fw-bold">Days</span></td>
-                      </tr>
-                    <?php
-                      include "db_conn.php";
-                      $sql = "SELECT
-                              blocking_tbl.block_id,
-                              blocking_tbl.yr_lvl,
-                              blocking_tbl.sem,
-                              blocking_tbl.acad_id,
-                              blocking_tbl.total_student,
-                              blocking_tbl.eval_id,
-
-                              subject_tbl.subj_id,
-                              subject_tbl.courseCode,
-                              subject_tbl.courseDesc,
-                              subject_tbl.units,
-
-                              blocking_subj_tbl.subj_id,
-                              blocking_subj_tbl.start_time,
-                              blocking_subj_tbl.end_time,
-                              blocking_subj_tbl.days
-
-                              FROM blocking_tbl
-                              INNER JOIN blocking_subj_tbl ON blocking_subj_tbl.block_id = blocking_tbl.block_id
-                              INNER JOIN subject_tbl ON subject_tbl.subj_id = blocking_subj_tbl.subj_id
-                              WHERE blocking_tbl.block_id = '$block_id' AND blocking_tbl.block_no = '$block_no' AND blocking_tbl.yr_lvl = '$yr_lvl' AND blocking_tbl.sem = '$sem' AND blocking_tbl.acad_id = '$acad_id'";
-
-                      $result = $conn->query($sql);
-                        if($result->num_rows > 0) {
-                          while ($row=$result->fetch_assoc()) {
-                    ?>
-                      <tr>
-                        <td><?php echo $row['courseCode'];?></td>
-                        <td><?php echo $row['courseDesc'];?></td>
-                        <td><?php echo $row['units'];?></td>
-                        <td>
-                          <?php
-                              $start_time = $row['start_time'];
-                              $end_time = $row['end_time'];
-                              echo date("h:i a", strtotime($start_time))." - ".date("h:i a", strtotime($end_time));
-                          ?>
-                        </td>
-                        <td><?php echo $row['days'];?></td>
-                      </tr>
+                  <div class="table-wrapper">
+                    <table class="table-cite mb-4">
+                      <thead>
+                        <tr>
+                          <th scope="col" colspan="5"><p class="my-0 text-center"><?php echo $yr_lvl." Year ".$sem." Semester";?></p></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td scope="col"><span class="fw-bold">Course Code</span></td>
+                          <td scope="col"><span class="fw-bold">Course Description</span></td>
+                          <td scope="col"><span class="fw-bold">Units</span></td>
+                          <td scope="col"><span class="fw-bold">Time</span></td>
+                          <td scope="col"><span class="fw-bold">Days</span></td>
+                        </tr>
                       <?php
+                        include "db_conn.php";
+                        $sql = "SELECT
+                                blocking_tbl.block_id,
+                                blocking_tbl.yr_lvl,
+                                blocking_tbl.sem,
+                                blocking_tbl.acad_id,
+                                blocking_tbl.total_student,
+                                blocking_tbl.eval_id,
+
+                                subject_tbl.subj_id,
+                                subject_tbl.courseCode,
+                                subject_tbl.courseDesc,
+                                subject_tbl.units,
+
+                                blocking_subj_tbl.subj_id,
+                                blocking_subj_tbl.start_time,
+                                blocking_subj_tbl.end_time,
+                                blocking_subj_tbl.days
+
+                                FROM blocking_tbl
+                                INNER JOIN blocking_subj_tbl ON blocking_subj_tbl.block_id = blocking_tbl.block_id
+                                INNER JOIN subject_tbl ON subject_tbl.subj_id = blocking_subj_tbl.subj_id
+                                WHERE blocking_tbl.block_id = '$block_id' AND blocking_tbl.block_no = '$block_no' AND blocking_tbl.yr_lvl = '$yr_lvl' AND blocking_tbl.sem = '$sem' AND blocking_tbl.acad_id = '$acad_id'";
+
+                        $result = $conn->query($sql);
+                          if($result->num_rows > 0) {
+                            while ($row=$result->fetch_assoc()) {
+                      ?>
+                        <tr>
+                          <td><?php echo $row['courseCode'];?></td>
+                          <td><?php echo $row['courseDesc'];?></td>
+                          <td><?php echo $row['units'];?></td>
+                          <td>
+                            <?php
+                                $start_time = $row['start_time'];
+                                $end_time = $row['end_time'];
+                                echo date("h:i a", strtotime($start_time))." - ".date("h:i a", strtotime($end_time));
+                            ?>
+                          </td>
+                          <td><?php echo $row['days'];?></td>
+                        </tr>
+                        <?php
+                            }
                           }
-                        }
-                        else {
-                          echo "<tr><td colspan='6' style='color: #ff0000;'><center>No subject available</center></td></tr>";
-                        }
-                     ?>
-                    </tbody>
-                  </table>
+                          else {
+                            echo "<tr><td colspan='6' style='color: #ff0000;'><center>No subject available</center></td></tr>";
+                          }
+                       ?>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
 
                 <!-- accept student modal-->
@@ -441,71 +443,73 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
 
                 <div class="section-container card mt-4">
                   <h5 class="mt-2 mb-4">List of Students</h5>
-                  <table class="table-cite" id="student_tbl">
-                    <thead>
-                      <tr>
-                        <th scope="col" colspan="5"><p class="my-0 text-center">Students</p></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td scope="col" style="display: none;"><span class="fw-bold">ID</span></td>
-                        <td scope="col"><span class="fw-bold">ID Number</span></td>
-                        <td scope="col"><span class="fw-bold">Name</span></td>
-                        <td scope="col"><span class="fw-bold">Year Level</span></td>
-                        <td scope="col"><span class="fw-bold">Status</span></td>
-                        <td scope="col"><span class="fw-bold">Action</span></td>
-                      </tr>
-                      <?php
-                      include "db_conn.php";
-                      $sql = "SELECT
-                              student_pri_info_tbl.student_id,
-                              student_pri_info_tbl.id_number,
-                              student_pri_info_tbl.fname,
-                              student_pri_info_tbl.mname,
-                              student_pri_info_tbl.lname,
-                              student_pri_info_tbl.yr_lvl,
+                  <div class="table-wrapper">
+                    <table class="table-cite" id="student_tbl">
+                      <thead>
+                        <tr>
+                          <th scope="col" colspan="5"><p class="my-0 text-center">Students</p></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td scope="col" style="display: none;"><span class="fw-bold">ID</span></td>
+                          <td scope="col"><span class="fw-bold">ID Number</span></td>
+                          <td scope="col"><span class="fw-bold">Name</span></td>
+                          <td scope="col"><span class="fw-bold">Year Level</span></td>
+                          <td scope="col"><span class="fw-bold">Status</span></td>
+                          <td scope="col"><span class="fw-bold">Action</span></td>
+                        </tr>
+                        <?php
+                        include "db_conn.php";
+                        $sql = "SELECT
+                                student_pri_info_tbl.student_id,
+                                student_pri_info_tbl.id_number,
+                                student_pri_info_tbl.fname,
+                                student_pri_info_tbl.mname,
+                                student_pri_info_tbl.lname,
+                                student_pri_info_tbl.yr_lvl,
 
-                              reserve_block_tbl.id,
-                              reserve_block_tbl.block_id,
-                              reserve_block_tbl.student_id,
-                              reserve_block_tbl.status,
+                                reserve_block_tbl.id,
+                                reserve_block_tbl.block_id,
+                                reserve_block_tbl.student_id,
+                                reserve_block_tbl.status,
 
-                              blocking_tbl.block_id,
-                              blocking_tbl.yr_lvl,
-                              blocking_tbl.sem
+                                blocking_tbl.block_id,
+                                blocking_tbl.yr_lvl,
+                                blocking_tbl.sem
 
-                              FROM student_pri_info_tbl
-                              INNER JOIN reserve_block_tbl ON reserve_block_tbl.student_id = student_pri_info_tbl.student_id
-                              INNER JOIN blocking_tbl ON blocking_tbl.block_id = reserve_block_tbl.block_id
-                              WHERE blocking_tbl.block_id = '$block_id' AND reserve_block_tbl.status = 'Pending'";
+                                FROM student_pri_info_tbl
+                                INNER JOIN reserve_block_tbl ON reserve_block_tbl.student_id = student_pri_info_tbl.student_id
+                                INNER JOIN blocking_tbl ON blocking_tbl.block_id = reserve_block_tbl.block_id
+                                WHERE blocking_tbl.block_id = '$block_id' AND reserve_block_tbl.status = 'Pending'";
 
-                        $result = $conn->query($sql);
-                          if($result->num_rows > 0) {
-                            while ($student_list=$result->fetch_assoc()) {
-                      ?>
-                      <tr>
-                        <td style="display: none"><?php echo $student_list['student_id'];?></td>
-                        <td><?php echo $student_list['id_number'];?></td>
-                        <td><?php echo $student_list['lname']." ,".$student_list['fname']." ".$student_list['mname'];?></td>
-                        <td><?php echo $student_list['yr_lvl'];?></td>
-                        <td><?php echo $student_list['status'];?></td>
-                        <td>
-                          <div class="d-grid gap-2 d-md-block">
-                            <button class="editbtn" id="accept_btn" data-modal="accept_modal">Accept</button>
-                            <button class="delbtn" id="unload_btn" data-modal="unload_modal">Unload</button>
-                          </div>
-                        </td>
-                      </tr>
-                      <?php
+                          $result = $conn->query($sql);
+                            if($result->num_rows > 0) {
+                              while ($student_list=$result->fetch_assoc()) {
+                        ?>
+                        <tr>
+                          <td style="display: none"><?php echo $student_list['student_id'];?></td>
+                          <td><?php echo $student_list['id_number'];?></td>
+                          <td><?php echo $student_list['lname']." ,".$student_list['fname']." ".$student_list['mname'];?></td>
+                          <td><?php echo $student_list['yr_lvl'];?></td>
+                          <td><?php echo $student_list['status'];?></td>
+                          <td>
+                            <div class="d-grid gap-2 d-md-block">
+                              <button class="editbtn" id="accept_btn" data-modal="accept_modal">Accept</button>
+                              <button class="delbtn" id="unload_btn" data-modal="unload_modal">Unload</button>
+                            </div>
+                          </td>
+                        </tr>
+                        <?php
+                          }
                         }
-                      }
-                      else {
-                        echo "<tr><td colspan='6' style='color: #ff0000;'><center>No students available</center></td></tr>";
-                      }
-                     ?>
-                    </tbody>
-                  </table>
+                        else {
+                          echo "<tr><td colspan='6' style='color: #ff0000;'><center>No students available</center></td></tr>";
+                        }
+                       ?>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
                 <!-- / table wrapper -->
               <!-- / section container -->

@@ -296,14 +296,44 @@
 			$sql_primary_info_result = mysqli_query($conn, $sql_primary_info);
 
 			if ($sql_primary_info_result) {
+
 				// queries
-				$sql_basic_info = "UPDATE student_basic_info_tbl SET bdate = '$bdate', nationality = '$nationality', birth_province = '$birth_province', birth_city = '$birth_city', birth_barangay = '$birth_barangay', birth_house_num = '$birth_house_num', birth_zip_code = '$birth_zip_code', email = '$email', contact_num = '$contact_num', gender = '$gender', religion = '$religion' WHERE student_id = '$student_id'";
 
-				$sql_family_info = "UPDATE student_fam_info_tbl SET father_fname = '$father_fname', father_mname = '$father_mname', father_lname = '$father_lname', father_sname = '$father_sname', father_contact = '$father_contact', father_occupation = '$father_occupation', mother_fname = '$mother_fname', mother_mname = '$mother_mname', mother_lname = '$mother_lname', mother_contact = '$mother_contact', mother_occupation = '$mother_occupation' WHERE student_id = '$student_id'";
+				$check_record_studentBasic_info = mysqli_query($conn, "SELECT * FROM student_basic_info_tbl WHERE student_id = '$student_id'");
+				$check_record_studentBasic_info_result = mysqli_num_rows($check_record_studentBasic_info);
 
-				$sql_guardian_info = "UPDATE student_guardian_info_tbl SET guardian_fname = '$guardian_fname', guardian_mname = '$guardian_mname', guardian_lname = '$guardian_lname', guardian_sname = '$guardian_sname', guardian_contact = '$guardian_contact', guardian_occupation = '$guardian_occupation', guardian_relationship = '$guardian_relationship', spouse_fname = '$spouse_fname', spouse_mname = '$spouse_mname', spouse_lname = '$spouse_lname', spouse_sname = '$spouse_sname', spouse_contact = '$spouse_contact', spouse_occupation = '$spouse_occupation' WHERE student_id = '$student_id'";
+				if ($check_record_studentBasic_info_result == 1) {
+					$sql_basic_info = "UPDATE student_basic_info_tbl SET bdate = '$bdate', nationality = '$nationality', birth_province = '$birth_province', birth_city = '$birth_city', birth_barangay = '$birth_barangay', birth_house_num = '$birth_house_num', birth_zip_code = '$birth_zip_code', email = '$email', contact_num = '$contact_num', gender = '$gender', religion = '$religion' WHERE student_id = '$student_id'";
+				} else {
+					$sql_basic_info = "INSERT INTO student_basic_info_tbl (student_id, bdate, nationality, birth_province, birth_city, birth_barangay, birth_house_num, birth_zip_code, email, contact_num, gender, religion) VALUES ('$student_id', '$bdate', '$nationality', '$birth_province', '$birth_city', '$birth_barangay', '$birth_house_num', '$birth_zip_code', '$email', '$contact_num', '$gender', '$religion')";
+				}
 
-				$sql_academic_info = "UPDATE student_acad_info_tbl SET course = '$course', strand = '$strand', second_course = '$second_course', graduated_shs = '$graduated_shs', learners_ref_num = '$learners_ref_num', graduated_es = '$graduated_es', form_138 = '$form_138', graduated_year_es = '$graduated_year_es', eval_id = '$eval_id' WHERE student_id = '$student_id'";
+				$check_record_studentFam_info = mysqli_query($conn, "SELECT * FROM student_fam_info_tbl WHERE student_id = '$student_id'");
+				$check_record_studentFam_info_result = mysqli_num_rows($check_record_studentFam_info);
+
+				if ($check_record_studentFam_info_result == 1) {
+					$sql_family_info = "UPDATE student_fam_info_tbl SET father_fname = '$father_fname', father_mname = '$father_mname', father_lname = '$father_lname', father_sname = '$father_sname', father_contact = '$father_contact', father_occupation = '$father_occupation', mother_fname = '$mother_fname', mother_mname = '$mother_mname', mother_lname = '$mother_lname', mother_contact = '$mother_contact', mother_occupation = '$mother_occupation' WHERE student_id = '$student_id'";
+				} else {
+					$sql_family_info = "INSERT INTO student_fam_info_tbl (student_id, father_fname, father_mname, father_lname, father_sname, father_contact, father_occupation, mother_fname, mother_mname, mother_lname, mother_contact, mother_occupation) VALUES ('$student_id', '$father_fname', '$father_mname', '$father_lname', '$father_sname', '$father_contact', '$father_occupation', '$mother_fname', '$mother_mname', '$mother_lname', '$mother_contact', '$mother_occupation')";
+				}
+				
+				$check_record_studentGuard_info = mysqli_query($conn, "SELECT * FROM student_guardian_info_tbl WHERE student_id = '$student_id'");
+				$check_record_studentGuard_info_result = mysqli_num_rows($check_record_studentGuard_info);
+
+				if ($check_record_studentGuard_info_result == 1) {
+					$sql_guardian_info = "UPDATE student_guardian_info_tbl SET guardian_fname = '$guardian_fname', guardian_mname = '$guardian_mname', guardian_lname = '$guardian_lname', guardian_sname = '$guardian_sname', guardian_contact = '$guardian_contact', guardian_occupation = '$guardian_occupation', guardian_relationship = '$guardian_relationship', spouse_fname = '$spouse_fname', spouse_mname = '$spouse_mname', spouse_lname = '$spouse_lname', spouse_sname = '$spouse_sname', spouse_contact = '$spouse_contact', spouse_occupation = '$spouse_occupation' WHERE student_id = '$student_id'";
+				} else {
+					$sql_guardian_info = "INSERT INTO student_guardian_info_tbl (student_id, guardian_fname, guardian_mname, guardian_lname, guardian_sname, guardian_contact, guardian_occupation, guardian_relationship, spouse_fname, spouse_mname, spouse_lname, spouse_sname, spouse_contact, spouse_occupation) VALUES ('$student_id', '$guardian_fname', '$guardian_mname', '$guardian_lname', '$guardian_sname', '$guardian_contact', '$guardian_occupation', '$guardian_relationship', '$spouse_fname', '$spouse_mname', '$spouse_lname', '$spouse_sname', '$spouse_contact', '$spouse_occupation')";
+				}
+
+				$check_record_studentAcad_info = mysqli_query($conn, "SELECT * FROM student_acad_info_tbl WHERE student_id = '$student_id'");
+				$check_record_studentAcad_info_result = mysqli_num_rows($check_record_studentAcad_info);
+
+				if ($check_record_studentAcad_info_result == 1) {
+					$sql_academic_info = "UPDATE student_acad_info_tbl SET course = '$course', strand = '$strand', second_course = '$second_course', graduated_shs = '$graduated_shs', learners_ref_num = '$learners_ref_num', graduated_es = '$graduated_es', form_138 = '$form_138', graduated_year_es = '$graduated_year_es', eval_id = '$eval_id' WHERE student_id = '$student_id'";
+				} else {
+					$sql_academic_info = "INSERT INTO student_acad_info_tbl (student_id, course, strand, second_course, graduated_shs, learners_ref_num, graduated_es, form_138, graduated_year_es, eval_id) VALUES ('$student_id', '$course', '$strand', '$second_course', '$graduated_shs', '$learners_ref_num', '$graduated_es', '$form_138', '$graduated_year_es', '$eval_id')";
+				}
 
 				// sql results
 				$sql_basic_info_result = mysqli_query($conn, $sql_basic_info);
@@ -409,14 +439,44 @@
 			$sql_primary_info_result = mysqli_query($conn, $sql_primary_info);
 
 			if ($sql_primary_info_result) {
+
 				// queries
-				$sql_basic_info = "UPDATE student_basic_info_tbl SET bdate = '$bdate', nationality = '$nationality', birth_province = '$birth_province', birth_city = '$birth_city', birth_barangay = '$birth_barangay', birth_house_num = '$birth_house_num', birth_zip_code = '$birth_zip_code', email = '$email', contact_num = '$contact_num', gender = '$gender', religion = '$religion' WHERE student_id = '$student_id'";
 
-				$sql_family_info = "UPDATE student_fam_info_tbl SET father_fname = '$father_fname', father_mname = '$father_mname', father_lname = '$father_lname', father_sname = '$father_sname', father_contact = '$father_contact', father_occupation = '$father_occupation', mother_fname = '$mother_fname', mother_mname = '$mother_mname', mother_lname = '$mother_lname', mother_contact = '$mother_contact', mother_occupation = '$mother_occupation' WHERE student_id = '$student_id'";
+				$check_record_studentBasic_info = mysqli_query($conn, "SELECT * FROM student_basic_info_tbl WHERE student_id = '$student_id'");
+				$check_record_studentBasic_info_result = mysqli_num_rows($check_record_studentBasic_info);
 
-				$sql_guardian_info = "UPDATE student_guardian_info_tbl SET guardian_fname = '$guardian_fname', guardian_mname = '$guardian_mname', guardian_lname = '$guardian_lname', guardian_sname = '$guardian_sname', guardian_contact = '$guardian_contact', guardian_occupation = '$guardian_occupation', guardian_relationship = '$guardian_relationship', spouse_fname = '$spouse_fname', spouse_mname = '$spouse_mname', spouse_lname = '$spouse_lname', spouse_sname = '$spouse_sname', spouse_contact = '$spouse_contact', spouse_occupation = '$spouse_occupation' WHERE student_id = '$student_id'";
+				if ($check_record_studentBasic_info_result == 1) {
+					$sql_basic_info = "UPDATE student_basic_info_tbl SET bdate = '$bdate', nationality = '$nationality', birth_province = '$birth_province', birth_city = '$birth_city', birth_barangay = '$birth_barangay', birth_house_num = '$birth_house_num', birth_zip_code = '$birth_zip_code', email = '$email', contact_num = '$contact_num', gender = '$gender', religion = '$religion' WHERE student_id = '$student_id'";
+				} else {
+					$sql_basic_info = "INSERT INTO student_basic_info_tbl (student_id, bdate, nationality, birth_province, birth_city, birth_barangay, birth_house_num, birth_zip_code, email, contact_num, gender, religion) VALUES ('$student_id', '$bdate', '$nationality', '$birth_province', '$birth_city', '$birth_barangay', '$birth_house_num', '$birth_zip_code', '$email', '$contact_num', '$gender', '$religion')";
+				}
 
-				$sql_academic_info = "UPDATE student_acad_info_transferee_tbl SET present_course = '$present_course', transfered_from = '$transfered_from', second_course = '$second_course', graduated_es = '$graduated_es', graduated_year_es = '$graduated_year_es', eval_id = '$eval_id' WHERE student_id = '$student_id'";
+				$check_record_studentFam_info = mysqli_query($conn, "SELECT * FROM student_fam_info_tbl WHERE student_id = '$student_id'");
+				$check_record_studentFam_info_result = mysqli_num_rows($check_record_studentFam_info);
+
+				if ($check_record_studentFam_info_result == 1) {
+					$sql_family_info = "UPDATE student_fam_info_tbl SET father_fname = '$father_fname', father_mname = '$father_mname', father_lname = '$father_lname', father_sname = '$father_sname', father_contact = '$father_contact', father_occupation = '$father_occupation', mother_fname = '$mother_fname', mother_mname = '$mother_mname', mother_lname = '$mother_lname', mother_contact = '$mother_contact', mother_occupation = '$mother_occupation' WHERE student_id = '$student_id'";
+				} else {
+					$sql_family_info = "INSERT INTO student_fam_info_tbl (student_id, father_fname, father_mname, father_lname, father_sname, father_contact, father_occupation, mother_fname, mother_mname, mother_lname, mother_contact, mother_occupation) VALUES ('$student_id', '$father_fname', '$father_mname', '$father_lname', '$father_sname', '$father_contact', '$father_occupation', '$mother_fname', '$mother_mname', '$mother_lname', '$mother_contact', '$mother_occupation')";
+				}
+				
+				$check_record_studentGuard_info = mysqli_query($conn, "SELECT * FROM student_guardian_info_tbl WHERE student_id = '$student_id'");
+				$check_record_studentGuard_info_result = mysqli_num_rows($check_record_studentGuard_info);
+
+				if ($check_record_studentGuard_info_result == 1) {
+					$sql_guardian_info = "UPDATE student_guardian_info_tbl SET guardian_fname = '$guardian_fname', guardian_mname = '$guardian_mname', guardian_lname = '$guardian_lname', guardian_sname = '$guardian_sname', guardian_contact = '$guardian_contact', guardian_occupation = '$guardian_occupation', guardian_relationship = '$guardian_relationship', spouse_fname = '$spouse_fname', spouse_mname = '$spouse_mname', spouse_lname = '$spouse_lname', spouse_sname = '$spouse_sname', spouse_contact = '$spouse_contact', spouse_occupation = '$spouse_occupation' WHERE student_id = '$student_id'";
+				} else {
+					$sql_guardian_info = "INSERT INTO student_guardian_info_tbl (student_id, guardian_fname, guardian_mname, guardian_lname, guardian_sname, guardian_contact, guardian_occupation, guardian_relationship, spouse_fname, spouse_mname, spouse_lname, spouse_sname, spouse_contact, spouse_occupation) VALUES ('$student_id', '$guardian_fname', '$guardian_mname', '$guardian_lname', '$guardian_sname', '$guardian_contact', '$guardian_occupation', '$guardian_relationship', '$spouse_fname', '$spouse_mname', '$spouse_lname', '$spouse_sname', '$spouse_contact', '$spouse_occupation')";
+				}
+
+				$check_record_studentAcad_info = mysqli_query($conn, "SELECT * FROM student_acad_info_transferee_tbl WHERE student_id = '$student_id'");
+				$check_record_studentAcad_info_result = mysqli_num_rows($check_record_studentAcad_info);
+
+				if ($check_record_studentAcad_info_result == 1) {
+					$sql_academic_info = "UPDATE student_acad_info_transferee_tbl SET present_course = '$present_course', transfered_from = '$transfered_from', second_course = '$second_course', graduated_es = '$graduated_es', graduated_year_es = '$graduated_year_es', eval_id = '$eval_id' WHERE student_id = '$student_id'";
+				} else {
+					$sql_academic_info = "INSERT INTO student_acad_info_transferee_tbl (student_id, present_course, transfered_from, second_course, graduated_es, graduated_year_es, eval_id) VALUES ('$student_id', '$present_course', '$transfered_from', '$second_course', '$graduated_es', '$graduated_year_es', '$eval_id')";
+				}
 
 				// sql results
 				$sql_basic_info_result = mysqli_query($conn, $sql_basic_info);
@@ -443,16 +503,16 @@
 	}
 
 	// upload freshmen or regular student csv file
-	if (isset($_FILES['upload_csv_regular']) && isset($_POST['upload_csv_regular_btn'])) {
+	if (isset($_FILES['upload_csv_student']) && isset($_POST['upload_csv_student_btn'])) {
 		include "../db_conn.php";
 
-		$upload_csv_regular = $_FILES['upload_csv_regular']['tmp_name'];
+		$upload_csv_student = $_FILES['upload_csv_student']['tmp_name'];
 
 		$csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
 
-		if(!empty($_FILES['upload_csv_regular']['name']) && in_array($_FILES['upload_csv_regular']['type'], $csvMimes)) {
-			if(is_uploaded_file($_FILES['upload_csv_regular']['tmp_name'])) {
-				$csvFile = fopen($_FILES['upload_csv_regular']['tmp_name'], 'r');
+		if(!empty($_FILES['upload_csv_student']['name']) && in_array($_FILES['upload_csv_student']['type'], $csvMimes)) {
+			if(is_uploaded_file($_FILES['upload_csv_student']['tmp_name'])) {
+				$csvFile = fopen($_FILES['upload_csv_student']['tmp_name'], 'r');
 				fgetcsv($csvFile);
 
 				while (($line = fgetcsv($csvFile)) !== FALSE) {
@@ -494,7 +554,7 @@
 						$sql_insert_result = mysqli_query($conn, $sql_insert);
 
 						if ($sql_insert_result) {
-							header("Location: ../upload_student_csv.php?success_msg=Students information has been imported successfully");
+							header("Location: ../upload_student_csv.php?success_msg=The import of student data was successful");
 							exit();
 						}
 						else {

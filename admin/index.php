@@ -49,9 +49,6 @@
 				        <div style="text-align: center;"><div class="h-captcha" data-sitekey=""  style="display: inline-block;"></div></div>
                  <button type="submit" class="btn btn-gradient-primary btn-lg font-weight-medium auth-form-btn " name="btn_login">LOG IN</button>
                 </div>
-                <div class="my-2 d-flex justify-content-between align-items-center">
-               
-                </div>
               
                 <div class="text-center mt-4 font-weight-light">
                   <span class="font-weight-light">
