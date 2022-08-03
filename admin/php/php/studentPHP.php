@@ -513,6 +513,9 @@
 				$csvFile = fopen($_FILES['upload_csv_student']['tmp_name'], 'r');
 				fgetcsv($csvFile);
 
+				$sql_update_result = null;
+				$sql_insert_result = null;
+
 				while (($line = fgetcsv($csvFile)) !== FALSE) {
 					$id_number = $line[0];
 					$yr_lvl = $line[1];
@@ -535,15 +538,11 @@
 
 					if ($sql_check_result->num_rows > 0) {
 						$sql_update = "UPDATE student_pri_info_tbl SET yr_lvl = '".$line[1]."', fname = '".$line[2]."', mname = '".$line[3]."', lname = '".$line[4]."', sname = '".$line[5]."', province = '".$line[6]."', city = '".$line[7]."', barangay = '".$line[8]."', house_num = '".$line[9]."', zip_code = '".$line[10]."', eval_status = '".$line[11]."', status = '".$line[12]."', password = '".$line[13]."' WHERE id_number = '".$line[0]."'";
-						$sql_update_result = mysqli_query($conn, $sql_update);
-
-						
+						$sql_update_result = mysqli_query($conn, $sql_update);	
 					}
 					else {
 						$sql_insert = "INSERT INTO student_pri_info_tbl (id_number, yr_lvl, fname, mname, lname, sname, province, city, barangay, house_num, zip_code, eval_status, status, password) VALUES ('".$id_number."', '".$yr_lvl."', '".$fname."', '".$mname."', '".$lname."', '".$sname."', '".$province."', '".$city."', '".$barangay."', '".$house_num."', '".$zip_code."', '".$eval_status."', '".$status."', '".$password."')";
 						$sql_insert_result = mysqli_query($conn, $sql_insert);
-
-						
 					}
 				}
 				fclose($csvFile);
@@ -552,16 +551,19 @@
 					header("Location: ../upload_student_csv.php?success_msg=Updated students information");
 					exit();
 				}
-
 				else if ($sql_insert_result > 0) {
 					header("Location: ../upload_student_csv.php?success_msg=The import of student data was successful");
 					exit();
 				}
-				else if ($sql_insert_result == 0) {
-					header("Location: ../upload_student_csv.php?error_msg=Error import students information");
+				else if ($sql_update_result == 0) {
+					header("Location: ../upload_student_csv.php?error_msg=Error update students");
 					exit();
 				}
-				// hi russel
+				else if ($sql_insert_result == 0) {
+					header("Location: ../upload_student_csv.php?error_msg=Error import students");
+					exit();
+				}
+
 			} else {
 				header("Location: ../upload_student_csv.php?error_msg=Error import file");
 				exit();

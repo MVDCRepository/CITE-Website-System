@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2022 at 09:43 AM
+-- Generation Time: Aug 03, 2022 at 02:16 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -157,13 +157,6 @@ CREATE TABLE `cert_consent_tbl` (
   `submit_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `cert_consent_tbl`
---
-
-INSERT INTO `cert_consent_tbl` (`id`, `student_id`, `student_type`, `student_sig`, `witness_sig`, `submit_date`) VALUES
-(2, 26, 'Regular Student', '62e045feca40f1.96042015.png', '62e045feca4177.21469625.png', '2022-07-27');
-
 -- --------------------------------------------------------
 
 --
@@ -176,13 +169,6 @@ CREATE TABLE `commitment_undertaking_tbl` (
   `signature` varchar(255) NOT NULL,
   `submit_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `commitment_undertaking_tbl`
---
-
-INSERT INTO `commitment_undertaking_tbl` (`id`, `student_id`, `signature`, `submit_date`) VALUES
-(9, 26, '62e024e008c835.59177831.png', '2022-07-27');
 
 -- --------------------------------------------------------
 
@@ -265,13 +251,6 @@ CREATE TABLE `health_df_tbl` (
   `signature` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `health_df_tbl`
---
-
-INSERT INTO `health_df_tbl` (`id`, `student_id`, `submit_date`, `attend_limited_f2f`, `office_transaction`, `others`, `sore_throat`, `shortness_of_breath`, `body_pain`, `headache`, `fever`, `loss`, `cough_cold`, `diarrhea`, `question_2`, `question_3`, `question_4`, `question_4_where`, `question_5`, `question_5_where`, `question_6`, `signature`) VALUES
-(7, 26, '2022-07-26', 'checked', 'test transaction', 'test others', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'test where 4', 'No', '', 'Yes', '62dd99592092d8.89951779.png');
-
 -- --------------------------------------------------------
 
 --
@@ -328,13 +307,6 @@ CREATE TABLE `student_acad_info_tbl` (
   `eval_id` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `student_acad_info_tbl`
---
-
-INSERT INTO `student_acad_info_tbl` (`id`, `student_id`, `course`, `strand`, `second_course`, `graduated_shs`, `learners_ref_num`, `graduated_es`, `form_138`, `graduated_year_es`, `eval_id`) VALUES
-(9, 26, 'Bachelor of Science in Information Technology', 'ICT', 'Bachelor of Science in Information Technology', 'Luciano Millan National High School', '', 'Narciso R. Ramos Elementary School', '', '2012', '1');
-
 -- --------------------------------------------------------
 
 --
@@ -351,13 +323,6 @@ CREATE TABLE `student_acad_info_transferee_tbl` (
   `graduated_year_es` varchar(100) NOT NULL,
   `eval_id` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `student_acad_info_transferee_tbl`
---
-
-INSERT INTO `student_acad_info_transferee_tbl` (`id`, `student_id`, `present_course`, `transfered_from`, `second_course`, `graduated_es`, `graduated_year_es`, `eval_id`) VALUES
-(6, 27, 'Bachelor of Science in Information Technology', 'PSU Asingan', 'Bachelor of Science in Information Technology', 'Narciso R. Ramos Elementary School', '2012', '2');
 
 -- --------------------------------------------------------
 
@@ -381,14 +346,6 @@ CREATE TABLE `student_basic_info_tbl` (
   `religion` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `student_basic_info_tbl`
---
-
-INSERT INTO `student_basic_info_tbl` (`id`, `student_id`, `bdate`, `nationality`, `birth_province`, `birth_city`, `birth_barangay`, `birth_house_num`, `birth_zip_code`, `email`, `contact_num`, `gender`, `religion`) VALUES
-(13, 26, '2000-03-26', 'Filipino', 'Pangaisnan', 'Urdaneta City', '', '', '2428', 'russeljeannepinlac@gmail.com', '09705778540', 'Male', 'IGLESIA NI CRISTO'),
-(14, 27, '2002-10-31', 'Filipino', 'Pangasinan', 'Urdaneta City', '', '', '2428', 'lhoressel@gmail.com', '09705778540', 'Female', 'ROMAN CATHOLIC');
-
 -- --------------------------------------------------------
 
 --
@@ -410,14 +367,6 @@ CREATE TABLE `student_fam_info_tbl` (
   `mother_contact` varchar(100) NOT NULL,
   `mother_occupation` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `student_fam_info_tbl`
---
-
-INSERT INTO `student_fam_info_tbl` (`id`, `student_id`, `father_fname`, `father_mname`, `father_lname`, `father_sname`, `father_contact`, `father_occupation`, `mother_fname`, `mother_mname`, `mother_lname`, `mother_contact`, `mother_occupation`) VALUES
-(14, 26, '', '', '', '', '', '', 'Milagros', 'Marquez', 'Vinoya', '', 'Teacher'),
-(15, 27, 'Salvador', '', 'Salayog', '', '', 'Vendor', 'Lorena', '', 'Salayog', '', 'Vendor');
 
 -- --------------------------------------------------------
 
@@ -456,14 +405,6 @@ CREATE TABLE `student_guardian_info_tbl` (
   `spouse_occupation` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `student_guardian_info_tbl`
---
-
-INSERT INTO `student_guardian_info_tbl` (`id`, `student_id`, `guardian_fname`, `guardian_mname`, `guardian_lname`, `guardian_sname`, `guardian_contact`, `guardian_occupation`, `guardian_relationship`, `spouse_fname`, `spouse_mname`, `spouse_lname`, `spouse_sname`, `spouse_contact`, `spouse_occupation`) VALUES
-(14, 26, 'Milagros', 'Marquez', 'Vinoya', '', '', 'Teacher', 'Mother', '', '', '', '', '', ''),
-(15, 27, 'Lorena', '', 'Salayog', '', '', 'Vendor', 'Mother', '', '', '', '', '', '');
-
 -- --------------------------------------------------------
 
 --
@@ -488,14 +429,6 @@ CREATE TABLE `student_pri_info_tbl` (
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `student_pri_info_tbl`
---
-
-INSERT INTO `student_pri_info_tbl` (`student_id`, `id_number`, `yr_lvl`, `fname`, `mname`, `lname`, `sname`, `province`, `city`, `barangay`, `house_num`, `zip_code`, `eval_status`, `status`, `password`) VALUES
-(26, '20181636', '4th', 'Russel Jeanne', 'Vinoya', 'Pinlac', '', 'Pangasinan', 'Asingan', 'Bantog', '153', '2439', 'Evaluate', 'Regular Graduating', '032600'),
-(27, '10312002', '1st', 'Lhoressa Mae', 'Mercado', 'Salayog', '', 'Pangasinan', 'Asingan', 'Zone 1 Macalong', '', '2439', 'Evaluate', 'Transferee', 'lhoressel');
-
 -- --------------------------------------------------------
 
 --
@@ -510,15 +443,6 @@ CREATE TABLE `student_requirement_tbl` (
   `date_time` datetime NOT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `student_requirement_tbl`
---
-
-INSERT INTO `student_requirement_tbl` (`req_id`, `student_id`, `file_name`, `file`, `date_time`, `status`) VALUES
-(180, 26, 'FORM 137', '1658673451_church.jpg', '2022-07-24 22:37:31', 'Pending'),
-(181, 26, 'FORM 138', '1658695312_vcard.png', '2022-07-25 04:41:52', 'Pending'),
-(183, 26, 'Updated Evaluation form', '1658940409_ming.jpg', '2022-07-28 00:46:49', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -864,7 +788,7 @@ ALTER TABLE `student_guardian_info_tbl`
 -- AUTO_INCREMENT for table `student_pri_info_tbl`
 --
 ALTER TABLE `student_pri_info_tbl`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=274;
 
 --
 -- AUTO_INCREMENT for table `student_requirement_tbl`
