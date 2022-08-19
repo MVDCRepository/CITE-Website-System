@@ -242,9 +242,18 @@ if (isset($_SESSION['std_student_id']) && isset($_SESSION['std_id_number']) && i
                                                 $sql_result = $conn->query($sql);
                                                 if($sql_result->num_rows > 0) {
                                                     while ($row=$sql_result->fetch_assoc()) {
+
+                                                        $guardian_mi = $row['guardian_mname'];
+
+                                                        if ($guardian_mi != null) {
+                                                            $guardian_mi = $row['guardian_mname'][0].".";
+                                                        }
+                                                        else {
+                                                            $guardian_mi = null;
+                                                        }
                                             ?>
                                             <div class="health_df_input">
-                                                <input type="text" id="sig_name_witness" name="sig_name_witness" value="<?php echo strtoupper($row['guardian_fname']." ".$row['guardian_mname'][0].". ".$row['guardian_lname']." ".$row['guardian_sname']);?>" readonly>
+                                                <input type="text" id="sig_name_witness" name="sig_name_witness" value="<?php echo $row['guardian_fname']." ".$guardian_mi." ".$row['guardian_lname']." ".$row['guardian_sname'];?>" readonly>
                                             </div>
                                             <?php
                                                     }

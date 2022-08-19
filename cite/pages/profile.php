@@ -152,7 +152,7 @@ if (isset($_SESSION['std_student_id']) && isset($_SESSION['std_id_number']) && i
                                                     </tr>
                                                     <tr>
                                                         <th>Full Name</th>
-                                                        <td><?php echo $row['mname'].", ".$row['fname']." ".$row['lname']." ".$row['sname'];?></td>
+                                                        <td><?php echo $row['lname'].", ".$row['fname']." ".$row['mname']." ".$row['sname'];?></td>
                                                     </tr>
                                                     <tr class="table-active">
                                                         <th colspan="2">PERMANENT ADDRESS :</th>

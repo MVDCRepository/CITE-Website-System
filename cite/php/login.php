@@ -47,7 +47,7 @@ if (isset($_POST['id_number']) && isset($_POST['password'])) {
 
 				FROM student_pri_info_tbl
 
-				INNER JOIN student_basic_info_tbl ON student_pri_info_tbl.student_id = student_basic_info_tbl.student_id
+				LEFT JOIN student_basic_info_tbl ON student_pri_info_tbl.student_id = student_basic_info_tbl.student_id
 
 				WHERE student_pri_info_tbl.id_number='$id_number' AND student_pri_info_tbl.password='$password'";
 
