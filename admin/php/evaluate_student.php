@@ -468,7 +468,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                           <td><?php echo $row_subjects['lab'];?></td>
                           <td><?php echo $row_subjects['courseCode'];?></td>
                           <td><?php echo $row_subjects['courseDesc'];?></td>
-                          <td><input type="text" class="grade_input" name="grade[]" max="99" maxlength="2"></td>
+                          <!-- <td><input type="text" class="grade_input" name="grade[]" max="99" maxlength="2"></td> -->
+                          <td>
+                            <input type="number" list="grading_list" class="grade_input" name="grade[]" max="99" min="65" maxlength="3">
+                            <datalist id="grading_list">
+                              <option value="INC">
+                              <option value="D">
+                              <option value="F">
+                            </datalist>
+                          </td>
                         </tr>
                         <?php
                             }

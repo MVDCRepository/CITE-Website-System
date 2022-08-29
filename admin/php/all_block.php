@@ -381,7 +381,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                                       FROM reserve_block_tbl
                                       INNER JOIN student_pri_info_tbl ON student_pri_info_tbl.student_id = reserve_block_tbl.student_id
                                       INNER JOIN blocking_tbl ON blocking_tbl.block_id = reserve_block_tbl.block_id
-                                      WHERE student_pri_info_tbl.yr_lvl = '$yr_lvl' AND reserve_block_tbl.block_id = '$block_id'";
+                                      WHERE student_pri_info_tbl.yr_lvl = '$yr_lvl' AND reserve_block_tbl.block_id = '$block_id' AND reserve_block_tbl.status = 'Pending'";
                               $sql_result = mysqli_query($conn, $sql);
 
                               if ($sql_result->num_rows > 0) {
@@ -472,7 +472,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['username']) && isset($_SESSION['f
                                       FROM reserve_block_tbl
                                       INNER JOIN student_pri_info_tbl ON student_pri_info_tbl.student_id = reserve_block_tbl.student_id
                                       INNER JOIN blocking_tbl ON blocking_tbl.block_id = reserve_block_tbl.block_id
-                                      WHERE student_pri_info_tbl.yr_lvl = '$yr_lvl' AND reserve_block_tbl.block_id = '$block_id'";
+                                      WHERE student_pri_info_tbl.yr_lvl = '$yr_lvl' AND reserve_block_tbl.block_id = '$block_id' AND reserve_block_tbl.status = 'Pending'";
                               $sql_result = mysqli_query($conn, $sql);
 
                               if ($sql_result->num_rows > 0) {
